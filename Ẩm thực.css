@@ -1,0 +1,111 @@
+/* 🌈 Navbar có nền gradient loang dài xuống */
+.navbar-custom {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.85) 0%,   /* phần trên đậm */
+    rgba(0, 0, 0, 0.6) 40%,   /* loang nhẹ */
+    rgba(0, 0, 0, 0.3) 75%,   /* loang nhiều hơn */
+    rgba(0, 0, 0, 0.0) 100%   /* mờ dần xuống ảnh */
+  );
+  backdrop-filter: blur(6px);
+  padding: 12px 0;
+  transition: background 0.4s ease;
+}
+
+/* Khi cuộn xuống, làm nền đậm hơn một chút */
+.navbar-custom.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+/* Giữ màu menu + hover */
+.navbar-custom .nav-link {
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #f9d342;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+/* Login bên phải */
+.login-text {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-text:hover {
+  color: #f9d342;
+}
+
+/* Banner full màn hình */
+.banner-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.GThiuAT {
+    padding-top: 50px;
+    padding-bottom: 50px; 
+    background: black;
+    
+}
+
+.khoangcach {
+    padding-bottom: 40px; 
+}
+
+.gt-text {
+    color: white;
+    text-align: center;
+
+}
+
+.cltext {
+    color: white;
+}
+.noidung {
+    color: white;
+        text-align: center;
+
+  line-height: 1.8; /* giãn dòng cho dễ đọc */
+  text-indent: 30px; /* thụt đầu dòng nhẹ nếu muốn */
+  margin: 20px 0;
+}
+
+.Size-pic{
+
+}
+
+.mon-dac-san {
+  background-color: #000;  /* nền đen full */
+  width: 100%;             /* full chiều ngang */
+}
+
+.glow {
+  width: 300px; /* hoặc kích thước bạn muốn */
+  border-radius: 8px; /* bo tròn nếu muốn */
+  box-shadow: 0 0 10px rgb(255, 255, 255);
+}
