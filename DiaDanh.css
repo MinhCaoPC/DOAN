@@ -1,4 +1,5 @@
-/* 🌈 Navbar có nền gradient loang dài xuống */
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap");
+
 .navbar-custom {
   position: fixed;
   width: 100%;
@@ -6,11 +7,13 @@
   z-index: 10;
   background: linear-gradient(
     to right,
-    rgba(22, 185, 144, 0.9) 0%,
-    /* xanh ngọc đậm bên trái */ rgba(30, 190, 155, 0.7) 25%,
-    /* loang nhẹ */ rgba(75, 210, 225, 0.6) 50%,
-    /* chuyển dần sang xanh biển */ rgba(70, 152, 214, 0.7) 75%,
-    /* xanh dương */ rgba(51, 144, 215, 0.9) 100% /* xanh dương đậm bên phải */
+    rgba(0, 120, 60, 1) 0%,
+    /* 🌿 xanh lá đậm hơn, ít trong suốt */ rgba(1, 158, 108, 0.9) 10%,
+    /* xanh ngọc đậm */ rgba(30, 190, 155, 0.7) 25%,
+    /* loang nhẹ dần */ rgba(75, 210, 225, 0.5) 50%,
+    /* giữa nhạt hơn */ rgba(70, 152, 214, 0.75) 80%,
+    /* loang lại xanh biển */ rgba(51, 144, 215, 0.95) 100%
+      /* xanh dương đậm bên phải */
   );
   backdrop-filter: blur(6px);
   padding: 12px 0;
@@ -44,4 +47,66 @@
 
 .login-text:hover {
   color: #f9d342;
+}
+
+.top {
+  position: relative;
+  margin-top: 80px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  filter: brightness(70%);
+  display: block;
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* ✨ “welcome to” */
+.banner-text h2 {
+  font-family: "Inknut Antiqua", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  line-height: 100%;
+  color: rgba(255, 255, 255, 0.85); /* trắng đục */
+  -webkit-text-stroke: 1.5px #7dc8ff; /* viền xanh dương nhạt */
+  text-shadow: 0 0 10px rgba(125, 200, 255, 0.4); /* ánh sáng xanh nhạt */
+  margin-bottom: 10px;
+}
+
+/* 🌊 “ĐÀ NẴNG” */
+.banner-text h1 {
+  font-family: "Aboreto", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 96px;
+  line-height: 100%;
+  color: rgba(255, 255, 255, 0.9); /* trắng đục hơn 1 chút */
+  -webkit-text-stroke: 2px #90d0ff; /* viền xanh dương nhạt hơn */
+  text-shadow: 0 0 25px rgba(144, 208, 255, 0.6),
+    0 0 40px rgba(144, 208, 255, 0.3); /* phát sáng nhẹ */
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .banner-text h1 {
+    font-size: 60px;
+  }
+  .banner-text h2 {
+    font-size: 30px;
+  }
 }
