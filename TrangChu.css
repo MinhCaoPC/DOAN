@@ -52,7 +52,6 @@
   overflow: hidden;
 }
 
-
 .banner-img {
   width: 100%;
   height: 70vh;
@@ -126,17 +125,27 @@
 #navname {
   position: relative;
   width: 100%;
-  background: linear-gradient(
-    to top,
-    #0099aea7 0%,
-    rgb(178, 206, 212) 100% 50%
-  );
+  background: linear-gradient(to top, #0099aea7 0%, rgb(178, 206, 212) 100%);
   padding: 25px 0;
   text-align: center;
   overflow: hidden;
-  z-index: 5;
+  z-index: 0; /* 👈 rất quan trọng */
   margin: 0;
-  margin-top: 0;
+}
+/* chỉnh màu mờ đen thanh navname*/
+#navname::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    /* đen mờ ở dưới nav */ rgba(0, 0, 0, 0.6) 20%,
+    /* bắt đầu nhạt dần */ rgba(0, 0, 0, 0) 100%
+      /* trong suốt ở phần trên nav */
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 #navname h2 {
@@ -153,17 +162,23 @@
 
 /* Banner giữa */
 @import url("https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap");
+/* chỉnh màu mờ đen trên dưới banner mid*/
 #banner {
   position: relative;
-  height: 1200px; /* tăng chiều cao để hiển thị toàn ảnh */
-  background-image: url("/anh/bannermid.png");
+  height: 1200px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.78) 0%,
+      transparent 40%,
+      transparent 85%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    url("/anh/bannermid.png");
   background-size: cover;
   background-position: center center;
   color: white;
   overflow: hidden;
 }
-
-
 
 .banner-top {
   position: absolute;
@@ -180,7 +195,7 @@
 
 #banner .content {
   position: absolute;
-  top: 25%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -193,7 +208,7 @@
 #banner .content p {
   font-family: "Montagu Slab", serif;
   font-weight: 100;
-  font-size: 28px;
+  font-size: 28px !important;
   line-height: 1.4;
   letter-spacing: 0;
   color: #f0f2ec;
@@ -201,7 +216,6 @@
   margin: 0 auto;
   max-width: 800px;
 }
-
 
 /* 👇 phần text ở dưới banner */
 .banner-bottom {
@@ -212,7 +226,6 @@
   z-index: 2;
   text-align: center;
 }
-
 
 /* Font đoạn mô tả */
 @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
@@ -231,7 +244,7 @@
 
 #banner .whygoto {
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
