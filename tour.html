@@ -49,17 +49,300 @@
     <div class="banner-content">
       <h1>DA NANG</h1>
 
-      <!-- Bộ sưu tập ảnh (4 ảnh) -->
-      <div class="gallery">
-        <img src="images/cau-rong.jpg" alt="Cầu Rồng">
-        <img src="images/ngu_hanh_son.jpg" alt="Ngũ Hành Sơn">
-        <img src="images/bai-bien-my-khe.jpg" alt="Bãi biển Mỹ Khê">
-        <img src="images/tuongphat.png" alt="Tượng Phật ngồi">
-    
-      </div>
+
+    <!-- Bộ sưu tập ảnh -->
+    <div class="gallery">
+      <img src="images/SonTra.jpg" alt="Sơn Trà" data-tour="#tour1">
+      <img src="images/nuithantai.jpg" alt="Núi Thần Tài"  data-tour="#tour2">
+      <img src="images/GT.jpg" alt="Giải trí" data-tour="#tour3">
+      <img src="images/amthuc.jpg" alt="Mỳ Quảng" data-tour="#tour4">
+      <img src="images/khach-san.jpg" alt="Khách Sạn 5 sao" data-tour="#tour5">     
+    </div>
+      <!-- Nút khám phá ngay -->
+    <a href="#tour" class="explore-btn">Khám phá ngay</a>
     </div>
   </section>
+  <div class="container py-5">
+  <h2 id="tour" class="text-center mb-4 fw-bold">🌴 TOUR DU LỊCH ĐÀ NẴNG</h2>
+
+  <!-- Điều hướng tour -->
+  <ul class="nav nav-pills justify-content-center mb-4" id="tourTabs" role="tablist">
+    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tour1" type="button">Tour 1</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tour2" type="button">Tour 2</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tour3" type="button">Tour 3</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tour4" type="button">Tour 4</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tour5" type="button">Tour 5</button></li>
+  </ul>
+
+  <!-- Chi tiết tour-->
+  <div class="tab-content" id="tourContent">
+
+    <!-- TOUR 1 -->
+    <div class="tab-pane fade show active" id="tour1" role="tabpanel">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <img src="images/cau.jpg" alt="Tour 1" class="tour-img">
+        </div>
+        <div class="col-md-6">
+          <h4 class="fw-bold">TOUR 1: KHÁM PHÁ ĐÀ NẴNG – BIỂN, NÚI, CẦU RỒNG</h4>
+          <p>⏰ <b>3 ngày 2 đêm</b><br>
+          💰 3.000.000 – 4.000.000 VNĐ/người<br>
+          👥 Nhóm bạn trẻ, người lần đầu đến Đà Nẵng<br>
+          🏨 Khách sạn 3★ trung tâm (gần cầu Rồng / Bạch Đằng)</p>
+          <h6 class="fw-bold">🗓 Lịch trình chi tiết:</h6>
+          <ul>
+            <li><b>Ngày 1:</b> Biển Mỹ Khê, cầu Rồng, café APEC</li>
+            <li><b>Ngày 2:</b> Sơn Trà, Ngũ Hành Sơn, chợ đêm</li>
+            <li><b>Ngày 3:</b> Đèo Hải Vân, hải sản Bé Mặn</li>
+          </ul>
+     <a href="#" class="btn btn-book mt-2" data-bs-toggle="modal" data-bs-target="#bookingModal" data-tour="Khám phá Đà Nẵng – Biển, Núi, Cầu Rồng">Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 2 -->
+    <div class="tab-pane fade" id="tour2" role="tabpanel">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <img src="images/thiendinh.jpg" alt="Nghỉ Dưỡng" class="tour-img">
+        </div>
+        <div class="col-md-6">
+          <h4 class="fw-bold">TOUR 2: NGHỈ DƯỠNG & THIỀN TỊNH</h4>
+          <p><b>⏰ 3 ngày 2 đêm</b><br>
+          💰 6.000.000 – 9.000.000 VNĐ/người<br>
+          👥 Cặp đôi, người cần thư giãn<br>
+          🏨 Resort 5★ như Naman Retreat / Hyatt / Pullman</p>
+          <h6 class="fw-bold">🗓 Lịch trình chi tiết:</h6>
+          <ul>
+            <li><b>Ngày 1:</b> Check-in resort, spa, yoga</li>
+            <li><b>Ngày 2:</b> Suối khoáng Núi Thần Tài</li>
+            <li><b>Ngày 3:</b> Café & mua đặc sản tại Chợ Hàn</li>
+          </ul>
+      <a href="#" class="btn btn-book mt-2" data-bs-toggle="modal" data-bs-target="#bookingModal" data-tour="Nghỉ dưỡng & Thiền tịnh">Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 3 -->
+    <div class="tab-pane fade" id="tour3" role="tabpanel">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <img src="images/giaitri.jpg" alt="Giải trí" class="tour-img">
+        </div>
+        <div class="col-md-6">
+          <h4 class="fw-bold">TOUR 3: GIẢI TRÍ & TRẢI NGHIỆM</h4>
+          <p><b>⏰ 4 ngày 3 đêm</b><br>
+          💰 5.000.000 – 7.000.000 VNĐ/người<br>
+          👥 Nhóm bạn trẻ, thích check-in<br>
+          🏨 Khách sạn 4★ trung tâm hoặc ven biển Mỹ Khê</p>
+          <h6 class="fw-bold">🗓 Lịch trình chi tiết:</h6>
+          <ul>
+            <li>Asia Park & chợ đêm Helio</li>
+            <li>Bà Nà Hills – Cầu Vàng</li>
+            <li>Sơn Trà, Sky36, đặc sản Đà Nẵng</li>
+          </ul>
+    <a href="#" class="btn btn-book mt-2" data-bs-toggle="modal" data-bs-target="#bookingModal" data-tour="Giải trí & Trải nghiệm">Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 4 -->
+    <div class="tab-pane fade" id="tour4" role="tabpanel">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <img src="images/chualinhung.jpg" alt="Chùa Linh Ứng" class="tour-img">
+        </div>
+        <div class="col-md-6">
+          <h4 class="fw-bold">TOUR 4: VĂN HÓA – TÂM LINH – ẨM THỰC</h4>
+          <p><b>⏰ 3 ngày 2 đêm</b><br>
+          💰 3.500.000 – 5.000.000 VNĐ/người<br>
+          👥 Người lớn tuổi, yêu văn hóa<br>
+          🏨 Khách sạn 3★ gần sông Hàn</p>
+          <h6 class="fw-bold">🗓 Lịch trình chi tiết:</h6>
+          <ul>
+            <li>Bảo tàng Chăm, cầu Rồng</li>
+            <li>Chùa Linh Ứng, Ngũ Hành Sơn</li>
+            <li>Ẩm thực Chợ Cồn, café The Local Beans</li>
+          </ul>
+      <a href="#" class="btn btn-book mt-2" data-bs-toggle="modal" data-bs-target="#bookingModal" data-tour="Văn hóa – Tâm linh – Ẩm thực">Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR 5 -->
+    <div class="tab-pane fade" id="tour5" role="tabpanel">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <img src="images/hotel.jpg" alt="Khách Sạn" class="tour-img">
+        </div>
+        <div class="col-md-6">
+          <h4 class="fw-bold">TOUR 5: NGHỈ DƯỠNG CAO CẤP – TRẢI NGHIỆM 5 SAO</h4>
+          <p><b>⏰ 3 ngày 2 đêm</b><br>
+          💰 10.000.000 – 15.000.000 VNĐ/người<br>
+          👥 Cặp đôi, tuần trăng mật, khách cao cấp<br>
+          🏨 InterContinental / Furama Resort</p>
+          <h6 class="fw-bold">🗓 Lịch trình chi tiết:</h6>
+          <ul>
+            <li>Check-in resort 5★, spa & fine dining</li>
+            <li>Bà Nà Hills – Cầu Vàng</li>
+            <li>Du thuyền sông Hàn & tiễn sân bay</li>
+          </ul>
+      <a href="#" class="btn btn-book mt-2" data-bs-toggle="modal" data-bs-target="#bookingModal" data-tour="Nghỉ dưỡng cao cấp – Trải nghiệm 5 sao">Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Tour nổi bật -->
+<section class="related-tours py-5 bg-light">
+  <div class="container">
+    <h3 class="text-center fw-bold mb-4 ">✨ Tour nổi bật khác</h3>
+    <div class="row g-4">
+
+      <!-- TOUR 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="images/hoian.png" class="card-img-top" alt="Hội An">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Tour Hội An 1 Ngày</h5>
+            <p class="card-text">Tham quan phố cổ, chùa Cầu, trải nghiệm thả đèn hoa đăng trên sông Hoài.</p>
+            <a href="#" class="btn btn-book mt-2"
+               data-bs-toggle="modal"
+               data-bs-target="#bookingModal"
+               data-tour="Tour Hội An 1 ngày">Đặt ngay</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOUR 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="images/bantay.jpg" class="card-img-top" alt="Bà Nà Hills">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Tour Bà Nà Hills</h5>
+            <p class="card-text">Khám phá Cầu Vàng nổi tiếng, check-in làng Pháp và công viên Fantasy Park.</p>
+            <a href="#" class="btn btn-book mt-2"
+               data-bs-toggle="modal"
+               data-bs-target="#bookingModal"
+               data-tour="Tour Bà Nà Hills">Đặt ngay</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOUR 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="images/ban-dao-son-tra.jpg" class="card-img-top" alt="Sơn Trà">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Tour Sơn Trà</h5>
+            <p class="card-text">Tham quan chùa Linh Ứng, ngắm Voọc chà vá và bãi biển tuyệt đẹp.</p>
+            <a href="#" class="btn btn-book mt-2"
+               data-bs-toggle="modal"
+               data-bs-target="#bookingModal"
+               data-tour="Tour Sơn Trà">Đặt ngay</a>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+</section>
+<!-- Modal form đặt tour -->
+  <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-4">
+        <h5 class="modal-title mb-3 text-center " id="bookingModalLabel">Đặt Tour Ngay</h5>
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Họ và tên</label>
+            <input type="text" class="form-control" placeholder="Nhập họ tên của bạn" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Số điện thoại</label>
+            <input type="tel" class="form-control" placeholder="Nhập số điện thoại" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Nhập email (nếu có)">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Chọn tour</label>
+            <input type="text" id="selectedTour" class="form-control" readonly>
+          </div>
+          <button type="submit" class="btn btn-book w-100 mt-2">Xác nhận đặt tour</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Vì sao nên chọn -->
+<section class="why-choose py-5">
+  <div class="container text-center">
+    <h3 class="fw-bold mb-4">🌟 Vì sao nên chọn chúng tôi?</h3>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <i class="bi bi-star-fill fs-1 text-warning"></i>
+        <h5 class="fw-bold mt-2">Uy tín hàng đầu</h5>
+        <p>Đối tác của các khu du lịch và khách sạn lớn tại Đà Nẵng.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-wallet2 fs-1 text-success"></i>
+        <h5 class="fw-bold mt-2">Giá tốt – Trọn gói</h5>
+        <p>Không phụ phí ẩn, bao gồm xe đưa đón và hướng dẫn viên.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-heart-fill fs-1 text-danger"></i>
+        <h5 class="fw-bold mt-2">Chăm sóc tận tâm</h5>
+        <p>Hỗ trợ 24/7 trước, trong và sau khi đi tour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Bản đồ -->
+<section class="map-section py-5 bg-light">
+  <div class="container">
+    <h3 class="text-center fw-bold mb-4">🗺️ Vị trí các tour tại Đà Nẵng</h3>
+    <div class="ratio ratio-16x9">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.477201871145!2d108.22152331533427!3d16.066370743599768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219bf6c456bd9%3A0xf2cf8d5d9f58e74c!2zQ-G7rWEgUuG7k25nLCBEw6AgTuG6tW5nLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1615400324312!5m2!1sen!2s"
+        width="700" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bấm vào ảnh hiển thị từng tour -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const galleryImages = document.querySelectorAll(".gallery img");
+
+  galleryImages.forEach(img => {
+    img.addEventListener("click", function() {
+      const tourId = this.getAttribute("data-tour");
+      const target = document.querySelector(tourId);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        // kích hoạt tab tương ứng
+        const tabTrigger = document.querySelector(`[data-bs-target="${tourId}"]`);
+        if (tabTrigger) {
+          const tab = new bootstrap.Tab(tabTrigger);
+          tab.show();
+        }
+      }
+    });
+  });
+});
+</script>
+   <!-- JS để hiển thị tên tour -->
+  <script>
+    const bookingModal = document.getElementById('bookingModal');
+    bookingModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const tourName = button.getAttribute('data-tour');
+      const inputTour = bookingModal.querySelector('#selectedTour');
+      inputTour.value = tourName;
+    });
+  </script>
   </body>
 </html>
