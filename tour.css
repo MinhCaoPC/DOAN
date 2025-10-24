@@ -85,12 +85,21 @@
   left: 80px;
   color: #fff;
   font-size: clamp(2rem, 8vw, 90px);
-  font-weight: 650; /* ✅ nhẹ và thanh hơn */
+  font-weight: 530;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-family: "Poppins", sans-serif;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+
+  /* Viền xanh dương */
+  -webkit-text-stroke: 2px #7aa7d7;
+
+  /* Ánh sáng xanh nhẹ lan xung quanh */
+text-shadow:
+  0 4px 4px rgba(136, 175, 216, 0.8),
+  0 6px 8px rgba(128, 210, 233, 0.6),
+  0 8px 12px rgba(216, 235, 255, 0.4);
 }
+
 
 
 /* --- Bộ sưu tập--- */
@@ -100,16 +109,16 @@
   left: 20px;
   display: flex;
   gap: 20px;
-  overflow-x: auto;         /* 👈 Cuộn ngang */
+  overflow-x: auto;        
   overflow-y: hidden;
-  max-width: 100%;          /* 👈 không vượt khung */
+  max-width: 100%;         
   padding-bottom: 10px;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none;    /* Ẩn thanh cuộn Firefox */
+  scrollbar-width: none;   
 }
 
 .gallery::-webkit-scrollbar {
-  display: none;            /* Ẩn thanh cuộn Chrome/Safari */
+  display: none;           
 }
 
 .gallery img {
@@ -143,7 +152,7 @@
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .banner {
-    height: 480px;
+     height: auto;
   }
   .banner-content h1 {
     top: 60px;
@@ -160,7 +169,7 @@
   position: absolute;
   bottom: 90px;
   right: 190px;
-  background: rgba(93, 169, 216, 0.9); /* Màu xanh trùng banner */
+  background: rgba(93, 169, 216, 0.9);
   color: #fff;
   font-size: 1.2rem;
   font-weight: 600;
@@ -178,6 +187,53 @@
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
+@media (max-width: 1024px){
+  .banner {
+    height: auto;
+    padding: 30px 0 20px;
+    overflow: visible;
+  }
+
+  .banner-content {
+    position: relative;
+    text-align: center;
+  }
+
+  .banner-content h1 {
+    position: static;
+    font-size: clamp(1.8rem, 7vw, 45px);
+    margin-bottom: 15px;
+  }
+
+  .gallery {
+    position: static;         /* ✅ không đè nút */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto 10px;
+  }
+
+  .gallery img {
+    width: 100px;
+    height: 140px;
+  }
+
+  .explore-btn {
+    position: static;          /* ✅ nút nằm dưới ảnh */
+    display: block;
+    margin: 15px auto;
+    background: rgba(93, 169, 216, 1);
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 24px;
+    border-radius: 25px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+
 /* Tiêu đề chính */
 h2 {
   color: #0d5e89;
@@ -297,12 +353,12 @@ h2 {
   font-weight: 700;
 }
 .related-tours h3 {
-  color: #0d5e89; /* xanh lá pastel */
-  font-size: 2rem;        /* tương đương cỡ h2 */
+  color: #0d5e89; 
+  font-size: 2rem;       
   text-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 h3.text-center {
-  color: #0d5e89; /* xanh dương nhẹ */
+  color: #0d5e89;
 }
 html {
   scroll-behavior: smooth;
