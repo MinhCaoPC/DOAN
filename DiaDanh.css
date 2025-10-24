@@ -52,11 +52,172 @@
   overflow: hidden;
 }
 
+.banner-img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  display: block;
+}
 
+.top::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(170, 185, 181, 0.4) 50%,
+    rgb(178, 206, 212) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
 
+@media (max-width: 768px) {
+  .banner-text h1 {
+    font-size: 60px;
+  }
+  .banner-text h2 {
+    font-size: 30px;
+  }
+}
 
+/* Thanh tiêu đề “Đà Nẵng” */
+@import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@500&display=swap");
 
+#navname {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(to top, #0099aea7 0%, rgb(178, 206, 212) 100%);
+  padding: 25px 0;
+  text-align: center;
+  overflow: hidden;
+  z-index: 0; /* 👈 rất quan trọng */
+  margin: 0;
+}
+/* chỉnh màu mờ đen thanh navname*/
+#navname::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    /* đen mờ ở dưới nav */ rgba(0, 0, 0, 0.6) 20%,
+    /* bắt đầu nhạt dần */ rgba(0, 0, 0, 0) 100%
+      /* trong suốt ở phần trên nav */
+  );
+  z-index: 1;
+  pointer-events: none;
+}
 
+#navname h2 {
+  position: relative;
+  z-index: 2;
+  font-family: "Montagu Slab", serif;
+  font-weight: 500;
+  font-size: 64px;
+  color: #f3f5ef;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  line-height: 1;
+}
 
+/* Font đoạn mô tả */
+@import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
 
+/* ----------- PHẦN ĐỊA DANH (GIỐNG HÌNH BẠN GỬI) ----------- */
+.diadanh-section {
+  background-color: #000;
+  color: #fff;
+  padding: 100px 80px;
+  text-align: center;
+  font-family: "Inknut Antiqua", serif;
+}
 
+.diadanh-section .intro-text {
+  font-family: "Montagu Slab", serif;
+  color: #f0f2ec;
+  max-width: 850px;
+  margin: 0 auto 60px;
+  font-size: 28px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.diadanh-section .title {
+  font-family: "Montagu Slab", serif;
+  color: #f0f2ec;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 60px 0 30px;
+}
+
+.img-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.img-box {
+  width: 250px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.img-box:hover {
+  transform: scale(1.05);
+}
+
+.img-box img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  background-color: #aaa;
+  transition: opacity 0.3s ease;
+}
+
+.hidden-text {
+  display: none;
+  font-family: "Montagu Slab", serif;
+  color: #f0f2ec;
+  margin-top: 10px;
+  font-size: 18px;
+  color: #eaeaea;
+}
+
+.hidden-text.show {
+  display: block;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.note {
+  margin-top: 80px;
+  text-align: left;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.note ul {
+  margin-top: 10px;
+  padding-left: 25px;
+}

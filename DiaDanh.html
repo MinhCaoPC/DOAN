@@ -108,39 +108,91 @@
     </nav>
     <nav>
       <div class="top">
-        <img src="anh/bannertop.jpg" alt="Địa Danh 1" class="banner-img" />
-        <div class="banner-text">
-          <h2>w e l c o m e&nbsp; t o</h2>
-          <h1>ĐÀ NẴNG</h1>
-        </div>
+        <img src="anh/banner_diadanh.jpg" alt="Địa Danh 1" class="banner-img" />
       </div>
     </nav>
     <nav id="navname">
       <div>
-        <h2>Đà Nẵng</h2>
+        <h2>Địa Danh Nổi Bật</h2>
       </div>
     </nav>
-    <section id="banner">
-      <div class="overlay"></div>
-
-      <h3 class="banner-top">
-        KHÁM PHÁ TRÁI TIM MIỀN TRUNG<br />
-        NƠI KÌ QUAN KẾT NỐI TRẢI NGHIỆM ĐẲNG CẤP
-      </h3>
-
-      <div class="content">
+    
+    <!-- Phần giới thiệu địa danh -->
+    <section id="diadanh" class="diadanh-section">
+      <div class="intro-text">
         <p>
           Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố
           đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm không
-          ngừng nghỉ.<br />
+          ngừng nghỉ.
+          <br /><br />
           Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán đảo
-          Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê đã được bình chọn là bãi biển
-          đẹp nhất hành tinh.
+          Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê, sự lãng mạn của sông Hàn và
+          nhịp sống đô thị thông minh, hiện đại. Từ Cầu Rồng phun lửa rực rỡ đến
+          Bà Nà Hills như xứ sở cổ tích – Đà Nẵng luôn biết cách chinh phục trái
+          tim du khách.
         </p>
       </div>
-      <h3 class="whygoto">Tại sao nên đến Đà Nẵng ?</h3>
+
+      <!-- Dòng tiêu đề 1 -->
+      <h2 class="title">Địa danh thiên nhiên – phong cảnh đẹp</h2>
+      <div class="img-row">
+        <div class="img-box" onclick="toggleContent(this)">
+          <img src="anh/santra.jpg" alt="Sơn Trà" />
+          <p class="hidden-text">
+            Bán đảo Sơn Trà – lá phổi xanh của Đà Nẵng, nơi hòa quyện giữa rừng
+            và biển.
+          </p>
+        </div>
+        <div class="img-box" onclick="toggleContent(this)">
+          <img src="anh/mykhe.jpg" alt="Mỹ Khê" />
+          <p class="hidden-text">
+            Bãi biển Mỹ Khê – từng được Forbes bình chọn là một trong những bãi
+            biển quyến rũ nhất hành tinh.
+          </p>
+        </div>
+        <div class="img-box" onclick="toggleContent(this)">
+          <img src="anh/banahills.jpg" alt="Bà Nà Hills" />
+          <p class="hidden-text">
+            Bà Nà Hills – xứ sở thần tiên giữa mây trời với cây cầu Vàng nổi
+            tiếng toàn cầu.
+          </p>
+        </div>
+      </div>
+
+      <!-- Dòng tiêu đề 2 -->
+      <h2 class="title">Biểu tượng đô thị – công trình nổi bật</h2>
+      <div class="img-row">
+        <div class="img-box" onclick="toggleContent(this)">
+          <img src="anh/cau_rong.jpg" alt="Cầu Rồng" />
+          <p class="hidden-text">
+            Cầu Rồng – biểu tượng hiện đại của thành phố, phun lửa và nước vào
+            cuối tuần.
+          </p>
+        </div>
+        <div class="img-box" onclick="toggleContent(this)">
+          <img src="anh/cauhan.jpg" alt="Cầu Sông Hàn" />
+          <p class="hidden-text">
+            Cầu Sông Hàn – cây cầu quay đầu tiên ở Việt Nam, niềm tự hào của
+            người Đà Nẵng.
+          </p>
+        </div>
+        <div class="img-box" onclick="toggleContent(this)">
+          <img src="anh/congtrinh.jpg" alt="Nhà hát" />
+          <p class="hidden-text">
+            Nhà hát Trưng Vương – công trình văn hóa hiện đại giữa lòng thành
+            phố biển.
+          </p>
+        </div>
+      </div>
 
       
-    </section>
+
+    <!-- Script cho hiệu ứng hiện/ẩn -->
+    <script>
+      function toggleContent(box) {
+        const text = box.querySelector(".hidden-text");
+        text.classList.toggle("show");
+      }
+    </script>
   </body>
 </html>
