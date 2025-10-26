@@ -9,7 +9,6 @@
       rgba(255, 184, 107, 0.5) 50%,
       rgba(255, 220, 150, 0.3) 100%);
 
-
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
@@ -100,6 +99,8 @@
   padding: 10px 22px;
   transition: all 0.3s ease;
   box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  margin: 0.3rem;
+
 }
 
 .btn-food:hover {
@@ -112,100 +113,133 @@
   box-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
 }
 
-  /* wrapper để quản lý nhiều box */
-  .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; /* khoảng cách giữa các box */
-  }
+/* --- Wrapper quản lý nhiều box --- */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* khoảng cách giữa các box */
+}
 
-  .content-box {
-    display: flex;
-    align-items: center;
-    background-color: #ffdfc6;
-    border-radius: 40px;
-    padding: 20px;
-    max-width: 1000px;
-    width: 100%;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-  transition: all 0.3s ease; /* mượt khi hover */
+/* --- Mỗi box --- */
+.content-box {
+  display: flex;
+  align-items: center;
+  background-color: #ffdfc6;
+  border-radius: 40px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  max-width: 48%; /* laptop: 2 cột */
+}
 
-  }
+/* Hiệu ứng hover */
 .content-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
+/* Ảnh bên trái */
+.content-box img {
+  width: 300px;
+  height: 300px;
+  border-radius: 30px;
+  object-fit: cover;
+  margin-right: 40px;
+  transition: all 0.3s ease;
+}
+
+.content-box:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Text bên phải */
+.text-box {
+  color: #792c00;
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* --- Wrapper quản lý nhiều box --- */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* khoảng cách giữa các box */
+}
+
+/* --- Mỗi box --- */
+.content-box {
+  display: flex;
+  align-items: center;
+  background-color: #ffdfc6;
+  border-radius: 40px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  max-width: 48%; /* 🖥 Laptop: 2 cột */
+}
+
+/* Hiệu ứng hover */
+.content-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Ảnh bên trái */
+.content-box img {
+  width: 250px;
+  height: 300px;
+  border-radius: 30px;
+  object-fit: cover;
+  margin-right: 40px;
+  transition: all 0.3s ease;
+}
+.content-box:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Text bên phải */
+.text-box {
+  color: #792c00;
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* --- Responsive --- */
+/* 📱 Mobile & iPad: 1 cột, card vẫn nằm ngang */
+@media (max-width: 1024px) {
+  .content-box {
+    flex-direction: row; /* ảnh trái – text phải */
+    max-width: 100%; /* 1 cột full */
+    padding: 15px;
+  }
 
   .content-box img {
-    width: 300px;
-    height: 300px;
-    border-radius: 30px;
-    object-fit: cover;
-    margin-right: 40px;
-  transition: all 0.3s ease;
-
+    width: 45%;
+    height: auto;
+    margin-right: 15px;
   }
-  .content-box:hover img {
-  transform: scale(1.05); /* phóng to nhẹ */
-  filter: brightness(1.1); /* sáng hơn */
-}
-
 
   .text-box {
-    color: #792c00;
-    font-size: 18px;
-    line-height: 1.6;
+    width: 55%;
+    font-size: 15px;
+    text-align: left;
   }
-
-  .text-box ul {
-    margin: 0;
-    padding-left: 20px;
-  }
-
-  /* Tablet (iPad) */
-  @media (max-width: 1023px) and (min-width: 769px) {
-    .content-box {
-      padding: 30px;
-      max-width: 800px;
-    }
-    .content-box img {
-      width: 250px;
-      height: 250px;
-      margin-right: 30px;
-    }
-    .text-box {
-      font-size: 16px;
-    }
-  }
-
-  /* Mobile: 1 dòng 2 cột */
-  @media (max-width: 768px) {
-    .content-box {
-      flex-direction: column; /* ảnh + text dọc */
-      width: calc(50% - 10px); /* 2 cột, trừ gap */
-      padding: 15px;
-    }
-    .content-box img {
-      width: 100%;
-      height: auto;
-      margin: 0 0 15px 0;
-      border-radius: 20px;
-    }
-    .text-box {
-      font-size: 14px;
-      text-align: center;
-    }
-  }
-
-  .content-section {
-  display: none; /* ẩn mặc định */
 }
 
+/* --- Phần còn lại giữ nguyên --- */
+.content-section {
+  display: none;
+}
 .content-section.active {
-  display: block; /* hiện section đang active */
+  display: block;
 }
 
 .content-box h3 {
@@ -213,23 +247,47 @@
   background: transparent;
   transition: all 0.3s ease;
 }
-
-/* Khi hover box thì chữ phát sáng cam */
 .content-box:hover h3 {
-  color: #ff8000; /* cam sáng */
+  color: #ff8000;
   text-shadow: 0 0 10px #ff8000, 0 0 20px #ff8000, 0 0 40px #ff8000;
 }
 
-/* màu chữ */
 .chutd {
-  color: white; /* chữ trắng */
+  color: white;
   background: transparent;
   text-shadow: 
     0 0 5px #ff8000,
     0 0 10px #ff8000,
     0 0 20px #ff8000,
-    0 0 40px #ff8000; /* phát sáng màu cam */
+    0 0 40px #ff8000;
 }
 .chu {
-    color: white;
+  color: white;
 }
+
+/* ❤️ Nút Yêu thích */
+.fav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #ff6600, #ff944d);
+  color: white;
+  font-size: 18px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+}
+.fav-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #ff944d, #ff6600);
+  box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+}
+
+.kc {
+    margin: 60px auto;
+}
+
+
