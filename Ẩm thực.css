@@ -4,12 +4,10 @@
   width: 100%;
   top: 0;
   z-index: 10;
-background: linear-gradient(
-  135deg,
-  rgba(190, 66, 0, 0.6) 0%,
-  rgba(255, 184, 107, 0.5) 50%,
-  rgba(255, 220, 150, 0.3) 100%
-);
+  background: linear-gradient(135deg,
+      rgba(190, 66, 0, 0.6) 0%,
+      rgba(255, 184, 107, 0.5) 50%,
+      rgba(255, 220, 150, 0.3) 100%);
 
 
   backdrop-filter: blur(6px);
@@ -33,7 +31,7 @@ background: linear-gradient(
 
 .navbar-custom .nav-link:hover {
   color: #f9d342;
-  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 /* Login bên phải */
@@ -67,50 +65,49 @@ background: linear-gradient(
   text-align: center;
 }
 
-.GThiuAT {
-    padding-top: 50px;
-    padding-bottom: 50px; 
-    background: black;
-    
-}
+
 
 .khoangcach {
-    padding-bottom: 40px; 
+  padding-bottom: 40px;
 }
 
 .gt-text {
-    color: white;
-    text-align: center;
+  color: white;
+  text-align: center;
 
 }
 
 .cltext {
-    color: white;
+  color: white;
 }
-.noidung {
-    color: white;
-        text-align: center;
 
-  line-height: 1.8; /* giãn dòng cho dễ đọc */
-  text-indent: 30px; /* thụt đầu dòng nhẹ nếu muốn */
+.noidung {
+  color: white;
+  text-align: center;
+
+  line-height: 1.8;
+  /* giãn dòng cho dễ đọc */
+  text-indent: 30px;
+  /* thụt đầu dòng nhẹ nếu muốn */
   margin: 20px 0;
 }
 
-.Loangmau{
-   padding-top: 50px;
-    padding-bottom: 50px; 
-background: linear-gradient(
-  to bottom,
-  rgba(190, 66, 0, 0.85),
-  rgba(50, 20, 0, 0.9)
-);
+.Loangmau {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: linear-gradient(
+    to bottom,
+      rgba(190, 66, 0, 0.85),
+      rgba(50, 20, 0, 0.9));
 
 }
 
 
 
 .glow {
-  width: 300px; /* hoặc kích thước bạn muốn */
-  border-radius: 8px; /* bo tròn nếu muốn */
+  width: 300px;
+  /* hoặc kích thước bạn muốn */
+  border-radius: 8px;
+  /* bo tròn nếu muốn */
   box-shadow: 0 0 10px rgb(255, 255, 255);
 }
