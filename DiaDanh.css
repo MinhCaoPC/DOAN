@@ -9,7 +9,10 @@
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
+ 
+  
 }
+
 
 .navbar-custom.scrolled {
   background: rgba(0, 0, 0, 0.9);
@@ -36,6 +39,7 @@
 .login-text:hover {
   color: #000000;
 }
+
 
 
 /*Xử lý banner vs thanh tìm kiếm*/

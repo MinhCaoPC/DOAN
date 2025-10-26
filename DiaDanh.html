@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a></li>
+          <li class="nav-item"><a class="nav-link" href="DiaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
           <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
           <li class="nav-item"><a class="nav-link" href="#">NGHỈ DƯỠNG</a></li>
           <li class="nav-item"><a class="nav-link" href="#">TOUR</a></li>
@@ -185,7 +185,7 @@
                   <button class="btn btn-outline-primary" id="btnMap-${index}" onclick="toggleMap(${index}, '${diaDanh.anh}', '${mapLink}')">
                     <i class="bi bi-geo-alt"></i> Xem vị trí
                   </button>` : ""}
-                <button class="btn btn-outline-success">
+                <button class="btn btn-outline-success" onclick="handleYeuThich()">
                   <i class="bi bi-heart"></i> Yêu thích
                 </button>
               </div>
@@ -227,6 +227,24 @@
         const loc = diaDanhList.filter(d => nhoms.includes(d.nhom));
         renderDiaDanh(loc);
       }
+
+
+      // ✅ Giả lập trạng thái đăng nhập
+      let isLoggedIn = false; // false = chưa đăng nhập, true = đã đăng nhập
+
+      function handleYeuThich() {
+        if (!isLoggedIn) {
+          // Chưa đăng nhập → hỏi người dùng
+          const goLogin = confirm("Bạn cần đăng nhập hoặc đăng ký để yêu thích địa danh. Bạn có muốn đăng nhập ngay không?");
+          if (goLogin) {
+            window.location.href = "dangNhap.html"; // chuyển tới trang đăng nhập
+          }
+        } else {
+          // Đã đăng nhập → thực hiện yêu thích
+          alert("Đã thêm vào danh sách yêu thích!");
+        }
+      }
+
     </script>
 
 
