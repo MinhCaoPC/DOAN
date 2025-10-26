@@ -38,6 +38,8 @@
         </ul>
       </div>
 
+
+
       <!-- Đăng nhập -->
       <div class="d-none d-lg-flex align-items-center">
         <i class="bi bi-person-circle me-2 fs-5"></i>
@@ -48,18 +50,24 @@
   </nav>
 
   <!-- Banner -->
-  <nav>
-    <div class="top">
-      <img src="anh/banner_diadanh.jpg" alt="Địa Danh 1" class="banner-img" />
-    </div>
-  </nav>
+  <!-- ✅ Banner với thanh tìm kiếm -->
+  <section id="banner" class="position-relative text-center text-light">
+    <img src="anh/banner_diadanh.jpg" alt="Banner" class="banner-img w-100" />
+    <div class="banner-overlay"></div>
 
-  <!-- Tiêu đề -->
-  <nav id="navname">
-    <div>
-      <h2>Địa Danh Nổi Bật</h2>
+    <!-- Thanh tìm kiếm nằm giữa banner -->
+    <div class="search-container position-absolute top-50 start-50 translate-middle text-center">
+      <h2 class="mb-4 fw-bold text-shadow">Khám Phá Địa Danh Đà Nẵng</h2>
+
+      <form class="search-form position-relative d-inline-block" onsubmit="return searchDiaDanh(event)">
+        <input id="searchInput" type="text" class="form-control search-input" placeholder="Tìm kiếm địa danh..." />
+        <button class="btn-search" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
     </div>
-  </nav>
+  </section>
+
 
   <!-- Phần giới thiệu địa danh -->
   <section id="diadanh" class="diadanh-section">
@@ -77,112 +85,148 @@
       </p>
     </div>
 
-    <!-- Nhóm 1 -->
-    <h2 class="title">Địa danh thiên nhiên – phong cảnh đẹp</h2>
-    <div class="img-row" id="group1">
-      <div class="img-box" data-desc="Bán đảo Sơn Trà – lá phổi xanh của Đà Nẵng, nơi hòa quyện giữa rừng và biển.">
-        <img src="anh/sontra.jpg" alt="Sơn Trà" />
+    <!-- ✅ Phân loại địa danh -->
+    <section id="phanloai" class="py-5 text-center">
+      <div class="container">
+        <div class="row justify-content-center g-4">
+
+          <div class="col-10 col-md-3">
+            <div class="card border-0 shadow-sm hover-scale" onclick="locDiaDanh('thiennhien')">
+              <img src="anh/thiennhien.jpg" class="card-img-top rounded-top" alt="Thiên nhiên">
+              <div class="card-body bg-white rounded-bottom">
+                <h5 class="fw-semibold">Địa Danh Thiên Nhiên</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-10 col-md-3">
+            <div class="card border-0 shadow-sm hover-scale" onclick="locDiaDanh('congtrinh')">
+              <img src="anh/congtrinh.jpg" class="card-img-top rounded-top" alt="Công trình">
+              <div class="card-body bg-white rounded-bottom">
+                <h5 class="fw-semibold">Địa Danh Công Trình</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-10 col-md-3">
+            <div class="card border-0 shadow-sm hover-scale" onclick="locDiaDanh('vanhoa')">
+              <img src="anh/vanhoa.jpg" class="card-img-top rounded-top" alt="Văn hoá - Nghệ thuật">
+              <div class="card-body bg-white rounded-bottom">
+                <h5 class="fw-semibold">Văn Hoá - Nghệ Thuật</h5>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="img-box"
-        data-desc="Bãi biển Mỹ Khê – từng được Forbes bình chọn là một trong những bãi biển quyến rũ nhất hành tinh.">
-        <img src="anh/mykhe.jpg" alt="Mỹ Khê" />
+    </section>
+
+
+
+    <section id="list-dia-danh" class="py-5">
+      <div class="container">
+        <div id="diaDanhContainer"></div>
       </div>
-      <div class="img-box" data-desc="Bà Nà Hills – xứ sở thần tiên giữa mây trời với cây cầu Vàng nổi tiếng toàn cầu.">
-        <img src="anh/banahills.jpg" alt="Bà Nà Hills" />
-      </div>
-      <div class="img-box"
-        data-desc="Ngũ Hành Sơn – cụm núi đá vôi huyền thoại mang đậm giá trị tâm linh và cảnh sắc kỳ ảo.">
-        <img src="anh/nguhanhson.jpg" alt="Ngũ Hành Sơn" />
-      </div>
-    </div>
-    <div class="desc-map-container" id="descmap1" style="display:none;">
-      <div class="group-desc" id="desc-group1"></div>
-      <div class="map-frame-container" id="map-frame-container1">
-        <iframe id="map-frame1" width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen
-          loading="lazy"></iframe>
-      </div>
-    </div>
+    </section>
 
 
-    <!-- Nhóm 2 -->
-    <h2 class="title">Biểu tượng đô thị – công trình nổi bật</h2>
-    <div class="img-row" id="group2">
-      <div class="img-box" data-desc="Cầu Rồng – biểu tượng hiện đại của thành phố, phun lửa và nước vào cuối tuần.">
-        <img src="anh/caurong.jpg" alt="Cầu Rồng" />
-      </div>
-      <div class="img-box" data-desc="Nhà hát Trưng Vương – công trình văn hóa hiện đại giữa lòng thành phố biển.">
-        <img src="anh/tuongba.jpg" alt="Tượng Bà" />
-      </div>
-      <div class="img-box" data-desc="Cầu Sông Hàn – cây cầu quay đầu tiên ở Việt Nam, niềm tự hào của người Đà Nẵng.">
-        <img src="anh/cauvang.jpg" alt="Cầu Vàng" />
-      </div>
-      <div class="img-box"
-        data-desc="Cầu Tình Yêu – điểm check-in lãng mạn bên sông Hàn, nơi lưu giữ khoảnh khắc của các cặp đôi.">
-        <img src="anh/cautinhyeu.jpg" alt="Cầu Tình Yêu" />
-      </div>
-    </div>
-    <div class="desc-map-container" id="descmap2" style="display:none;">
-      <div class="group-desc" id="desc-group2"></div>
-      <div class="map-frame-container" id="map-frame-container2">
-        <iframe id="map-frame2" width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen
-          loading="lazy"></iframe>
-      </div>
-    </div>
 
-  </section>
 
-  <!-- JS -->
-  <script>
-    const mapDataGroup1 = {
-      "sontra.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61325.10679341589!2d108.23449602352073!3d16.126652347514394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d72d1be522d%3A0x1e7339a6534e4e7!2zQsOhbiDEkeG6o28gU8ahbiBUcsOg!5e0!3m2!1svi!2s!4v1761382274356!5m2!1svi!2s",
-      "mykhe.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7510.326805541372!2d108.23757912776612!3d16.06199747013214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421782f7fa0ee3%3A0xeafb8ba272ee55ac!2zQsOjaSBiaeG7g24gTeG7uSBLaMOq!5e0!3m2!1svi!2s!4v1761386143516!5m2!1svi!2s",
-      "banahills.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9344.564818548868!2d108.0239637961576!3d16.027234286432954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f60e6b3844c9%3A0x5c53b85f61797909!2sSun%20World%20B%C3%A0%20N%C3%A0%20Hills!5e0!3m2!1svi!2s!4v1761386544078!5m2!1svi!2s",
-      "nguhanhson.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.188299429895!2d108.26058557604907!3d16.00371038466636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e14b2edb%3A0xbc6e1faf738be4c5!2zTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386646650!5m2!1svi!2s"
-    };
 
-    const mapDataGroup2 = {
-      "caurong.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.084502275844!2d108.22511767605005!3d16.061104184617214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219d2f38ce45d%3A0xbfa47dd116d4db88!2zQ-G6p3UgUuG7k25nLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1761383554572!5m2!1svi!2s",
-      "tuongba.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.1807428214015!2d108.26174147604922!3d16.00410398466608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142110e6f11cc15%3A0x13a307b874043572!2zQ2jDuWEgTGluaCDhu6huZyDigJMgTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386845365!5m2!1svi!2s",
-      "cauvang.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.356680734252!2d107.99398757604877!3d15.994937484673793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f73d19c5d38f%3A0x63766c11470ab50d!2zQ-G6p3UgVsOgbmc!5e0!3m2!1svi!2s!4v1761386912430!5m2!1svi!2s",
-      "cautinhyeu.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.048040202771!2d108.22723967605002!3d16.062996684615584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142196e746d9c5f%3A0x91cfbbc68781d139!2zQ-G6p3UgVMOsbmggWcOqdSAtIExvdmUgUGllcg!5e0!3m2!1svi!2s!4v1761386959645!5m2!1svi!2s"
-    };
 
-    function setupImageGroup(groupId, descId, mapContainerId, mapFrameId, mapData) {
-      const group = document.getElementById(groupId);
-      const desc = document.getElementById(descId);
-      const boxes = group.querySelectorAll(".img-box");
-      const mapContainer = document.getElementById(mapContainerId);
-      const mapFrame = document.getElementById(mapFrameId);
 
-      boxes.forEach((box) => {
-        box.addEventListener("click", () => {
-          boxes.forEach((b) => b.classList.remove("active"));
-          box.classList.add("active");
 
-          const text = box.dataset.desc;
-          desc.textContent = text;
-          desc.classList.add("show");
+    <script>
 
-          const img = box.querySelector("img");
-          const fileName = img.getAttribute("src").split("/").pop().trim();
-          const mapUrl = mapData[fileName];
+      window.onload = function () {
+        locDiaDanh('thiennhien');
+      };
+      // ✅ Dữ liệu địa danh (sẽ thay bằng dữ liệu từ CSDL sau này)
+      const diaDanhList = [
+        { ten: "Sun World Bà Nà Hills", moTa: "Khu du lịch nổi tiếng với khí hậu mát mẻ, kiến trúc châu Âu và Cầu Vàng độc đáo.", anh: "anh/banahills.jpg", nhom: "thiennhien" },
+        { ten: "Bãi Biển Mỹ Khê", moTa: "Bãi biển đẹp bậc nhất hành tinh, nước trong xanh và bờ cát trắng mịn.", anh: "anh/mykhe.jpg", nhom: "thiennhien" },
+        { ten: "Núi Ngũ Hành Sơn", moTa: "Cụm núi đá vôi gồm 5 ngọn tượng trưng cho Ngũ Hành, nổi tiếng với hang động và chùa chiền.", anh: "anh/nguhanhson.jpg", nhom: "thiennhien" },
+        { ten: "Bán Đảo Sơn Trà", moTa: "Lá phổi xanh của Đà Nẵng, nơi sinh sống của nhiều loài động vật quý hiếm.", anh: "anh/sontra.jpg", nhom: "thiennhien" },
+        { ten: "Cầu Vàng", moTa: "Biểu tượng độc đáo với hai bàn tay khổng lồ nâng đỡ giữa mây trời.", anh: "anh/cauvang.jpg", nhom: "congtrinh" },
+        { ten: "Cầu Rồng", moTa: "Cầu phun lửa và nước, biểu tượng hiện đại của thành phố.", anh: "anh/caurong.jpg", nhom: "congtrinh" },
+        { ten: "Cầu Tình Yêu", moTa: "Địa điểm lãng mạn bên sông Hàn, nơi các cặp đôi treo ổ khóa tình yêu.", anh: "anh/cautinhyeu.jpg", nhom: "congtrinh" },
+        { ten: "Tượng Bà Chùa Linh Ứng", moTa: "Tượng Quan Âm cao 67m hướng ra biển, là biểu tượng tâm linh của Đà Nẵng.", anh: "anh/tuongba.jpg", nhom: "vanhoa" }
+      ];
 
-          if (mapUrl) {
-            mapFrame.src = mapUrl;
-            const containerWrapper = document.getElementById(mapContainerId).parentElement;
-            containerWrapper.style.display = "flex";
-            containerWrapper.scrollIntoView({ behavior: "smooth" });
+      // ✅ Map liên kết ảnh với Google Maps
+      const mapLinks = {
+        "sontra.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61325.10679341589!2d108.23449602352073!3d16.126652347514394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d72d1be522d%3A0x1e7339a6534e4e7!2zQsOhbiDEkeG6o28gU8ahbiBUcsOg!5e0!3m2!1svi!2s!4v1761382274356!5m2!1svi!2s",
+        "mykhe.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7510.326805541372!2d108.23757912776612!3d16.06199747013214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421782f7fa0ee3%3A0xeafb8ba272ee55ac!2zQsOjaSBiaeG7g24gTeG7uSBLaMOq!5e0!3m2!1svi!2s!4v1761386143516!5m2!1svi!2s",
+        "banahills.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9344.564818548868!2d108.0239637961576!3d16.027234286432954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f60e6b3844c9%3A0x5c53b85f61797909!2sSun%20World%20B%C3%A0%20N%C3%A0%20Hills!5e0!3m2!1svi!2s!4v1761386544078!5m2!1svi!2s",
+        "nguhanhson.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.188299429895!2d108.26058557604907!3d16.00371038466636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e14b2edb%3A0xbc6e1faf738be4c5!2zTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386646650!5m2!1svi!2s",
+        "caurong.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.084502275844!2d108.22511767605005!3d16.061104184617214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219d2f38ce45d%3A0xbfa47dd116d4db88!2zQ-G6p3UgUuG7k25nLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1761383554572!5m2!1svi!2s",
+        "tuongba.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.1807428214015!2d108.26174147604922!3d16.00410398466608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142110e6f11cc15%3A0x13a307b874043572!2zQ2jDuWEgTGluaCDhu6huZyDigJMgTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386845365!5m2!1svi!2s",
+        "cauvang.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.356680734252!2d107.99398757604877!3d15.994937484673793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f73d19c5d38f%3A0x63766c11470ab50d!2zQ-G6p3UgVsOgbmc!5e0!3m2!1svi!2s!4v1761386912430!5m2!1svi!2s",
+        "cautinhyeu.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.048040202771!2d108.22723967605002!3d16.062996684615584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142196e746d9c5f%3A0x91cfbbc68781d139!2zQ-G6p3UgVMOsbmggWcOqdSAtIExvdmUgUGllcg!5e0!3m2!1svi!2s!4v1761386959645!5m2!1svi!2s"
+      };
 
-          } else {
-            mapContainer.style.display = "none";
-          }
+      const container = document.getElementById("diaDanhContainer");
+
+      // ✅ Hàm render danh sách
+      function renderDiaDanh(list) {
+        container.innerHTML = "";
+        list.forEach((diaDanh, index) => {
+          const fileName = diaDanh.anh.split("/").pop();
+          const mapLink = mapLinks[fileName] || "";
+          const html = `
+          <div class="row align-items-start mb-5 fade-in" id="item-${index}">
+            <div class="col-md-5 text-center position-relative">
+              <div class="image-container" id="media-${index}">
+                <img src="${diaDanh.anh}" alt="${diaDanh.ten}" class="img-fluid rounded shadow-sm" />
+              </div>
+            </div>
+            <div class="col-md-7">
+              <h3 class="fw-bold mb-3">${diaDanh.ten}</h3>
+              <p>${diaDanh.moTa}</p>
+              <div class="nut-hanh-dong d-flex gap-3 mt-3">
+                ${mapLink ? `
+                  <button class="btn btn-outline-primary" id="btnMap-${index}" onclick="toggleMap(${index}, '${diaDanh.anh}', '${mapLink}')">
+                    <i class="bi bi-geo-alt"></i> Xem vị trí
+                  </button>` : ""}
+                <button class="btn btn-outline-success">
+                  <i class="bi bi-heart"></i> Yêu thích
+                </button>
+              </div>
+            </div>
+          </div>`;
+          container.insertAdjacentHTML("beforeend", html);
         });
-      });
-    }
 
-    setupImageGroup("group1", "desc-group1", "map-frame-container1", "map-frame1", mapDataGroup1);
-    setupImageGroup("group2", "desc-group2", "map-frame-container2", "map-frame2", mapDataGroup2);
-  </script>
+        // Hiệu ứng xuất hiện
+        document.querySelectorAll(".fade-in").forEach(el => {
+          el.classList.add("appear");
+        });
+      }
+
+      // ✅ Hàm lọc địa danh theo nhóm
+      function locDiaDanh(nhom) {
+        const loc = diaDanhList.filter(d => d.nhom === nhom);
+        renderDiaDanh(loc);
+      }
+
+      // ✅ Hàm chuyển ảnh <-> bản đồ
+      function toggleMap(index, imgPath, mapLink) {
+        const mediaDiv = document.getElementById(`media-${index}`);
+        const btn = document.getElementById(`btnMap-${index}`);
+
+        if (mediaDiv.dataset.showing === "map") {
+          mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa danh" class="img-fluid rounded shadow-sm" />`;
+          mediaDiv.dataset.showing = "image";
+          btn.innerHTML = `<i class="bi bi-geo-alt"></i> Xem vị trí`;
+        } else {
+          mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+          mediaDiv.dataset.showing = "map";
+          btn.innerHTML = `<i class="bi bi-image"></i> Xem ảnh`;
+        }
+      }
+    </script>
+
+
 
 </body>
 

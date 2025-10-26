@@ -24,7 +24,7 @@
 }
 
 .navbar-custom .nav-link:hover {
-  color: #f9d342;
+  color: #000000;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
@@ -34,34 +34,94 @@
 }
 
 .login-text:hover {
-  color: #f9d342;
+  color: #000000;
 }
 
-/* Banner đầu tiên (Welcome to Đà Nẵng) */
-.top {
+
+/*Xử lý banner vs thanh tìm kiếm*/
+/* Banner */
+#banner {
   position: relative;
-  margin-top: 0px;
-  width: 100%;
-  overflow: hidden;
+  height: 80vh;
+
 }
 
 .banner-img {
   width: 100%;
-  height: 70vh;
+  height: 100%;
   object-fit: cover;
-  display: block;
+  filter: brightness(100%);
+  /* Giữ sáng rõ hình ảnh, không bị tối */
 }
 
-.top::after {
-  content: "";
+.banner-overlay {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 150px;
-  pointer-events: none;
-  z-index: 1;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  /* Xóa lớp mờ đen phủ trên */
 }
+
+/* THANH TÌM KIẾM */
+.search-container {
+  font-family: "Montagu Slab", serif;
+}
+
+.search-container h2 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: 1px;
+}
+
+.search-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  font-size: 20px;
+  border-radius: 50px;
+  padding: 10px 45px 10px 20px;
+  width: 100%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  color: white;
+  outline: none;
+}
+
+.btn-search {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.btn-search:hover {
+  color: #000000;
+}
+
+
 
 @media (max-width: 768px) {
   .banner-text h1 {
@@ -73,60 +133,13 @@
   }
 }
 
-/* Thanh tiêu đề “Đà Nẵng” */
-@import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@500&display=swap");
 
-#navname {
-  position: relative;
-  width: 100%;
-  background: linear-gradient(90deg, rgba(230, 85, 60, 0.80) 0%,
-      /* đỏ hoàng hôn bên trái */
-      rgba(255, 120, 60, 0.6) 25%,
-      /* pha cam ánh đèn */
-      rgba(255, 160, 120, 0.5) 50%,
-      /* sáng ở giữa */
-      rgba(255, 120, 60, 0.5) 75%,
-      /* pha cam ánh đèn bên phải */
-      rgba(230, 85, 60, 0.85) 100%
-      /* đỏ hoàng hôn bên phải */
-    );
-  padding: 25px 0;
-  text-align: center;
-  overflow: hidden;
-  z-index: 0;
-  margin: 0;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 20px rgba(255, 100, 60, 0.3);
-  transition: background 1s ease;
-}
-
-#navname h2 {
-  position: relative;
-  z-index: 2;
-  font-family: "Montagu Slab", serif;
-  font-weight: 600;
-  font-size: 62px;
-  color: #fff8f4;
-  text-shadow: 0 0 10px rgba(255, 200, 160, 0.8), 2px 2px 8px rgba(120, 40, 40, 0.7);
-  margin: 0;
-  line-height: 1.1;
-}
-
-/* chỉnh màu mờ đen thanh navname*/
-#navname::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
 
 /* Font đoạn mô tả */
 @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
 
-/* ----------- PHẦN ĐỊA DANH (GIỐNG HÌNH BẠN GỬI) ----------- */
 .diadanh-section {
-  background-color: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(to bottom, rgb(119, 230, 2430.8) 0%, rgba(119, 230, 243, 0.5) 20%, rgba(119, 230, 243, 0.2) 75%);
   color: #fff;
   padding: 100px 80px;
   text-align: center;
@@ -135,7 +148,7 @@
 
 .diadanh-section .intro-text {
   font-family: "Montagu Slab", serif;
-  color: #f0f2ec;
+  color: #000000;
   max-width: 850px;
   margin: 0 auto 60px;
   font-size: 28px;
@@ -143,137 +156,143 @@
   text-align: justify;
 }
 
-.diadanh-section .title {
-  font-family: "Montagu Slab", serif;
-  color: #f0f2ec;
-  font-weight: 700;
-  font-size: 32px;
-  margin: 60px 0 30px;
-}
-
-.img-row {
+#list-dia-danh .row {
+  min-height: 450px; /* Chiều cao tối thiểu cho mỗi hàng */
   display: flex;
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 40px;
 }
 
-.img-box {
-  width: 250px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+#list-dia-danh img {
+  width: 100%;
+  max-width: 420px;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
 }
 
-.img-box:hover {
+#list-dia-danh img:hover {
   transform: scale(1.05);
 }
 
-.img-box img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 10px;
-  background-color: #aaa;
-  transition: opacity 0.3s ease;
-}
-
-.img-box.active {
-  transform: scale(1.08);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
-}
-
-
-
-.note {
-  margin-top: 80px;
-  text-align: left;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.note ul {
-  margin-top: 10px;
-  padding-left: 25px;
-}
-
-.group-desc {
+#list-dia-danh p {
   font-family: "Montagu Slab", serif;
-  color: #f0f2ec;
-  margin-top: 20px;
-  font-size: 24px;
-  text-align: center;
-  line-height: 1.5;
-  min-height: 50px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  color: #000;
+  font-size: 20px;
+  line-height: 1.6;
+  max-height: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.group-desc.show {
-  opacity: 1;
+#list-dia-danh h3 {
+  color: #000000;
 }
 
 .map-container {
-  animation: fadeIn 0.6s ease-in-out;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Bố cục mô tả - bản đồ song song */
-.desc-map-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  margin-top: 30px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  animation: fadeIn 0.6s ease-in-out;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.6s ease;
 }
 
-.group-desc {
-  flex: 1;
-  font-family: "Montagu Slab", serif;
-  color: #f0f2ec;
-  font-size: 22px;
-  line-height: 1.6;
-  text-align: justify;
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-in.appear {
   opacity: 1;
-  transition: opacity 0.4s ease;
+  transform: translateY(0);
 }
 
-.map-frame-container {
-  flex: 1;
-  text-align: right;
+
+
+/* Phần phân loại bên trái, gọn gàng */
+#phanloai .row {
+  justify-content: flex-start !important; /* canh trái */
+  gap: 10px !important;
 }
 
-.map-frame-container iframe {
-  width: 100%;
-  height: 320px;
-  border-radius: 10px;
+#phanloai .col-10.col-md-3 {
+  flex: 0 0 auto;
+  max-width: 400px;  
+  width: 20%;
 }
 
-/* Khi xem trên điện thoại – xếp chồng dọc lại */
-@media (max-width: 768px) {
-  .desc-map-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  .map-frame-container iframe {
-    width: 100%;
-    height: 250px;
-  }
+/* Căn lề toàn bộ khối phân loại về trái */
+#phanloai {
+  text-align: left;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 80px; /* đẩy nhẹ sang phải cho đẹp */
 }
+
+
+/* Giảm padding trong card */
+#phanloai .card-body {
+  padding: 6px 4px;
+  
+  
+}
+
+/* Giảm margin dưới phần phân loại */
+#phanloai {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+#phanloai h3 {
+  margin-bottom: 20px; /* Giảm khoảng cách tiêu đề với các thẻ */
+}
+
+#phanloai h5 {
+  font-size: 14px;
+}
+#phanloai .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
+  border: 2px solid transparent;
+  background-color: #f7f7f7;
+}
+
+#phanloai .card:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  border-color: #5c5c5c;
+  background-color: #eaeaea;
+}
+
+/* Trạng thái được chọn (active) — màu đậm hơn, nổi rõ hơn */
+#phanloai .card.active {
+  transform: scale(1.08);
+  border-color: #2f2f2f;
+  background-color: #d6d6d6;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+.btn {
+  border-radius: 25px;
+  padding: 8px 18px;
+  transition: all 0.3s ease;
+  
+}
+
+.btn-outline-success:hover,
+.btn-outline-primary:hover {
+  transform: scale(1.05);
+}
+
+.nut-hanh-dong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* khoảng cách giữa 2 nút */
+  margin-top: 15px;
+}
+
+
