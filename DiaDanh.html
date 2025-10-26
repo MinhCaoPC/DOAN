@@ -85,36 +85,33 @@
       </p>
     </div>
 
-    <!-- ✅ Phân loại địa danh -->
     <section id="phanloai" class="py-5 text-center">
       <div class="container">
         <div class="row justify-content-center g-4">
 
+
           <div class="col-10 col-md-3">
-            <div class="card border-0 shadow-sm hover-scale" onclick="locDiaDanh('thiennhien')">
-              <img src="anh/thiennhien.jpg" class="card-img-top rounded-top" alt="Thiên nhiên">
-              <div class="card-body bg-white rounded-bottom">
-                <h5 class="fw-semibold">Địa Danh Thiên Nhiên</h5>
-              </div>
-            </div>
+            <button class="btn-phanloai" data-loai="all" onclick='locDiaDanh(["thiennhien","congtrinh","vanhoa"])'>
+              Tất cả địa danh
+            </button>
           </div>
 
           <div class="col-10 col-md-3">
-            <div class="card border-0 shadow-sm hover-scale" onclick="locDiaDanh('congtrinh')">
-              <img src="anh/congtrinh.jpg" class="card-img-top rounded-top" alt="Công trình">
-              <div class="card-body bg-white rounded-bottom">
-                <h5 class="fw-semibold">Địa Danh Công Trình</h5>
-              </div>
-            </div>
+            <button class="btn-phanloai" data-loai="thiennhien" onclick="locDiaDanh('thiennhien')">
+              Địa Danh Thiên Nhiên
+            </button>
           </div>
 
           <div class="col-10 col-md-3">
-            <div class="card border-0 shadow-sm hover-scale" onclick="locDiaDanh('vanhoa')">
-              <img src="anh/vanhoa.jpg" class="card-img-top rounded-top" alt="Văn hoá - Nghệ thuật">
-              <div class="card-body bg-white rounded-bottom">
-                <h5 class="fw-semibold">Văn Hoá - Nghệ Thuật</h5>
-              </div>
-            </div>
+            <button class="btn-phanloai" data-loai="congtrinh" onclick="locDiaDanh('congtrinh')">
+              Địa Danh Công Trình
+            </button>
+          </div>
+
+          <div class="col-10 col-md-3">
+            <button class="btn-phanloai" data-loai="vanhoa" onclick="locDiaDanh('vanhoa')">
+              Văn Hoá - Nghệ Thuật
+            </button>
           </div>
 
         </div>
@@ -139,7 +136,7 @@
     <script>
 
       window.onload = function () {
-        locDiaDanh('thiennhien');
+        locDiaDanh(['thiennhien', 'congtrinh', 'vanhoa']);
       };
       // ✅ Dữ liệu địa danh (sẽ thay bằng dữ liệu từ CSDL sau này)
       const diaDanhList = [
@@ -223,6 +220,12 @@
           mediaDiv.dataset.showing = "map";
           btn.innerHTML = `<i class="bi bi-image"></i> Xem ảnh`;
         }
+      }
+
+      function locDiaDanh(nhoms) {
+        if (!Array.isArray(nhoms)) nhoms = [nhoms]; // nếu chỉ 1 nhóm thì chuyển thành mảng
+        const loc = diaDanhList.filter(d => nhoms.includes(d.nhom));
+        renderDiaDanh(loc);
       }
     </script>
 

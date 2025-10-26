@@ -139,7 +139,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
 
 .diadanh-section {
-  background: linear-gradient(to bottom, rgb(119, 230, 2430.8) 0%, rgba(119, 230, 243, 0.5) 20%, rgba(119, 230, 243, 0.2) 75%);
+  background: linear-gradient(to top, rgb(119, 230, 2430.8) 0%, rgba(119, 230, 243, 0.5) 20%, rgba(255, 255, 255, 0.2) 75%);
   color: #fff;
   padding: 100px 80px;
   text-align: center;
@@ -210,67 +210,32 @@
 
 
 
-/* Phần phân loại bên trái, gọn gàng */
-#phanloai .row {
-  justify-content: flex-start !important; /* canh trái */
-  gap: 10px !important;
+/* ✅ Nút phân loại */
+.btn-phanloai {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+  transform: scale(1);
 }
 
-#phanloai .col-10.col-md-3 {
-  flex: 0 0 auto;
-  max-width: 400px;  
-  width: 20%;
-}
-
-/* Căn lề toàn bộ khối phân loại về trái */
-#phanloai {
-  text-align: left;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  padding-left: 80px; /* đẩy nhẹ sang phải cho đẹp */
-}
-
-
-/* Giảm padding trong card */
-#phanloai .card-body {
-  padding: 6px 4px;
-  
-  
-}
-
-/* Giảm margin dưới phần phân loại */
-#phanloai {
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
-#phanloai h3 {
-  margin-bottom: 20px; /* Giảm khoảng cách tiêu đề với các thẻ */
-}
-
-#phanloai h5 {
-  font-size: 14px;
-}
-#phanloai .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
-  border: 2px solid transparent;
-  background-color: #f7f7f7;
-}
-
-#phanloai .card:hover {
-  transform: scale(1.07);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-  border-color: #5c5c5c;
-  background-color: #eaeaea;
-}
-
-/* Trạng thái được chọn (active) — màu đậm hơn, nổi rõ hơn */
-#phanloai .card.active {
+.btn-phanloai:hover {
   transform: scale(1.08);
-  border-color: #2f2f2f;
-  background-color: #d6d6d6;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  background: #e7f2ff; /* xanh dương nhạt khi hover */
 }
+
+/* ✅ Khi được chọn */
+.btn-phanloai.active {
+  background: linear-gradient(to right, #007bff, #00b4ff); /* xanh dương gradient */
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4); /* bóng xanh dương */
+}
+
 
 
 
