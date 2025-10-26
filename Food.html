@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ẩm thực Đà Nẵng</title>
+ <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- CSS riêng -->
+  <link rel="stylesheet" href="Food.css">
+</head>
+<body>
+<!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container-fluid px-4">
+
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="logo.png" alt="Logo" class="logo me-2">
+      </a>
+
+      <!-- Nút thu gọn -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu chính -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">NGHỈ DƯỠNG</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">TOUR</a></li>
+        </ul>
+      </div>
+
+      <!-- Đăng nhập -->
+      <div class="d-none d-lg-flex align-items-center">
+      <i class="bi bi-person-circle me-2 fs-5" style="color: white;"></i>
+      </div>
+
+    </div>
+  </nav>
+
+    <!-- Banner -->
+  <section class="banner-section">
+    <img src="pic/BANNER.JPG" alt="banner" class="banner-img">
+  </section>
+<!-- Giới thiệu ẩm thực -->
+<div class="container-fluid text-center Loangmau">
+  <div class="row align-items-center">
+    <!-- Hình trái -->
+    <div class="col-12 col-md-3 d-none d-md-block">
+      <img src="pic/2.png" alt="food" class="img-fluid">
+    </div>
+
+    <!-- Text giữa -->
+    <div class="col-12 col-md-6 gt-text">
+        <h2 class="chutd">KHÁM PHÁ <br> THIÊN ĐƯỜNG ẨM THỰC ĐÀ NẴNG</h2>
+        <p class="chu"> Đà Nẵng, trung tâm du lịch miền Trung, không chỉ hấp dẫn với cảnh quan tuyệt đẹp mà còn bởi nền ẩm thực đa dạng. Ẩm thực nơi đây là sự kết hợp tinh tế giữa nét cầu kỳ của Huế và mộc mạc của xứ Quảng, từ món ăn đường phố nổi tiếng như Mì Quảng, Bánh tráng cuốn thịt heo, đến hải sản tươi ngon ven biển.
+            Mỗi món ăn đều kể câu chuyện văn hóa và cam kết chất lượng, mời du khách khám phá hương vị đặc sắc của thành phố. </p>
+
+    </div>
+
+    <!-- Hình phải -->
+    <div class="col-12 col-md-3 d-none d-md-block">
+      <img src="pic/1.png" alt="food" class="img-fluid">
+    </div>
+  </div>
+
+
+<!-- NÚT -->
+<div class="text-center mb-4 buttons">
+  <button class="btn-food active" onclick="toggleSection('dacSan', event)">Đặc sản</button>
+  <button class="btn-food" onclick="toggleSection('haiSan', event)">Hải sản</button>
+  <button class="btn-food" onclick="toggleSection('duongPho', event)">Đường phố</button>
+  <button class="btn-food" onclick="toggleSection('Qua', event)">Quà tặng người thân</button>
+</div>
+
+<!-- SECTION 1: ĐẶC SẢN -->
+<section id="dacSan" class="content-section active">
+<div>
+    <h2 class="chutd">
+        Món đặc sản “phải thử” ở Đà Nẵng
+    </h2>
+</div>
+<div class="wrapper">
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Bãi biển Đà Nẵng">
+    <div class="text-box">
+      <p><b>Ẩm thực Đà Nẵng</b> không chỉ nằm ở món ăn mà còn ở cách thưởng thức:</p>
+      <ul>
+        <li>Người dân thích ăn ngoài trời, trong các quán nhỏ, gió biển lồng lộng, vừa ăn vừa trò chuyện thoải mái.</li>
+        <li>Du khách có thể dễ dàng bắt gặp ẩm thực bình dân nhưng sạch sẽ, phản ánh tính cách “gọn gàng, ngắn nắp” của người Đà Nẵng.</li>
+        <li>Các khu chợ đêm và phố ẩm thực như chợ Hàn, chợ Cồn, chợ đêm Sơn Trà hay Helio luôn là điểm dừng chân hấp dẫn.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1549887534-7a88c7d7a9f3" alt="Cảnh biển khác">
+    <div class="text-box">
+      <p><b>Du lịch Đà Nẵng</b> mang đến trải nghiệm phong phú:</p>
+      <ul>
+        <li>Tham quan Bà Nà Hills, Cầu Rồng, biển Mỹ Khê.</li>
+        <li>Trải nghiệm ẩm thực đường phố đặc sắc.</li>
+        <li>Khám phá văn hóa và lễ hội địa phương.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: HẢI SẢN -->
+<section id="haiSan" class="content-section active">
+<div>
+    <h2 class="chutd">
+        Món hải sản – tinh hoa vùng biển
+    </h2>
+</div>
+<div class="wrapper">
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Bãi biển Đà Nẵng">
+    <div class="text-box">
+      <p><b>Ẩm thực Đà Nẵng</b> không chỉ nằm ở món ăn mà còn ở cách thưởng thức:</p>
+      <ul>
+        <li>Người dân thích ăn ngoài trời, trong các quán nhỏ, gió biển lồng lộng, vừa ăn vừa trò chuyện thoải mái.</li>
+        <li>Du khách có thể dễ dàng bắt gặp ẩm thực bình dân nhưng sạch sẽ, phản ánh tính cách “gọn gàng, ngắn nắp” của người Đà Nẵng.</li>
+        <li>Các khu chợ đêm và phố ẩm thực như chợ Hàn, chợ Cồn, chợ đêm Sơn Trà hay Helio luôn là điểm dừng chân hấp dẫn.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1549887534-7a88c7d7a9f3" alt="Cảnh biển khác">
+    <div class="text-box">
+      <p><b>Du lịch Đà Nẵng</b> mang đến trải nghiệm phong phú:</p>
+      <ul>
+        <li>Tham quan Bà Nà Hills, Cầu Rồng, biển Mỹ Khê.</li>
+        <li>Trải nghiệm ẩm thực đường phố đặc sắc.</li>
+        <li>Khám phá văn hóa và lễ hội địa phương.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: Đường phố -->
+<section id="duongPho" class="content-section active">
+    <div>
+    <h2 class="chutd">
+        Món ăn bình dân - đường phố
+    </h2>
+</div>
+<div class="wrapper">
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Bãi biển Đà Nẵng">
+    <div class="text-box">
+      <p><b>Ẩm thực Đà Nẵng</b> không chỉ nằm ở món ăn mà còn ở cách thưởng thức:</p>
+      <ul>
+        <li>Người dân thích ăn ngoài trời, trong các quán nhỏ, gió biển lồng lộng, vừa ăn vừa trò chuyện thoải mái.</li>
+        <li>Du khách có thể dễ dàng bắt gặp ẩm thực bình dân nhưng sạch sẽ, phản ánh tính cách “gọn gàng, ngắn nắp” của người Đà Nẵng.</li>
+        <li>Các khu chợ đêm và phố ẩm thực như chợ Hàn, chợ Cồn, chợ đêm Sơn Trà hay Helio luôn là điểm dừng chân hấp dẫn.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1549887534-7a88c7d7a9f3" alt="Cảnh biển khác">
+    <div class="text-box">
+      <p><b>Du lịch Đà Nẵng</b> mang đến trải nghiệm phong phú:</p>
+      <ul>
+        <li>Tham quan Bà Nà Hills, Cầu Rồng, biển Mỹ Khê.</li>
+        <li>Trải nghiệm ẩm thực đường phố đặc sắc.</li>
+        <li>Khám phá văn hóa và lễ hội địa phương.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: Quà -->
+<section id="Qua" class="content-section active">
+        <div>
+    <h2 class="chutd">
+Đặc sản mua về làm quà
+    </h2>
+</div>
+<div class="wrapper">
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Bãi biển Đà Nẵng">
+    <div class="text-box">
+      <p><b>Ẩm thực Đà Nẵng</b> không chỉ nằm ở món ăn mà còn ở cách thưởng thức:</p>
+      <ul>
+        <li>Người dân thích ăn ngoài trời, trong các quán nhỏ, gió biển lồng lộng, vừa ăn vừa trò chuyện thoải mái.</li>
+        <li>Du khách có thể dễ dàng bắt gặp ẩm thực bình dân nhưng sạch sẽ, phản ánh tính cách “gọn gàng, ngắn nắp” của người Đà Nẵng.</li>
+        <li>Các khu chợ đêm và phố ẩm thực như chợ Hàn, chợ Cồn, chợ đêm Sơn Trà hay Helio luôn là điểm dừng chân hấp dẫn.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <img src="https://images.unsplash.com/photo-1549887534-7a88c7d7a9f3" alt="Cảnh biển khác">
+    <div class="text-box">
+      <p><b>Du lịch Đà Nẵng</b> mang đến trải nghiệm phong phú:</p>
+      <ul>
+        <li>Tham quan Bà Nà Hills, Cầu Rồng, biển Mỹ Khê.</li>
+        <li>Trải nghiệm ẩm thực đường phố đặc sắc.</li>
+        <li>Khám phá văn hóa và lễ hội địa phương.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleSection(id, event) {
+  // Ẩn toàn bộ section
+  document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+  
+  // Hiện section được chọn
+  document.getElementById(id).classList.add('active');
+
+  // Cập nhật trạng thái nút
+  document.querySelectorAll('.btn-food').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
