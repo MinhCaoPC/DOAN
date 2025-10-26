@@ -5,15 +5,7 @@
   width: 100%;
   top: 0;
   z-index: 10;
-  background: linear-gradient(
-    to right,
-    rgba(0, 120, 60, 1) 0%,
-    rgba(1, 158, 108, 0.9) 10%,
-    rgba(30, 190, 155, 0.7) 25%,
-    rgba(75, 210, 225, 0.5) 50%,
-    rgba(70, 152, 214, 0.75) 80%,
-    rgba(51, 144, 215, 0.95) 100%
-  );
+  background: linear-gradient(to right, rgba(0, 120, 60, 1) 0%, rgba(1, 158, 108, 0.9) 10%, rgba(30, 190, 155, 0.7) 25%, rgba(75, 210, 225, 0.5) 50%, rgba(70, 152, 214, 0.75) 80%, rgba(51, 144, 215, 0.95) 100%);
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
@@ -40,6 +32,7 @@
   color: #fff;
   text-decoration: none;
 }
+
 .login-text:hover {
   color: #f9d342;
 }
@@ -74,6 +67,7 @@
   .banner-text h1 {
     font-size: 60px;
   }
+
   .banner-text h2 {
     font-size: 30px;
   }
@@ -85,14 +79,17 @@
 #navname {
   position: relative;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(230, 85, 60, 0.80) 0%,    /* đỏ hoàng hôn bên trái */
-    rgba(255, 120, 60, 0.6) 25%,   /* pha cam ánh đèn */
-    rgba(255, 160, 120, 0.5) 50%, /* sáng ở giữa */
-    rgba(255, 120, 60, 0.5) 75%,   /* pha cam ánh đèn bên phải */
-    rgba(230, 85, 60, 0.85) 100%   /* đỏ hoàng hôn bên phải */
-  );
+  background: linear-gradient(90deg, rgba(230, 85, 60, 0.80) 0%,
+      /* đỏ hoàng hôn bên trái */
+      rgba(255, 120, 60, 0.6) 25%,
+      /* pha cam ánh đèn */
+      rgba(255, 160, 120, 0.5) 50%,
+      /* sáng ở giữa */
+      rgba(255, 120, 60, 0.5) 75%,
+      /* pha cam ánh đèn bên phải */
+      rgba(230, 85, 60, 0.85) 100%
+      /* đỏ hoàng hôn bên phải */
+    );
   padding: 25px 0;
   text-align: center;
   overflow: hidden;
@@ -103,7 +100,6 @@
   transition: background 1s ease;
 }
 
-
 #navname h2 {
   position: relative;
   z-index: 2;
@@ -111,12 +107,11 @@
   font-weight: 600;
   font-size: 62px;
   color: #fff8f4;
-  text-shadow:
-    0 0 10px rgba(255, 200, 160, 0.8),
-    2px 2px 8px rgba(120, 40, 40, 0.7);
+  text-shadow: 0 0 10px rgba(255, 200, 160, 0.8), 2px 2px 8px rgba(120, 40, 40, 0.7);
   margin: 0;
   line-height: 1.1;
 }
+
 /* chỉnh màu mờ đen thanh navname*/
 #navname::before {
   content: "";
@@ -126,14 +121,12 @@
   pointer-events: none;
 }
 
-
-
 /* Font đoạn mô tả */
 @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
 
 /* ----------- PHẦN ĐỊA DANH (GIỐNG HÌNH BẠN GỬI) ----------- */
 .diadanh-section {
-  background-color:rgba(0, 0, 0, 0.7) ;
+  background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   padding: 100px 80px;
   text-align: center;
@@ -183,6 +176,7 @@
   background-color: #aaa;
   transition: opacity 0.3s ease;
 }
+
 .img-box.active {
   transform: scale(1.08);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -190,16 +184,7 @@
   border-radius: 12px;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
 
 .note {
   margin-top: 80px;
@@ -230,4 +215,65 @@
 
 .group-desc.show {
   opacity: 1;
+}
+
+.map-container {
+  animation: fadeIn 0.6s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bố cục mô tả - bản đồ song song */
+.desc-map-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.group-desc {
+  flex: 1;
+  font-family: "Montagu Slab", serif;
+  color: #f0f2ec;
+  font-size: 22px;
+  line-height: 1.6;
+  text-align: justify;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.map-frame-container {
+  flex: 1;
+  text-align: right;
+}
+
+.map-frame-container iframe {
+  width: 100%;
+  height: 320px;
+  border-radius: 10px;
+}
+
+/* Khi xem trên điện thoại – xếp chồng dọc lại */
+@media (max-width: 768px) {
+  .desc-map-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .map-frame-container iframe {
+    width: 100%;
+    height: 250px;
+  }
 }

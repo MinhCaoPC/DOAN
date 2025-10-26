@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <!-- Navbar -->
+  <!-- ✅ Navbar duy nhất -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container-fluid px-4">
       <!-- Logo -->
@@ -31,13 +31,9 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a></li>
           <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">NGHỈ DƯỠNG</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="#">NGHỈ DƯỠNG</a></li>
           <li class="nav-item"><a class="nav-link" href="#">TOUR</a></li>
         </ul>
       </div>
@@ -51,46 +47,14 @@
     </div>
   </nav>
 
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-    <div class="container-fluid px-4">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="logo.png" alt="Logo" class="logo me-2" />
-      </a>
-
-      <!-- Nút thu gọn -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Menu chính -->
-      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">NGHỈ DƯỠNG</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">TOUR</a></li>
-        </ul>
-      </div>
-
-      <!-- Đăng nhập -->
-      <div class="d-none d-lg-flex align-items-center">
-        <i class="bi bi-person-circle me-2 fs-5"></i>
-        <a href="#" class="login-text me-1 dangnhap">ĐĂNG NHẬP</a> /
-        <a href="#" class="login-text ms-1 dangky">ĐĂNG KÝ</a>
-      </div>
-    </div>
-  </nav>
+  <!-- Banner -->
   <nav>
     <div class="top">
       <img src="anh/banner_diadanh.jpg" alt="Địa Danh 1" class="banner-img" />
     </div>
   </nav>
+
+  <!-- Tiêu đề -->
   <nav id="navname">
     <div>
       <h2>Địa Danh Nổi Bật</h2>
@@ -113,8 +77,7 @@
       </p>
     </div>
 
-
-    <!-- Dòng tiêu đề 1 -->
+    <!-- Nhóm 1 -->
     <h2 class="title">Địa danh thiên nhiên – phong cảnh đẹp</h2>
     <div class="img-row" id="group1">
       <div class="img-box" data-desc="Bán đảo Sơn Trà – lá phổi xanh của Đà Nẵng, nơi hòa quyện giữa rừng và biển.">
@@ -132,68 +95,94 @@
         <img src="anh/nguhanhson.jpg" alt="Ngũ Hành Sơn" />
       </div>
     </div>
+    <div class="desc-map-container" id="descmap1" style="display:none;">
+      <div class="group-desc" id="desc-group1"></div>
+      <div class="map-frame-container" id="map-frame-container1">
+        <iframe id="map-frame1" width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+    </div>
 
-    <!-- Mô tả chung cho nhóm 1 -->
-    <p class="group-desc" id="desc-group1"></p>
 
-    <!-- Dòng tiêu đề 2 -->
+    <!-- Nhóm 2 -->
     <h2 class="title">Biểu tượng đô thị – công trình nổi bật</h2>
     <div class="img-row" id="group2">
       <div class="img-box" data-desc="Cầu Rồng – biểu tượng hiện đại của thành phố, phun lửa và nước vào cuối tuần.">
         <img src="anh/caurong.jpg" alt="Cầu Rồng" />
       </div>
-
       <div class="img-box" data-desc="Nhà hát Trưng Vương – công trình văn hóa hiện đại giữa lòng thành phố biển.">
         <img src="anh/tuongba.jpg" alt="Tượng Bà" />
       </div>
-
       <div class="img-box" data-desc="Cầu Sông Hàn – cây cầu quay đầu tiên ở Việt Nam, niềm tự hào của người Đà Nẵng.">
         <img src="anh/cauvang.jpg" alt="Cầu Vàng" />
       </div>
-
       <div class="img-box"
         data-desc="Cầu Tình Yêu – điểm check-in lãng mạn bên sông Hàn, nơi lưu giữ khoảnh khắc của các cặp đôi.">
         <img src="anh/cautinhyeu.jpg" alt="Cầu Tình Yêu" />
       </div>
-      
-
-
+    </div>
+    <div class="desc-map-container" id="descmap2" style="display:none;">
+      <div class="group-desc" id="desc-group2"></div>
+      <div class="map-frame-container" id="map-frame-container2">
+        <iframe id="map-frame2" width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen
+          loading="lazy"></iframe>
+      </div>
     </div>
 
-    <!-- Mô tả chung cho nhóm 2 -->
-    <p class="group-desc" id="desc-group2"></p>
+  </section>
 
+  <!-- JS -->
+  <script>
+    const mapDataGroup1 = {
+      "sontra.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61325.10679341589!2d108.23449602352073!3d16.126652347514394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d72d1be522d%3A0x1e7339a6534e4e7!2zQsOhbiDEkeG6o28gU8ahbiBUcsOg!5e0!3m2!1svi!2s!4v1761382274356!5m2!1svi!2s",
+      "mykhe.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7510.326805541372!2d108.23757912776612!3d16.06199747013214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421782f7fa0ee3%3A0xeafb8ba272ee55ac!2zQsOjaSBiaeG7g24gTeG7uSBLaMOq!5e0!3m2!1svi!2s!4v1761386143516!5m2!1svi!2s",
+      "banahills.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9344.564818548868!2d108.0239637961576!3d16.027234286432954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f60e6b3844c9%3A0x5c53b85f61797909!2sSun%20World%20B%C3%A0%20N%C3%A0%20Hills!5e0!3m2!1svi!2s!4v1761386544078!5m2!1svi!2s",
+      "nguhanhson.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.188299429895!2d108.26058557604907!3d16.00371038466636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e14b2edb%3A0xbc6e1faf738be4c5!2zTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386646650!5m2!1svi!2s"
+    };
 
+    const mapDataGroup2 = {
+      "caurong.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.084502275844!2d108.22511767605005!3d16.061104184617214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219d2f38ce45d%3A0xbfa47dd116d4db88!2zQ-G6p3UgUuG7k25nLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1761383554572!5m2!1svi!2s",
+      "tuongba.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.1807428214015!2d108.26174147604922!3d16.00410398466608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142110e6f11cc15%3A0x13a307b874043572!2zQ2jDuWEgTGluaCDhu6huZyDigJMgTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386845365!5m2!1svi!2s",
+      "cauvang.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.356680734252!2d107.99398757604877!3d15.994937484673793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f73d19c5d38f%3A0x63766c11470ab50d!2zQ-G6p3UgVsOgbmc!5e0!3m2!1svi!2s!4v1761386912430!5m2!1svi!2s",
+      "cautinhyeu.jpg": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.048040202771!2d108.22723967605002!3d16.062996684615584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142196e746d9c5f%3A0x91cfbbc68781d139!2zQ-G6p3UgVMOsbmggWcOqdSAtIExvdmUgUGllcg!5e0!3m2!1svi!2s!4v1761386959645!5m2!1svi!2s"
+    };
 
+    function setupImageGroup(groupId, descId, mapContainerId, mapFrameId, mapData) {
+      const group = document.getElementById(groupId);
+      const desc = document.getElementById(descId);
+      const boxes = group.querySelectorAll(".img-box");
+      const mapContainer = document.getElementById(mapContainerId);
+      const mapFrame = document.getElementById(mapFrameId);
 
-    <script>
-      // Hàm xử lý hiển thị nội dung cho từng nhóm
-      function setupImageGroup(groupId, descId) {
-        const group = document.getElementById(groupId);
-        const desc = document.getElementById(descId);
-        const boxes = group.querySelectorAll(".img-box");
+      boxes.forEach((box) => {
+        box.addEventListener("click", () => {
+          boxes.forEach((b) => b.classList.remove("active"));
+          box.classList.add("active");
 
-        boxes.forEach((box) => {
-          box.addEventListener("click", () => {
-            // Xóa trạng thái active cũ
-            boxes.forEach((b) => b.classList.remove("active"));
-            // Gán active cho hình được click
-            box.classList.add("active");
+          const text = box.dataset.desc;
+          desc.textContent = text;
+          desc.classList.add("show");
 
-            // Cập nhật nội dung mô tả
-            const text = box.getAttribute("data-desc");
-            desc.textContent = text;
+          const img = box.querySelector("img");
+          const fileName = img.getAttribute("src").split("/").pop().trim();
+          const mapUrl = mapData[fileName];
 
-            // Hiện hiệu ứng fade-in cho mô tả
-            desc.classList.add("show");
-          });
+          if (mapUrl) {
+            mapFrame.src = mapUrl;
+            const containerWrapper = document.getElementById(mapContainerId).parentElement;
+            containerWrapper.style.display = "flex";
+            containerWrapper.scrollIntoView({ behavior: "smooth" });
+
+          } else {
+            mapContainer.style.display = "none";
+          }
         });
-      }
+      });
+    }
 
-      // Áp dụng cho cả 2 nhóm
-      setupImageGroup("group1", "desc-group1");
-      setupImageGroup("group2", "desc-group2");
-    </script>
+    setupImageGroup("group1", "desc-group1", "map-frame-container1", "map-frame1", mapDataGroup1);
+    setupImageGroup("group2", "desc-group2", "map-frame-container2", "map-frame2", mapDataGroup2);
+  </script>
 
 </body>
 
