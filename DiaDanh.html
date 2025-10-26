@@ -166,39 +166,37 @@
 
       // ✅ Hàm render danh sách
       function renderDiaDanh(list) {
-        container.innerHTML = "";
-        list.forEach((diaDanh, index) => {
-          const fileName = diaDanh.anh.split("/").pop();
-          const mapLink = mapLinks[fileName] || "";
-          const html = `
-          <div class="row align-items-start mb-5 fade-in" id="item-${index}">
-            <div class="col-md-5 text-center position-relative">
-              <div class="image-container" id="media-${index}">
-                <img src="${diaDanh.anh}" alt="${diaDanh.ten}" class="img-fluid rounded shadow-sm" />
-              </div>
+  container.innerHTML = "";
+  list.forEach((diaDanh, index) => {
+    const fileName = diaDanh.anh.split("/").pop();
+    const mapLink = mapLinks[fileName] || "";
+    const html = `
+      <div class="dia-danh-card fade-in mb-5" id="item-${index}">
+        <div class="row align-items-center">
+          <div class="col-md-5 text-center position-relative" id="media-${index}">
+            <img src="${diaDanh.anh}" alt="${diaDanh.ten}" class="img-fluid rounded shadow-sm" />
+          </div>
+          <div class="col-md-7">
+            <h3 class="fw-bold mb-3">${diaDanh.ten}</h3>
+            <p>${diaDanh.moTa}</p>
+            <div class="nut-hanh-dong d-flex gap-3 mt-3">
+              ${mapLink ? `
+                <button class="btn btn-outline-primary" id="btnMap-${index}" onclick="toggleMap(${index}, '${diaDanh.anh}', '${mapLink}')">
+                  <i class="bi bi-geo-alt"></i> Xem vị trí
+                </button>` : ""}
+              <button class="btn btn-outline-success" onclick="handleYeuThich()">
+                <i class="bi bi-heart"></i> Yêu thích
+              </button>
             </div>
-            <div class="col-md-7">
-              <h3 class="fw-bold mb-3">${diaDanh.ten}</h3>
-              <p>${diaDanh.moTa}</p>
-              <div class="nut-hanh-dong d-flex gap-3 mt-3">
-                ${mapLink ? `
-                  <button class="btn btn-outline-primary" id="btnMap-${index}" onclick="toggleMap(${index}, '${diaDanh.anh}', '${mapLink}')">
-                    <i class="bi bi-geo-alt"></i> Xem vị trí
-                  </button>` : ""}
-                <button class="btn btn-outline-success" onclick="handleYeuThich()">
-                  <i class="bi bi-heart"></i> Yêu thích
-                </button>
-              </div>
-            </div>
-          </div>`;
-          container.insertAdjacentHTML("beforeend", html);
-        });
+          </div>
+        </div>
+      </div>`;
+    container.insertAdjacentHTML("beforeend", html);
+  });
 
-        // Hiệu ứng xuất hiện
-        document.querySelectorAll(".fade-in").forEach(el => {
-          el.classList.add("appear");
-        });
-      }
+  document.querySelectorAll(".fade-in").forEach(el => el.classList.add("appear"));
+}
+
 
       // ✅ Hàm lọc địa danh theo nhóm
       function locDiaDanh(nhom) {
