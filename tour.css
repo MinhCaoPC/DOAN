@@ -13,7 +13,17 @@
   width: 100%;
   top: 0;
   z-index: 10;
-  background: linear-gradient(to right, rgba(0, 120, 60, 1) 0%, rgba(1, 158, 108, 0.9) 10%, rgba(30, 190, 155, 0.7) 25%, rgba(75, 210, 225, 0.5) 50%, rgba(70, 152, 214, 0.75) 80%, rgba(51, 144, 215, 0.95) 100%);
+background: linear-gradient(
+  to right,
+  rgba(135, 206, 250, 1) 0%,   /* sky blue */
+  rgba(135, 206, 250, 0.9) 10%, 
+  rgba(135, 206, 250, 0.8) 25%, 
+  rgba(176, 224, 230, 0.7) 50%, /* powder blue */
+  rgba(135, 206, 250, 0.85) 80%, 
+  rgba(135, 206, 250, 0.95) 100%
+);
+
+
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
@@ -35,7 +45,7 @@
 }
 
 .navbar-custom .nav-link:hover {
-  color: #000000;
+    color: #002489; /* xanh trời đậm (deep sky blue) */
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
@@ -46,6 +56,15 @@
 
 .login-text:hover {
   color: #000000;
+}
+/* Căn giữa login trên mobile */
+@media (max-width: 991.98px) {
+  .login-section {
+    justify-content: center;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
 }
 
 /* --- Banner --- */

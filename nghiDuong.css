@@ -40,6 +40,47 @@
   color: #000000;
 }
 
+/* ✅ Responsive chỉnh chữ intro & thanh search trên điện thoại */
+@media (max-width: 768px) {
+  .intro-text {
+    font-size: 1.1rem !important; /* nhỏ hơn */
+    line-height: 1.4;
+    text-align: center;
+  }
+  .input-group,
+  .search-container,
+  .search-box {
+    width: 55% !important;
+  }
+
+#phanloai .row {
+  display: flex;
+  flex-wrap: nowrap; /* ❌ không cho xuống hàng */
+  justify-content: center;
+  gap: 10px; /* khoảng cách giữa các nút */
+}
+
+#phanloai .col-10 {
+  flex: 0 0 27%; /* mỗi nút chiếm ~1/4 chiều ngang */
+  max-width: 40%;
+}
+
+#phanloai .btn-phanloai {
+  width: 100%;
+}
+
+
+  
+}
+/* Canh lại "Đăng nhập / Đăng ký" khi trên mobile */
+@media (max-width: 991.98px) {
+  .login-section {
+    justify-content: center;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
 
 
 /*Xử lý banner vs thanh tìm kiếm*/
@@ -143,7 +184,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
 
 .diadanh-section {
-  background: linear-gradient(to top, rgb(119, 230, 2430.8) 0%, rgba(119, 230, 243, 0.5) 20%, rgba(255, 255, 255, 0.2) 75%);
+  background: linear-gradient(to top, rgb(119, 230, 243, 0.8) 0%, rgba(119, 230, 243, 0.5) 20%, rgba(255, 255, 255, 0.2) 75%);
   color: #fff;
   padding: 100px 80px;
   text-align: center;
@@ -183,6 +224,10 @@
   pointer-events: none; /* để không chặn click vào nút bên trong */
   border-radius: 15px;
 }
+
+
+
+
 
 #list-dia-danh .row {
   min-height: 450px; /* Chiều cao tối thiểu cho mỗi hàng */
