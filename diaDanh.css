@@ -1,11 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap"); */
 
 .navbar-custom {
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 10;
-  background: linear-gradient(to right, rgba(0, 120, 60, 1) 0%, rgba(1, 158, 108, 0.9) 10%, rgba(30, 190, 155, 0.7) 25%, rgba(75, 210, 225, 0.5) 50%, rgba(70, 152, 214, 0.75) 80%, rgba(51, 144, 215, 0.95) 100%);
+background: linear-gradient(
+  to right,
+  rgba(135, 206, 250, 1) 0%,   /* sky blue */
+  rgba(135, 206, 250, 0.9) 10%, 
+  rgba(135, 206, 250, 0.8) 25%, 
+  rgba(176, 224, 230, 0.7) 50%, /* powder blue */
+  rgba(135, 206, 250, 0.85) 80%, 
+  rgba(135, 206, 250, 0.95) 100%
+);
+
+
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
@@ -27,7 +37,7 @@
 }
 
 .navbar-custom .nav-link:hover {
-  color: #000000;
+    color: #002489; /* xanh trời đậm (deep sky blue) */
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
@@ -127,7 +137,7 @@
 
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .banner-text h1 {
     font-size: 60px;
   }
@@ -135,15 +145,20 @@
   .banner-text h2 {
     font-size: 30px;
   }
-}
+} */
 
 
 
 /* Font đoạn mô tả */
-@import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap"); */
 
 .diadanh-section {
-  background: linear-gradient(to top, rgb(119, 230, 2430.8) 0%, rgba(119, 230, 243, 0.5) 20%, rgba(255, 255, 255, 0.2) 75%);
+background: linear-gradient(
+  to top,
+  rgba(119, 230, 243, 0.3) 0%,   /* xanh nhạt, opacity thấp */
+  rgba(119, 230, 243, 0.2) 20%,  /* xanh nhạt hơn */
+  rgba(255, 255, 255, 0.1) 75%   /* trắng rất nhạt, loang mịn */
+);
   color: #fff;
   padding: 100px 80px;
   text-align: center;
@@ -162,15 +177,16 @@
 
 .dia-danh-card {
   position: relative;
-  border-radius: 15px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.05));
 }
 
 .dia-danh-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
 .dia-danh-overlay {
@@ -179,10 +195,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.25); /* mờ đen */
-  pointer-events: none; /* để không chặn click vào nút bên trong */
-  border-radius: 15px;
+  background: linear-gradient(to top, rgba(0,0,0,0.25), rgba(0,0,0,0));
+  pointer-events: none;
+  border-radius: 20px;
 }
+
 
 #list-dia-danh .row {
   min-height: 450px; /* Chiều cao tối thiểu cho mỗi hàng */
@@ -238,31 +255,34 @@
 
 
 
-/* ✅ Nút phân loại */
+/* ✅ Nút phân loại - xanh trời nhạt */
 .btn-phanloai {
   width: 100%;
   padding: 15px;
   border: none;
-  border-radius: 12px;
+  border-radius: 25px;
   font-weight: 600;
-  background: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.25s ease;
+  background: linear-gradient(135deg, #87CEFA, #56CCF2); /* xanh trời nhạt → trung */
+  color: white;
+  box-shadow: 0 4px 12px rgba(86, 204, 242, 0.4);
+  transition: all 0.3s ease;
   transform: scale(1);
 }
 
 .btn-phanloai:hover {
   transform: scale(1.08);
-  background: #e7f2ff; /* xanh dương nhạt khi hover */
+  box-shadow: 0 6px 18px rgba(86, 204, 242, 0.6);
+  background: linear-gradient(135deg, #56CCF2, #87CEFA); /* đảo gradient khi hover */
 }
 
-/* ✅ Khi được chọn */
+
 .btn-phanloai.active {
-  background: linear-gradient(to right, #007bff, #00b4ff); /* xanh dương gradient */
+  background: linear-gradient(135deg, #00C6FF, #2F80ED); /* xanh sáng hơn khi active */
   color: white;
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4); /* bóng xanh dương */
+  box-shadow: 0 6px 18px rgba(0, 198, 255, 0.6);
 }
+
 
 
 
@@ -288,4 +308,33 @@
   margin-top: 15px;
 }
 
+
+.intro {
+  max-width: 800px;     /* chiều rộng tối đa */
+  margin: 0 auto 60px;  /* căn giữa + khoảng cách dưới */
+  font-size: 20px;      /* giảm font chữ */
+  line-height: 1.6;     /* giữ khoảng cách dòng dễ đọc */
+  text-align: justify;  /* canh đều 2 bên */
+  padding: 0 15px;      /* khoảng cách 2 bên nhỏ, responsive */
+    color: #002489; /* xanh trời đậm (deep sky blue) */
+
+}
+@media (max-width: 768px) {
+  .intro {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+}
+
+.text-super-glow-blue {
+  color: #ffffff;          /* chữ trắng */
+  font-weight: 900;        /* cực đậm */
+  text-shadow:
+    0 0 5px rgba(0, 198, 255, 0.9),    /* glow xanh nhạt */
+    0 0 10px rgba(0, 198, 255, 0.7),   /* glow xanh trung bình */
+    0 0 15px rgba(0, 198, 255, 0.5),   /* glow xanh mờ */
+    0 0 20px rgba(0, 198, 255, 0.4),   /* glow lan rộng hơn */
+    2px 2px 6px rgba(0,0,0,0.6);       /* bóng đen để nổi */
+  letter-spacing: 1px;    /* chữ thoáng hơn */
+}
 
