@@ -173,16 +173,21 @@
 
 /* --- Mỗi box --- */
 .content-box {
+  position: relative; /* cần cho nút absolute hoạt động */
+
   display: flex;
-  align-items: center;
+  align-items: stretch; /* ✅ cho nội dung bên trong cao hết box */
   background-color: #ffdfc6;
   border-radius: 40px;
   padding: 20px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   box-sizing: border-box;
   transition: all 0.3s ease;
-  max-width: 48%; /* 🖥 Laptop: 2 cột */
+  max-width: 48%;
+  height: 350px; /* ✅ chiều cao cố định */
+  overflow: hidden;
 }
+
 
 /* Hiệu ứng hover */
 .content-box:hover {
@@ -204,13 +209,32 @@
   filter: brightness(1.1);
 }
 
-/* Text bên phải */
+/* --- Nội dung bên phải --- */
 .text-box {
   color: #792c00;
   font-size: 18px;
   line-height: 1.6;
   text-align: left;
+
+  flex: 1;
+  max-height: 100%;       /* ✅ Giới hạn theo chiều cao box */
+  overflow-y: auto;       /* ✅ Cho phép cuộn khi quá dài */
+  padding-right: 10px;    /* Tạo khoảng cách cho scrollbar */
+  box-sizing: border-box;
 }
+
+/* ✅ Tùy chỉnh thanh cuộn */
+.text-box::-webkit-scrollbar {
+  width: 8px;
+}
+.text-box::-webkit-scrollbar-thumb {
+  background-color: #ff950069;
+  border-radius: 10px;
+}
+.text-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
 
 /* --- Responsive --- */
 /* 📱 Mobile & iPad: 1 cột, card vẫn nằm ngang */
@@ -265,7 +289,31 @@
   color: white;
 }
 
-/* ❤️ Nút Yêu thích */
+.fav-btn {
+  position: absolute;
+  bottom: 15px;              /* cách đáy 15px */
+  left: 75%;                 /* canh giữa ngang */
+  transform: translateX(-50%); /* dịch ngược lại 50% để đúng giữa */
+  background-color: #ff7b00;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.fav-btn:hover {
+  background-color: #e06c00;
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* ❤️ Nút Yêu thích
 .fav-btn {
   display: inline-flex;
   align-items: center;
@@ -284,10 +332,98 @@
   transform: translateY(-2px);
   background: linear-gradient(90deg, #ff944d, #ff6600);
   box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
-}
+} */
 
 .kc {
     margin: 60px auto;
 }
 
+
+
+
+.info-box {
+  position: relative;
+  display: flex;
+  width: 850px; /* 🧱 full chiều ngang toàn màn hình */
+  height: 300px;
+  padding: 20px;
+  border-radius: 35px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  background-color: #ffdfc6;
+  margin: 20px auto;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Hover nhẹ nhàng */
+.info-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+/* Bên trái: hình ảnh */
+.info-image {
+  flex: 1;
+  overflow: hidden;
+}
+
+.info-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.info-box:hover img {
+  transform: scale(1.03);
+  filter: brightness(1.06);
+}
+
+/* Bên phải: nội dung */
+.info-content {
+text-align: left;
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+}
+
+/* Thanh cuộn tùy chỉnh */
+.info-content::-webkit-scrollbar {
+    
+  width: 8px;
+}
+.info-content::-webkit-scrollbar-thumb {
+  background-color: #ff950069;
+
+  border-radius: 10px;
+}
+.info-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+@media (max-width: 768px) {
+  .info-box {
+    flex-direction: column;   /* Ảnh lên trên, nội dung xuống dưới */
+    width: 100%;              /* full ngang */
+    height: auto;             /* cho phép tự co chiều cao */
+    padding: 15px;
+  }
+
+  .info-image {
+    width: 100%;              /* chiếm full ngang */
+    height: 250px;            /* chiều cao cố định */
+    margin-bottom: 15px;      /* khoảng cách với nội dung */
+  }
+
+  .info-content {
+    flex: none;
+    width: 100%;
+    height: auto;             /* tự co theo nội dung */
+    padding: 10px 0;
+  }
+}
 
