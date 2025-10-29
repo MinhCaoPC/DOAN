@@ -1,0 +1,551 @@
+
+.navbar-custom {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(
+    to bottom,
+    rgba(21, 78, 100, 0.85) 0%,   /* phần trên đậm */
+    rgba(78, 189, 240, 0.6) 40%,   /* loang nhẹ */
+    rgba(125, 199, 231, 0.3) 75%,   /* loang nhiều hơn */
+    rgba(182, 233, 254, 0) 100%   /* mờ dần xuống ảnh */
+  );
+  backdrop-filter: blur(6px);
+  padding: 12px 0;
+  transition: background 0.4s ease;
+}
+
+/* Khi cuộn xuống, làm nền đậm hơn một chút */
+.navbar-custom.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+/* Giữ màu menu + hover */
+.navbar-custom .nav-link {
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #f9d342;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+/* Login bên phải */
+.login-text {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-text:hover {
+  color: #f9d342;
+}
+/*Xử lý banner vs thanh tìm kiếm*/
+/* Banner */
+#banner {
+  position: relative;
+  height: 80vh;
+
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(100%);
+  /* Giữ sáng rõ hình ảnh, không bị tối */
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  /* Xóa lớp mờ đen phủ trên */
+}
+/* --- Chữ welcome & ĐÀ NẴNG --- */
+.banner-text h2,
+.banner-text h1 {
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #7d9eb1, #155e82, #0e354e);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 4s ease-in-out infinite;
+  text-shadow: 0 0 25px rgba(16, 56, 67, 0.7);
+   /* ✨ Thêm viền trắng bên ngoài chữ */
+  -webkit-text-stroke: 1px white;
+  
+  /* Hiệu ứng phát sáng */
+  text-shadow:
+    0 0 10px rgba(72, 191, 255, 0.8),
+    0 0 20px rgba(72, 191, 255, 0.5),
+    0 0 40px rgba(72, 191, 255, 0.4);
+}
+
+/* H2 nhỏ hơn và có khoảng cách đều */
+.banner-text h2 {
+  font-size: 35px;
+  letter-spacing: 6px;
+  margin-bottom: 5px;
+}
+
+/* H1 lớn và nổi bật */
+.banner-text h1 {
+  font-size: 80px;
+  font-weight: 900;
+  letter-spacing: 10px;
+  margin-bottom: 30px;
+}
+
+/* Hiệu ứng ánh sáng loang xanh chạy qua chữ */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* THANH TÌM KIẾM */
+.search-container {
+  font-family: "Montagu Slab", serif;
+}
+
+.search-container h2 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: 1px;
+}
+
+.search-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  font-size: 20px;
+  border-radius: 50px;
+  padding: 10px 45px 10px 20px;
+  width: 100%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  color: white;
+  outline: none;
+}
+
+.btn-search {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.btn-search:hover {
+  color: #000000;
+}
+/* --- Phần giới thiệu --- */
+.intro-section {
+  background-color: #f8fbff 0%; /* nền xanh nhạt dịu */
+  padding: 20px 0;
+}
+
+.intro-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Cột trái --- */
+.intro-text {
+  flex: 1;
+}
+
+.intro-title {
+  font-family: 'Georgia', serif;
+  font-size: 48px;
+  color: #3498db;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.intro-subtitle {
+  color: #6ba7e6;
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.intro-description {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* --- Cột phải (bản đồ) --- */
+.intro-image img {
+  width: 120%; /* cho hình bự hơn khung */
+  height: auto;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
+  margin-top: 10px; /* đẩy hình xuống dưới */
+  transform: translateY(20px); /* có thể dùng thay margin-top, dịch mượt hơn */
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+  .intro-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .intro-image img {
+    width: 250px;
+  }
+}
+/* --- Tại sao nên đến Đà Nẵng --- */
+.why-section {
+  background: linear-gradient(to bottom, #ffffff 0%, #e3f2fd 60%, #d3e9fb 100%);
+  padding: 80px 0;
+  transition: background 0.5s ease;
+}
+.why-title {
+  font-family: 'Playfair Display', serif; /* chữ thanh lịch */
+  color: #4a9ff5;
+  font-size: 28px;
+  text-align: left;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
+/* --- Nội dung từng slide --- */
+.why-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.why-img {
+  width: 420px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.why-text {
+  max-width: 450px;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* --- Nút điều hướng Carousel --- */
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #4a9ff5;
+  border-radius: 50%;
+  padding: 15px;
+  background-size: 60%;
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  background-color: #1e88e5;
+}
+.carousel-item {
+  position: relative;
+}
+/* --- Responsive --- */
+@media (max-width: 992px) {
+  .why-content {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+  .why-img {
+    width: 90%;
+  }
+  .why-text {
+    max-width: 90%;
+  }
+}
+/* Trải nghiệm không thể bỏ lỡ */
+/* .experience-section {
+  background: linear-gradient(to bottom, #cce8ff 0%, #ceeaff 60%, #9ed0f9 100%);
+  background: white;
+  text-align: center;
+  padding: 60px 20px;
+} */
+.experience-section {
+  background: linear-gradient(135deg, #e7f3ff, #ffffff); 
+  border-top-right-radius: 60px;   
+  border-bottom-left-radius: 60px; 
+  padding: 60px 20px;
+  margin: 60px auto;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.experience-title {
+  font-family: 'Playfair Display', serif;
+  color: #4a9ff5;
+  font-size: 24px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.experience-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.experience-item {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.experience-item:hover {
+  transform: translateY(-5px);
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #4a9ff5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.icon-circle:hover {
+  background-color: #4a9ff5;
+  color: #fff;
+}
+
+.icon-circle i {
+  font-size: 28px;
+  color: #4a9ff5;
+}
+
+.icon-circle:hover i {
+  color: #fff;
+}
+
+.highlight-section {
+  background-color: #e3f2fd;
+  padding: 80px 20px;
+  text-align: left;
+}
+
+.highlight-section h2 {
+  color: #222;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.highlight-section p {
+  color: #444;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.see-more {
+  background-color: #4a9ff5;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.see-more:hover {
+  background-color: #1e88e5;
+}
+.icon-circle img {
+  width: 40px;
+  height: 40px;
+}
+/* 4 phần giới thiệu chi tiết */
+.discover-section {
+  background: #e9f6ff;
+  padding: 20px 0;
+}
+
+
+.discover-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 80px auto;
+  gap: 40px;
+}
+/* Dịch phần chữ sang phải cho bố cục bên phải */
+.discover-content.right .discover-text {
+  padding-left: 100px; /* Đẩy chữ ra xa ảnh, tuỳ chỉnh 30–60px */
+}
+
+/* So le layout */
+.discover-content.left .discover-text {
+  order: 1;
+}
+.discover-content.left .discover-images {
+  order: 2;
+}
+.discover-content.right .discover-images {
+  order: 1;
+}
+.discover-content.right .discover-text {
+  order: 2;
+}
+
+/* Text box */
+.discover-text {
+  flex: 1;
+}
+.discover-text h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #0b65c2;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.discover-text h3 span {
+  display: inline-block;
+  width: 80px;
+  height: 4px;
+  background-color: #4a9ff5;
+  border-radius: 3px;
+}
+.discover-text p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.8;
+  max-width: 450px;
+  margin-bottom: 25px;
+}
+
+/* Nút xem thêm */
+.btn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid #4a9ff5;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #0b65c2; /* xanh đậm hơn nền */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-more i {
+  font-size: 14px;
+  color: #0057b7; /* mũi tên xanh đậm hơn nền */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover: nền xanh nhạt, mũi tên trượt sang phải */
+.btn-more:hover {
+  background: #4a9ff5;
+  color: #fff;
+  border-color: #4a9ff5;
+}
+
+.btn-more:hover i {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+/* Hộp ảnh */
+.discover-images {
+  flex: 1;
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.image-grid img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 40px;
+  transition: transform 0.4s ease;
+}
+.image-grid img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .discover-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .discover-text h3 {
+    justify-content: center;
+  }
+  .discover-text h3 span {
+    display: none;
+  }
+  .discover-text p {
+    margin: 0 auto 20px;
+  }
+}

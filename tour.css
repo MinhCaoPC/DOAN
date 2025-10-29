@@ -77,27 +77,31 @@
   z-index: 2;
   height: 100%;
   overflow: visible; 
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Căn giữa dọc */
 }
 
-.banner-content h1 {
-  position: absolute;
-  top: 100px;
-  left: 80px;
-  color: #fff;
-  font-size: clamp(2rem, 8vw, 90px);
-  font-weight: 530;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+.banner-content h1 { 
+  position: absolute; 
+  text-align: center; 
+  top: 100px; 
+  left: 80px; 
+  color: #fff; 
+  font-size: clamp(2rem, 8vw, 90px); 
+  font-weight: 530; 
+  text-transform: uppercase; 
+  letter-spacing: 3px; 
   font-family: "Poppins", sans-serif;
 
   /* Viền xanh dương */
   -webkit-text-stroke: 2px #7aa7d7;
 
   /* Ánh sáng xanh nhẹ lan xung quanh */
-text-shadow:
-  0 4px 4px rgba(136, 175, 216, 0.8),
-  0 6px 8px rgba(128, 210, 233, 0.6),
-  0 8px 12px rgba(216, 235, 255, 0.4);
+  text-shadow:
+    0 4px 4px rgba(136, 175, 216, 0.8),
+    0 6px 8px rgba(128, 210, 233, 0.6),
+    0 8px 12px rgba(216, 235, 255, 0.4);
 }
 
 
@@ -220,7 +224,7 @@ text-shadow:
   }
 
   .explore-btn {
-    position: static;          /* ✅ nút nằm dưới ảnh */
+    position: static;       
     display: block;
     margin: 15px auto;
     background: rgba(93, 169, 216, 1);
@@ -231,7 +235,20 @@ text-shadow:
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   }
 }
-
+/* nội dung giới thiệu */
+.danang-desc {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.7;
+  text-align: center;
+  font-style: italic;
+  background: linear-gradient(to right, #a3c6d6, #ffffff);
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
 
 
 /* Tiêu đề chính */
@@ -304,6 +321,33 @@ h2 {
 .tab-content li {
   margin-bottom: 6px;
 }
+/* --- Nút thêm mục yêu thích --- */
+.fav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg,  #0d5e89, #70a8ca);
+  color: white;
+  font-size: 16px;          /* giảm cỡ chữ */
+  padding: 8px 18px;        /* thu nhỏ nút */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(86, 168, 211, 0.3);
+  margin-right: 15px;       /* tạo khoảng cách giữa hai nút */
+}
+
+.fav-btn i {
+  font-size: 18px;
+}
+
+.fav-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg,#0d5e89, #70a8c0);
+  box-shadow: 0 5px 15px rgba(98, 198, 237, 0.4);
+}
+
 
 /* Responsive (điện thoại, tablet) */
 @media (max-width: 767.98px) {
@@ -343,6 +387,15 @@ h2 {
   color: #fff;
 }
 
+/* --- Căn chỉnh vùng chứa hai nút --- */
+.tour-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: start;   /* có thể đổi thành center nếu muốn căn giữa */
+  margin-top: 15px;
+  flex-wrap: wrap;          /* để không bị tràn hàng trên màn hình nhỏ */
+}
+
 /* --- Form Modal --- */
 .modal-content {
   border-radius: 15px;
@@ -362,4 +415,130 @@ h3.text-center {
 }
 html {
   scroll-behavior: smooth;
+}
+/* --- Khu vực Tour nổi bật --- */
+.featured-tours {
+  position: relative;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.featured-tours h2 {
+  color: #0d5e89;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* --- Bố cục carousel --- */
+.featured-tours .carousel-item {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* --- Thẻ tour --- */
+.tour-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  width: 280px;
+  transition: transform 0.3s ease;
+}
+
+.tour-card:hover {
+  transform: translateY(-6px);
+}
+
+.tour-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 3px solid #0d5e89;
+}
+
+.tour-card h5 {
+  color: #0d5e89;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.tour-card p {
+  color: #333;
+  font-size: 0.9rem;
+  padding: 0 10px;
+}
+
+/* --- Nút Đặt Ngay --- */
+.btn-book {
+  background-color: #2a739e;
+  color: white;
+  font-weight: 600;
+  border-radius: 25px;
+  padding: 8px 20px;
+  transition: 0.3s;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.btn-book:hover {
+  background-color: #1b5576;
+  transform: translateY(-3px);
+}
+.carousel-item img {
+  width: 100%;
+  height: 400px; /*  tùy kích thước muốn */
+  object-fit: cover; 
+  border-radius: 10px; 
+}
+
+
+/* --- Nút điều hướng Carousel nổi bật --- */
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 55px;
+  height: 55px;
+  background-color: rgba(176, 215, 227, 0.85); 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: rgb(54, 120, 155);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* --- Icon mũi tên --- */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+  width: 25px;
+  height: 25px;
+}
+
+/* Vị trí nút 2 bên */
+.carousel-control-prev {
+  left: 15px;
+}
+.carousel-control-next {
+  right: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 40px;
+    height: 40px;
+  }
 }
