@@ -3,21 +3,25 @@
 /* Font đoạn mô tả */
 @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
 
-
-
 .navbar-custom {
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 10;
-  background: linear-gradient(to right, rgba(0, 120, 60, 1) 0%, rgba(1, 158, 108, 0.9) 10%, rgba(30, 190, 155, 0.7) 25%, rgba(75, 210, 225, 0.5) 50%, rgba(70, 152, 214, 0.75) 80%, rgba(51, 144, 215, 0.95) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(135, 206, 250, 1) 0%,
+    /* sky blue */ rgba(135, 206, 250, 0.9) 10%,
+    rgba(135, 206, 250, 0.8) 25%,
+    rgba(176, 224, 230, 0.7) 50%,
+    /* powder blue */ rgba(135, 206, 250, 0.85) 80%,
+    rgba(135, 206, 250, 0.95) 100%
+  );
+
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
-
-
 }
-
 
 .navbar-custom.scrolled {
   background: rgba(0, 0, 0, 0.9);
@@ -32,7 +36,7 @@
 }
 
 .navbar-custom .nav-link:hover {
-  color: #000000;
+  color: #024481;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
@@ -50,14 +54,15 @@
   color: #000000;
 }
 
-
 #banner {
   position: relative;
   height: 80vh;
-
 }
 
-.navbar-custom{ z-index:1050; }
+.navbar-custom {
+  z-index: 1050;
+}
+
 .banner-img {
   width: 100%;
   height: 100%;
@@ -73,7 +78,8 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0);
-  pointer-events:none; z-index:0;
+  pointer-events: none;
+  z-index: 0;
   /* Xóa lớp mờ đen phủ trên */
 }
 
@@ -134,14 +140,15 @@
   color: #000000;
 }
 
-
-
-
-
-
-
 .diadanh-section {
-  background: linear-gradient(to top, rgb(119, 230, 243, 0.8) 0%, rgba(119, 230, 243, 0.5) 20%, rgba(255, 255, 255, 0.2) 75%);
+  background: linear-gradient(
+    to top,
+    rgba(119, 171, 243, 0.3) 0%,
+    /* xanh nhạt, opacity thấp */ rgba(119, 171, 243, 0.2) 20%,
+    /* xanh nhạt hơn */ rgba(255, 255, 255, 0.1) 75%
+      /* trắng rất nhạt, loang mịn */
+  );
+
   color: #fff;
   padding: 100px 60px;
   text-align: center;
@@ -150,7 +157,7 @@
 
 .diadanh-section .intro-text {
   font-family: "Montagu Slab", serif;
-  color: #000000;
+  color: #024481;
   max-width: 850px;
   margin: 0 auto 60px;
   font-size: 28px;
@@ -158,202 +165,305 @@
   text-align: justify;
 }
 
-/* PHÂN LOẠI */
-.btn-phanloai {
-  width: 100%;
-  padding: 14px 16px;
-  border: none;
-  border-radius: 12px;
+/* === BUTTON === */
+.text-center.mb-4 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-food {
+  background: linear-gradient(135deg, #87cefa, #56ccf2);
+  color: white;
   font-weight: 600;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
-  transition: transform .2s, box-shadow .2s, background .2s;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 22px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  margin: 0.3rem;
 }
 
-.btn-phanloai:hover {
-  transform: translateY(-1px);
-  background: #eef7ff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, .12);
+.btn-food:hover {
+  background-color: #14b7e9;
+  transform: translateY(-3px);
 }
 
-.btn-phanloai.active {
-  background: linear-gradient(90deg, #007bff, #00b4ff);
-  color: #fff;
-  box-shadow: 0 6px 14px rgba(0, 123, 255, .35);
+.btn-food.active {
+  background-color: #5e7fe2;
+  box-shadow: 0 0 10px rgba(167, 220, 222, 0.8);
 }
 
-
-/* Lưới riêng cho khu filter để tránh xung đột Bootstrap */
-#phanloai .row {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+/* --- Wrapper quản lý nhiều box --- */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  /* khoảng cách giữa các box */
 }
 
-#phanloai .col-10 {
-  width: 100% !important;
-  max-width: none;
-  flex: none;
-}
-
-
-@media (min-width:576px) {
-  #phanloai .row {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width:992px) {
-  #phanloai .row {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-
-/* CARD LIST */
-#list-dia-danh .container {
-  padding-left: 2px;
-  padding-right: 12px;
-}
-
-.dia-danh-card {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto 28px;
-  border-radius: 16px;
-  background: #fff;
+/* --- Layout chính cho mỗi box --- */
+.content-box {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background: linear-gradient(to top right, #d6ebff 0%, #f9fcff 55%);
+  border-radius: 30px;
+  box-shadow: 0 6px 18px rgba(100, 170, 255, 0.18);
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .14);
-  transition: transform .25s, box-shadow .25s;
-  padding: 12px;
-}
-
-.dia-danh-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, .2);
-}
-
-
-.dia-danh-card>.row {
-  --bs-gutter-x: 1rem;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-
-}
-
-
-#list-dia-danh img,
-#list-dia-danh iframe {
-  display: block;
+  transition: all 0.3s ease;
   width: 100%;
-  height: clamp(220px, 38vw, 340px);
+  max-width: 850px;
+  margin: 0 auto;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Khi hover */
+.content-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Ảnh và bản đồ nằm trong khung media-box */
+.media-box {
+  flex: 1 1 45%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.media-box img,
+.media-box iframe {
+  width: 100%;
+  height: 100%;
+  max-height: 300px;
+  min-height: 300px;
   object-fit: cover;
-  border-radius: 12px;
-  padding: 0;
-  margin-top: 6px;
-  border: 0;
+  border-radius: 20px;
+  transition: all 0.3s ease;
 }
 
-
-#list-dia-danh h3 {
-  color: #000;
-  font-size: clamp(1.06rem, 1.6vw, 1.5rem);
-  line-height: 1.25;
-  margin-bottom: .5rem;
+.content-box:hover img {
+  transform: scale(1.05);
 }
 
-#list-dia-danh p {
-  font-family: "Montagu Slab", serif;
-  color: #000;
-  font-size: clamp(.95rem, 1.4vw, 1.125rem);
-  line-height: 1.6;
-  margin-bottom: .75rem;
-  display: block;
-  overflow: visible;
-  -webkit-box-orient: initial; 
-
-
-}
-
-
-.mo-ta-scroll{
-  max-height: 8.5rem;           /* tăng chiều cao mô tả */
-  overflow: auto;
-  padding-right: .25rem;         /* tránh chữ dính sát scrollbar */
-  scrollbar-gutter: stable;      /* NGĂN layout bị xô khi xuất hiện scrollbar */
-}
-
-
-/* 3) Đặt cột phải thành flex để nút không bị ảnh hưởng bởi mô tả */
-.dia-danh-card .col-md-7{
+/* Text bên phải */
+.text-box {
+  flex: 1 1 55%;
+  color: #024481;
+  text-align: left;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-
-/* 4) Nút luôn căn giữa, chiều rộng ổn định để không “nhảy” */
-.nut-hanh-dong{
-  margin-top: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-}
-.nut-hanh-dong .btn{
-  min-width: 150px;              /* cùng độ rộng giữa “Xem ảnh”/“Xem vị trí” */
+.text-box h5 {
+  font-weight: 700;
   text-align: center;
+  margin-bottom: 8px;
 }
 
-
-/* Tùy biến cho Firefox */
-.mo-ta-scroll{
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,.35) rgba(0,0,0,.08);
+.text-box p {
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-
-
-
-
-.nut-hanh-dong {
-  display: flex;
-  justify-content: center;
+/* Các nút */
+.nuthanhdong {
+  display: inline-flex;
   align-items: center;
-  gap: 15px;
-  /* khoảng cách giữa 2 nút */
-  margin-top: 15px;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 25px;
+  transition: all 0.3s ease;
 }
 
-
-
-
-.btn {
-  border-radius: 999px;
-  padding: 8px 16px;
-  transition: transform .2s, box-shadow .2s;
+.nuthanhdong i {
+  font-size: 1.1rem;
 }
 
-.btn-outline-success:hover,
-.btn-outline-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, .15);
+.nuthanhdong:hover {
+  transform: translateY(-2px);
 }
 
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .5s ease-out, transform .5s ease-out;
+/* === Nút XEM ẢNH / XEM VỊ TRÍ - màu đen === */
+.nuthanhdong.btn-outline-primary {
+  background-color: #49bd66;
+  color: #fff;
+  border: 2px solid #b6b4b4;
+  transition: all 0.3s ease;
 }
 
-.fade-in.appear {
-  opacity: 1;
-  transform: translateY(0);
+.nuthanhdong.btn-outline-primary:hover {
+  background-color: #333;
+  border-color: #333;
+  transform: scale(1.05);
 }
 
+/* === Nút YÊU THÍCH - màu đỏ === */
+.nuthanhdong.btn-outline-success {
+  background-color: #e55b5b;
+  color: #fff;
+  border: 2px solid #cf7070;
+  transition: all 0.3s ease;
+}
+
+.nuthanhdong.btn-outline-success:hover {
+  background-color: #b30000;
+  border-color: #b30000;
+  transform: scale(1.05);
+}
+
+/* Làm cho nút bo mềm đẹp hơn */
+.nuthanhdong {
+  border-radius: 25px;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .content-box {
+    flex-direction: row;
+    /* ảnh trái – text phải */
+    max-width: 100%;
+    /* 1 cột full */
+    padding: 15px;
+  }
+
+  .content-box img {
+    width: 45%;
+    height: auto;
+    margin-right: 15px;
+  }
+
+  .text-box {
+    width: 55%;
+    font-size: 15px;
+    text-align: left;
+  }
+}
+
+@media (min-width: 991.98px) {
+  .content-box {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .media-box img,
+  .media-box iframe {
+    min-height: 250px;
+  }
+
+  .text-box p {
+    font-size: 0.9rem;
+  }
+
+  .nuthanhdong {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+  }
+}
+
+/* ===== Fix ảnh/bản đồ bị bóp trên iPad / tablet (768 - 1024px) ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* nới rộng khung chứa để ảnh có nhiều không gian hơn */
+  .content-box {
+    max-width: 960px;
+    /* cho phép box rộng hơn trên tablet */
+    padding: 18px;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  /* cho media-box chiếm nhiều không gian hơn (55-60%) */
+  .media-box {
+    flex: 0 0 58%;
+    /* cố định tỉ lệ: ~58% cho ảnh/bản đồ */
+    max-width: 58%;
+    min-width: 52%;
+  }
+
+  /* text-box chiếm phần còn lại */
+  .text-box {
+    flex: 0 0 42%;
+    max-width: 42%;
+    min-width: 38%;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Ảnh + iframe sẽ giữ tỉ lệ rộng (không bị bóp), dùng aspect-ratio */
+  .media-box img,
+  .media-box iframe {
+    width: 100%;
+    height: auto;
+    /* dùng aspect-ratio để đảm bảo chiều cao tỉ lệ với chiều rộng */
+    aspect-ratio: 16 / 10;
+    /* ~1.6:1, bạn có thể đổi thành 16/9 nếu muốn */
+    max-height: 420px;
+    /* giới hạn chiều cao để không quá to */
+    min-height: 300px;
+    max-width: 400px;
+    /* đảm bảo không quá ngắn */
+    object-fit: cover;
+    /* crop chứ không bóp */
+    display: block;
+  }
+
+  /* Nếu text dài, cho phép scroll nội dung mà không làm thay đổi layout */
+  .text-box {
+    overflow: hidden;
+  }
+
+  .text-box .mo-ta {
+    overflow: auto;
+    max-height: calc(420px - 120px);
+    /* space for title + buttons */
+    padding-right: 6px;
+  }
+
+  /* Giữ nút hợp lý trên tablet */
+  .nuthanhdong {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .navbar-collapse .login-section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    font-size: 0.7rem;
+  }
+
+  .login-text i {
+    font-size: 1rem;
+    margin-right: 3px;
+  }
+
+  #banner {
+    height: 50vh !important;
+  }
+
+  #banner .intro-text {
+    font-size: 1rem;
+  }
+}
 
 /* Mobile tweaks */
-@media (max-width:767.98px) {
+@media (max-width: 767.98px) {
   .navbar-custom {
     padding: 6px 14px;
   }
@@ -379,11 +489,11 @@
     align-items: center;
     gap: 6px;
     margin-left: auto;
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 
   .login-text i {
-    font-size: .8rem;
+    font-size: 0.8rem;
     margin-right: 3px;
   }
 
@@ -403,7 +513,7 @@
 
   .search-container h2 {
     font-size: 1rem;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     line-height: 1.2;
   }
 
@@ -411,99 +521,35 @@
     font-size: 1rem;
   }
 
-  .dia-danh-card {
-    width: 70vw;
-    margin: 0 auto 20px;
-    border-radius: 16px;
-    box-shadow: 0 10px 26px rgba(0, 0, 0, .25), 0 0 32px rgba(0, 180, 255, .12);
-    padding: 12px;
-    
-    
+  .content-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+    height: auto;
   }
 
-  .dia-danh-card>.row {
-    --bs-gutter-x: 0;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    
-    
-  }
-
-  #list-dia-danh img,
-  #list-dia-danh iframe {
-    height: 230px;
-  }
-
-  .dia-danh-card h3 {
-    font-size: 1.05rem;
-    margin-bottom: .4rem;
-  }
-
-  .dia-danh-card p {
-    font-size: .95rem;
-    line-height: 1.4;
-    text-align: justify;
-  }
-
-  .nut-hanh-dong {
-    gap: 8px;
-    margin-top: 10px;
-    justify-content: center;
-  }
-  }
-
-  .nut-hanh-dong .btn {
-    padding: 6px 10px !important;
-    border-radius: 8px !important;
-  }
-
-  .btn i {
-    font-size: .85rem !important;
-    margin-right: 4px;
-  }
-  .mo-ta-scroll{
-    max-height: 6.5rem;/* ~3 dòng mobile */
-  }
-
-
-
-
-/* Tablet */
-@media (min-width:768px) and (max-width:991.98px) {
-    .navbar-collapse .login-section {
+  .media-box {
+    flex: none;
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 6px;
-    margin-left: auto;
-    font-size: .7rem;
   }
 
-  .login-text i {
-    font-size: 1.0rem;
-    margin-right: 3px;
+  .media-box img,
+  .media-box iframe {
+    width: 100%;
+    height: 220px;
+    border-radius: 20px;
   }
 
-   #banner {
-    height: 50vh !important;
+  .text-box {
+    flex: none;
+    width: 100%;
+    padding-top: 10px;
   }
 
-  #banner .intro-text{
-    font-size: 1.0rem;
-  }
-
-  #list-dia-danh img,
-  #list-dia-danh iframe {
-    height: clamp(260px, 32vw, 320px);
-  }
-}
-
-/* Desktop lớn */
-@media (min-width:1200px) {
-
-  #list-dia-danh img,
-  #list-dia-danh iframe {
-    height: 340px;
+  .nuthanhdong {
+    width: 100%;
+    max-width: 200px;
+    padding: 8px 0;
+    font-size: 0.85rem;
   }
 }
