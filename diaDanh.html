@@ -85,7 +85,7 @@
       <p>
         Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố đáng sống nhất Việt Nam”
         mà còn là một cổng ngõ trải nghiệm không ngừng nghỉ.
-        <br/><br/>
+        <br /><br />
         Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán đảo Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê,
         sự lãng mạn của sông Hàn và nhịp sống đô thị thông minh, hiện đại. Từ Cầu Rồng phun lửa rực rỡ đến Bà Nà Hills
         như xứ sở cổ tích – Đà Nẵng luôn biết cách chinh phục trái tim du khách.
@@ -97,7 +97,8 @@
       <div class="container px-0">
         <div class="row justify-content-center g-4">
           <div class="col-10 col-md-3">
-            <button class="btn-phanloai active" data-loai="all" onclick='locDiaDanh(["thiennhien","congtrinh","vanhoa"], this)'>
+            <button class="btn-phanloai active" data-loai="all"
+              onclick='locDiaDanh(["thiennhien","congtrinh","vanhoa"], this)'>
               Tất Cả Địa Danh
             </button>
           </div>
@@ -135,7 +136,7 @@
     // DỮ LIỆU
     const diaDanhList = [
       { ten: "Sun World Bà Nà Hills", moTa: "Khu du lịch nổi tiếng với khí hậu mát mẻ, kiến trúc châu Âu và Cầu Vàng độc đáo.", anh: "anh/banahills.jpg", nhom: "thiennhien" },
-      { ten: "Bãi Biển Mỹ Khê", moTa: "Bãi biển đẹp bậc nhất hành tinh, nước trong xanh và bờ cát trắng mịn.", anh: "anh/mykhe.jpg", nhom: "thiennhien" },
+      { ten: "Bãi Biển Mỹ Khê", moTa: "Bãi biển đẹp bậc nhất hành tinh, nước trong xanh và bờ cát trắng mịn. ", anh: "anh/mykhe.jpg", nhom: "thiennhien" },
       { ten: "Núi Ngũ Hành Sơn", moTa: "Cụm núi đá vôi gồm 5 ngọn tượng trưng cho Ngũ Hành, nổi tiếng với hang động và chùa chiền.", anh: "anh/nguhanhson.jpg", nhom: "thiennhien" },
       { ten: "Bán Đảo Sơn Trà", moTa: "Lá phổi xanh của Đà Nẵng, nơi sinh sống của nhiều loài động vật quý hiếm.", anh: "anh/sontra.jpg", nhom: "thiennhien" },
       { ten: "Cầu Vàng", moTa: "Biểu tượng độc đáo với hai bàn tay khổng lồ nâng đỡ giữa mây trời.", anh: "anh/cauvang.jpg", nhom: "congtrinh" },
@@ -176,7 +177,10 @@
               </div>
               <div class="col-md-7">
                 <h3 class="fw-bold mb-3">${diaDanh.ten}</h3>
-                <p>${diaDanh.moTa}</p>
+                <div class="mo-ta-scroll">
+  <p class="mb-0">${diaDanh.moTa}</p>
+</div>
+
                 <div class="nut-hanh-dong d-flex gap-3 mt-3">
                   ${mapLink ? `
                     <button class="btn btn-outline-primary" id="btnMap-${index}" onclick="toggleMap(${index}, '${diaDanh.anh}', '${mapLink}')">
@@ -203,15 +207,15 @@
       if (btn) btn.classList.add("active");
       // áp dụng thêm filter theo từ khoá đang search (nếu có)
       const kw = (searchEl.value || "").trim().toLowerCase();
-      const loc = diaDanhList.filter(d => nhoms.includes("thiennhien") && d.nhom==="thiennhien"
-                                       || nhoms.includes("congtrinh") && d.nhom==="congtrinh"
-                                       || nhoms.includes("vanhoa")    && d.nhom==="vanhoa");
+      const loc = diaDanhList.filter(d => nhoms.includes("thiennhien") && d.nhom === "thiennhien"
+        || nhoms.includes("congtrinh") && d.nhom === "congtrinh"
+        || nhoms.includes("vanhoa") && d.nhom === "vanhoa");
       const locKw = kw ? loc.filter(d => d.ten.toLowerCase().includes(kw)) : loc;
       renderDiaDanh(locKw);
     }
 
-    
-// Ảnh <-> Bản đồ
+
+    // Ảnh <-> Bản đồ
     function toggleMap(index, imgPath, mapLink) {
       const mediaDiv = document.getElementById(`media-${index}`);
       const btn = document.getElementById(`btnMap-${index}`);
@@ -232,7 +236,7 @@
     }
 
 
-// Yêu thích (giả lập)
+    // Yêu thích (giả lập)
     let isLoggedIn = false;
     function handleYeuThich() {
       if (!isLoggedIn) {
@@ -245,12 +249,12 @@
 
     // Khởi tạo: hiển thị tất cả
     window.onload = function () {
-      locDiaDanh(['thiennhien','congtrinh','vanhoa'], document.querySelector('[data-loai="all"]'));
+      locDiaDanh(['thiennhien', 'congtrinh', 'vanhoa'], document.querySelector('[data-loai="all"]'));
     };
 
-    
-    </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
 </body>
 
