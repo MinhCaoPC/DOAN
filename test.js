@@ -19,3 +19,4 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollToSection(".experience-item:nth-child(3)", "#section-nghi-duong");
   scrollToSection(".experience-item:nth-child(4)", "#section-hoat-dong");
 });
+
