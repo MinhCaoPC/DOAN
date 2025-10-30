@@ -1,0 +1,102 @@
+:root {
+  --primary: #0066cc;
+  --accent: #ffcc66;
+  --bg: #f6fbff;
+  --muted: #6c757d;
+}
+
+body {
+  background: var(--bg);
+  color: #0b1730;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+
+/* Header */
+.page-header {
+  background: linear-gradient(90deg, rgba(163, 208, 240, 0.95), rgba(30, 101, 163, 0.95));
+  color: #fff;
+  padding: 48px 0;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+/* Card chung */
+.contact-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(7,35,64,0.06);
+  padding: 22px;
+}
+
+/* Icon tròn */
+.icon-circle {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  margin-right: 12px;
+}
+
+/* Form */
+.form-control:focus {
+  box-shadow: 0 0 0 0.125rem rgba(0,102,204,0.18);
+  border-color: var(--primary);
+}
+
+.btn-primary {
+  background: var(--primary);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #004e92;
+}
+
+/* Map */
+#map {
+  height: 320px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Mạng xã hội */
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.3s;
+}
+
+.social-icons a:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Chữ phụ */
+.small-muted {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .page-header {
+    padding: 28px 0;
+    text-align: center;
+  }
+}

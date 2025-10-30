@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nghỉ dưỡng</title>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS riêng -->
+    <link rel="stylesheet" href="nghiDuong.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="logo.png" alt="Logo" class="logo me-2" />
+        </a>
+
+        <!-- Toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarMenu"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tour.html">TOUR</a>
+            </li>
+          </ul>
+
+          <!-- Đăng nhập / Đăng ký -->
+          <div
+            class="login-section d-flex align-items-center text-white ms-lg-3 mt-3 mt-lg-0"
+          >
+            <a href="dangNhap.html" class="login-text me-1 dangnhap">
+              <i class="bi bi-person-circle me-2 fs-5"></i>ĐĂNG NHẬP
+            </a>
+            <span class="mx-1">|</span>
+            <a href="dangKy.html" class="login-text ms-1 dangky">
+              <i class="bi bi-person-fill-add me-2 fs-5"></i>ĐĂNG KÝ
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="position-relative text-center text-light">
+      <img src="anh/bannernghiduong.jpg" alt="Banner" class="banner-img w-100" />
+      <div class="banner-overlay"></div>
+
+      <!-- Thanh tìm kiếm -->
+      <div
+        class="search-container position-absolute top-50 start-50 translate-middle text-center"
+      >
+        <h2 class="mb-4 fw-bold text-shadow">Khám Phá Địa Danh Đà Nẵng</h2>
+
+        <form
+          class="search-form position-relative d-inline-block"
+          onsubmit="return searchDiaDanh(event)"
+        >
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control search-input"
+            placeholder="Tìm kiếm địa danh..."
+          />
+          <button class="btn-search" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Giới thiệu + Phân loại -->
+    <section id="diadanh" class="diadanh-section">
+      <div class="intro danang-desc ">
+        <p>
+          Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố
+          đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm không
+          ngừng nghỉ.
+          <br /><br />
+          Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán đảo
+          Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê, sự lãng mạn của sông Hàn và
+          nhịp sống đô thị thông minh, hiện đại. Từ Cầu Rồng phun lửa rực rỡ đến
+          Bà Nà Hills như xứ sở cổ tích – Đà Nẵng luôn biết cách chinh phục trái
+          tim du khách.
+        </p>
+      </div>
+
+      <div class="text-center mb-4 buttons">
+        <button
+          class="btn-food active"
+          onclick="toggleSection('dacSan', event)"
+        >
+          Địa danh
+        </button>
+        <button class="btn-food" onclick="toggleSection('haiSan', event)">
+          Địa danh thiên nhiên
+        </button>
+        <button class="btn-food" onclick="toggleSection('duongPho', event)">
+          Địa danh công trình kiến trúc
+        </button>
+        <button class="btn-food" onclick="toggleSection('Qua', event)">
+          Địa danh văn hoá - nghệ thuật
+        </button>
+      </div>
+      <section class="content-section">
+        <div id="DiaDanhDN" class="wrapper"></div>
+      </section>
+    </section>
+
+    <!-- JS -->
+    <script>
+      // DỮ LIỆU
+      const diaDanhList = [
+        {
+          ten: "Sun World Bà Nà Hills",
+          moTa: "Sun World Bà Nà Hills là khu du lịch nổi tiếng với khí hậu mát mẻ quanh năm, kiến trúc châu Âu độc đáo, cáp treo hiện đại và Cầu Vàng nổi bật với bàn tay khổng lồ nâng đỡ. Du khách có thể tham quan Làng Pháp, thưởng thức ẩm thực đa dạng, tham gia các trò chơi giải trí và khám phá vườn hoa tuyệt đẹp. Đây là điểm đến lý tưởng cho cả gia đình, nhóm bạn và các cặp đôi yêu thích trải nghiệm du lịch kết hợp khám phá thiên nhiên và kiến trúc độc đáo.",
+          anh: "anh/banahills.jpg",
+          nhom: "thiennhien",
+        },
+ 
+      {
+        ten: "Asia Park",
+        moTa: "Asia Park là khu vui chơi giải trí hiện đại nổi bật với vòng quay Sun Wheel khổng lồ, nhiều trò chơi cảm giác mạnh, khu vực trò chơi dành cho trẻ em và các công trình kiến trúc lấy cảm hứng từ các nền văn hóa châu Á. Du khách đến đây có thể tham gia các trò chơi giải trí, chụp ảnh sống ảo, thưởng thức ẩm thực và hòa mình vào không gian sôi động, náo nhiệt, phù hợp cho cả gia đình và nhóm bạn trẻ.",
+        anh: "anh/AsianPark.jpg",
+        nhom: "thamquan",
+      },
+      {
+        ten: "Sky36",
+        moTa: "Sky36 là quán bar và lounge cao nhất Đà Nẵng, tọa lạc trên tầng 36 tòa nhà Novotel, mang đến tầm nhìn toàn cảnh thành phố và sông Hàn về đêm. Đây là điểm đến lý tưởng để thưởng thức cocktail, nhạc sống, tận hưởng không gian sang trọng và ngắm hoàng hôn hay cảnh đêm lấp lánh của Đà Nẵng.",
+        anh: "anh/Sky360.webp",
+        nhom: "thamquan",
+      },
+
+      {
+        ten: "Du lịch Sông Hàn",
+        moTa: "Sông Hàn là điểm du lịch nổi bật ở Đà Nẵng, chảy qua trung tâm thành phố và gắn liền với nhiều cây cầu biểu tượng như Cầu Rồng, Cầu Tình Yêu, Cầu Sông Hàn quay. Du khách có thể tham gia du thuyền ngắm cảnh, thưởng thức bình minh và hoàng hôn trên sông, chiêm ngưỡng cảnh sắc thành phố lung linh về đêm, và trải nghiệm các hoạt động giải trí, ẩm thực dọc bờ sông.",
+        anh: "anh/SongHan.webp",
+        nhom: "thamquan",
+      },
+
+      {
+        ten: "Núi Thần Tài",
+        moTa: "Núi Thần Tài là khu du lịch sinh thái và nghỉ dưỡng nổi tiếng tại Đà Nẵng, nổi bật với suối khoáng nóng tự nhiên, bể tắm khoáng, tắm bùn và các dịch vụ spa thư giãn. Nơi đây còn có cảnh quan núi non hùng vĩ, rừng nguyên sinh xanh mát, thích hợp cho các hoạt động dã ngoại, cắm trại và trải nghiệm gia đình.",
+        anh: "anh/Núi Thần Tài.png",
+        nhom: "thamquan",
+      },
+
+        {
+          ten: "VinWonders Nam Hội An",
+          moTa: "VinWonders Nam Hội An là khu vui chơi giải trí hiện đại, quy mô lớn với hàng loạt trò chơi cảm giác mạnh, công viên nước, khu vực biểu diễn nghệ thuật và trải nghiệm văn hóa Hội An. Đây là điểm đến lý tưởng cho cả gia đình và du khách muốn tận hưởng những giây phút vui chơi trọn vẹn.",
+          anh: "anh/vin.jpg",
+          nhom: "thamquan",
+        },
+
+        {
+          ten: "InterContinental Danang Sun Peninsula Resort",
+          moTa: "InterContinental Danang Sun Peninsula Resort là khu nghỉ dưỡng 5 sao sang trọng, tọa lạc trên bán đảo Sơn Trà, nổi bật với kiến trúc độc đáo, tầm nhìn ra biển tuyệt đẹp và dịch vụ đẳng cấp quốc tế. Đây là nơi lý tưởng để tận hưởng kỳ nghỉ thư giãn, thưởng thức ẩm thực tinh tế và khám phá thiên nhiên xung quanh.",
+          anh: "anh/resort1.png",
+          nhom: "nghiduong",
+        },
+
+        {
+          ten: "Furama Resort Danang",
+          moTa: "Furama Resort Danang là khu nghỉ dưỡng cao cấp bên bờ biển Mỹ Khê, nổi bật với kiến trúc sang trọng, hồ bơi rộng lớn và dịch vụ tiện nghi 5 sao. Du khách có thể thư giãn, tham gia các hoạt động giải trí, thưởng thức ẩm thực đa dạng và tận hưởng kỳ nghỉ lý tưởng giữa thiên nhiên biển tuyệt đẹp.",
+          anh: "anh/resort2.jpg",
+          nhom: "nghiduong",
+        },
+
+        {
+          ten: "Hyatt Regency Danang Resort & Spa",
+          moTa: "Hyatt Regency Danang Resort & Spa là khu nghỉ dưỡng sang trọng nằm bên bờ biển Non Nước, nổi bật với kiến trúc hiện đại, hồ bơi ngoài trời, spa cao cấp và các tiện nghi đẳng cấp. Du khách có thể thư giãn, tham gia các hoạt động giải trí, và thưởng thức ẩm thực quốc tế ngay tại khu nghỉ dưỡng.",
+          anh: "anh/resort3.webp",
+          nhom: "nghiduong",
+        },
+        {
+          ten: "Naman Retreat",
+          moTa: "Naman Retreat là khu nghỉ dưỡng cao cấp tại Đà Nẵng, nổi tiếng với kiến trúc tre độc đáo, hòa quyện giữa thiên nhiên và không gian hiện đại. Khu resort mang đến trải nghiệm nghỉ dưỡng yên bình, thư giãn tuyệt đối với dịch vụ spa, hồ bơi vô cực và bãi biển riêng tuyệt đẹp. Đây là điểm đến lý tưởng cho những ai muốn tìm kiếm sự tĩnh lặng và sang trọng giữa lòng thành phố biển.",
+          anh: "anh/resort4.jpg",
+          nhom: "resort",
+        },
+
+        {
+          ten: "Pullman Danang Beach Resort",
+          moTa: "Pullman Danang Beach Resort là khu nghỉ dưỡng cao cấp ven biển Mỹ Khê, Đà Nẵng, với các phòng nghỉ sang trọng, hồ bơi rộng, spa thư giãn và các dịch vụ ẩm thực phong phú. Đây là điểm dừng chân lý tưởng cho kỳ nghỉ gia đình hoặc du lịch kết hợp công tác.",
+          anh: "anh/resort5.jpg",
+          nhom: "nghiduong",
+        },
+
+        {
+          ten: "Premier Village Danang Resort (Managed by Accor)",
+          moTa: "Khu nghỉ dưỡng sang trọng ven biển Đà Nẵng, với các biệt thự hướng biển, hồ bơi riêng, và dịch vụ cao cấp mang đến trải nghiệm nghỉ dưỡng đẳng cấp quốc tế.",
+          anh: "anh/resort6.jpg",
+          nhom: "nghiduong",
+        },
+
+        {
+          ten: "Công viên Biển Đông",
+          moTa: "Công viên ven biển nổi tiếng tại Đà Nẵng, nơi du khách có thể tản bộ, ngắm cảnh biển, thưởng thức ẩm thực đường phố và tham gia các hoạt động giải trí ngoài trời.",
+          anh: "anh/CongVien.jpg",
+          nhom: "thiennhien",
+        },
+
+        {
+          ten: "Khu du lịch sinh thái Hòa Phú Thành",
+          moTa: "Khu du lịch sinh thái nằm ở ngoại ô Đà Nẵng, nổi bật với cảnh quan núi rừng tươi mát, suối thác, hồ nước trong xanh, thích hợp cho các hoạt động dã ngoại, cắm trại và team building.",
+          anh: "anh/HPT.jpg",
+          nhom: "thiennhien",
+        },
+
+        {
+          ten: "Khu du lịch Suối Hoa",
+          moTa: "Khu du lịch nổi tiếng với suối trong xanh, vườn hoa rực rỡ và không gian yên tĩnh, thích hợp cho các chuyến dã ngoại, thư giãn và tham quan cùng gia đình.",
+          anh: "anh/SH.jpg",
+          nhom: "thiennhien",
+        },
+
+        {
+          ten: "Rừng dừa Cẩm Thanh",
+          moTa: "Rừng dừa nổi tiếng gần Hội An với những kênh rạch xanh mát, trải nghiệm thuyền tham quan, ngắm cảnh thiên nhiên hoang sơ và thưởng thức đặc sản địa phương.",
+          anh: "anh/Rừng.jpg",
+          nhom: "thiennhien",
+        },
+        {
+          ten: "Công viên APEC Đà Nẵng",
+          moTa: "Công viên APEC nằm bên bờ sông Hàn, được xây dựng để phục vụ Tuần lễ Cấp cao APEC 2017 tổ chức tại Đà Nẵng. Đây là địa điểm du lịch nổi bật với không gian rộng rãi, cảnh quan hiện đại, nhiều bãi cỏ, lối đi bộ ven sông, và các công trình kiến trúc đặc trưng. Du khách có thể thư giãn, chụp ảnh check-in, tận hưởng không khí trong lành, ngắm cảnh sông Hàn và ngắm hoàng hôn tuyệt đẹp trên thành phố biển.",
+          anh: "anh/APEC.png",
+          nhom: "congtrinh",
+        },
+
+      ];
+
+      const mapLinks = {
+
+        "banahills.jpg":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9344.564818548868!2d108.0239637961576!3d16.027234286432954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f60e6b3844c9%3A0x5c53b85f61797909!2sSun%20World%20B%C3%A0%20N%C3%A0%20Hills!5e0!3m2!1svi!2s!4v1761386544078!5m2!1svi!2s",
+        "AsianPark.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4674680522517!2d108.22305827602098!3d16.041213884634193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219e7a191cc17%3A0xe60f91d4055e3074!2sDA%20NANG%20DOWNTOWN!5e0!3m2!1svi!2s!4v1761807407857!5m2!1svi!2s",
+        "Sky360.webp":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.774534854411!2d108.22126017602173!3d16.07718558460354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183ae54d6015%3A0xa61168c6e58166a2!2sSky36%20Bar%20%26%20Dining!5e0!3m2!1svi!2s!4v1761807723127!5m2!1svi!2s",
+        "SongHan.webp": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30671.84988975057!2d108.20529037171396!3d16.066463465190893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183d37f5d3d5%3A0xaa3ca36520c7af4c!2zU8O0bmcgSMOgbg!5e0!3m2!1svi!2s!4v1761807780504!5m2!1svi!2s",
+        "Núi Thần Tài.png": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.9233624441138!2d108.01773288884141!3d15.969378796173947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f79592c03133%3A0xcb326b87969bbea3!2sNui%20Than%20Tai-%20Ebisu%20Onsen%20Resort%20Da%20Nang!5e0!3m2!1svi!2s!4v1761807841818!5m2!1svi!2s",
+        "vin.jpg": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.3342878792523!2d108.40336798589529!3d15.78631784579725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420bfde49f11d1%3A0x49422ef9074e41ca!2sVinWonders%20Nam%20H%E1%BB%99i%20An!5e0!3m2!1svi!2s!4v1761807898735!5m2!1svi!2s",
+        "resort1.png": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3832.9318215347967!2d108.30364047602232!3d16.120827384566155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d9513ec9199%3A0x5ade8a2bd4daad0d!2sInterContinental%20Danang%20Sun%20Peninsula%20Resort!5e0!3m2!1svi!2s!4v1761807957589!5m2!1svi!2s",
+        "resort2.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.491872097083!2d108.24849317602107!3d16.03994558463522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2!2sFurama%20Resort%20Danang!5e0!3m2!1svi!2s!4v1761808163074!5m2!1svi!2s",
+        "resort3.webp": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.0096282167615!2d108.26162297602069!3d16.013014284658382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314210cf6a42c159%3A0xaeb535cc2b736240!2sHyatt%20Regency%20Danang%20Resort%20and%20Spa!5e0!3m2!1svi!2s!4v1761808201027!5m2!1svi!2s",
+        "resort4.jpg": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.940834853191!2d108.28214283884142!3d15.967554696174338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314210ffff49be83%3A0x4dc264a06ef8baa5!2sNaman%20Retreat!5e0!3m2!1svi!2s!4v1761808756039!5m2!1svi!2s",
+        "resort5.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.47995989457!2d108.24751227602104!3d16.04056468463478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217686dfcf229%3A0xa17b1ae3b14af658!2sPullman%20Danang%20Beach%20Resort!5e0!3m2!1svi!2s!4v1761808244473!5m2!1svi!2s",
+        "resort6.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4506113664197!2d108.24817547602112!3d16.04208988463351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217687f97d183%3A0xee49ef38ee262430!2zUHJlbWllciBWaWxsYWdlIMSQw6AgTuG6tW5nIFJlc29ydA!5e0!3m2!1svi!2s!4v1761808272373!5m2!1svi!2s",
+        "CongVien.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.906957619848!2d108.24326187602153!3d16.070317284609338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142171781bc61df%3A0x88236faf8a5f84f8!2zQ8O0bmcgdmnDqm4gQmnhu4NuIMSQw7RuZw!5e0!3m2!1svi!2s!4v1761808305527!5m2!1svi!2s",
+        "HPT.jpg": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3849.4291750182256!2d107.99154042200647!3d15.955569627200813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f77af7e9b92b%3A0xfaf4e097094874f3!2zSMOyYSBQaMO6IFRow6BuaCBUb3VyaXN0IC0gVHLGsOG7o3QgdGjDoWMgxJDDoCBO4bq1bmc!5e0!3m2!1svi!2s!4v1761808357278!5m2!1svi!2s",
+        "SH.jpg": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.0567990196837!2d107.99244637601969!3d15.958409984705195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f7e396263a2d%3A0xc5471820f69b2f53!2zS2h1IGR1IGzhu4tjaCBzaW5oIHRow6FpIFN14buRaSBIb2E!5e0!3m2!1svi!2s!4v1761808395156!5m2!1svi!2s",
+        "Rừng.jpg": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4774.610044886419!2d108.36964843832543!3d15.878690096735962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dae60bab751%3A0x73703c9bc757a0c3!2zUuG7q25nIEThu6thIELhuqN5IE3huqt1!5e0!3m2!1svi!2s!4v1761808435977!5m2!1svi!2s",
+        "APEC.png": 
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30673.138145755496!2d108.18822457910159!3d16.058105500000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421930165d7dcd%3A0xf9d555ad7f300ab3!2zQ8O0bmcgVmnDqm4gQVBFQw!5e0!3m2!1svi!2s!4v1761809359663!5m2!1svi!2s",
+
+      };
+
+      // DOM
+      const container = document.getElementById("DiaDanhDN");
+      const searchEl = document.getElementById("searchInput");
+
+      // ===========================
+      // HIỂN THỊ DANH SÁCH
+      // ===========================
+      function renderDiaDanh(list) {
+        container.innerHTML = "";
+        list.forEach((diaDanh, index) => {
+          const fileName = diaDanh.anh.split("/").pop();
+          const mapLink = mapLinks[fileName] || "";
+
+          const html = `
+        <div class="content-box fade-in mb-4" id="item-${index}">
+          <div id="media-${index}" class="media-box" data-showing="image">
+            <img src="${diaDanh.anh}" alt="${
+            diaDanh.ten
+          }" class="rounded shadow-sm w-100" />
+          </div>
+
+          <div class="text-box mt-3">
+            <h5 class="text-center fw-bold">${diaDanh.ten}</h5>
+            <p class="mo-ta mb-2">${diaDanh.moTa}</p>
+
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+              ${
+                mapLink
+                  ? `
+                <button class="btn btn-outline-primary nuthanhdong" 
+                        id="btnMap-${index}" 
+                        onclick="toggleMap(${index}, '${diaDanh.anh}', '${mapLink}')">
+                  <i class="bi bi-geo-alt"></i> 
+                  <span></span>
+                </button>`
+                  : ""
+              }
+              
+              <button class="btn btn-outline-success nuthanhdong" onclick="handleYeuThich()">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+          container.insertAdjacentHTML("beforeend", html);
+        });
+      }
+
+      // ===========================
+      // TÌM KIẾM
+      // ===========================
+      function searchDiaDanh(e) {
+        e.preventDefault();
+        const kw = searchEl.value.trim().toLowerCase();
+        const filtered = diaDanhList.filter(
+          (d) =>
+            d.ten.toLowerCase().includes(kw) ||
+            d.moTa.toLowerCase().includes(kw)
+        );
+        renderDiaDanh(filtered);
+        return false;
+      }
+
+      // ===========================
+      // LỌC THEO NHÓM
+      // ===========================
+      function toggleSection(loai, e) {
+        document
+          .querySelectorAll(".btn-food")
+          .forEach((b) => b.classList.remove("active"));
+        e.target.classList.add("active");
+
+        let nhom = "";
+        if (loai === "haiSan") nhom = "thiennhien";
+        else if (loai === "duongPho") nhom = "congtrinh";
+        else if (loai === "Qua") nhom = "vanhoa";
+        else nhom = "all";
+
+        const kw = searchEl.value.trim().toLowerCase();
+        const filtered = diaDanhList.filter(
+          (d) =>
+            (nhom === "all" || d.nhom === nhom) &&
+            (d.ten.toLowerCase().includes(kw) ||
+              d.moTa.toLowerCase().includes(kw))
+        );
+
+        renderDiaDanh(filtered);
+      }
+
+      // ===========================
+      // ẢNH ↔ BẢN ĐỒ
+      // ===========================
+      function toggleMap(index, imgPath, mapLink) {
+        const mediaDiv = document.getElementById(`media-${index}`);
+        const btn = document.getElementById(`btnMap-${index}`);
+        const showing = mediaDiv.dataset.showing;
+
+        if (showing === "map") {
+          mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa danh" class="img-fluid rounded shadow-sm" />`;
+          mediaDiv.dataset.showing = "image";
+          btn.querySelector("span").textContent = "";
+          btn.firstElementChild.className = "bi bi-geo-alt";
+        } else {
+          mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+          mediaDiv.dataset.showing = "map";
+          btn.querySelector("span").textContent = "";
+          btn.firstElementChild.className = "bi bi-image";
+        }
+      }
+
+      // ===========================
+      // YÊU THÍCH
+      // ===========================
+      let isLoggedIn = false;
+      function handleYeuThich() {
+        if (!isLoggedIn) {
+          const goLogin = confirm(
+            "Bạn cần đăng nhập hoặc đăng ký để yêu thích địa danh. Bạn có muốn đăng nhập ngay không?"
+          );
+          if (goLogin) window.location.href = "dangNhap.html";
+        } else {
+          alert("💖 Đã thêm vào danh sách yêu thích!");
+        }
+      }
+
+      // ===========================
+      // KHỞI TẠO
+      // ===========================
+      window.onload = function () {
+        renderDiaDanh(diaDanhList);
+      };
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+  </body>
+</html>

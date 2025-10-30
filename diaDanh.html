@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Địa Danh Du Lịch</title>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS riêng -->
+    <link rel="stylesheet" href="diaDanh.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="logo.png" alt="Logo" class="logo me-2" />
+        </a>
+
+        <!-- Toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarMenu"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tour.html">TOUR</a>
+            </li>
+          </ul>
+
+          <!-- Đăng nhập / Đăng ký -->
+          <div
+            class="login-section d-flex align-items-center text-white ms-lg-3 mt-3 mt-lg-0"
+          >
+            <a href="dangNhap.html" class="login-text me-1 dangnhap">
+              <i class="bi bi-person-circle me-2 fs-5"></i>ĐĂNG NHẬP
+            </a>
+            <span class="mx-1">|</span>
+            <a href="dangKy.html" class="login-text ms-1 dangky">
+              <i class="bi bi-person-fill-add me-2 fs-5"></i>ĐĂNG KÝ
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="position-relative text-center text-light">
+      <img src="anh/banner_diadanh.jpg" alt="Banner" class="banner-img w-100" />
+      <div class="banner-overlay"></div>
+
+      <!-- Thanh tìm kiếm -->
+      <div
+        class="search-container position-absolute top-50 start-50 translate-middle text-center"
+      >
+        <h2 class="mb-4 fw-bold text-shadow">Khám Phá Địa Danh Đà Nẵng</h2>
+
+        <form
+          class="search-form position-relative d-inline-block"
+          onsubmit="return searchDiaDanh(event)"
+        >
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control search-input"
+            placeholder="Tìm kiếm địa danh..."
+          />
+          <button class="btn-search" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Giới thiệu + Phân loại -->
+    <section id="diadanh" class="diadanh-section">
+      <div class="intro danang-desc ">
+        <p>
+          Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố
+          đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm không
+          ngừng nghỉ.
+          <br /><br />
+          Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán đảo
+          Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê, sự lãng mạn của sông Hàn và
+          nhịp sống đô thị thông minh, hiện đại. Từ Cầu Rồng phun lửa rực rỡ đến
+          Bà Nà Hills như xứ sở cổ tích – Đà Nẵng luôn biết cách chinh phục trái
+          tim du khách.
+        </p>
+      </div>
+
+      <div class="text-center mb-4 buttons">
+        <button
+          class="btn-food active"
+          onclick="toggleSection('dacSan', event)"
+        >
+          Địa danh
+        </button>
+        <button class="btn-food" onclick="toggleSection('haiSan', event)">
+          Địa danh thiên nhiên
+        </button>
+        <button class="btn-food" onclick="toggleSection('duongPho', event)">
+          Địa danh công trình kiến trúc
+        </button>
+        <button class="btn-food" onclick="toggleSection('Qua', event)">
+          Địa danh văn hoá - nghệ thuật
+        </button>
+      </div>
+      <section class="content-section">
+        <div id="DiaDanhDN" class="wrapper"></div>
+      </section>
+    </section>
+
+    <!-- JS -->
+    <script>
+      // DỮ LIỆU
+      const diaDanhList = [
+        
+        {
+          ten: "Bãi Biển Mỹ Khê",
+          moTa: "Bãi biển Mỹ Khê là một trong những bãi biển nổi tiếng nhất Đà Nẵng với bờ cát trắng mịn, nước biển trong xanh và sóng êm, thích hợp cho tắm biển, tắm nắng và các hoạt động thể thao dưới nước. Nơi đây còn nổi bật với cảnh bình minh và hoàng hôn tuyệt đẹp, là điểm thư giãn, nghỉ dưỡng lý tưởng cho du khách trong và ngoài nước. Mỹ Khê được nhiều tạp chí du lịch quốc tế bình chọn là một trong những bãi biển đẹp nhất hành tinh, đồng thời thu hút đông đảo khách du lịch đến thưởng ngoạn và chụp hình check-in.",
+          anh: "anh/mykhe.jpg",
+          nhom: "thiennhien",
+        },
+        {
+          ten: "Núi Ngũ Hành Sơn",
+          moTa: "Ngũ Hành Sơn là quần thể gồm 6 ngọn núi nằm ven biển Đà Nẵng, bao gồm Kim Sơn, Mộc Sơn, Thủy Sơn, Thổ Sơn và Hỏa Sơn (gồm Dương Hỏa Sơn và Âm Hỏa Sơn). Những ngọn núi đá vôi hùng vĩ này mang trong mình vẻ đẹp hòa quyện giữa thiên nhiên, biển cả và yếu tố tâm linh. Nơi đây thu hút đông đảo du khách trong và ngoài nước đến tham quan, khám phá hệ thống hang động, chùa chiền và cảnh quan thiên nhiên kỳ thú. Ngũ Hành Sơn cũng là một trong 10 địa điểm du lịch nổi bật nhất của Đà Nẵng và đã được công nhận là di tích lịch sử - văn hóa cấp Quốc gia.",
+          anh: "anh/nguhanhson.jpg",
+          nhom: "thiennhien",
+        },
+        {
+          ten: "Bán Đảo Sơn Trà",
+          moTa: "Bán đảo Sơn Trà nằm ở phía đông bắc thành phố Đà Nẵng, được mệnh danh là 'lá phổi xanh' của thành phố với hệ sinh thái phong phú và cảnh quan thiên nhiên hùng vĩ. Du khách có thể tham quan các bãi biển đẹp như Bãi Bụt, Bãi Nam, tham quan chùa Linh Ứng với tượng Phật Bà cao 67m, trekking xuyên rừng, ngắm hoàng hôn hoặc bình minh, và thưởng ngoạn toàn cảnh thành phố từ các đỉnh núi. Sơn Trà còn nổi tiếng với động vật hoang dã như voọc chà vá chân nâu, mang đến trải nghiệm khám phá thiên nhiên độc đáo.",
+          anh: "anh/Sontra.png",
+          nhom: "thiennhien",
+        },
+        {
+          ten: "Cầu Vàng",
+          moTa: "Cầu Vàng nằm trong khu du lịch Sun World Bà Nà Hills, nổi bật với thiết kế độc đáo hình bàn tay khổng lồ nâng đỡ cây cầu, mang đến trải nghiệm đi bộ trên cao đầy ấn tượng giữa núi rừng xanh mát. Đây là điểm check-in nổi tiếng của du khách trong và ngoài nước, với khung cảnh thiên nhiên hùng vĩ, sương mù bao phủ, tạo nên bức tranh thơ mộng, huyền ảo. Cầu Vàng kết hợp cùng các tiện ích tham quan khác của Bà Nà Hills như vườn hoa, cáp treo và làng Pháp, tạo nên một hành trình du lịch trọn vẹn và hấp dẫn.",
+          anh: "anh/cauvang.jpg",
+          nhom: "congtrinh",
+        },
+        {
+          ten: "Cầu Rồng",
+          moTa: "Đưa vào hoạt động năm 2013, cầu Rồng là một trong những điểm tham quan nổi tiếng và hiện đại nhất Đà Nẵng. Với thiết kế độc đáo mang hình dáng con rồng vươn mình bắc qua sông Hàn thơ mộng, cây cầu thể hiện khát vọng vươn lên mạnh mẽ của thành phố trẻ trung, năng động. Đây cũng là cây cầu thứ 7 góp phần tạo nên biểu tượng “thành phố của những cây cầu”. Vào các tối cuối tuần, du khách sẽ được chiêm ngưỡng màn trình diễn rồng phun lửa và phun nước vô cùng sống động, tạo nên không khí sôi động, rực rỡ sắc màu bên dòng sông Hàn lung linh ánh đèn.",
+          anh: "anh/CauRong.png",
+          nhom: "congtrinh",
+        },
+        {
+          ten: "Cầu Tình Yêu",
+          moTa: "Cầu Tình Yêu là cây cầu nổi tiếng bắc qua sông Hàn, điểm đến lãng mạn dành cho các cặp đôi. Cây cầu được trang trí bằng các ổ khóa tình yêu và hệ thống đèn LED rực rỡ vào ban đêm, tạo nên không gian thơ mộng để ngắm cảnh sông Hàn, hoàng hôn và tham gia các hoạt động vui chơi xung quanh. Đây là địa điểm lý tưởng để chụp hình, dạo bộ và trải nghiệm vẻ đẹp lãng mạn của thành phố biển Đà Nẵng.",
+          anh: "anh/cautinhyeu.jpg",
+          nhom: "congtrinh",
+        },
+        {
+          ten: "Chùa Linh Ứng",
+          moTa: "Chùa Linh Ứng Bãi Bụt thuộc bán đảo Sơn Trà, nổi tiếng với tượng Phật Bà Quan Thế Âm cao 67 mét hướng ra biển. Chùa có kiến trúc uy nghiêm, không gian thanh tịnh, là điểm đến linh thiêng thu hút cả du khách lẫn phật tử. Du khách đến đây có thể tham quan kiến trúc chùa, thưởng ngoạn cảnh biển từ trên cao và trải nghiệm sự bình yên trong không gian tâm linh.",
+          anh: "anh/tuongba.jpg",
+          nhom: "vanhoa",
+        },
+        {
+          ten: "Đỉnh Bàn Cờ",
+          moTa: "Đỉnh Bàn Cờ được mệnh danh là 'chốn bồng lai tiên cảnh' giữa lòng Đà Nẵng. Từ độ cao hơn 700m trên bán đảo Sơn Trà, du khách có thể phóng tầm mắt ngắm toàn cảnh thành phố: sông Hàn uốn lượn, những cây cầu bắc ngang, nhà cao tầng nối tiếp và biển xanh êm ả phía xa. Nơi đây còn có bức tượng tiên ông ngồi đánh cờ – biểu tượng đặc trưng của điểm đến. Đặc biệt, trải nghiệm cắm trại qua đêm, ngắm bình minh hoặc hoàng hôn trên đỉnh núi là hoạt động được nhiều du khách yêu thích khi đến Đà Nẵng.",
+          anh: "anh/Dinhbanco.png",
+          nhom: "thiennhien",
+        },
+        {
+          ten: "Bãi Bụt",
+          moTa: "Bãi Bụt là địa điểm không thể bỏ qua trong chuyến du lịch Đà Nẵng. Nằm ở phía Nam của núi Sơn Trà, thuộc bán đảo Sơn Trà, Bãi Bụt sở hữu vẻ đẹp hoang sơ hiếm có và nằm kế bên ngôi chùa Linh Ứng nổi tiếng. Từ trung tâm thành phố Đà Nẵng, bạn chỉ mất khoảng 35 phút di chuyển với quãng đường tầm 15 km để đến đây. Các dự án khai thác du lịch ở Bãi Bụt chỉ mới phát triển từ năm 2012 nên nơi đây vẫn còn giữ được nét tự nhiên, yên bình. Du khách có thể đến Bãi Bụt vào bất cứ thời điểm nào trong năm vì nơi đây luôn mở cửa chào đón. Tuy nhiên, thời điểm lý tưởng nhất là từ tháng 2 đến tháng 9, khi thời tiết khô ráo, biển êm, nắng nhẹ và có nhiều lễ hội diễn ra, rất thích hợp để tắm biển, ngắm cảnh và tận hưởng không khí trong lành. Từ tháng 10 đến tháng 1, Đà Nẵng bước vào mùa mưa, trời se lạnh và có sương mù nên ít khách du lịch hơn, nếu đi vào thời gian này bạn nên chuẩn bị kỹ về trang phục và kế hoạch di chuyển.",
+          anh: "anh/BaiBut.jpg",
+          nhom: "thiennhien",
+        },
+        {
+  ten: "Bảo tàng Chăm",
+  moTa: "Bảo tàng Chăm Đà Nẵng lưu giữ và trưng bày hơn 2.000 hiện vật của văn hóa Chăm, bao gồm tượng, điêu khắc, đồ gốm, trang sức và các di vật khảo cổ. Đây là điểm đến văn hóa quan trọng, giúp du khách tìm hiểu về lịch sử, nghệ thuật và đời sống của người Chăm qua các thời kỳ.",
+  anh: "anh/BaoTang.webp",
+  nhom: "vanhoa",
+},
+
+{
+  ten: "Đèo Hải Vân",
+  moTa: "Đèo Hải Vân là con đèo huyền thoại nối liền Đà Nẵng và Thừa Thiên Huế, nổi tiếng với cảnh quan hùng vĩ, uốn lượn trên dãy núi ven biển. Du khách đến đây có thể chiêm ngưỡng biển xanh, núi non trùng điệp, chụp ảnh cảnh đẹp và trải nghiệm cảm giác lái xe qua những khúc cua hiểm trở nhưng tuyệt đẹp. Đây là điểm tham quan lý tưởng cho những ai yêu thích thiên nhiên và khám phá.",
+  anh: "anh/Đèo hải vân.jpg",
+  nhom: "thiennhien",
+},
+
+{
+  ten: "Nhà thờ Con Gà",
+  moTa: "Nhà thờ Con Gà là công trình kiến trúc tôn giáo nổi tiếng tại trung tâm Đà Nẵng, được xây dựng từ thời Pháp thuộc với lối kiến trúc Gothic đặc trưng. Nhà thờ thu hút du khách bởi tháp chuông cao, tượng gà trên đỉnh mái và không gian trang nghiêm, là điểm chụp hình và tham quan nổi tiếng của thành phố.",
+  anh: "anh/Nhaga.jpg",
+  nhom: "congtrinh",
+},
+
+{
+  ten: "Thành Điện Hải",
+  moTa: "Thành Điện Hải là di tích lịch sử nổi tiếng của Đà Nẵng, được xây dựng từ thế kỷ 19 dưới triều Nguyễn nhằm bảo vệ vùng đất ven biển. Với kiến trúc quân sự độc đáo, thành thể hiện nét văn hóa, chiến lược phòng thủ đặc trưng của vùng miền Trung Việt Nam, thu hút du khách yêu thích lịch sử và khảo cổ.",
+  anh: "anh/Dienhai.jpg",
+  nhom: "vanhoa",
+},
+
+{
+  ten: "Biển Mỹ An",
+  moTa: "Biển Mỹ An là bãi biển nổi tiếng tại Đà Nẵng với làn nước trong xanh, bờ cát trắng mịn và không gian yên tĩnh. Nơi đây thích hợp cho du khách tắm biển, dạo chơi, và trải nghiệm các hoạt động thể thao nước.",
+  anh: "anh/BienMyAn.jpg",
+  nhom: "thiennhien",
+},
+
+{
+  ten: "Phố cổ Hội An",
+  moTa: "Di sản văn hóa thế giới nổi tiếng với những con phố cổ kính, nhà cổ, chùa chiền, đèn lồng rực rỡ về đêm và nền ẩm thực phong phú, thu hút du khách trong và ngoài nước.",
+  anh: "anh/HoiAn.jpg",
+  nhom: "vanhoa",
+},
+
+{
+  ten: "Làng cổ Phong Nam",
+  moTa: "Làng cổ Phong Nam mang đậm nét văn hóa truyền thống của miền Trung, với những ngôi nhà cổ, nghề thủ công truyền thống và cảnh quan yên bình ven sông, là điểm dừng chân lý tưởng cho du khách yêu thích trải nghiệm văn hóa.",
+  anh: "anh/LangCo.webp",
+  nhom: "vanhoa",
+},
+
+{
+  ten: "Giếng Trời",
+  moTa: "Giếng Trời là một thắng cảnh thiên nhiên độc đáo với hồ nước xanh trong bao quanh bởi núi đá vôi và rừng nguyên sinh. Đây là điểm đến lý tưởng cho những ai yêu thích khám phá, tắm mát và trải nghiệm không gian hoang sơ, thanh bình.",
+  anh: "anh/Gieng.jpg",
+  nhom: "thiennhien",
+},
+
+{
+  ten: "Thánh Địa Mỹ Sơn",
+  moTa: "Thánh Địa Mỹ Sơn là quần thể di tích Chăm Pa cổ kính, bao gồm nhiều đền tháp Hindu giáo nằm giữa thung lũng xanh mát. Đây là điểm du lịch văn hóa nổi tiếng gần Hội An, giúp du khách tìm hiểu lịch sử, kiến trúc và văn hóa Chăm độc đáo.",
+  anh: "anh/ThanhDia.jpg",
+  nhom: "vanhoa",
+},
+
+{
+  ten: "Bãi Biển Nam Ô",
+  moTa: "Bãi Biển Nam Ô thuộc quận Liên Chiểu, Đà Nẵng, nổi tiếng với bãi cát vàng mịn và nước biển trong xanh. Đây là điểm du lịch yên tĩnh, thích hợp tắm biển, dạo chơi và thưởng thức hải sản tươi sống từ các ngư dân địa phương.",
+  anh: "anh/Namo.jpg",
+  nhom: "bien",
+},
+
+{
+  ten: "Cầu Sông Hàn",
+  moTa: "Cầu Sông Hàn là biểu tượng của thành phố Đà Nẵng, nổi bật với thiết kế cầu quay độc đáo. Du khách có thể chiêm ngưỡng cảnh sông Hàn thơ mộng, đặc biệt vào buổi tối khi cầu được thắp sáng lung linh.",
+  anh: "anh/CauSongHan.jpg",
+  nhom: "congtrinh",
+},
+
+
+      ];
+
+      const mapLinks = {
+        "sontra.jpg":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61325.10679341589!2d108.23449602352073!3d16.126652347514394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d72d1be522d%3A0x1e7339a6534e4e7!2zQsOhbiDEkeG6o28gU8ahbiBUcsOg!5e0!3m2!1svi!2s!4v1761382274356!5m2!1svi!2s",
+        "mykhe.jpg":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7510.326805541372!2d108.23757912776612!3d16.06199747013214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421782f7fa0ee3%3A0xeafb8ba272ee55ac!2zQsOjaSBiaeG7g24gTeG7uSBLaMOq!5e0!3m2!1svi!2s!4v1761386143516!5m2!1svi!2s",
+
+        "nguhanhson.jpg":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.188299429895!2d108.26058557604907!3d16.00371038466636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e14b2edb%3A0xbc6e1faf738be4c5!2zTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386646650!5m2!1svi!2s",
+        "CauRong.png":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.084502275844!2d108.22511767605005!3d16.061104184617214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219d2f38ce45d%3A0xbfa47dd116d4db88!2zQ-G6p3UgUuG7k25nLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1761383554572!5m2!1svi!2s",
+        "tuongba.jpg":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.1807428214015!2d108.26174147604922!3d16.00410398466608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142110e6f11cc15%3A0x13a307b874043572!2zQ2jDuWEgTGluaCDhu6huZyDigJMgTmfFqSBIw6BuaCBTxqFu!5e0!3m2!1svi!2s!4v1761386845365!5m2!1svi!2s",
+        "cauvang.jpg":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.356680734252!2d107.99398757604877!3d15.994937484673793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f73d19c5d38f%3A0x63766c11470ab50d!2zQ-G6p3UgVsOgbmc!5e0!3m2!1svi!2s!4v1761386912430!5m2!1svi!2s",
+        "cautinhyeu.jpg":
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.048040202771!2d108.22723967605002!3d16.062996684615584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142196e746d9c5f%3A0x91cfbbc68781d139!2zQ-G6p3UgVMOsbmggWcOqdSAtIExvdmUgUGllcg!5e0!3m2!1svi!2s!4v1761386959645!5m2!1svi!2s",
+        "Sontra.png":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122650.24616582367!2d108.11980388469398!3d16.12659971116778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d72d1be522d%3A0x1e7339a6534e4e7!2zQsOhbiDEkeG6o28gU8ahbiBUcsOg!5e0!3m2!1svi!2s!4v1761810351876!5m2!1svi!2s",
+        "Dinhbanco.png":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15331.792384854098!2d108.26564616417757!3d16.1199856530684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d71a211a64f%3A0xb65a8033e2183c23!2zxJHhu4luaCBCw6BuIEPhu50!5e0!3m2!1svi!2s!4v1761810386894!5m2!1svi!2s",
+        "BaiBut.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.3683726500362!2d108.26887377602209!3d16.09823398458546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217b9ff96e6c9%3A0xe9575c07f27853c4!2zQsOjaSBC4buldA!5e0!3m2!1svi!2s!4v1761810626176!5m2!1svi!2s",
+        "BaoTang.webp":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.0999817377597!2d108.22069277602132!3d16.060300684617875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219cdb3006a2d%3A0x62ca993f60c3a12c!2zQuG6o28gdMOgbmcgxJBpw6p1IGto4bqvYyBDaMSDbSDEkMOgIE7hurVuZw!5e0!3m2!1svi!2s!4v1761810659693!5m2!1svi!2s",
+        "Đèo hải vân.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15325.589398796657!2d108.12303326419922!3d16.199999501975853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31422151a4984555%3A0x9a66217b26b3f759!2zxJDDqG8gSOG6o2kgVsOibg!5e0!3m2!1svi!2s!4v1761810691293!5m2!1svi!2s",
+        "Nhaga.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.9700329665793!2d108.22061107602138!3d16.06704478461205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142198f38589aef%3A0x9409e1a4c30cbf79!2zR2nDoW8gWOG7qSBDaMOhbmggVG_DoCDEkMOgIE7hurVuZw!5e0!3m2!1svi!2s!4v1761810737600!5m2!1svi!2s",
+        "Dienhai.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.788401887728!2d108.22057677602169!3d16.076466484604094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183a92ad5d85%3A0x8c69a6b9b807240!2zxJAuIFRow6BuaCDEkGnhu4duIEjhuqNpLCBUaOG6oWNoIFRoYW5nLCBI4bqjaSBDaMOidSwgxJDDoCBO4bq1bmcgNTUwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1761810765026!5m2!1svi!2s",
+        "BienMyAn.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.2587322368017!2d108.24623597602128!3d16.052058084625006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142179546cbaa2b%3A0x4d10339bf79eb2da!2zQmnhu4NuIE3hu7kgQW4!5e0!3m2!1svi!2s!4v1761810788059!5m2!1svi!2s",
+        "HoiAn.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122778.37554307416!2d108.3346721609736!3d15.918276472041798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e1353a7b%3A0xae336435edfcca3!2zVHAuIEjhu5lpIEFuLCBRdeG6o25nIE5hbSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1761810811793!5m2!1svi!2s",
+        "LangCo.webp":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.5175720118987!2d108.18846138591775!3d15.986550445182221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421b3a022c381d%3A0xf1091f8a1ae04521!2zTMOgbmcgY-G7lSBQaG9uZyBOYW0!5e0!3m2!1svi!2s!4v1761810847059!5m2!1svi!2s",
+        "Gieng.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.2958165769212!2d107.98989635180024!3d16.034759897593265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f6831262b307%3A0xa64c6ed6f98b579b!2zTmjhuqV0IMOUbmc!5e0!3m2!1svi!2s!4v1761810914581!5m2!1svi!2s",
+        "ThanhDia.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7679.470411485051!2d108.11780679537198!3d15.765141089484498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314200a30f3839eb%3A0xe7c8b131ea5e90b2!2zVGjDoW5oIMSR4buLYSBN4bu5IFPGoW4sIER1eSBYdXnDqm4sIFF14bqjbmcgTmFtLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1761810949303!5m2!1svi!2s",
+        "Namo.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3832.966860898239!2d108.12772667602239!3d16.119015084567717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31422100615493c1%3A0xcc7829d30269c285!2zQsOjaSBU4bqvbSBOYW0gw5Q!5e0!3m2!1svi!2s!4v1761810996920!5m2!1svi!2s",
+        "CauSongHan.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.8716261068953!2d108.22422117602156!3d16.072150084607742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421831cd8a36d1%3A0x384de766f6cc5a4e!2zQ-G6p3UgU8O0bmcgSMOgbg!5e0!3m2!1svi!2s!4v1761811022392!5m2!1svi!2s",
+                };
+
+      // DOM
+      const container = document.getElementById("DiaDanhDN");
+      const searchEl = document.getElementById("searchInput");
+
+      // ===========================
+      // HIỂN THỊ DANH SÁCH
+      // ===========================
+      function renderDiaDanh(list) {
+        container.innerHTML = "";
+        list.forEach((diaDanh, index) => {
+          const fileName = diaDanh.anh.split("/").pop();
+          const mapLink = mapLinks[fileName] || "";
+
+          const html = `
+        <div class="content-box fade-in mb-4" id="item-${index}">
+          <div id="media-${index}" class="media-box" data-showing="image">
+            <img src="${diaDanh.anh}" alt="${
+            diaDanh.ten
+          }" class="rounded shadow-sm w-100" />
+          </div>
+
+          <div class="text-box mt-3">
+            <h5 class="text-center fw-bold">${diaDanh.ten}</h5>
+            <p class="mo-ta mb-2">${diaDanh.moTa}</p>
+
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+              ${
+                mapLink
+                  ? `
+                <button class="btn btn-outline-primary nuthanhdong" 
+                        id="btnMap-${index}" 
+                        onclick="toggleMap(${index}, '${diaDanh.anh}', '${mapLink}')">
+                  <i class="bi bi-geo-alt"></i> 
+                  <span></span>
+                </button>`
+                  : ""
+              }
+              
+              <button class="btn btn-outline-success nuthanhdong" onclick="handleYeuThich()">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+          container.insertAdjacentHTML("beforeend", html);
+        });
+      }
+
+      // ===========================
+      // TÌM KIẾM
+      // ===========================
+      function searchDiaDanh(e) {
+        e.preventDefault();
+        const kw = searchEl.value.trim().toLowerCase();
+        const filtered = diaDanhList.filter(
+          (d) =>
+            d.ten.toLowerCase().includes(kw) ||
+            d.moTa.toLowerCase().includes(kw)
+        );
+        renderDiaDanh(filtered);
+        return false;
+      }
+
+      // ===========================
+      // LỌC THEO NHÓM
+      // ===========================
+      function toggleSection(loai, e) {
+        document
+          .querySelectorAll(".btn-food")
+          .forEach((b) => b.classList.remove("active"));
+        e.target.classList.add("active");
+
+        let nhom = "";
+        if (loai === "haiSan") nhom = "thiennhien";
+        else if (loai === "duongPho") nhom = "congtrinh";
+        else if (loai === "Qua") nhom = "vanhoa";
+        else nhom = "all";
+
+        const kw = searchEl.value.trim().toLowerCase();
+        const filtered = diaDanhList.filter(
+          (d) =>
+            (nhom === "all" || d.nhom === nhom) &&
+            (d.ten.toLowerCase().includes(kw) ||
+              d.moTa.toLowerCase().includes(kw))
+        );
+
+        renderDiaDanh(filtered);
+      }
+
+      // ===========================
+      // ẢNH ↔ BẢN ĐỒ
+      // ===========================
+      function toggleMap(index, imgPath, mapLink) {
+        const mediaDiv = document.getElementById(`media-${index}`);
+        const btn = document.getElementById(`btnMap-${index}`);
+        const showing = mediaDiv.dataset.showing;
+
+        if (showing === "map") {
+          mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa danh" class="img-fluid rounded shadow-sm" />`;
+          mediaDiv.dataset.showing = "image";
+          btn.querySelector("span").textContent = "";
+          btn.firstElementChild.className = "bi bi-geo-alt";
+        } else {
+          mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+          mediaDiv.dataset.showing = "map";
+          btn.querySelector("span").textContent = "";
+          btn.firstElementChild.className = "bi bi-image";
+        }
+      }
+
+      // ===========================
+      // YÊU THÍCH
+      // ===========================
+      let isLoggedIn = false;
+      function handleYeuThich() {
+        if (!isLoggedIn) {
+          const goLogin = confirm(
+            "Bạn cần đăng nhập hoặc đăng ký để yêu thích địa danh. Bạn có muốn đăng nhập ngay không?"
+          );
+          if (goLogin) window.location.href = "dangNhap.html";
+        } else {
+          alert("💖 Đã thêm vào danh sách yêu thích!");
+        }
+      }
+
+      // ===========================
+      // KHỞI TẠO
+      // ===========================
+      window.onload = function () {
+        renderDiaDanh(diaDanhList);
+      };
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+  </body>
+</html>
