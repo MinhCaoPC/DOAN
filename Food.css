@@ -594,6 +594,45 @@
   #ThuongThucList .info-image, .iframe{ height: 240px !important;  }
 
 
+  /* Phần 1: danh sách món ăn */
+  #MonAnDN .actions-fixed{
+    position: absolute;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 12px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    gap: 10px;
+    width: auto;              /* giữ đúng kích thước theo nội dung */
+    justify-content: center;
+    z-index: 3;
+  }
+
+
+  /* Phần 2: card không gian thưởng thức */
+  #ThuongThucList .actions-fixed{
+    position: absolute;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 12px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    gap: 10px;
+    width: auto;
+    justify-content: center;
+    z-index: 3;
+  }
+
+
+  /* Chừa chỗ cho nút, tránh đè chữ */
+  #MonAnDN .text-box{ padding-bottom: 80px; }
+  #ThuongThucList .info-content{ padding-bottom: 64px; }
+
+
+
+
+
+
 
 
   
