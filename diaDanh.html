@@ -102,7 +102,7 @@
 
     <!-- Giới thiệu + Phân loại -->
     <section id="diadanh" class="diadanh-section">
-      <div class="intro-text">
+      <div class="intro">
         <p>
           Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố
           đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm không
@@ -142,6 +142,13 @@
     <script>
       // DỮ LIỆU
       const diaDanhList = [
+          {
+          ten: "Bãi Bụt",
+          moTa: "Bãi Bụt là địa điểm không thể bỏ qua trong chuyến du lịch Đà Nẵng. Nằm ở phía Nam của núi Sơn Trà, thuộc bán đảo Sơn Trà, Bãi Bụt sở hữu vẻ đẹp hoang sơ hiếm có và nằm kế bên ngôi chùa Linh Ứng nổi tiếng. Từ trung tâm thành phố Đà Nẵng, bạn chỉ mất khoảng 35 phút di chuyển với quãng đường tầm 15 km để đến đây. Các dự án khai thác du lịch ở Bãi Bụt chỉ mới phát triển từ năm 2012 nên nơi đây vẫn còn giữ được nét tự nhiên, yên bình. Du khách có thể đến Bãi Bụt vào bất cứ thời điểm nào trong năm vì nơi đây luôn mở cửa chào đón. Tuy nhiên, thời điểm lý tưởng nhất là từ tháng 2 đến tháng 9, khi thời tiết khô ráo, biển êm, nắng nhẹ và có nhiều lễ hội diễn ra, rất thích hợp để tắm biển, ngắm cảnh và tận hưởng không khí trong lành. Từ tháng 10 đến tháng 1, Đà Nẵng bước vào mùa mưa, trời se lạnh và có sương mù nên ít khách du lịch hơn, nếu đi vào thời gian này bạn nên chuẩn bị kỹ về trang phục và kế hoạch di chuyển.",
+          anh: "anh/BaiBut.jpg",
+          nhom: "thiennhien",
+        },
+
         {
           ten: "Sun World Bà Nà Hills",
           moTa: "Khu du lịch nổi tiếng với khí hậu mát mẻ, kiến trúc châu Âu và Cầu Vàng độc đáo. ",
@@ -156,14 +163,14 @@
         },
         {
           ten: "Núi Ngũ Hành Sơn",
-          moTa: "Cụm núi đá vôi gồm 5 ngọn tượng trưng cho Ngũ Hành, nổi tiếng với hang động và chùa chiền.",
+          moTa: "Ngũ Hành Sơn là quần thể gồm 6 ngọn núi nằm ven biển Đà Nẵng, bao gồm Kim Sơn, Mộc Sơn, Thủy Sơn, Thổ Sơn và Hỏa Sơn (gồm Dương Hỏa Sơn và Âm Hỏa Sơn). Những ngọn núi đá vôi hùng vĩ này mang trong mình vẻ đẹp hòa quyện giữa thiên nhiên, biển cả và yếu tố tâm linh. Nơi đây thu hút đông đảo du khách trong và ngoài nước đến tham quan, khám phá hệ thống hang động, chùa chiền và cảnh quan thiên nhiên kỳ thú. Ngũ Hành Sơn cũng là một trong 10 địa điểm du lịch nổi bật nhất của Đà Nẵng và đã được công nhận là di tích lịch sử - văn hóa cấp Quốc gia.",
           anh: "anh/nguhanhson.jpg",
           nhom: "thiennhien",
         },
         {
           ten: "Bán Đảo Sơn Trà",
           moTa: "Lá phổi xanh của Đà Nẵng, nơi sinh sống của nhiều loài động vật quý hiếm.",
-          anh: "anh/sontra.jpg",
+          anh: "anh/Sontra.png",
           nhom: "thiennhien",
         },
         {
@@ -174,8 +181,8 @@
         },
         {
           ten: "Cầu Rồng",
-          moTa: "Cầu phun lửa và nước, biểu tượng hiện đại của thành phố.",
-          anh: "anh/caurong.jpg",
+          moTa: "Đưa vào hoạt động năm 2013, cầu Rồng là một trong những điểm tham quan nổi tiếng và hiện đại nhất Đà Nẵng. Với thiết kế độc đáo mang hình dáng con rồng vươn mình bắc qua sông Hàn thơ mộng, cây cầu thể hiện khát vọng vươn lên mạnh mẽ của thành phố trẻ trung, năng động. Đây cũng là cây cầu thứ 7 góp phần tạo nên biểu tượng “thành phố của những cây cầu”. Vào các tối cuối tuần, du khách sẽ được chiêm ngưỡng màn trình diễn rồng phun lửa và phun nước vô cùng sống động, tạo nên không khí sôi động, rực rỡ sắc màu bên dòng sông Hàn lung linh ánh đèn.",
+          anh: "anh/CauRong.png",
           nhom: "congtrinh",
         },
         {
@@ -190,6 +197,13 @@
           anh: "anh/tuongba.jpg",
           nhom: "vanhoa",
         },
+        {
+          ten: "Đỉnh Bàn Cờ",
+          moTa: "Đỉnh Bàn Cờ được mệnh danh là 'chốn bồng lai tiên cảnh' giữa lòng Đà Nẵng. Từ độ cao hơn 700m trên bán đảo Sơn Trà, du khách có thể phóng tầm mắt ngắm toàn cảnh thành phố: sông Hàn uốn lượn, những cây cầu bắc ngang, nhà cao tầng nối tiếp và biển xanh êm ả phía xa. Nơi đây còn có bức tượng tiên ông ngồi đánh cờ – biểu tượng đặc trưng của điểm đến. Đặc biệt, trải nghiệm cắm trại qua đêm, ngắm bình minh hoặc hoàng hôn trên đỉnh núi là hoạt động được nhiều du khách yêu thích khi đến Đà Nẵng.",
+          anh: "anh/Dinhbanco.png",
+          nhom: "thiennhien",
+        },
+
       ];
 
       const mapLinks = {

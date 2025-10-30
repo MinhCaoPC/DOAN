@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap"); */
 
 /* Font đoạn mô tả */
-@import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap"); */
 
 .navbar-custom {
   position: fixed;
@@ -85,7 +85,7 @@
 
 /* THANH TÌM KIẾM */
 .search-container {
-  font-family: "Montagu Slab", serif;
+  /* font-family: "Montagu Slab", serif; */
 }
 
 .search-container h2 {
@@ -137,7 +137,7 @@
 }
 
 .btn-search:hover {
-  color: #000000;
+  color: #024481;
 }
 
 .diadanh-section {
@@ -293,7 +293,7 @@
 
 /* === Nút XEM ẢNH / XEM VỊ TRÍ - màu đen === */
 .nuthanhdong.btn-outline-primary {
-  background-color: #49bd66;
+  background-color: #00bfe6;
   color: #fff;
   border: 2px solid #b6b4b4;
   transition: all 0.3s ease;
@@ -551,5 +551,22 @@
     max-width: 200px;
     padding: 8px 0;
     font-size: 0.85rem;
+  }
+}
+
+.intro {
+  max-width: 700px;   /* chiều rộng tối đa */
+  margin: 0 auto 60px;  /* căn giữa + khoảng cách dưới */
+  font-size: 20px;      /* giảm font chữ */
+  line-height: 1.6;     /* giữ khoảng cách dòng dễ đọc */
+  text-align: justify;  /* canh đều 2 bên */
+  padding: 0 15px;      /* khoảng cách 2 bên nhỏ, responsive */
+  color: #024481;
+}
+
+@media (max-width: 768px) {
+  .intro{
+    font-size: 16px;
+    padding: 0 10px;
   }
 }
