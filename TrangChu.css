@@ -32,7 +32,7 @@
 }
 
 .navbar-custom .nav-link:hover {
-  color: #f9d342;
+  color: #F5F5DC;
   text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
 
@@ -43,7 +43,7 @@
 }
 
 .login-text:hover {
-  color: #f9d342;
+  color: #F5F5DC;
 }
 
 /* Banner */
@@ -718,3 +718,75 @@
    height: 40px;
   padding: 3px 0;
 }
+
+/* Mobile tweaks */
+@media (max-width:767.98px) {
+ .navbar-custom {
+   padding: 6px 14px;
+ }
+
+
+ .navbar-brand img {
+   height: 30px;
+ }
+
+
+ .navbar-toggler {
+   padding: 3px 6px;
+   font-size: 14px;
+ }
+
+
+ .navbar-nav .nav-link {
+   font-size: 12px;
+   padding: 6px 8px;
+ }
+
+
+ .navbar-collapse .login-section {
+   width: 100%;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   gap: 6px;
+   margin-left: auto;
+   font-size: .7rem;
+ }
+
+
+ .login-text i {
+   font-size: .8rem;
+   margin-right: 3px;
+ }
+}
+
+
+
+
+
+
+/* Tablet */
+@media (min-width:768px) and (max-width:991.98px) {
+   .navbar-collapse .login-section {
+   width: 100%;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   gap: 6px;
+   margin-left: auto;
+   font-size: .7rem;
+ }
+
+
+ .login-text i {
+   font-size: 1.0rem;
+   margin-right: 3px;
+ }
+
+
+ 
+}
+
+
+
+

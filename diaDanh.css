@@ -22,37 +22,39 @@
   padding: 12px 0;
   transition: background 0.4s ease;
 }
-
+/* Khi cuộn xuống, làm nền đậm hơn một chút */
 .navbar-custom.scrolled {
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(10px);
+ background: rgba(0, 0, 0, 0.9);
+ backdrop-filter: blur(10px);
 }
 
+
+/* Giữ màu menu + hover */
 .navbar-custom .nav-link {
-  color: #fff;
-  font-weight: 500;
-  padding: 8px 16px;
-  transition: color 0.3s ease;
+ color: #fff;
+ font-weight: 500;
+ padding: 8px 16px;
+ transition: color 0.3s ease;
 }
+
 
 .navbar-custom .nav-link:hover {
-  color: #024481;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+ color: #F5F5DC;
+ text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
 
-.navbar .container-fluid {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
 
+/* Login bên phải */
 .login-text {
-  color: #fff;
-  text-decoration: none;
+ color: #fff;
+ text-decoration: none;
 }
+
 
 .login-text:hover {
-  color: #000000;
+ color: #F5F5DC;
 }
+
 
 #banner {
   position: relative;
