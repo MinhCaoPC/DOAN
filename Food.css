@@ -33,15 +33,6 @@
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
-/* Login bên phải */
-.login-text {
-  color: #fff;
-  text-decoration: none;
-}
-
-.login-text:hover {
-  color: #f9d342;
-}
 
 /* Banner full màn hình */
 .banner-section {
@@ -56,30 +47,81 @@
   object-fit: cover;
 }
 
-.banner-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
 
 .Loangmau {
+  position: relative;
   padding-top: 50px;
   padding-bottom: 50px;
-  background: linear-gradient(
-    to bottom,
+  background: linear-gradient(to bottom,
       rgba(190, 66, 0, 0.85),
       rgba(50, 20, 0, 0.9));
 }
+
 .Loangmau::after {
   content: "";
-  position: absolute;
+  position:  absolute;
   inset: 0;
   background-image: url("https://www.transparenttextures.com/patterns/noise.png");
-  opacity: 0.15; /* chỉnh hạt đậm hay nhạt */
+  opacity: 0.15;
+  /* chỉnh hạt đậm hay nhạt */
   mix-blend-mode: overlay;
   pointer-events: none;
+}
+
+/* THANH TÌM KIẾM */
+.search-container {
+  font-family: "Montagu Slab", serif;
+  width: 60vw;
+  /* Tăng chiều dài thanh tìm kiếm*/
+  max-width: 600px;
+}
+
+
+.search-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  font-size: 20px;
+  border-radius: 50px;
+  padding: 10px 45px 10px 20px;
+  width: 100%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  color: white;
+  outline: none;
+}
+
+.btn-search {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.btn-search:hover {
+  color: #000000;
 }
 
 /* === BUTTON === */
@@ -98,7 +140,7 @@
   border-radius: 25px;
   padding: 10px 22px;
   transition: all 0.3s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   margin: 0.3rem;
 
 }
@@ -113,101 +155,67 @@
   box-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
 }
 
-/* --- Wrapper quản lý nhiều box --- */
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px; /* khoảng cách giữa các box */
-}
 
-/* --- Mỗi box --- */
-.content-box {
-  display: flex;
-  align-items: center;
-  background-color: #ffdfc6;
-  border-radius: 40px;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  box-sizing: border-box;
-  transition: all 0.3s ease;
-  max-width: 48%; /* laptop: 2 cột */
-}
-
-/* Hiệu ứng hover */
-.content-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* Ảnh bên trái */
-.content-box img {
-  width: 300px;
-  height: 300px;
-  border-radius: 30px;
-  object-fit: cover;
-  margin-right: 40px;
-  transition: all 0.3s ease;
-}
-
-.content-box:hover img {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
-
-/* Text bên phải */
-.text-box {
-  color: #792c00;
-  font-size: 18px;
-  line-height: 1.6;
-  text-align: left;
-}
 
 /* --- Wrapper quản lý nhiều box --- */
 .wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px; /* khoảng cách giữa các box */
+  gap: 20px;
+  /* khoảng cách giữa các box */
 }
 
 /* --- Mỗi box --- */
 .content-box {
-  position: relative; /* cần cho nút absolute hoạt động */
+  position: relative;
+  /* cần cho nút absolute hoạt động */
 
   display: flex;
-  align-items: stretch; /* ✅ cho nội dung bên trong cao hết box */
+  align-items: stretch;
+  /* ✅ cho nội dung bên trong cao hết box */
   background-color: #ffdfc6;
   border-radius: 40px;
   padding: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   transition: all 0.3s ease;
   max-width: 48%;
-  height: 350px; /* ✅ chiều cao cố định */
+  height: 350px;
+  /* ✅ chiều cao cố định */
   overflow: hidden;
 }
+
+.content-box { height: 350px; }              /* giữ đúng với map hiện tại */
+.media-box{
+  flex: 0 0 280px;            /* trước là 300px */
+  height: 100%;                              /* = 350px theo content-box */
+  border-radius: 30px;
+  overflow: hidden;
+  margin-right: 24px;
+}
+/* Ảnh & iframe chung 1 size */
+.media-box img,
+.media-box iframe{
+  display: block;
+  width: 100%;
+  height: 100%;           /* = 350px */
+  object-fit: cover;      /* ảnh không méo, che kín khung */
+  border: 0;
+  border-radius: 30px;
+}
+
+
+
 
 
 /* Hiệu ứng hover */
 .content-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Ảnh bên trái */
-.content-box img {
-  width: 250px;
-  height: 300px;
-  border-radius: 30px;
-  object-fit: cover;
-  margin-right: 40px;
-  transition: all 0.3s ease;
-}
-.content-box:hover img {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
+
 
 /* --- Nội dung bên phải --- */
 .text-box {
@@ -217,83 +225,140 @@
   text-align: left;
 
   flex: 1;
-  max-height: 100%;       /* ✅ Giới hạn theo chiều cao box */
-  overflow-y: auto;       /* ✅ Cho phép cuộn khi quá dài */
-  padding-right: 10px;    /* Tạo khoảng cách cho scrollbar */
+  max-height: 100%;
+  /* ✅ Giới hạn theo chiều cao box */
+  padding-right: 10px;
   box-sizing: border-box;
+  flex: 1 1 380px;            /* cho phép rộng linh hoạt hơn */
+  text-align: center;         /* ✅ căn giữa toàn bộ chữ */
+  padding-inline: 16px;       /* thêm khoảng thở 2 bên */
+  margin-inline: auto;        /* giữ khối chữ cân đối */
+  max-height: 100%;
+  overflow-y: auto;
+  padding-bottom: 70px;       /* để nút không che chữ */
+
 }
+.text-box h5{
+  margin-bottom: 10px;
+}
+
+
 
 /* ✅ Tùy chỉnh thanh cuộn */
 .text-box::-webkit-scrollbar {
   width: 8px;
 }
+
 .text-box::-webkit-scrollbar-thumb {
   background-color: #ff950069;
   border-radius: 10px;
 }
+
 .text-box::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
+.actions-fixed{
+  position: absolute;
+  right: 16px;
+  bottom: 16px;            /* ✅ luôn nằm ở dưới */
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
 
-/* --- Responsive --- */
-/* 📱 Mobile & iPad: 1 cột, card vẫn nằm ngang */
-@media (max-width: 1024px) {
-  .content-box {
-    flex-direction: row; /* ảnh trái – text phải */
-    max-width: 100%; /* 1 cột full */
-    padding: 15px;
-  }
+/* ✅ Chỉ áp cho danh sách món ăn Phần 1 */
+#MonAnDN .text-box{ color:#212529; }
+#MonAnDN .text-box h5,
+#MonAnDN .text-box .mo-ta{ color:#212529; }
 
-  .content-box img {
-    width: 45%;
-    height: auto;
-    margin-right: 15px;
-  }
 
-  .text-box {
-    width: 55%;
-    font-size: 15px;
-    text-align: left;
-  }
+/* Nút cố định chỉ áp cho Phần 1 để không đè layout Phần 2 */
+#MonAnDN .actions-fixed{
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+
+/* Nút dạng pill giống style cũ */
+.btn-action{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 30px;     /* ✅ pill tròn như cũ */
+  border: 1px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,.2);
+  transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  font-weight: 600;
+}
+
+
+
+
+/* Nút Map/Ảnh: nền TRẮNG, VIỀN CAM, icon cam – giống nút cũ */
+.btn-map{
+  background:#0f8e35;
+  border-color:#c4966b;
+  color:#0f8e35;
+}
+.btn-map i{ font-size:18px; line-height:1; }
+.btn-map:hover{
+  background:#fff7f0;
+  border-color:#c4966b;
+  color:#11e21f;
+}
+
+
+/* Nút Yêu thích: nền CAM đặc – giống .fav-btn trước đây */
+.btn-fav{
+  background:#f48e4a;
+  color:#fff;
+  border-color:#ef2727;
+}
+.btn-fav:hover{
+  background:#a72e06;
+  border-color:#ef2727;
+  transform: translateY(-1px);
 }
 
 /* --- Phần còn lại giữ nguyên --- */
 .content-section {
   display: none;
 }
+
 .content-section.active {
   display: block;
-}
-
-.content-box h3 {
-  color: white;
-  background: transparent;
-  transition: all 0.3s ease;
-}
-.content-box:hover h3 {
-  color: #ff8000;
-  text-shadow: 0 0 10px #ff8000, 0 0 20px #ff8000, 0 0 40px #ff8000;
 }
 
 .chutd {
   color: white;
   background: transparent;
-  text-shadow: 
+  text-shadow:
     0 0 5px #ff8000,
     0 0 10px #ff8000,
     0 0 20px #ff8000,
     0 0 40px #ff8000;
 }
+
 .chu {
   color: white;
 }
 
 .fav-btn {
   position: absolute;
-  bottom: 15px;              /* cách đáy 15px */
-  left: 75%;                 /* canh giữa ngang */
-  transform: translateX(-50%); /* dịch ngược lại 50% để đúng giữa */
+  bottom: 15px;
+  /* cách đáy 15px */
+  left: 75%;
+  /* canh giữa ngang */
+  transform: translateX(-50%);
+  /* dịch ngược lại 50% để đúng giữa */
   background-color: #ff7b00;
   color: #fff;
   border: none;
@@ -305,7 +370,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .fav-btn:hover {
@@ -313,29 +378,9 @@
   transform: translateX(-50%) scale(1.05);
 }
 
-/* ❤️ Nút Yêu thích
-.fav-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(90deg, #ff6600, #ff944d);
-  color: white;
-  font-size: 18px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
-}
-.fav-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(90deg, #ff944d, #ff6600);
-  box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
-} */
 
 .kc {
-    margin: 60px auto;
+  margin: 60px auto;
 }
 
 
@@ -344,12 +389,13 @@
 .info-box {
   position: relative;
   display: flex;
-  width: 850px; /* 🧱 full chiều ngang toàn màn hình */
+  width: 850px;
+  /* 🧱 full chiều ngang toàn màn hình */
   height: 300px;
   padding: 20px;
   border-radius: 35px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   background-color: #ffdfc6;
   margin: 20px auto;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
@@ -358,7 +404,7 @@
 /* Hover nhẹ nhàng */
 .info-box:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 /* Bên trái: hình ảnh */
@@ -382,7 +428,7 @@
 
 /* Bên phải: nội dung */
 .info-content {
-text-align: left;
+  text-align: left;
   flex: 1;
   padding: 20px;
   overflow-y: auto;
@@ -392,38 +438,174 @@ text-align: left;
 
 /* Thanh cuộn tùy chỉnh */
 .info-content::-webkit-scrollbar {
-    
+
   width: 8px;
 }
+
 .info-content::-webkit-scrollbar-thumb {
   background-color: #ff950069;
 
   border-radius: 10px;
 }
+
 .info-content::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
 
+#ThuongThucList .info-image{
+  border-radius: 30px;     /* giống phần 1 */
+  overflow: hidden;        /* để iframe bị cắt theo góc bo */
+}
+
+
+/* Đồng bộ size & bo tròn cho cả ảnh và iframe trong Phần 2 */
+#ThuongThucList .info-image img,
+#ThuongThucList .info-image iframe{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;  /* dùng cùng radius với .info-image */
+}
+
+
+
+
+
+/* --- Responsive --- */
+/* 📱 Mobile & iPad: 1 cột, card vẫn nằm ngang */
+@media (max-width: 1024px) {
+  .content-box {
+    flex-direction: row;
+    /* ảnh trái – text phải */
+    max-width: 100%;
+    /* 1 cột full */
+    padding: 15px;
+
+    height: auto;         /* để card tự co khi màn hình hẹp */
+    align-items: flex-start;
+
+  }
+  .media-box{
+    flex: 0 0 45vw;       /* chiếm ~45% chiều ngang */
+    height: 250px;        /* map & ảnh = 250px ở breakpoint này */
+    margin-right: 15px;
+  }
+  .media-box img,
+  .media-box iframe{
+    height: 100%;
+  }
+
+
+  .text-box {
+    width: 55%;
+    font-size: 15px;
+    text-align: center;
+  }
+  
+
+}
+
+@media (min-width: 1200px){
+  #ThuongThucList{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;   /* căn giữa card */
+  }
+  #ThuongThucList .info-box{
+    width: min(1280px, 92vw);  /* ↑ từ 850px lên tối đa 1280px */
+    height: 360px;             /* tùy chọn: cao hơn chút cho thoáng */
+  }
+  /* Tỉ lệ ảnh : nội dung khi card rộng */
+  #ThuongThucList .info-image{  flex: 0 0 48%; }
+  #ThuongThucList .info-content{flex: 0 0 52%; }
+}
+
+
+
 @media (max-width: 768px) {
   .info-box {
-    flex-direction: column;   /* Ảnh lên trên, nội dung xuống dưới */
-    width: 100%;              /* full ngang */
-    height: auto;             /* cho phép tự co chiều cao */
+    flex-direction: column;
+    /* Ảnh lên trên, nội dung xuống dưới */
+    width: 100%;
+    /* full ngang */
+    height: auto;
+    /* cho phép tự co chiều cao */
     padding: 15px;
   }
 
   .info-image {
-    width: 100%;              /* chiếm full ngang */
-    height: 250px;            /* chiều cao cố định */
-    margin-bottom: 15px;      /* khoảng cách với nội dung */
+    width: 100%;
+    /* chiếm full ngang */
+    height: 250px;
+    /* chiều cao cố định */
+    margin-bottom: 15px;
+    /* khoảng cách với nội dung */
   }
 
   .info-content {
     flex: none;
     width: 100%;
-    height: auto;             /* tự co theo nội dung */
+    height: auto;
+    /* tự co theo nội dung */
     padding: 10px 0;
   }
-}
 
+  
+
+  .search-input {
+    font-size: 14px;
+    padding: 8px 38px 8px 14px;
+  }
+
+  .btn-search {
+    font-size: 18px;
+    right: 10px;
+  }
+  .content-box{
+    flex-direction: column;   /* ảnh/map lên trên, text dưới */
+    height: auto;
+  }
+  .media-box{
+    flex: none;
+    width: 100%;
+    height: 220px;            /* map & ảnh = 220px trên mobile */
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+  .text-box{
+    width: 100% !important;     /* ghi đè 55% ở breakpoint 1024px */
+    font-size: 16px;            /* chữ to hơn chút cho dễ đọc */
+    line-height: 1.7;
+    padding-inline: 12px;       /* tăng không gian 2 bên */
+  }
+  .content-box{
+    padding: 16px;              /* card rộng rãi hơn */
+  }
+  .media-box{
+    height: 240px;              /* tuỳ chọn: tăng nhẹ khung ảnh/map */
+  }
+   #ThuongThucList .info-box{
+    width: 100%;
+    max-width: 100%;
+  }
+  #ThuongThucList .info-image, .iframe{ height: 240px !important;  }
+
+
+
+
+  
+
+
+.actions-fixed{ left:50%; right:auto; transform:translateX(-50%); }
+
+
+}
+@media (max-width: 576px){
+  .text-box{
+    font-size: 16.5px;          /* nhích thêm 0.5 nếu muốn nhìn rõ hơn */
+    padding-inline: 14px;
+  }
+}

@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ẩm thực Đà Nẵng</title>
- <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ẩm thực Đà Nẵng</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- CSS riêng -->
-  <link rel="stylesheet" href="Food.css">
+  <link rel="stylesheet" href="Food.css" />
 </head>
+
 <body>
-<!-- Navbar -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container-fluid px-4">
-
       <!-- Logo -->
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="logo.png" alt="Logo" class="logo me-2">
+        <img src="logo.png" alt="Logo" class="logo me-2" />
       </a>
 
       <!-- Nút thu gọn -->
@@ -30,46 +31,66 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">NGHỈ DƯỠNG</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">NGHỈ DƯỠNG</a>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#">TOUR</a></li>
         </ul>
       </div>
 
       <!-- Đăng nhập -->
       <div class="d-none d-lg-flex align-items-center">
-      <i class="bi bi-person-circle me-2 fs-5" style="color: white;"></i>
+        <i class="bi bi-person-circle me-2 fs-5" style="color: white"></i>
       </div>
-
     </div>
   </nav>
 
-    <!-- Banner -->
+  <!-- Banner -->
   <section class="banner-section">
-    <img src="pic/BANNER.JPG" alt="banner" class="banner-img">
+    <img src="pic/BANNER.JPG" alt="banner" class="banner-img" />
+    <div class="search-container position-absolute top-50 start-50 translate-middle text-center">
+      <form class="search-form position-relative d-inline-block" onsubmit="return searchMonAn(event)">
+        <input id="searchInput" type="text" class="form-control search-input" placeholder="Tìm kiếm địa danh..." />
+        <button class="btn-search" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+    </div>
   </section>
-<!-- Giới thiệu ẩm thực -->
-<div class="container-fluid text-center Loangmau">
-  <div class="row align-items-center">
-    <!-- Hình trái -->
-    <div class="col-12 col-md-3 d-none d-md-block">
-      <img src="pic/2.png" alt="food" class="img-fluid">
-    </div>
+  <!-- Giới thiệu ẩm thực -->
+  <div class="container-fluid text-center Loangmau">
+    <div class="row align-items-center">
+      <!-- Hình trái -->
+      <div class="col-12 col-md-3 d-none d-md-block">
+        <img src="pic/2.png" alt="food" class="img-fluid" />
+      </div>
 
-    <!-- Text giữa -->
-    <div class="col-12 col-md-6 gt-text">
-        <h2 class="chutd ">KHÁM PHÁ <br> THIÊN ĐƯỜNG ẨM THỰC ĐÀ NẴNG</h2>
-        <p class="chu"> Đà Nẵng, trung tâm du lịch miền Trung, không chỉ hấp dẫn với cảnh quan tuyệt đẹp mà còn bởi nền ẩm thực đa dạng. Ẩm thực nơi đây là sự kết hợp tinh tế giữa nét cầu kỳ của Huế và mộc mạc của xứ Quảng, từ món ăn đường phố nổi tiếng như Mì Quảng, Bánh tráng cuốn thịt heo, đến hải sản tươi ngon ven biển.
-            Mỗi món ăn đều kể câu chuyện văn hóa và cam kết chất lượng, mời du khách khám phá hương vị đặc sắc của thành phố. </p>
+      <!-- Text giữa -->
+      <div class="col-12 col-md-6 gt-text">
+        <h2 class="chutd">
+          KHÁM PHÁ <br />
+          THIÊN ĐƯỜNG ẨM THỰC ĐÀ NẴNG
+        </h2>
+        <p class="chu">
+          Đà Nẵng, trung tâm du lịch miền Trung, không chỉ hấp dẫn với cảnh
+          quan tuyệt đẹp mà còn bởi nền ẩm thực đa dạng. Ẩm thực nơi đây là sự
+          kết hợp tinh tế giữa nét cầu kỳ của Huế và mộc mạc của xứ Quảng, từ
+          món ăn đường phố nổi tiếng như Mì Quảng, Bánh tráng cuốn thịt heo,
+          đến hải sản tươi ngon ven biển. Mỗi món ăn đều kể câu chuyện văn hóa
+          và cam kết chất lượng, mời du khách khám phá hương vị đặc sắc của
+          thành phố.
+        </p>
+      </div>
 
+      <!-- Hình phải -->
+      <div class="col-12 col-md-3 d-none d-md-block">
+        <img src="pic/1.png" alt="food" class="img-fluid" />
+      </div>
     </div>
-
-    <!-- Hình phải -->
-    <div class="col-12 col-md-3 d-none d-md-block">
-      <img src="pic/1.png" alt="food" class="img-fluid">
-    </div>
-  </div>
 
 <!-- NÚT -->
 <div class="text-center mb-4 buttons">
@@ -79,589 +100,620 @@
   <button class="btn-food" onclick="toggleSection('Qua', event)">Quà tặng người thân</button>
 </div>
 
-<!-- SECTION 1: ĐẶC SẢN -->
-<section id="dacSan" class="content-section active">
-<div>
-    <h2 class="chutd ">
-        Món đặc sản “phải thử” ở Đà Nẵng
-    </h2>
+
+<!-- CHỈ GIỮ KHỐI NÀY, KHÔNG BỌC TRONG .content-section -->
+<div id="MonAnDN" class="wrapper"></div>
+
+
+<!-- (tùy chọn) giữ các section rỗng để hiển thị thông báo, NHƯNG để riêng và đang ẩn -->
+<section id="dacSan" class="content-section" style="display:none"></section>
+<section id="haiSan" class="content-section" style="display:none"></section>
+<section id="duongPho" class="content-section" style="display:none"></section>
+<section id="Qua" class="content-section" style="display:none"></section>
+
+    <!-- Phần 2 -->
+    <div class="center kc">
+  <h2 class="chutd">KHÔNG GIAN VÀ PHONG CÁCH THƯỞNG THỨC</h2>
 </div>
 
-<div class="wrapper">
-  <div class="content-box">
-    <img src="pic/Mì quảng.jpg" alt="Mì Quảng">
-    <div class="text-box">
-    <h5 class="text-center"><b>Mì Quảng </b></h5>
-    <p>Món đặc sản biểu tượng của Đà Nẵng với sợi mì dai mềm, nước dùng đậm đà, ăn kèm rau sống, bánh tráng nướng và đậu phộng rang.</p>
-    <p><b>Giá: </b>30.000 - 50.000 VNĐ/tô</p>
 
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
+<!-- ✅ List Phần 2 sẽ render bằng JS -->
+<div id="ThuongThucList"></div>
+
+
+  <script>
+    const monAnList = [
+      {
+        ten: "Mì Quảng",
+        moTa: "Món đặc sản biểu tượng của Đà Nẵng với sợi mì dai mềm, nước dùng đậm đà, ăn kèm rau sống, bánh tráng nướng và đậu phộng rang.",
+        diaChi: "Gợi ý: 135 Tiểu La, Hoà Cường Bắc, Hải Châu, Đà Nẵng",
+        gia: "35.000 - 55.000 VNĐ/tô",
+        anh: "pic/Mì quảng.jpg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Bún chả cá",
+        moTa: "Món đặc sản Đà Nẵng với nước dùng ngọt thanh, chả cá dai giòn, ăn kèm rau sống, hành phi và chút ớt cay, mang hương vị đậm đà khó quên.",
+        diaChi: "Gợi ý: 204 Phan Đăng Lưu, Hoà Cường Bắc, Cẩm Lệ, Đà Nẵng",
+        gia: "45.000 - 60.000 VNĐ/tô",
+        anh: "pic/Bún Chả.jpg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Bún mắm nêm",
+        moTa: "Món ăn dân dã đặc trưng Đà Nẵng với mắm nêm thơm lừng, kết hợp thịt heo quay hoặc luộc, chả bò, rau sống và đậu phộng, tạo hương vị đậm đà khó quên.",
+        diaChi: "Gợi ý: 145 Huỳnh Thúc Kháng, Phước Ninh, Hải Châu, Đà Nẵng",
+        gia: "30.000 - 40.000 VNĐ/phần",
+        anh: "pic/Bún nêm.jpeg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Gỏi cá Nam Ô",
+        moTa: "Món đặc sản độc đáo của Đà Nẵng làm từ cá trích tươi, trộn cùng rau rừng, hành phi, đậu phộng và nước chấm cay mặn, mang hương vị tươi ngon đặc trưng của biển.",
+        diaChi: "Gợi ý: 130 Huỳnh Thúc Kháng, Phước Ninh, Hải Châu, Đà Nẵng",
+        gia: "50.000 - 150.000 VNĐ/phần",
+        anh: "pic/Gỏi cá Nam ô.jpg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Bánh tráng cuốn thịt heo",
+        moTa: "Món đặc sản với thịt heo hai đầu da thái mỏng, cuốn cùng rau sống, dưa leo và chấm mắm nêm đậm đà, kết hợp bánh tráng phơi sương và nước chấm đặc trưng.",
+        diaChi: "Gợi ý: 35 Đỗ Thúc Tịnh, Khuê Trung, Cẩm Lệ, Đà Nẵng",
+        gia: "50.000 - 200.000 VNĐ/phần",
+        anh: "pic/Bánh tráng cuốn.jpg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Bánh canh ruộng",
+        moTa: "Món ăn dân dã Đà Nẵng với sợi bánh canh dai, nước dùng ngọt thanh nấu từ xương heo, ăn kèm chả cá, hành phi và rau sống.",
+        diaChi: "Gợi ý: 20 Hà Thị Thân, An Hải Trung, Sơn Trà, Đà Nẵng",
+        gia: "20.000 - 35.000 VNĐ/tô",
+        anh: "pic/Bánh canh ruộng.jpg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Cá nục cuốn bánh tráng Đà Nẵng",
+        moTa: "Cá nục tươi, tẩm ướp sả, tỏi, hành tím, cuốn cùng rau sống và bánh tráng, chấm nước mắm cay nồng, đặc sản hấp dẫn của Đà Nẵng.",
+        diaChi: "59/19 Núi Thành, Bình Thuận, Hải Châu, Đà Nẵng.",
+        gia: "50.000 - 120.000 VNĐ/phần",
+        anh: "pic/Cá nục.jpg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Bê thui Cầu Mống",
+        moTa: "Thịt bê non thui vàng, thái mỏng, chấm mắm cái hoặc mắm nêm, ăn kèm rau sống và bánh tráng, mang vị ngọt và hương thơm đặc trưng của Đà Nẵng.",
+        diaChi: "Gợi ý: 138 Nguyễn Tri Phương, Thạc Gián, Thanh Khê, Đà Nẵng",
+        gia: "150.000 - 400.000 VNĐ/phần",
+        anh: "pic/Bê.webp",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Bún thịt nướng",
+        moTa: "Món đặc sản Đà Nẵng với thịt heo nướng thơm lừng, ăn cùng bún tươi, rau sống, đậu phộng, nổi bật nhờ nước lèo làm từ gan và nước tương đậu nành, sệt vừa phải, tạo hương vị đậm đà khó quên.",
+        diaChi: "Gợi ý: 191 Trần Phú, Phước Ninh, Hải Châu, Đà Nẵng",
+        gia: "25.000 - 40.000 VNĐ/tô",
+        anh: "pic/Bún thịt nướng.jpg",
+        nhom: "dacSan",
+      },
+      {
+        ten: "Bún bò",
+        moTa: "Món đặc sản miền Trung với nước dùng đậm đà, thịt bò mềm, ăn kèm chả bò, rau sống, giá đỗ và chút sa tế cay, sợi bún nhỏ, có thể thêm mắm ruốc, hành tím, muối, ớt.",
+        diaChi: "Gợi ý: 236 Phan Đăng Lưu, Khuê Trung, Cẩm Lệ, Đà Nẵng",
+        gia: "30.000 - 50.000 VNĐ/tô",
+        anh: "pic/Bún bò.webp",
+        nhom: "dacSan",
+      },
+
+      //hải sản
+      {
+        ten: "Hải sản Phố",
+        diaChi: "Số 100, đường Tiểu La, Hòa Thuận Tây, Hải Châu, Đà Nẵng",
+        gia: "45.000 - 300.000 VNĐ/món",
+        moTa: "Quán nổi tiếng với hải sản tươi ngon, giữ trọn hương vị biển Đà Nẵng.",
+        anh: "pic/Hải sản 1.jpeg",
+        nhom: "haiSan",
+      },
+      {
+        ten: "Mộc Quán",
+        diaChi: "Số 26, Tô Hiến Thành, quận Sơn Trà, Đà Nẵng",
+        gia: "70.000 - 300.000 VNĐ/món",
+        moTa: "Với không gian decor đồng quê, menu đa dạng từ BBQ, hải sản đến các món dân dã.",
+        anh: "pic/Hải sản 2.jpg",
+        nhom: "haiSan",
+      },
+      {
+        ten: "Hải sản Phương",
+        diaChi: "Lô 15-16 B23, Nguyễn Tất Thành, quận Thanh Khê, Đà Nẵng",
+        gia: "45.000 - 120.000 VNĐ/món",
+        moTa: "Nổi tiếng với các món tươi ngon như cua rang me, ốc xào sả ớt, lẩu hải sản béo ngậy.",
+        anh: "pic/Hải sản 4.jpg",
+        nhom: "haiSan",
+      },
+      {
+        ten: "Hải sản Năm Đảnh",
+        diaChi:
+          "139/38, Trần Quang Khải, phường Thọ Quang, quận Sơn Trà, Đà Nẵng",
+        gia: "60.000 - 100.000 VNĐ/món",
+        moTa: "Nổi bật với hải sản tươi, giá cả hợp lý, thu hút đông khách địa phương.",
+        anh: "pic/Hải sản 3.jpg",
+        nhom: "haiSan",
+      },
+
+      //đường phố
+      {
+        ten: "Ốc hút",
+        moTa: "Món đặc sản Đà Nẵng với ốc xào sả, ớt, lá chanh, đôi khi thêm nước dừa, ăn kèm xoài hoặc đu đủ bào, hành phi và bánh tráng nướng.",
+        diaChi: "Gợi ý: 277 Đống Đa, Thạch Thang, Hải Châu, Đà Nẵng",
+        gia: "20.000 - 50.000 VNĐ/phần",
+        anh: "pic/Ốc hút.jpg",
+        nhom: "duongPho",
+      },
+      {
+        ten: "Mít trộn",
+        moTa: "Món ăn vặt với mít non trộn da heo, đậu phộng, rau răm, nước mắm cay, đôi khi thêm bò khô và hành phi, dùng kèm bánh đa.",
+        diaChi: "Gợi ý: 362 Hoàng Diệu, Bình Thuận, Hải Châu, Đà Nẵng",
+        gia: "15.000 - 30.000 VNĐ/phần",
+        anh: "pic/Mít trộn.jpg",
+        nhom: "duongPho",
+      },
+      {
+        ten: "Bánh bèo",
+        moTa: "Món ăn vặt dân dã với bánh đổ chén nhỏ, ăn kèm tôm chưng, bánh mì chiên, đậu phộng và nước mắm.",
+        diaChi: "Gợi ý: 409 Núi Thành, Hoà Cường Bắc, Hải Châu, Đà Nẵng",
+        gia: "20.000 - 35.000 VNĐ/phần",
+        anh: "pic/Bánh bèo.jpg",
+        nhom: "duongPho",
+      },
+      {
+        ten: "Bánh tráng kẹp",
+        moTa: "Món ăn vặt với bánh tráng nướng giòn, nhân trứng cút, pate, hành phi, chấm tương ớt hoặc mắm ruốc.",
+        diaChi:
+          "Gợi ý: 250 254 Đ. Nguyễn Hoàng, Phước Ninh, Thanh Khê, Đà Nẵng",
+        gia: "10.000 - 20.000 VNĐ/cái",
+        anh: "pic/Bánh tráng kẹp.jpg",
+        nhom: "duongPho",
+      },
+      {
+        ten: "Bánh mì bột lọc",
+        moTa: "Món ăn vặt với nhân bột lọc dai mềm, tôm, thịt, gói trong bánh mì giòn thơm, phổ biến ở các xe đẩy rong.",
+        diaChi: "Gợi ý: 104 Đ. Lê Độ, Chính Giám, Thanh Khê, Đà Nẵng",
+        gia: "10.000 - 20.000 VNĐ/cái",
+        anh: "pic/Bánh mì bột lộc.webp",
+        nhom: "duongPho",
+      },
+      {
+        ten: "Chè sầu riêng",
+        moTa: "Món ăn vặt ngọt ngào với sầu riêng tươi, cốt dừa, đậu xanh và các loại topping, mang hương vị đặc trưng Đà Nẵng.",
+        diaChi: "Gợi ý: 189 Hoàng Diệu, Phước Ninh, Hải Châu, Đà Nẵng",
+        gia: "30.000 - 40.000 VNĐ/ly",
+        anh: "pic/Chè sầu riêng.webp",
+        nhom: "duongPho",
+      },
+      {
+        ten: "Kem bơ",
+        moTa: "Món tráng miệng mát lạnh với bơ dầm mịn, kem vani và topping dừa khô, vị béo ngậy, ngọt nhẹ.",
+        diaChi:
+          "Gợi ý: 98 Nguyễn Văn Thoại, Bắc Mỹ Phú, Ngũ Hành Sơn, Đà Nẵng",
+        gia: "25.000 - 30.000 VNĐ/ly",
+        anh: "pic/Kem bơ.webp",
+        nhom: "duongPho",
+      },
+      {
+        ten: "Chè xoa xoa hạt lựu",
+        moTa: "Món chè mát lành với xoa xoa, hạt lựu, thạch đen, nước cốt dừa, đậu xanh đánh và nước đường.",
+        diaChi: "Gợi ý: 46 Trần Bình Trọng, Hải Châu, Đà Nẵng",
+        gia: "15.000 - 25.000 VNĐ/ly",
+        anh: "pic/Chè xoa xoa.jpg",
+        nhom: "duongPho",
+      },
+
+      // đặc sản quà
+      {
+        ten: "Rong biển Mỹ Khê",
+        moTa: "Rong biển từ vùng biển sạch, giàu dinh dưỡng, dùng chế biến canh, xào, gỏi, salad, chè, thạch. Vị ngọt thanh, dai giòn, tốt cho sức khỏe.",
+        diaChi: "Gợi ý: 204 Phan Đăng Lưu, Hoà Cường Bắc, Cẩm Lệ, Đà Nẵng",
+        gia: "400.000 - 500.000 VNĐ/kg",
+        anh: "pic/Rong biển.webp",
+        nhom: "dacSanQua",
+      },
+      {
+        ten: "Tré",
+        moTa: "Món đặc sản làm từ thịt heo, tai heo, ủ chua tự nhiên, dùng làm gỏi, ăn vặt hoặc mồi nhậu. Dễ bảo quản và mang đi xa.",
+        gia: "80.000 - 100.000 VNĐ/hũ 500g",
+        anh: "pic/Tré.jpg",
+        nhom: "dacSanQua",
+      },
+      {
+        ten: "Nước mắm Nam Ô",
+        moTa: "Đặc sản truyền thống làm từ cá cơm tươi, ủ theo phương pháp cổ truyền, mang vị mặn mà, thơm nồng, thích hợp làm quà.",
+        gia: "100.000 - 200.000 VNĐ/lít",
+        anh: "pic/Mắm.jpeg",
+        nhom: "dacSanQua",
+      },
+      {
+        ten: "Chả bò Đà Nẵng",
+        moTa: "Chả bò làm từ thịt bò tươi 100%, nêm gia vị đặc trưng, dai giòn, béo thơm, thích hợp làm quà tặng.",
+        gia: "350.000 - 500.000 VNĐ/kg",
+        anh: "pic/Chả bò.jpg",
+        nhom: "dacSanQua",
+      },
+      {
+        ten: "Trà sâm dứa Đà Nẵng",
+        moTa: "Trà sâm dứa thơm mát, hòa quyện giữa lá trà non sấy khô và lá dứa tươi, thích hợp làm quà tặng và tốt cho sức khỏe.",
+        gia: "100.000 - 150.000 VNĐ/hộp 100g",
+        anh: "pic/Sâm.jpg",
+        nhom: "dacSanQua",
+      },
+      {
+        ten: "Mực rim me Đà Nẵng",
+        moTa: "Mực sữa tươi rim me, đường và ớt, vị chua ngọt, cay mặn, thích hợp làm quà và rất đặc trưng phố biển.",
+        gia: "200.000 - 300.000 VNĐ/500g",
+        anh: "pic/mực.webp",
+        nhom: "dacSanQua",
+      },
+      {
+        ten: "Bò khô Đà Nẵng",
+        moTa: "Bò khô tẩm ướp gia vị gừng, nghệ, ớt, tỏi, dai mềm, thơm lừng, thích hợp làm quà và dễ vận chuyển.",
+        gia: "500.000 - 700.000 VNĐ/kg",
+        anh: "pic/Khô bò.webp",
+        nhom: "dacSanQua",
+      },
+      {
+        ten: "Bánh khô mè Đà Nẵng",
+        moTa: "Bánh giòn tan, ngọt thanh, thơm lừng, làm từ bột mì và mè rang, đặc sản truyền thống nổi tiếng Đà Nẵng.",
+        gia: "50.000 - 80.000 VNĐ/hộp 500g",
+        anh: "pic/Khô mè.webp",
+        nhom: "dacSanQua",
+      },
+    ];
+
+    const monAnThuongThuc = [
+      // Không gian, phong cách
+      {
+        ten: "Chợ Cồn – Nơi mua bán tấp nập của người dân bản địa",
+        diaChi: "90 Hùng Vương, Hải Châu, Đà Nẵng",
+        gioMoCua: "07:00 – 19:00 hàng ngày",
+        moTa: "Chợ Cồn là khu chợ nổi tiếng lâu đời của Đà Nẵng, được xem như 'trái tim mua sắm' của thành phố. Ban đầu chỉ là khu chợ nhỏ, nay Chợ Cồn đã phát triển thành trung tâm giao thương sầm uất với hơn 2000 gian hàng. Ngoài mua sắm, nơi đây còn được mệnh danh là 'thiên đường ẩm thực Đà Nẵng' với vô vàn món đặc sản như bánh xèo, bún mắm, mì Quảng, gỏi cuốn, bánh bèo, bánh tráng kẹp hay chè sầu riêng.",
+        anh: "pic/Chợ cồn.jpg",
+        nhom: "thuongthuc",
+      },
+      {
+        ten: "Chợ hải sản – Trải nghiệm độc đáo vào buổi bình minh",
+        diaChi: "Yên Khê 2, Thanh Khê Đông, Thanh Khê, Đà Nẵng",
+        gioMoCua: "Từ 16:00 hàng ngày",
+        moTa: "Chợ hải sản Đà Nẵng nằm trên đường Hoàng Sa, dọc tuyến đường dẫn lên chùa Linh Ứng, mang không gian mở và mộc mạc. Phiên chợ bắt đầu từ 3 giờ sáng, nơi ngư dân mang về những mẻ hải sản tươi rói. Đây là nơi lý tưởng để cảm nhận nét đời thường giản dị mà đầy sức sống của Đà Thành, đồng thời mua về hải sản tươi ngon nhất trong ngày.",
+        anh: "pic/Chợ Cá.jpg",
+        nhom: "thuongthuc",
+      },
+      {
+        ten: "Chợ đêm Helio – Thiên đường ẩm thực về đêm ở Đà Nẵng",
+        diaChi: "Đường 2/9, quận Hải Châu, Đà Nẵng",
+        gioMoCua: "17:00 – 22:30 hàng ngày",
+        moTa: "Chợ đêm Helio là khu chợ đêm sầm uất và nhộn nhịp bậc nhất Đà Nẵng, nổi tiếng với hơn 150 gian hàng ẩm thực đa dạng. Ngoài ra còn có âm nhạc, lễ hội, không gian rộng rãi và không khí sôi động, là điểm đến lý tưởng để vui chơi và thưởng thức ẩm thực Đà Nẵng về đêm.",
+        anh: "pic/Chợ đêm Helio.jpg",
+        nhom: "thuongthuc",
+      },
+      {
+        ten: "Chợ Hàn – Thiên đường của đồ lưu niệm và mua sắm",
+        diaChi: "119 Trần Phú, Hải Châu, Đà Nẵng",
+        gioMoCua: "06:00 – 19:00 hàng ngày",
+        moTa: "Chợ Hàn là khu chợ lâu đời nổi tiếng nhất Đà Nẵng, nơi bày bán đa dạng hàng hóa từ hải sản khô, mắm, tương ớt, tỏi Lý Sơn đến hoa quả nhiệt đới. Ngoài ra còn có dịch vụ may đo tại chỗ, mang đến trải nghiệm mua sắm đậm chất Đà Thành – thân thiện và đầy sắc màu.",
+        anh: "pic/Chợ Hàn.jpg",
+        nhom: "thuongthuc",
+      },
+      {
+        ten: "Chợ Bắc Mỹ An – Thiên đường ẩm thực và mua sắm địa phương",
+        diaChi:
+          "25 Nguyễn Bá Lân, Phường Bắc Mỹ An, Quận Ngũ Hành Sơn, Đà Nẵng",
+        gioMoCua: "06:00 – 19:00 hàng ngày",
+        moTa: "Chợ Bắc Mỹ An là điểm đến quen thuộc của người dân địa phương, nổi bật với các món ăn đường phố đa dạng và sinh tố hoa quả tươi ngon. Không gian chợ thoáng đãng, quầy hàng gọn gàng, vừa mua sắm vừa thưởng thức hương vị đặc trưng của ẩm thực Đà Nẵng.",
+        anh: "pic/Bắc mỹ á.jpg",
+        nhom: "thuongthuc",
+      },
+    ];
+
+    const mapLinks = {
+      // 🎯 Nhóm đặc sản
+      "Mì quảng.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4004689740896!2d108.21395827604977!3d16.044695384631243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219c0f89fde09%3A0xdf536a87a6562de8!2zMTM1IFRp4buDdSBMYSwgSG_DoCBDxrDhu51uZyBC4bqvYywgSOG6o2kgQ2jDonUsIMSQw6AgTuG6tW5nIDU1MDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1761787635665!5m2!1svi!2s",
+      "Bún Chả.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.5590172957345!2d108.20965857604965!3d16.036455484638303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142199d1b05643b%3A0x576af3f1ab1ca0f!2zQsO6biBDaOG6oyBRdeG6oXQgLSDEkOG6rW0gxJHDoCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1761787755919!5m2!1svi!2s",
+      "Bún nêm.jpeg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.155931529221!2d108.21335038611934!3d16.057396144965182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219c96950e5c9%3A0xc62708eff1905f7!2zQsO6biBN4bqvbSBCw6AgxJDDtG5n!5e0!3m2!1svi!2s!4v1761788399376!5m2!1svi!2s",
+      "Gỏi cá Nam ô.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.1328319169515!2d108.21544057604994!3d16.058595384619455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421b6643084119%3A0x46707966d33409f1!2zR-G7j2kgY8OhIE5hbSDDlCBBLiBTaW5o!5e0!3m2!1svi!2s!4v1761788535121!5m2!1svi!2s",
+      "Bánh tráng cuốn.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.7346767907434!2d108.20705197604939!3d16.027321484646095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142198c62eb4391%3A0x642295b8af7cab9c!2zUXXDoW4gTeG6rXU!5e0!3m2!1svi!2s!4v1761793560144!5m2!1svi!2s",
+      "Bánh canh ruộng.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.1302564993084!2d108.22920157604992!3d16.05872908461929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142196930eab33d%3A0x49116ee973284dfc!2zQsOhbmggQ2FuaCBSdeG7mW5n!5e0!3m2!1svi!2s!4v1761793688808!5m2!1svi!2s",
+      "Cá nục.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.2734850340603!2d108.21834037604994!3d16.05129188462561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421955716670c1%3A0xd5ffea052f4998b8!2zQ8OhIE7hu6VjIEN14buRbiBCw6FuaCBUcsOhbmcgLSBCw6kgTsOidQ!5e0!3m2!1svi!2s!4v1761793823102!5m2!1svi!2s",
+      "Bê.webp":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.0889602840566!2d108.20228927604997!3d16.060872784617416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219822ef9cd0f%3A0x6d652e063583061b!2zQsOqIFRodWkgTcaw4budaSBD4bqndSBN4buRbmc!5e0!3m2!1svi!2s!4v1761794012652!5m2!1svi!2s",
+      "Bún thịt nướng.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.9942093362943!2d108.22120507605011!3d16.065790284613207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421832ef8895e5%3A0x2a6622b0e022cf25!2zQsO6biB0aOG7i3Qgbsaw4bubbmcgTmdh!5e0!3m2!1svi!2s!4v1761795434960!5m2!1svi!2s",
+      "Bún bò.webp":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.551182081834!2d108.20840447604965!3d16.03686278463801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219006d2c8aa5%3A0x3e829a89b72e2cc8!2zQsO6biBiw7IgSOG6sW5nIDI!5e0!3m2!1svi!2s!4v1761795501344!5m2!1svi!2s",
+
+      //Hải sản
+      "Hải sản 1.jpeg": "",
+      "": "",
+      "": "",
+      "": "",
+
+      // 🍢 Nhóm đường phố
+      "Ốc hút.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.851712811612!2d108.21137077605022!3d16.07318298460685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142192d9bf7fa63%3A0x3bf5b72d072fc5d0!2z4buQYyBIw7p0IDI3Nw!5e0!3m2!1svi!2s!4v1761796401922!5m2!1svi!2s",
+      "Mít trộn.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.176011838286!2d108.21444167604982!3d16.05635358462129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219d8d5ba8caf%3A0xf36a74bc6699fc35!2zRMOsIExhbiAoIE3DrXQgQ2h14buRaSBUcuG7mW4gKQ!5e0!3m2!1svi!2s!4v1761796534309!5m2!1svi!2s",
+      "Bánh tráng kẹp.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.131795588356!2d108.2106012760499!3d16.058649184619274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b60f698737%3A0xc846db29e7c776c3!2zQsOhbmggVHLDoW5nIEvhurlwIETDrCBFbQ!5e0!3m2!1svi!2s!4v1761796636316!5m2!1svi!2s",
+      "Bánh mì bột lộc.webp":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.95388108067!2d108.19654548612048!3d16.067882844933155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314218529000fa17%3A0x279266550500ee56!2zMTA0IMSQLiBMw6ogxJDhu5ksIENow61uaCBHacOhbSwgVGhhbmggS2jDqiwgxJDDoCBO4bq1bmcgNTUwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1761796716000!5m2!1svi!2s",
+      "Kem bơ.webp":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.21018680488!2d108.23829887604988!3d16.05457908462275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142177c4d0ca37d%3A0x7891f631e33bb89c!2zS2VtIELGoSBOZ8OibiBIw6A!5e0!3m2!1svi!2s!4v1761796775728!5m2!1svi!2s",
+      "Chè xoa xoa.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.990892782476!2d108.21587677605011!3d16.065962384613044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421948f4043b27%3A0xdbfa63b96cbbaa99!2zQ2jDqCBYb2EgWG9hIEjhuqF0IEzhu7F1IFRy4bqnbiBCw6xuaCBUcuG7jW5n!5e0!3m2!1svi!2s!4v1761796813486!5m2!1svi!2s",
+    };
+
+    const mapLinksThuongThuc = {
+      // 🏪 Nhóm không gian & phong cách thưởng thức
+      "Chợ cồn.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.939316979617!2d108.2176771760501!3d16.068638484610776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183472c301a7%3A0x4ca1dfabf314ed00!2zOTAgSMO5bmcgVsawxqFuZywgSOG6o2kgQ2jDonUsIMSQw6AgTuG6tW5nIDU1MDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1761804064311!5m2!1svi!2s",
+      "Chợ Cá.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.845585689778!2d108.17701637605016!3d16.073500784606637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314218fc9229be03%3A0x1ad83cdec99b4e18!2zWcOqbiBLaMOqIDIsIFRoYW5oIEtow6osIMSQw6AgTuG6tW5nLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1761804180319!5m2!1svi!2s",
+      "Chợ đêm Helio.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4128730021143!2d108.2204946760497!3d16.04405088463181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219cf864109a1%3A0xae486547f322b52b!2zxJAuIDIgVGjDoW5nIDksIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZywgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1761804242748!5m2!1svi!2s",
+      "Chợ Hàn.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.94784767546!2d108.22164677605012!3d16.068195884611157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314218323e56c4ef%3A0x79ca6f8db5faa264!2zMTE5IFRy4bqnbiBQaMO6LCBI4bqjaSBDaMOidSwgxJDDoCBO4bq1bmcgNTUwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1761804286760!5m2!1svi!2s",
+      "Bắc mỹ á.jpg":
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4488650318062!2d108.23943687604961!3d16.042180634633322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421760dcd59b65%3A0xa5148e15ff526fe0!2zQ2jhu6MgQuG6r2MgTeG7uSBBbg!5e0!3m2!1svi!2s!4v1761804349027!5m2!1svi!2s",
+    };
+
+    // DOM
+    const container = document.getElementById("MonAnDN");
+    const searchEl = document.getElementById("searchInput");
+
+    // current selected group: 'dacSan', 'haiSan', 'duongPho', 'dacSanQua'
+    let currentGroup = "dacSan";
+
+    // ===========================
+    // HIỂN THỊ DANH SÁCH
+    // ===========================
+    // renderMonAn accepts an optional list of items; if not provided, it will
+    // compute the list from currentGroup and current search keyword.
+    function renderMonAn(list) {
+      // prepare list if not passed
+      const kw =
+        searchEl && searchEl.value ? searchEl.value.trim().toLowerCase() : "";
+      let items = list;
+      if (!Array.isArray(items)) {
+        items = monAnList.filter(
+          (d) =>
+            (currentGroup === "all" || d.nhom === currentGroup) &&
+            (kw === "" ||
+              (d.ten && d.ten.toLowerCase().includes(kw)) ||
+              (d.moTa && d.moTa.toLowerCase().includes(kw)))
+        );
+      }
+
+      // find the section element for optional messages (not strictly required)
+      const sectionEl = document.getElementById(currentGroup) || null;
+      if (sectionEl) sectionEl.innerHTML = "";
+
+      // If no items, show message
+      if (!items || items.length === 0) {
+        if (sectionEl)
+          sectionEl.innerHTML = "<p>Không có món nào thuộc nhóm này.</p>";
+        container.innerHTML = "";
+        return;
+      }
+
+      container.innerHTML = "";
+      items.forEach((MonAn, index) => {
+        const fileName = MonAn.anh.split("/").pop();
+        const mapLink = mapLinks[fileName] || "";
+
+        const html = `
+  <div class="content-box fade-in mb-4" id="item-${index}">
+    <div id="media-${index}" class="media-box" data-showing="image">
+      <img src="${MonAn.anh}" alt="${MonAn.ten}" class="media-img rounded shadow-sm" />
+    </div>
+
+    <div class="text-box mt-3">
+      <h5 class="text-center fw-bold">${MonAn.ten}</h5>
+      <p class="mo-ta mb-2">${MonAn.moTa || ""}</p>
+      <p class="mo-ta mb-2">${MonAn.diaChi || ""}</p>
+      <p class="mo-ta mb-2">${MonAn.gia || ""}</p>
+    </div>
+
+    <div class="actions-fixed">
+      ${mapLink ? `
+        <button class="btn-action btn-icon btn-map" id="btnMap-${index}"
+                title="Xem bản đồ / ảnh"
+                onclick="toggleMap(${index}, '${MonAn.anh}', '${mapLink}')">
+          <i class="bi bi-geo-alt"></i>
+        </button>` : ''}
+
+      <button class="btn-action btn-fav" onclick="handleYeuThich()" title="Yêu thích">
+        <i class="bi bi-heart"></i>
+      </button>
     </div>
   </div>
-
-  <div class="content-box">
-    <img src="pic/Bún Chả.jpg" alt="Bún chả cá">
-    <div class="text-box">
-        <h5 class="text-center"><b>Bún chả cá</b></h5>
-        <p>Món đặc sản Đà Nẵng với nước dùng ngọt thanh, chả cá dai giòn, ăn kèm rau sống, hành phi và chút ớt cay, mang hương vị đậm đà khó quên.</p>
-        <p><b>Giá: </b>25.000 - 45.000 VNĐ/tô</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Bún nêm.jpeg" alt="Bún Nêm">
-    <div class="text-box">
-<h5 class="text-center"><b>Bún mắm nêm</b></h5>
-<p>Món ăn dân dã đặc trưng Đà Nẵng với mắm nêm thơm lừng, kết hợp thịt heo quay hoặc luộc, chả bò, rau sống và đậu phộng, tạo hương vị đậm đà khó quên.</p>
-<p><b>Giá: </b>25.000 - 40.000 VNĐ/phần</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Gỏi cá Nam ô.jpg" alt="Gỏi cả">
-    <div class="text-box">
-        <h5 class="text-center"><b>Gỏi cá Nam Ô</b></h5>
-<p>Món đặc sản độc đáo của Đà Nẵng làm từ cá trích tươi, trộn cùng rau rừng, hành phi, đậu phộng và nước chấm cay mặn, mang hương vị tươi ngon đặc trưng của biển.</p>
-<p><b>Giá: </b>50.000 - 150.000 VNĐ/phần</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Bánh tráng cuốn.jpg" alt="Bánh tráng cuốn">
-    <div class="text-box">
-<h5 class="text-center"><b>Bánh tráng cuốn <br> thịt heo</b></h5>
-<p>Món đặc sản với thịt heo hai đầu da thái mỏng, cuốn cùng rau sống, dưa leo và chấm mắm nêm đậm đà, kết hợp bánh tráng phơi sương và nước chấm đặc trưng.</p>
-<p><b>Giá: </b>50.000 - 200.000 VNĐ/phần</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Bánh canh ruộng.jpg" alt="Bánh canh ruộng">
-    <div class="text-box">
-<h5 class="text-center"><b>Bánh canh ruộng</b></h5>
-<p>Món ăn dân dã Đà Nẵng với sợi bánh canh dai, nước dùng ngọt thanh nấu từ xương heo, ăn kèm chả cá, hành phi và rau sống.</p>
-<p><b>Giá: </b>20.000 - 35.000 VNĐ/tô</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-
-  </div>
-  <div class="content-box">
-    <img src="pic/Cá nục.jpg" alt="Cá Nục">
-    <div class="text-box">
-<h5 class="text-center"><b>Cá nục cuốn bánh tráng Đà Nẵng</b></h5>
-<p>Cá nục tươi, tẩm ướp sả, tỏi, hành tím, cuốn cùng rau sống và bánh tráng, chấm nước mắm cay nồng, đặc sản hấp dẫn của Đà Nẵng.</p>
-<p><b>Giá: </b>50.000 - 120.000 VNĐ/phần</p>
+`;
 
 
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
 
-  <div class="content-box">
-    <img src="pic/Bê.webp" alt="Bê">
-    <div class="text-box">
-<h5 class="text-center"><b>Bê thui Cầu Mống</b></h5>
-<p>Thịt bê non thui vàng, thái mỏng, chấm mắm cái hoặc mắm nêm, ăn kèm rau sống và bánh tráng, mang vị ngọt và hương thơm đặc trưng của Đà Nẵng.</p>
-<p><b>Giá: </b>150.000 - 400.000 VNĐ/phần</p>
+        container.insertAdjacentHTML("beforeend", html);
+      });
+    }
 
+    // ===========================
+    // TÌM KIẾM
+    // ===========================
+    function searchMonAn(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      renderMonAn();
+      return false;
+    }
 
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
+    // ===========================
+    // LỌC THEO NHÓM
+    // ===========================
+    function toggleSection(loai, e) {
+      // update active button
+      document
+        .querySelectorAll(".btn-food")
+        .forEach((b) => b.classList.remove("active"));
+      if (e && e.target) e.target.classList.add("active");
 
-  <div class="content-box">
-    <img src="pic/Bún thịt nướng.jpg" alt="Bún thịt nướng">
-    <div class="text-box">
-<h5 class="text-center"><b>Bún thịt nướng</b></h5>
-<p>Món đặc sản Đà Nẵng với thịt heo nướng thơm lừng, ăn cùng bún tươi, rau sống, đậu phộng, nổi bật nhờ nước lèo làm từ gan và nước tương đậu nành, sệt vừa phải, tạo hương vị đậm đà khó quên.</p>
-<p><b>Giá: </b>25.000 - 40.000 VNĐ/tô</p>
+      // map incoming identifier to group value used in data
+      if (loai === "haiSan") currentGroup = "haiSan";
+      else if (loai === "duongPho") currentGroup = "duongPho";
+      else if (loai === "Qua")
+        currentGroup = "dacSanQua"; // monAnList uses 'dacSanQua'
+      else currentGroup = "dacSan";
 
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
+      renderMonAn();
+    }
 
-  <div class="content-box">
-    <img src="pic/Bún bò.webp" alt="Bún bò">
-    <div class="text-box">
-<h5 class="text-center"><b>Bún bò</b></h5>
-<p>Món đặc sản miền Trung với nước dùng đậm đà, thịt bò mềm, ăn kèm chả bò, rau sống, giá đỗ và chút sa tế cay, sợi bún nhỏ, có thể thêm mắm ruốc, hành tím, muối, ớt.</p>
-<p><b>Giá: </b>30.000 - 50.000 VNĐ/tô</p>
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-</section>
+    // ===========================
+    // ẢNH ↔ BẢN ĐỒ
+    // ===========================
+    function toggleMap(index, imgPath, mapLink) {
+  const mediaDiv = document.getElementById(`media-${index}`);
+  const btn = document.getElementById(`btnMap-${index}`);
+  if (!mediaDiv) return;
+  const showing = mediaDiv.dataset.showing;
 
-<!-- SECTION 2: HẢI SẢN -->
-<section id="haiSan" class="content-section ">
-<div>
-    <h2 class="chutd">
-        Món hải sản – tinh hoa vùng biển
-    </h2>
-</div>
-<div class="wrapper ">
-  <div class="content-box">
-    <img src="pic/Hải sản 1.jpeg" alt="Hải sản Phố">
-    <div class="text-box">
-<h5 class="text-center"><b>Hải sản Phố</b></h5>
-<p><strong>Địa chỉ:</strong> Số 100, đường Tiểu La, Hòa Thuận Tây, Hải Châu, Đà Nẵng</p>
-<p><strong>Giờ mở cửa:</strong> 10:00 - 22:30</p>
-<p><strong>Giá tham khảo:</strong> 45.000 - 300.000 VNĐ/món</p>
-<p>Quán nổi tiếng với hải sản tươi ngon, giữ trọn hương vị biển Đà Nẵng.</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Hải sản 2.jpg" alt="Mộc quán">
-    <div class="text-box">
-<h5 class="text-center"><b>Mộc Quán</b></h5>
-<p><strong>Địa chỉ:</strong> Số 26, Tô Hiến Thành, quận Sơn Trà, Đà Nẵng</p>
-<p><strong>Giờ mở cửa:</strong> 10:30 - 22:30</p>
-<p><strong>Giá tham khảo:</strong> 70.000 - 300.000 VNĐ/món</p>
-<p>Với không gian decor đồng quê, menu đa dạng từ BBQ, hải sản đến các món dân dã.</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Hải sản 4.jpg" alt="Hải sản Phương">
-    <div class="text-box">
-<h5 class="text-center"><b>Hải sản Phương</b></h5>
-<p><strong>Địa chỉ:</strong> Lô 15-16 B23, Nguyễn Tất Thành, quận Thanh Khê, Đà Nẵng</p>
-<p><strong>Giờ mở cửa:</strong> 09:00 - 23:00</p>
-<p><strong>Giá tham khảo:</strong> 45.000 - 120.000 VNĐ/món</p>
-<p>Nổi tiếng với các món tươi ngon như cua rang me, ốc xào sả ớt, lẩu hải sản béo ngậy.</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Hải sản 3.jpg" alt="5 đảnh">
-    <div class="text-box">
-<h5 class="text-center"><b>Hải sản Năm Đảnh</b></h5>
-<p><strong>Địa chỉ:</strong> 139/38, Trần Quang Khải, phường Thọ Quang, quận Sơn Trà, Đà Nẵng</p>
-<p><strong>Giờ mở cửa:</strong> 10:00 - 23:00</p>
-<p><strong>Giá tham khảo:</strong> 60.000 - 100.000 VNĐ/món</p>
-<p>Nổi bật với hải sản tươi, giá cả hợp lý, thu hút đông khách địa phương.</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-</section>
-
-<!-- SECTION 3: Đường phố -->
-<section id="duongPho" class="content-section ">
-    <div>
-    <h2 class="chutd">
-        Món ăn bình dân - đường phố
-    </h2>
-</div>
-<div class="wrapper">
-  <div class="content-box">
-    <img src="pic/Ốc hút.jpg" alt="Ốc hút">
-    <div class="text-box">
-<h5 class="text-center"><b>Ốc hút</b></h5>
-<p>Món đặc sản Đà Nẵng với ốc xào sả, ớt, lá chanh, đôi khi thêm nước dừa, ăn kèm xoài hoặc đu đủ bào, hành phi và bánh tráng nướng.</p>
-<p><b>Giá: </b>20.000 - 50.000 VNĐ/phần</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Mít trộn.jpg" alt="Mít trộn">
-    <div class="text-box">
-<h5 class="text-center"><b>Mít trộn</b></h5>
-<p>Món ăn vặt với mít non trộn da heo, đậu phộng, rau răm, nước mắm cay, đôi khi thêm bò khô và hành phi, dùng kèm bánh đa.</p>
-<p><b>Giá: </b>15.000 - 30.000 VNĐ/phần</p>
-
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Bánh bèo.jpg" alt="Bánh bèo">
-    <div class="text-box">
-<h5 class="text-center"><b>Bánh bèo</b></h5>
-<p>Món ăn vặt dân dã với bánh đổ chén nhỏ, ăn kèm tôm chưng, bánh mì chiên, đậu phộng và nước mắm.</p>
-<p><b>Giá: </b>20.000 - 35.000 VNĐ/phần</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Bánh tráng kẹp.jpg" alt="Bánh tráng kẹp">
-    <div class="text-box">
-<h5 class="text-center"><b>Bánh tráng kẹp</b></h5>
-<p>Món ăn vặt với bánh tráng nướng giòn, nhân trứng cút, pate, hành phi, chấm tương ớt hoặc mắm ruốc.</p>
-<p><b>Giá: </b>10.000 - 20.000 VNĐ/cái</p>
-
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
- <div class="content-box">
-    <img src="pic/Bánh mì bột lộc.webp" alt="Bánh mì">
-    <div class="text-box">
-<h5 class="text-center"><b>Bánh mì bột lọc</b></h5>
-<p>Món ăn vặt với nhân bột lọc dai mềm, tôm, thịt, gói trong bánh mì giòn thơm, phổ biến ở các xe đẩy rong.</p>
-<p><b>Giá: </b>10.000 - 20.000 VNĐ/cái</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Chè sầu riêng.webp" alt="Chè sầu riêng">
-    <div class="text-box">
-<h5 class="text-center"><b>Chè sầu riêng</b></h5>
-<p>Món ăn vặt ngọt ngào với sầu riêng tươi, cốt dừa, đậu xanh và các loại topping, mang hương vị đặc trưng Đà Nẵng.</p>
-<p><b>Giá: </b>30.000 - 40.000 VNĐ/ly</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Kem bơ.webp" alt="Kem bơ">
-    <div class="text-box">
-<h5 class="text-center"><b>Kem bơ</b></h5>
-<p>Món tráng miệng mát lạnh với bơ dầm mịn, kem vani và topping dừa khô, vị béo ngậy, ngọt nhẹ.</p>
-<p><b>Giá: </b>25.000 - 30.000 VNĐ/ly</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Chè xoa xoa.jpg" alt="Chè Xoa Xoa">
-    <div class="text-box">
-<h5 class="text-center"><b>Chè xoa xoa hạt lựu</b></h5>
-<p>Món chè mát lành với xoa xoa, hạt lựu, thạch đen, nước cốt dừa, đậu xanh đánh và nước đường.</p>
-<p><b>Giá: </b>15.000 - 25.000 VNĐ/ly</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-  </div>
-</section>
-
-<!-- SECTION 4: Quà -->
-<section id="Qua" class="content-section ">
-        <div>
-    <h2 class="chutd">
-Đặc sản mua về làm quà
-    </h2>
-</div>
-<div class="wrapper">
-  <div class="content-box">
-    <img src="pic/Rong biển.webp" alt="Rong Biển">
-    <div class="text-box">
-<h5 class="text-center"><b>Rong biển Mỹ Khê</b></h5>
-<p>Rong biển từ vùng biển sạch, giàu dinh dưỡng, dùng chế biến canh, xào, gỏi, salad, chè, thạch. Vị ngọt thanh, dai giòn, tốt cho sức khỏe.</p>
-<p><b>Giá: </b>400.000 - 500.000 VNĐ/kg</p>
-
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Tré.jpg" alt="Tré">
-    <div class="text-box">
-<h5 class="text-center"><b>Tré</b></h5>
-<p>Món đặc sản làm từ thịt heo, tai heo, ủ chua tự nhiên, dùng làm gỏi, ăn vặt hoặc mồi nhậu. Dễ bảo quản và mang đi xa.</p>
-<p><b>Giá: </b>80.000 - 100.000 VNĐ/hũ 500g</p>
-
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Mắm.jpeg" alt="Mắm">
-    <div class="text-box">
-<h5 class="text-center"><b>Nước mắm Nam Ô</b></h5>
-<p>Đặc sản truyền thống làm từ cá cơm tươi, ủ theo phương pháp cổ truyền, mang vị mặn mà, thơm nồng, thích hợp làm quà.</p>
-<p><b>Giá: </b>100.000 - 200.000 VNĐ/lít</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Chả bò.jpg" alt="Chả bò">
-    <div class="text-box">
-<h5 class="text-center"><b>Chả bò Đà Nẵng</b></h5>
-<p>Chả bò làm từ thịt bò tươi 100%, nêm gia vị đặc trưng, dai giòn, béo thơm, thích hợp làm quà tặng.</p>
-<p><b>Giá: </b>350.000 - 500.000 VNĐ/kg</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
- <div class="content-box">
-    <img src="pic/Sâm.jpg" alt="Trà sâm">
-    <div class="text-box">
-<h5 class="text-center"><b>Trà sâm dứa Đà Nẵng</b></h5>
-<p>Trà sâm dứa thơm mát, hòa quyện giữa lá trà non sấy khô và lá dứa tươi, thích hợp làm quà tặng và tốt cho sức khỏe.</p>
-<p><b>Giá: </b>100.000 - 150.000 VNĐ/hộp 100g</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/mực.webp" alt="Mực rim me">
-    <div class="text-box">
-<h5 class="text-center"><b>Mực rim me Đà Nẵng</b></h5>
-<p>Mực sữa tươi rim me, đường và ớt, vị chua ngọt, cay mặn, thích hợp làm quà và rất đặc trưng phố biển.</p>
-<p><b>Giá: </b>200.000 - 300.000 VNĐ/500g</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="content-box">
-    <img src="pic/Khô bò.webp" alt="Khô bò">
-    <div class="text-box">
-<h5 class="text-center"><b>Bò khô Đà Nẵng</b></h5>
-<p>Bò khô tẩm ướp gia vị gừng, nghệ, ớt, tỏi, dai mềm, thơm lừng, thích hợp làm quà và dễ vận chuyển.</p>
-<p><b>Giá: </b>500.000 - 700.000 VNĐ/kg</p>
-
-    <button class="fav-btn center">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
- 
-  </div>
-  <div class="content-box">
-    <img src="pic/Khô mè.webp" alt="Khô mè">
-    <div class="text-box">
-<h5 class="text-center"><b>Bánh khô mè Đà Nẵng</b></h5>
-<p>Bánh giòn tan, ngọt thanh, thơm lừng, làm từ bột mì và mè rang, đặc sản truyền thống nổi tiếng Đà Nẵng.</p>
-<p><b>Giá: </b>50.000 - 80.000 VNĐ/hộp 500g</p>
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-  </div>
-</section>
-
-<script>
-function toggleSection(id, event) {
-  // Ẩn toàn bộ section
-  document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-  
-  // Hiện section được chọn
-  document.getElementById(id).classList.add('active');
-
-  // Cập nhật trạng thái nút
-  document.querySelectorAll('.btn-food').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  if (showing === "map") {
+    mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh món ăn" class="media-img rounded shadow-sm">`;
+    mediaDiv.dataset.showing = "image";
+    if (btn?.firstElementChild) btn.firstElementChild.className = "bi bi-geo-alt";
+  } else {
+    mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+    mediaDiv.dataset.showing = "map";
+    if (btn?.firstElementChild) btn.firstElementChild.className = "bi bi-image";
+  }
 }
+
+
+    // ===========================
+    // YÊU THÍCH
+    // ===========================
+    let isLoggedIn = false;
+    function handleYeuThich() {
+      if (!isLoggedIn) {
+        const goLogin = confirm(
+          "Bạn cần đăng nhập hoặc đăng ký để yêu thích địa danh. Bạn có muốn đăng nhập ngay không?"
+        );
+        if (goLogin) window.location.href = "dangNhap.html";
+      } else {
+        alert("💖 Đã thêm vào danh sách yêu thích!");
+      }
+    }
+
+    // ===========================
+    // KHỞI TẠO
+    // ===========================
+    document.addEventListener('DOMContentLoaded', function () {
+  // mặc định là ĐẶC SẢN
+  currentGroup = 'dacSan';
+  // đánh dấu nút đầu tiên active (phòng khi HTML không có class active)
+  const firstBtn = document.querySelector('.btn-food');
+  if (firstBtn) firstBtn.classList.add('active');
+
+  renderMonAn();
+
+  // debug nhẹ: xem có bao nhiêu món được render
+  console.log('Rendered items:', document.querySelectorAll('#MonAnDN .content-box').length);
+});
+
+  </script>
+  <script>
+  // ===========================
+  // PHẦN 2: RENDER KHÔNG GIAN & PHONG CÁCH THƯỞNG THỨC
+  // ===========================
+  function renderThuongThuc() {
+    const wrap = document.getElementById('ThuongThucList');
+    if (!wrap) return;
+
+
+    wrap.innerHTML = '';
+
+
+    monAnThuongThuc.forEach((p, idx) => {
+      const fileName = (p.anh || '').split('/').pop();
+      const mapLink = (mapLinksThuongThuc && mapLinksThuongThuc[fileName]) ? mapLinksThuongThuc[fileName] : '';
+
+
+      const html = `
+        <div class="info-box" id="tt-item-${idx}">
+          <div id="tt-media-${idx}" class="info-image" data-showing="image">
+            <img src="${p.anh}" alt="${p.ten}" />
+          </div>
+
+
+          <div class="info-content">
+            <h5 class="text-center"><b>${p.ten || ''}</b></h5>
+            ${p.diaChi ? `<p><b>Địa chỉ:</b> ${p.diaChi}</p>` : ''}
+            ${p.gioMoCua ? `<p><b>Giờ hoạt động:</b> ${p.gioMoCua}</p>` : ''}
+            <p>${p.moTa || ''}</p>
+          </div>
+
+
+          <!-- ✅ Nút hành động giống phần 1 -->
+          <div class="actions-fixed">
+            ${mapLink ? `
+              <button class="btn-action btn-icon btn-map" id="tt-btnMap-${idx}"
+                      title="Xem bản đồ / ảnh"
+                      onclick="toggleMapTT(${idx}, '${p.anh}', '${mapLink}')">
+                <i class="bi bi-geo-alt"></i>
+              </button>` : ''}
+
+
+            <button class="btn-action btn-fav" onclick="handleYeuThich()" title="Yêu thích">
+              <i class="bi bi-heart"></i>
+            </button>
+          </div>
+        </div>
+      `;
+
+
+      wrap.insertAdjacentHTML('beforeend', html);
+    });
+  }
+
+
+  // ẢNH ↔ BẢN ĐỒ cho Phần 2
+  function toggleMapTT(index, imgPath, mapLink) {
+    const mediaDiv = document.getElementById(`tt-media-${index}`);
+    const btn = document.getElementById(`tt-btnMap-${index}`);
+    if (!mediaDiv) return;
+
+
+    const showing = mediaDiv.dataset.showing;
+    if (showing === 'map') {
+      mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa điểm" />`;
+      mediaDiv.dataset.showing = 'image';
+      if (btn?.firstElementChild) btn.firstElementChild.className = 'bi bi-geo-alt';
+    } else {
+      mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+      mediaDiv.dataset.showing = 'map';
+      if (btn?.firstElementChild) btn.firstElementChild.className = 'bi bi-image';
+    }
+  }
+
+
+  // Gọi render khi tải trang (bạn đã có DOMContentLoaded ở dưới; thêm dòng này vào trong đó)
+  document.addEventListener('DOMContentLoaded', function () {
+    // ... các dòng bạn đã có ...
+    renderThuongThuc();   // ✅ gọi để vẽ Phần 2
+  });
 </script>
 
-<!-- Phần 2 -->
- <div class="center kc"><h2 class="chutd">KHÔNG GIAN VÀ PHONG CÁCH THƯỞNG THỨC</h2></div>
-<div class="info-box">
-  <div class="info-image">
-    <img src="pic/Chợ cồn.jpg" alt="Chợ Cồn">
-  </div>
-  <div class="info-content">
- <h5 class="text-center"><b>Chợ Cồn – Nơi mua bán tấp nập của người dân bản địa</b></h5>
-<p><b>Địa chỉ:</b> 90 Hùng Vương, Hải Châu, Đà Nẵng</p>
-<p><b>Giờ hoạt động:</b> 07:00 – 19:00 hàng ngày</p>
-<p>Chợ Cồn là khu chợ nổi tiếng lâu đời của Đà Nẵng, được xem như “trái tim mua sắm” của thành phố. Ban đầu chỉ là khu chợ nhỏ nơi người nông dân và ngư dân tụ họp buôn bán, nay Chợ Cồn đã phát triển thành trung tâm giao thương sầm uất với hơn 2000 gian hàng. Nơi đây bày bán đủ loại mặt hàng, từ vải vóc, quần áo, đồ lưu niệm, trang sức cho đến các loại thực phẩm tươi sống, hải sản khô, cà phê rang xay và đồ thủ công mỹ nghệ tinh xảo.</p>
-<p>Không chỉ là thiên đường mua sắm, Chợ Cồn còn được mệnh danh là “thiên đường ẩm thực Đà Nẵng”. Du khách có thể thưởng thức vô vàn món ăn đặc trưng như bánh xèo, bún mắm, mì Quảng, gỏi cuốn, bánh bèo, bánh tráng kẹp hay chè sầu riêng. Mùi thơm lan tỏa khắp khu chợ cùng không khí náo nhiệt tạo nên trải nghiệm khó quên, phản ánh rõ nét nhịp sống và văn hóa bình dị của người dân Đà Thành.</p>
 
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-<div class="info-box">
-  <div class="info-image">
-    <img src="pic/Chợ Cá.jpg" alt="Chợ Cá">
-  </div>
-  <div class="info-content">
- <h5 class="text-center"><b>Chợ hải sản – Trải nghiệm độc đáo vào buổi bình minh</b></h5>
-<p><b>Địa chỉ:</b> Yên Khê 2, Thanh Khê Đông, Thanh Khê, Đà Nẵng</p>
-<p><b>Giờ hoạt động:</b> Từ 16:00 hàng ngày</p>
-<p>Chợ hải sản Đà Nẵng nằm trên đường Hoàng Sa, dọc tuyến đường dẫn lên chùa Linh Ứng, mang đến không gian mở, thanh bình và mộc mạc. Không giống như những khu chợ trung tâm tấp nập, nơi đây mang đậm hơi thở của biển và cuộc sống ngư dân. Phiên chợ bắt đầu từ lúc 3 giờ sáng, kéo dài khoảng hai tiếng, khi những thuyền cá vừa cập bến với mẻ hải sản tươi rói.</p>
-<p>Tham quan chợ vào buổi bình minh là một trải nghiệm thú vị. Bạn có thể thong thả tản bộ, ngắm mặt trời lên trên mặt biển và tận hưởng bầu không khí trong lành, rộn ràng tiếng nói cười của người dân vùng biển. Đây là cơ hội tuyệt vời để cảm nhận nét đời thường giản dị mà đầy sức sống của Đà Nẵng, đồng thời mua về những mẻ hải sản tươi ngon nhất trong ngày.</p>
-
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-<div class="info-box">
-  <div class="info-image">
-    <img src="pic/Chợ đêm Helio.jpg" alt="Chợ đêm">
-  </div>
-  <div class="info-content">
-<h5 class="text-center"><b>Chợ đêm Helio – Thiên đường ẩm thực về đêm ở Đà Nẵng</b></h5>
-<p><b>Địa chỉ:</b> Đường 2/9, quận Hải Châu, Đà Nẵng</p>
-<p><b>Giờ hoạt động:</b> 17:00 – 22:30 hàng ngày</p>
-<p>Chợ đêm Helio là khu chợ đêm sầm uất và nhộn nhịp bậc nhất Đà Nẵng, nổi tiếng với hơn 150 gian hàng ẩm thực đa dạng. Đây là điểm đến lý tưởng cho những ai muốn khám phá nền ẩm thực đường phố phong phú, từ các món Á – Âu cho đến đặc sản địa phương hấp dẫn.</p>
-<p>Không chỉ là thiên đường ăn uống, Helio còn thường xuyên tổ chức các chương trình âm nhạc, lễ hội, thu hút đông đảo du khách mỗi tối. Với không gian rộng rãi, thiết kế hiện đại và không khí sôi động, chợ đêm Helio là nơi lý tưởng để vui chơi, thưởng thức món ngon và tận hưởng Đà Nẵng về đêm trọn vẹn nhất.</p>
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-<div class="info-box">
-  <div class="info-image">
-    <img src="pic/Chợ Hàn.jpg" alt="Chợ Hàn">
-  </div>
-  <div class="info-content">
-<h5 class="text-center"><b>Chợ Hàn – Thiên đường của đồ lưu niệm và mua sắm</b></h5>
-<p><b>Địa chỉ:</b> 119 Trần Phú, Hải Châu, Đà Nẵng</p>
-<p><b>Giờ hoạt động:</b> 06:00 – 19:00 hàng ngày</p>
-<p>Chợ Hàn là một trong những khu chợ nổi tiếng và lâu đời nhất Đà Nẵng, được xem là điểm dừng chân lý tưởng cho du khách muốn tìm mua quà lưu niệm hay đặc sản địa phương. Nơi đây bày bán đủ loại sản phẩm như tương ớt, tỏi Lý Sơn, mực một nắng, bánh tráng và vô số mặt hàng khô đặc trưng miền Trung.</p>
-<p>Bên cạnh đó, khu vực hoa quả tại chợ Hàn cũng rất phong phú với nhiều loại trái cây nhiệt đới như xoài, sầu riêng, mít và chuối tươi ngon. Ngoài việc mua sắm, du khách còn có thể đặt may những bộ trang phục được thiết kế ngay tại chỗ bởi các thợ may khéo léo, tận hưởng một trải nghiệm mua sắm đậm chất Đà Nẵng – thân thiện, dân dã và đầy sắc màu.</p>
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-
-  <div class="info-box">
-  <div class="info-image">
-    <img src="pic/Bắc mỹ á.jpg" alt="Chợ Bắc mỹ á">
-  </div>
-  <div class="info-content">
-<h5 class="text-center"><b>Chợ Bắc Mỹ An – Thiên đường ẩm thực và mua sắm địa phương</b></h5>
-<p><b>Địa chỉ:</b> 25 Nguyễn Bá Lân, Phường Bắc Mỹ An, Quận Ngũ Hành Sơn, Đà Nẵng</p>
-<p><b>Giờ mở cửa:</b> 6:00 – 19:00 hàng ngày</p>
-<p>Chợ Bắc Mỹ An là điểm đến quen thuộc của người dân địa phương, đặc biệt là giới trẻ, khi muốn thưởng thức các món ăn đường phố đa dạng và phong phú. Từ các món ăn dân dã, sinh tố hoa quả tươi ngon đến những tô mỳ hấp dẫn, bạn đều có thể tìm thấy tại đây với mức giá phải chăng.</p>
-<p>Không gian chợ thoáng đãng, quầy hàng bày trí gọn gàng, tạo điều kiện lý tưởng để vừa mua sắm, vừa thưởng thức hương vị đặc trưng của ẩm thực Đà Nẵng.</p>
-    <button class="fav-btn">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <i class="fas fa-heart"></i>
-    </button>
-    </div>
-  </div>
-</div>
-</div>
-
-</div>
-</div>
-
-
-
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
