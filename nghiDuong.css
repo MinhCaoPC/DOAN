@@ -82,10 +82,7 @@ background: linear-gradient(
   /* Xóa lớp mờ đen phủ trên */
 }
 
-/* THANH TÌM KIẾM */
-.search-container {
-  /* font-family: "Montagu Slab", serif; */
-}
+
 
 .search-container h2 {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);

@@ -78,23 +78,12 @@
   text-transform: uppercase;
   background: linear-gradient(90deg, #6b93a9, #155e82, #1c4b69);
   background-size: 300%;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientFlow 4s ease-in-out infinite;
   text-shadow: 0 0 25px rgba(106, 169, 187, 0.7);
-   /* ✨ Thêm viền trắng bên ngoài chữ */
   -webkit-text-stroke: 1px white;
-  
-  /* Hiệu ứng phát sáng */
-  /* text-shadow:
-    0 0 10px rgba(72, 191, 255, 0.8),
-    0 0 20px rgba(48, 134, 181, 0.5),
-    0 0 40px rgba(72, 191, 255, 0.4); */
-}
-
-/* H2 nhỏ hơn và có khoảng cách đều */
-.banner-text h2 {
-  font-size: 45px;
   letter-spacing: 6px;
   margin-bottom: 5px;
 }
