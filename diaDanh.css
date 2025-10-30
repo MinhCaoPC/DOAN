@@ -214,12 +214,17 @@
   box-shadow: 0 6px 18px rgba(100, 170, 255, 0.18);
   overflow: hidden;
   transition: all 0.3s ease;
-  width: 100%;
-  max-width: 850px;
-  margin: 0 auto;
+
+  /* 🔹 Kích thước cố định */
+  width: 850px;    /* cố định ngang */
+  height: 400px;   /* cố định dọc */
+  
+  margin: 0 auto;  /* căn giữa màn hình */
   gap: 20px;
   padding: 20px;
+  position: relative;
 }
+
 
 /* Khi hover */
 .content-box:hover {
@@ -251,13 +256,86 @@
 
 /* Text bên phải */
 .text-box {
-  flex: 1 1 55%;
+
   color: #024481;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* padding: 16px 20px; */
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffffa8;
+  border-radius: 12px;
+
+  /* ✅ Cố định kích thước trên mọi thiết bị */
+  width: 600px;
+  height: 250px;
+  flex: none;
 }
+
+.text-box {
+  color: #024481;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* nội dung top */
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffffa8;
+  border-radius: 12px;
+
+  /* 🔹 Kích thước nhỏ hơn trước */
+  width: 400px;  /* giảm từ 600px */
+  height: 280px; /* giảm từ 250px */
+  flex: none;
+
+  /* 🔹 Căn giữa chiều dọc nếu muốn */
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 16px;
+}
+
+/* 🌈 Thanh cuộn */
+.text-box::-webkit-scrollbar {
+  width: 8px;
+}
+.text-box::-webkit-scrollbar-thumb {
+  background-color: #00a6ff69;
+  border-radius: 10px;
+}
+.text-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .text-box {
+    width: 300px;
+    height: 180px;
+    margin: auto; /* căn giữa cả ngang lẫn dọc */
+  }
+}
+@media (max-width: 768px) {
+  .text-box {
+    width: 300px;      /* thu nhỏ ngang */
+    height: 180px;     /* thu nhỏ dọc */
+    
+    /* ✅ Khoảng trống trên/dưới */
+    margin-top: 20px;  
+    margin-bottom: 45px;
+
+    /* ✅ Căn giữa ngang */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+
+
 
 .text-box h5 {
   font-weight: 700;
@@ -293,32 +371,63 @@
 
 /* === Nút XEM ẢNH / XEM VỊ TRÍ - màu đen === */
 .nuthanhdong.btn-outline-primary {
+  position: absolute;
+  bottom: 13px;
+   /* left: calc(50% - 50px);                   */
+   right: 77px; 
+  z-index: 10;
+
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: #00bfe6;
   color: #fff;
   border: 2px solid #b6b4b4;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+
 .nuthanhdong.btn-outline-primary:hover {
-  background-color: #333;
-  border-color: #333;
-  transform: scale(1.05);
+  background-color: #14d1ff;  /* xanh sáng neon */
+  border-color: #0aa3cc;
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(20, 209, 255, 0.9);
 }
+
 
 /* === Nút YÊU THÍCH - màu đỏ === */
 .nuthanhdong.btn-outline-success {
+  position: absolute;
+  bottom: 13px;
+   /* left: calc(50% + 25px);                 */
+  right:16px;
+  z-index: 10;
+
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: #e55b5b;
   color: #fff;
   border: 2px solid #cf7070;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .nuthanhdong.btn-outline-success:hover {
-  background-color: #b30000;
-  border-color: #b30000;
-  transform: scale(1.05);
+  background-color: #ff5b5b;  /* đỏ neon sáng */
+  border-color: #cc3a3a;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 91, 91, 0.8);
 }
-
 /* Làm cho nút bo mềm đẹp hơn */
 .nuthanhdong {
   border-radius: 25px;
@@ -397,6 +506,7 @@
     flex-direction: column;
     justify-content: space-between;
   }
+
 
   /* Ảnh + iframe sẽ giữ tỉ lệ rộng (không bị bóp), dùng aspect-ratio */
   .media-box img,
@@ -569,4 +679,19 @@
     font-size: 16px;
     padding: 0 10px;
   }
+}
+
+/* nội dung giới thiệu */
+.danang-desc {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  font-size: 1rem;
+  color: #024481;
+  line-height: 1.7;
+  text-align: center;
+  font-style: italic;
+  background: linear-gradient(to right, #def4ff, #ffffff);
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }

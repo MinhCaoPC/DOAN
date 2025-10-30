@@ -1,22 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap"); */
 
 /* Font đoạn mô tả */
-@import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap"); */
 
 .navbar-custom {
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 10;
-  background: linear-gradient(
-    to right,
-    rgba(135, 206, 250, 1) 0%,
-    /* sky blue */ rgba(135, 206, 250, 0.9) 10%,
-    rgba(135, 206, 250, 0.8) 25%,
-    rgba(176, 224, 230, 0.7) 50%,
-    /* powder blue */ rgba(135, 206, 250, 0.85) 80%,
-    rgba(135, 206, 250, 0.95) 100%
-  );
+background: linear-gradient(
+  to right,
+  rgba(58, 92, 142, 0.8),   /* xanh đêm nhạt */
+  rgba(85, 120, 180, 0.7),  /* xanh navy nhạt */
+  rgba(120, 160, 210, 0.6)  /* xanh trời ban đêm nhạt */
+);
+
+
 
   backdrop-filter: blur(6px);
   padding: 12px 0;
@@ -36,7 +35,7 @@
 }
 
 .navbar-custom .nav-link:hover {
-  color: #024481;
+  color: #c0e1ff;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
@@ -51,7 +50,7 @@
 }
 
 .login-text:hover {
-  color: #000000;
+  color: #c0e1ff;
 }
 
 #banner {
@@ -85,7 +84,7 @@
 
 /* THANH TÌM KIẾM */
 .search-container {
-  font-family: "Montagu Slab", serif;
+  /* font-family: "Montagu Slab", serif; */
 }
 
 .search-container h2 {
@@ -137,17 +136,20 @@
 }
 
 .btn-search:hover {
-  color: #000000;
+  color: #c0e1ff;
 }
 
 .diadanh-section {
-  background: linear-gradient(
-    to top,
-    rgba(119, 171, 243, 0.3) 0%,
-    /* xanh nhạt, opacity thấp */ rgba(119, 171, 243, 0.2) 20%,
-    /* xanh nhạt hơn */ rgba(255, 255, 255, 0.1) 75%
-      /* trắng rất nhạt, loang mịn */
-  );
+background: linear-gradient(
+  to top,
+  rgba(58, 92, 142, 0.5),
+  rgba(85, 120, 180, 0.35),
+  rgba(120, 160, 210, 0.2),
+  rgba(180, 200, 230, 0.1),
+  rgba(220, 235, 250, 0.05)
+);
+
+
 
   color: #fff;
   padding: 100px 60px;
@@ -156,7 +158,7 @@
 }
 
 .diadanh-section .intro-text {
-  font-family: "Montagu Slab", serif;
+  /* font-family: "Montagu Slab", serif; */
   color: #024481;
   max-width: 850px;
   margin: 0 auto 60px;
@@ -174,7 +176,9 @@
 }
 
 .btn-food {
-  background: linear-gradient(135deg, #87cefa, #56ccf2);
+background: linear-gradient(135deg, #3a5f8a, #7ca3d9);
+/* #0a1932: deep night blue
+   #1c2f55: navy-ish blue */
   color: white;
   font-weight: 600;
   border: none;
@@ -209,17 +213,22 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background: linear-gradient(to top right, #d6ebff 0%, #f9fcff 55%);
+background: linear-gradient(to top right, #7fa6d6 0%, #c0dbf5 55%);
   border-radius: 30px;
   box-shadow: 0 6px 18px rgba(100, 170, 255, 0.18);
   overflow: hidden;
   transition: all 0.3s ease;
-  width: 100%;
-  max-width: 850px;
-  margin: 0 auto;
+
+  /* 🔹 Kích thước cố định */
+  width: 850px;    /* cố định ngang */
+  height: 400px;   /* cố định dọc */
+  
+  margin: 0 auto;  /* căn giữa màn hình */
   gap: 20px;
   padding: 20px;
+  position: relative;
 }
+
 
 /* Khi hover */
 .content-box:hover {
@@ -251,13 +260,86 @@
 
 /* Text bên phải */
 .text-box {
-  flex: 1 1 55%;
+
   color: #024481;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* padding: 16px 20px; */
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffffa8;
+  border-radius: 12px;
+
+  /* ✅ Cố định kích thước trên mọi thiết bị */
+  width: 600px;
+  height: 250px;
+  flex: none;
 }
+
+.text-box {
+  color: #024481;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* nội dung top */
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffffa8;
+  border-radius: 12px;
+
+  /* 🔹 Kích thước nhỏ hơn trước */
+  width: 400px;  /* giảm từ 600px */
+  height: 280px; /* giảm từ 250px */
+  flex: none;
+
+  /* 🔹 Căn giữa chiều dọc nếu muốn */
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 16px;
+}
+
+/* 🌈 Thanh cuộn */
+.text-box::-webkit-scrollbar {
+  width: 8px;
+}
+.text-box::-webkit-scrollbar-thumb {
+  background-color: #00a6ff69;
+  border-radius: 10px;
+}
+.text-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .text-box {
+    width: 300px;
+    height: 180px;
+    margin: auto; /* căn giữa cả ngang lẫn dọc */
+  }
+}
+@media (max-width: 768px) {
+  .text-box {
+    width: 300px;      /* thu nhỏ ngang */
+    height: 180px;     /* thu nhỏ dọc */
+    
+    /* ✅ Khoảng trống trên/dưới */
+    margin-top: 20px;  
+    margin-bottom: 45px;
+
+    /* ✅ Căn giữa ngang */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+
+
 
 .text-box h5 {
   font-weight: 700;
@@ -293,31 +375,64 @@
 
 /* === Nút XEM ẢNH / XEM VỊ TRÍ - màu đen === */
 .nuthanhdong.btn-outline-primary {
-  background-color: #49bd66;
+  position: absolute;
+  bottom: 13px;
+   /* left: calc(50% - 50px);                  */
+  right: 77px;
+   z-index: 10;
+
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #00bfe6;
   color: #fff;
   border: 2px solid #b6b4b4;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+
 .nuthanhdong.btn-outline-primary:hover {
-  background-color: #333;
-  border-color: #333;
-  transform: scale(1.05);
+  background-color: #14d1ff;  /* xanh sáng neon */
+  border-color: #0aa3cc;
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(20, 209, 255, 0.9);
 }
+
 
 /* === Nút YÊU THÍCH - màu đỏ === */
 .nuthanhdong.btn-outline-success {
+  position: absolute;
+  bottom: 13px;
+  right:16px;
+   /* left: calc(50% + 25px);             */
+  z-index: 16;
+
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: #e55b5b;
   color: #fff;
   border: 2px solid #cf7070;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .nuthanhdong.btn-outline-success:hover {
-  background-color: #b30000;
-  border-color: #b30000;
-  transform: scale(1.05);
+  background-color: #ff5b5b;  /* đỏ neon sáng */
+  border-color: #cc3a3a;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 91, 91, 0.8);
 }
+
 
 /* Làm cho nút bo mềm đẹp hơn */
 .nuthanhdong {
@@ -397,6 +512,7 @@
     flex-direction: column;
     justify-content: space-between;
   }
+
 
   /* Ảnh + iframe sẽ giữ tỉ lệ rộng (không bị bóp), dùng aspect-ratio */
   .media-box img,
@@ -552,4 +668,36 @@
     padding: 8px 0;
     font-size: 0.85rem;
   }
+}
+
+.intro {
+  max-width: 700px;   /* chiều rộng tối đa */
+  margin: 0 auto 60px;  /* căn giữa + khoảng cách dưới */
+  font-size: 20px;      /* giảm font chữ */
+  line-height: 1.6;     /* giữ khoảng cách dòng dễ đọc */
+  text-align: justify;  /* canh đều 2 bên */
+  padding: 0 15px;      /* khoảng cách 2 bên nhỏ, responsive */
+  color: #024481;
+}
+
+@media (max-width: 768px) {
+  .intro{
+    font-size: 16px;
+    padding: 0 10px;
+  }
+}
+
+/* nội dung giới thiệu */
+.danang-desc {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  font-size: 1rem;
+  color: #024481;
+  line-height: 1.7;
+  text-align: center;
+  font-style: italic;
+background: linear-gradient(to right, #d0e7ff, #f0f8ff);
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
