@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liên hệ — Đà Nẵng Travel</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+  <!-- File CSS Riêng -->
+  <link rel="stylesheet" href="lienHe.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h1>Liên hệ với chúng tôi</h1>
+          <p class="small-muted mb-0">
+            Cần trợ giúp? Gửi tin nhắn, đặt câu hỏi hoặc yêu cầu hỗ trợ — chúng tôi luôn sẵn sàng giúp bạn.
+          </p>
+        </div>
+        <div class="col-md-4 text-md-end d-none d-md-block">
+          <a href="TrangChu.html" class="btn btn-outline-light btn-sm">
+            <i class="fa fa-home me-2"></i>Về trang chủ
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container mb-5">
+    <div class="row g-4">
+
+      <!-- Form liên hệ -->
+      <div class="col-lg-7">
+        <div class="contact-card">
+          <h4 class="mb-3">Gửi tin nhắn cho chúng tôi</h4>
+          <p class="small-muted">Điền thông tin, chúng tôi sẽ phản hồi sớm nhất trong vòng 24h.</p>
+
+          <form id="contactForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                <input id="name" type="text" class="form-control" placeholder="Nguyễn Văn A" required>
+                <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                <input id="email" type="email" class="form-control" placeholder="email@domain.com" required>
+                <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
+              </div>
+
+              <div class="col-12">
+                <label for="subject" class="form-label">Chủ đề</label>
+                <input id="subject" type="text" class="form-control" placeholder="Ví dụ: Hỏi về tour Bà Nà">
+              </div>
+
+              <div class="col-12">
+                <label for="message" class="form-label">Nội dung <span class="text-danger">*</span></label>
+                <textarea id="message" rows="6" class="form-control" placeholder="Viết nội dung..." required></textarea>
+                <div class="invalid-feedback">Vui lòng nhập nội dung.</div>
+              </div>
+
+              <div class="col-12 d-flex align-items-center justify-content-between flex-column flex-sm-row gap-2">
+                <div class="small-muted">
+                  Bằng việc gửi bạn đồng ý với <a href="#" class="text-decoration-underline">chính sách bảo mật</a>.
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary">Gửi yêu cầu</button>
+                  <button type="reset" class="btn btn-outline-secondary ms-2">Xoá</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div id="successMessage" class="alert alert-success mt-3 d-none" role="alert">
+            ✅ Cảm ơn! Yêu cầu của bạn đã được gửi. Chúng tôi sẽ liên hệ sớm.
+          </div>
+        </div>
+      </div>
+
+      <!-- Thông tin liên hệ + Bản đồ -->
+      <div class="col-lg-5">
+        <div class="contact-card mb-4">
+          <h5>Thông tin liên hệ</h5>
+          <p class="small-muted">Bạn có thể gọi hoặc ghé trực tiếp văn phòng chúng tôi.</p>
+
+          <div class="d-flex align-items-start gap-3 mb-3">
+            <div class="icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
+            <div><strong>Văn phòng</strong><div class="small-muted">123 Bạch Đằng, Hải Châu, Đà Nẵng</div></div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3 mb-3">
+            <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
+            <div><strong>Hotline</strong><div><a href="tel:0901234567" class="text-decoration-none">0901 234 567</a></div></div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3 mb-3">
+            <div class="icon-circle"><i class="fa-regular fa-envelope"></i></div>
+            <div><strong>Email</strong><div><a href="mailto:info@danangtravel.vn" class="text-decoration-none">info@danangtravel.vn</a></div></div>
+          </div>
+
+          <div class="mt-3">
+            <div class="small-muted mb-2">Theo dõi chúng tôi</div>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bản đồ -->
+        <div class="contact-card">
+          <h6>Bản đồ</h6>
+          <div id="map" aria-label="Bản đồ Đà Nẵng"></div>
+          <div class="small-muted mt-2">Click vào marker để xem chi tiết địa điểm.</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-3 small-muted">
+    © <span id="year"></span> Đà Nẵng Travel • Thiết kế bởi CTV Team
+  </footer>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    // Khởi tạo bản đồ Leaflet
+    const map = L.map('map').setView([16.0678, 108.2208], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const places = [
+      { name: 'Cầu Rồng', coords: [16.0615, 108.2271] },
+      { name: 'Biển Mỹ Khê', coords: [16.0635, 108.2510] },
+      { name: 'Bà Nà Hills', coords: [15.9970, 107.9884] }
+    ];
+
+    places.forEach(p => {
+      L.marker(p.coords).addTo(map).bindPopup(`<strong>${p.name}</strong>`);
+    });
+
+    // Xử lý form
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('successMessage');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
+      }
+      success.classList.remove('d-none');
+      setTimeout(() => {
+        form.reset();
+        form.classList.remove('was-validated');
+      }, 1000);
+    });
+
+    // Năm tự động
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

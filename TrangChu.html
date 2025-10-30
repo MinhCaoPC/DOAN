@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Địa Danh Du Lịch</title>
+    <title>Trang Chủ</title>
     <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -16,14 +16,18 @@
 
     <!-- CSS riêng -->
     <link rel="stylesheet" href="TrangChu.css" />
+    <!-- icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
       <div class="container-fluid px-4">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src="logo.png" alt="Logo" class="logo me-2" />
+          <img src="" alt="Logo" class="logo me-2" />
         </a>
 
         <!-- Nút thu gọn -->
@@ -50,53 +54,558 @@
             <li class="nav-item">
               <a class="nav-link" href="#">NGHỈ DƯỠNG</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">TOUR</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="tour.html">TOUR</a>
+            </li>
           </ul>
         </div>
 
         <!-- Đăng nhập -->
         <div class="d-none d-lg-flex align-items-center">
-          <i class="bi bi-person-circle me-2 fs-5"></i>
-          <a href="#" class="login-text me-1 dangnhap">ĐĂNG NHẬP</a> /
-          <a href="#" class="login-text ms-1 dangky">ĐĂNG KÝ</a>
+          <i class="bi bi-person-circle me-2 fs-5 text-white"></i>
+          <a href="dangNhap.html" class="login-text me-1">ĐĂNG NHẬP /</a>
+          <a href="dangKy.html" class="login-text ms-1">ĐĂNG KÝ</a>
         </div>
       </div>
     </nav>
-    <nav>
-      <div class="top">
-        <img src="anh/bannertop.jpg" alt="Địa Danh 1" class="banner-img" />
+
+    <!-- Banner với thanh tìm kiếm -->
+    <section id="banner" class="position-relative text-center text-light">
+      <img src="images/banner-DN.png" alt="Banner" class="banner-img w-100" />
+      <div class="banner-overlay"></div>
+
+      <!-- Thanh tìm kiếm nằm giữa banner -->
+      <div
+        class="search-container position-absolute top-50 start-50 translate-middle text-center"
+      >
         <div class="banner-text">
           <h2>w e l c o m e&nbsp; t o</h2>
           <h1>ĐÀ NẴNG</h1>
         </div>
-      </div>
-    </nav>
-    <nav id="navname">
-      <div>
-        <h2>Đà Nẵng</h2>
-      </div>
-    </nav>
-    <section id="banner">
-      <div class="overlay"></div>
 
-      <h3 class="banner-top">
-        KHÁM PHÁ TRÁI TIM MIỀN TRUNG<br />
-        NƠI KÌ QUAN KẾT NỐI TRẢI NGHIỆM ĐẲNG CẤP
-      </h3>
-
-      <div class="content">
-        <p>
-          Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố
-          đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm không
-          ngừng nghỉ.<br />
-          Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán đảo
-          Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê đã được bình chọn là bãi biển
-          đẹp nhất hành tinh.
-        </p>
+        <form
+          class="search-form position-relative d-inline-block"
+          onsubmit="return searchDiaDanh(event)"
+        >
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control search-input"
+            placeholder="Tìm kiếm ..."
+          />
+          <button class="btn-search" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
       </div>
-      <h3 class="whygoto">Tại sao nên đến Đà Nẵng ?</h3>
-
-      
     </section>
+    <!-- Giới thiệu Đà Nẵng -->
+    <section class="intro-section">
+      <div class="intro-container">
+        <!-- Cột bên trái -->
+        <div class="intro-text">
+          <h2 class="intro-title">Đà Nẵng</h2>
+          <h4 class="intro-subtitle">
+            KHÁM PHÁ TRÁI TIM MIỀN TRUNG<br />NƠI KÌ QUAN KẾT NỐI TRẢI NGHIỆM
+            ĐẲNG CẤP
+          </h4>
+          <p class="intro-description">
+            Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành
+            phố đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm
+            không ngừng nghỉ.<br /><br />
+            Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán
+            đảo Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê đã được bình chọn, sự
+            lãng mạn của sông Hàn và nhịp sống đô thị thông minh, hiện đại. Từ
+            Cầu Rồng phun lửa rực rỡ đến Bà Nà Hills như xứ sở cổ tích, Đà Nẵng
+            luôn biết cách chinh phục trái tim du khách.
+          </p>
+        </div>
+
+        <!-- Cột bên phải -->
+        <div class="intro-image">
+          <img src="images/bando.png" alt="Bản đồ Việt Nam" />
+        </div>
+      </div>
+    </section>
+    <!-- Tại sao phải đến Đà Nẵng -->
+    <section class="why-section">
+      <h2 class="why-title">Tại sao nên đến Đà Nẵng ?</h2>
+
+      <div
+        id="whyCarousel"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        data-bs-interval="5000"
+      >
+        <div class="carousel-inner">
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div class="why-content">
+              <img src="images/CR.jpg" class="why-img" alt="Cầu Rồng" />
+              <div class="why-text">
+                <ol>
+                  <strong>Thiên nhiên tuyệt đẹp & đa dạng:</strong>
+                  <p>
+                    Đà Nẵng sở hữu bờ biển dài hơn 60 km với cát trắng mịn và
+                    nước trong xanh. Tận hưởng bình minh trên biển, cắm trại ở
+                    Sơn Trà hoặc chinh phục Hải Vân Quan huyền thoại.
+                  </p>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div class="why-content">
+              <img
+                src="images/chualinhung.png"
+                class="why-img"
+                alt="Chùa Linh Ứng"
+              />
+              <div class="why-text">
+                <ol>
+                  <strong>Điểm đến Văn hóa & Lịch sử:</strong>
+                  <p>
+                    Vị trí chiến lược giúp Đà Nẵng dễ dàng kết nối với bộ ba di
+                    sản UNESCO: Phố cổ Hội An và Thánh địa Mỹ Sơn. Các di tích
+                    tại chỗ như Bảo tàng Chăm, Ngũ Hành Sơn, và Chùa Linh Ứng
+                    lưu giữ nét văn hóa sâu sắc của miền Trung.
+                  </p>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-item">
+            <div class="why-content">
+              <img
+                src="images/amthuc.jpg"
+                class="why-img"
+                alt="Ẩm thực Đà Nẵng"
+              />
+              <div class="why-text">
+                <ol>
+                  <strong>Ẩm thực đặc sắc:</strong>
+                  <p>
+                    Từ Mì Quảng trứ danh, Bún chả cá thanh ngọt, Bánh tráng cuốn
+                    thịt heo hai da đặc trưng, đến thế giới hải sản tươi ngon
+                    bậc nhất – tất cả tạo nên một thiên đường vị giác.
+                  </p>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4-->
+          <div class="carousel-item">
+            <div class="why-content">
+              <img
+                src="images/ks.jpg"
+                class="why-img"
+                alt="Khách sạn cao cấp"
+              />
+              <div class="why-text">
+                <ol>
+                  <strong>Trải nghiệm giải trí & nghỉ dưỡng đỉnh cao:</strong>
+                  <p>
+                    Từ Bà Nà Hills với Cầu Vàng nổi tiếng thế giới, đến Asia
+                    Park và Sun World – Đà Nẵng luôn khiến du khách “cháy” hết
+                    mình với vô vàn trải nghiệm hấp dẫn.
+                  </p>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nút điều hướng -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#whyCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#whyCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Phần trải nghiệm -->
+    <section class="experience-section">
+      <h2 class="experience-title">Trải nghiệm không thể bỏ lỡ tại Đà Nẵng</h2>
+      <div class="experience-icons">
+        <div class="experience-item" id="btn-dia-danh">
+          <div class="icon-circle">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <p>Địa danh nổi bật</p>
+        </div>
+        <div class="experience-item">
+          <div class="icon-circle">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+
+          <p>Ẩm thực đặc trưng</p>
+        </div>
+        <div class="experience-item">
+          <div class="icon-circle">
+            <i class="fa-solid fa-map"></i>
+          </div>
+          <p>Tour hấp dẫn</p>
+        </div>
+        <div class="experience-item">
+          <div class="icon-circle">
+            <i class="fa-solid fa-spa"></i>
+          </div>
+          <p>Nghỉ dưỡng thư giãn</p>
+        </div>
+      </div>
+    </section>
+    <!-- Chi tiết từng trải nghiệm -->
+    <section id="section-dia-danh" class="discover-section">
+      <div class="discover-content left">
+        <div class="discover-text">
+          <h3><span></span>Khám phá nổi bật</h3>
+          <p>
+            Khám phá vẻ đẹp biểu tượng của Đà Nẵng – nơi thiên nhiên và con
+            người hòa quyện tạo nên hành trình khó quên.
+          </p>
+          <a href="#" class="btn-more"
+            >Xem thêm <i class="bi bi-arrow-right"></i
+          ></a>
+        </div>
+        <div class="discover-images">
+          <div class="image-grid">
+            <img src="images/banner-DN.png" alt="" />
+            <img src="images/cautinhyeu.jpg" alt="" />
+            <img src="images/dinhBanCo.jpg" alt="" />
+            <img src="images/CR.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-am-thuc" class="discover-section">
+      <div class="discover-content right">
+        <div class="discover-images">
+          <div class="image-grid">
+            <img src="images/amthuc.jpg" alt="Mỳ Quảng" />
+            <img src="images/amthuc2.jpg" alt="Bánh bột lọc" />
+            <img src="images/amthuc3.jpg" alt="Bánh tráng cuốn thịt heo" />
+            <img src="images/amthuc4.jpg" alt="Bánh xèo" />
+          </div>
+        </div>
+        <div class="discover-text">
+          <h3><span></span>Ẩm thực Đà Nẵng</h3>
+          <p>
+            Khám phá tinh hoa ẩm thực của Đà Nẵng, nơi mỗi món ăn là một trải
+            nghiệm văn hóa.
+          </p>
+          <a href="#" class="btn-more"
+            >Xem thêm <i class="bi bi-arrow-right"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-nghi-duong" class="discover-section">
+      <div class="discover-content left">
+        <div class="discover-text">
+          <h3><span></span>Trải nghiệm tour hấp dẫn</h3>
+          <p>
+            Mỗi khoảnh khắc ở Đà Nẵng là một hành trình đáng nhớ, tràn đầy năng
+            lượng và niềm vui.
+          </p>
+          <a href="tour.html" class="btn-more"
+            >Xem thêm <i class="bi bi-arrow-right"></i
+          ></a>
+        </div>
+        <div class="discover-images">
+          <div class="image-grid">
+            <img src="images/thiendinh.jpg" alt="Thiền định nghỉ dưỡng" />
+            <img src="images/nghi2.jpg" alt="Biển Mỹ An" />
+            <img src="images/nghi3.jpg" alt="Rạn Nam Ô" />
+            <img src="images/nghi4.jpg" alt="Hải Vân Quang" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-hoat-dong" class="discover-section">
+      <div class="discover-content right">
+        <div class="discover-images">
+          <div class="image-grid">
+            <img src="images/hd1.jpg" alt="Radison Hotel Đà Nẵng" />
+            <img
+              src="images/hd2.webp"
+              alt="InterContinental Danang Sun Peninsula Resort"
+            />
+            <img src="images/hd3.png" alt="Khu nghỉ dưỡng Núi Thần Tài" />
+            <img src="images/hd3.webp" alt="Sheraton Grand" />
+          </div>
+        </div>
+        <div class="discover-text">
+          <h3><span></span>Khu nghỉ dưỡng & khách sạn nổi bật</h3>
+          <p>
+            Tận hưởng không gian nghỉ dưỡng đẳng cấp, nơi bình yên hòa cùng vẻ
+            đẹp biển trời Đà Nẵng.
+          </p>
+          <a href="#" class="btn-more"
+            >Xem thêm <i class="bi bi-arrow-right"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+    <!--  -->
+    <section class="danang-festival-section">
+      <!-- <h2 class="festival-heading">🎉 Sự kiện & Lễ hội ở Đà Nẵng</h2> -->
+      <div class="festival-title-wrapper">
+        <div class="festival-title-bar"></div>
+        <h2 class="festival-heading">🎉 Sự kiện & Lễ hội ở Đà Nẵng</h2>
+      </div>
+
+      <div class="danang-carousel">
+        <div class="danang-carousel-container" id="danangCarousel">
+          <div
+            class="danang-slide"
+            style="background-image: url('images/phunlua.jpg')"
+          >
+            <h3>Cầu Rồng phun lửa</h3>
+          </div>
+          <div
+            class="danang-slide"
+            style="background-image: url('images/phaohoa.jpg')"
+          >
+            <h3>Lễ hội pháo hoa quốc tế</h3>
+          </div>
+          <div
+            class="danang-slide"
+            style="background-image: url('images/park.jpg')"
+          >
+            <h3>Asia Park</h3>
+          </div>
+          <div
+            class="danang-slide"
+            style="background-image: url('images/ba-na-hills.jpg')"
+          >
+            <h3>Bà Nà Hills</h3>
+          </div>
+        </div>
+
+        <div class="danang-controls">
+          <button class="danang-btn" onclick="prevFestival()">&#10094;</button>
+          <button class="danang-btn" onclick="nextFestival()">&#10095;</button>
+        </div>
+      </div>
+    </section>
+    <!-- Bản đồ tương tác Đà Nẵng -->
+    <section id="map-section" class="py-5 text-center">
+      <h2 class="mb-4">🗺️ Bản đồ du lịch Đà Nẵng</h2>
+      <p class="text-muted">
+        Khám phá những địa điểm nổi bật tại thành phố đáng sống nhất Việt Nam
+      </p>
+      <div
+        id="map"
+        style="
+          height: 300px;
+          border-radius: 15px;
+          margin: 30px auto;
+          width: 90%;
+        "
+      ></div>
+    </section>
+    <!-- Thư viện Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+      // Tạo bản đồ tại vị trí trung tâm Đà Nẵng
+      var map = L.map("map").setView([16.0678, 108.2208], 13);
+
+      // Thêm lớp bản đồ nền từ OpenStreetMap
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      // Danh sách địa điểm nổi bật
+      var locations = [
+        {
+          name: "Cầu Rồng",
+          coords: [16.0615, 108.2271],
+          img: "images/CR.jpg",
+          link: "#",
+        },
+        {
+          name: "Biển Mỹ Khê",
+          coords: [16.0635, 108.251],
+          img: "images/MK.jpg",
+          link: "#",
+        },
+        {
+          name: "Bà Nà Hills",
+          coords: [15.997, 107.9884],
+          img: "images/ba-na-hills.jpg",
+          link: "#",
+        },
+        {
+          name: "Ngũ Hành Sơn",
+          coords: [15.975, 108.263],
+          img: "images/NHS.jpg",
+          link: "#",
+        },
+      ];
+      // Duyệt qua từng địa điểm và thêm marker
+      locations.forEach(function (loc) {
+        var marker = L.marker(loc.coords).addTo(map);
+
+        // Tạo nội dung popup hiển thị khi click vào marker
+        var popupContent = `
+    <div style="text-align:center;">
+      <h5>${loc.name}</h5>
+      <img src="${loc.img}" alt="${loc.name}" style="width:200px; height:120px; border-radius:10px; margin-top:5px;">
+      <br>
+      <a href="${loc.link}" style="color:#007bff; text-decoration:none;">Xem chi tiết</a>
+    </div>
+  `;
+
+        marker.bindPopup(popupContent);
+      });
+
+      // Thêm marker cho từng địa điểm
+      locations.forEach(function (loc) {
+        var popupContent = `
+      <div style="text-align:center">
+        <h6>${loc.name}</h6>
+        <img src="${loc.img}" alt="${loc.name}" style="width:120px; border-radius:8px;">
+        <br>
+        <a href="${loc.link}" style="text-decoration:none; color:#007bff; font-weight:500;">Xem chi tiết</a>
+      </div>
+    `;
+        L.marker(loc.coords).addTo(map).bindPopup(popupContent);
+      });
+    </script>
+<!-- 🌊 Footer -->
+<footer class="footer text-light">
+  <div class="container py-5">
+    <div class="row gy-4">
+      
+      <!-- Logo & Mô tả -->
+      <div class="col-md-4">
+        <h3 class="footer-logo">Đà Nẵng Travel</h3>
+        <p>Khám phá vẻ đẹp Đà Nẵng – thành phố đáng sống nhất Việt Nam.  
+        Chúng tôi mang đến những trải nghiệm du lịch độc đáo và tiện lợi.</p>
+      </div>
+
+      <!-- Liên kết nhanh -->
+      <div class="col-md-4">
+        <h5>Liên kết nhanh</h5>
+        <ul class="footer-links">
+          <li><a href="#about">Giới thiệu</a></li>
+          <li><a href="tour.html">Tour</a></li>
+          <li><a href="lienhe.html">Liên hệ</a></li>
+        </ul>
+      </div>
+
+      <!-- Liên hệ & Mạng xã hội -->
+      <div class="col-md-4">
+        <h5>Liên hệ</h5>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Đường Bạch Đằng, Đà Nẵng</p>
+        <p><i class="fas fa-phone"></i> 0901 234 567</p>
+        <p><i class="fas fa-envelope"></i> info@danangtravel.vn</p>
+
+        <div class="social-icons mt-3">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom text-center py-3">
+    <p>© 2025 Đà Nẵng Travel. Thiết kế bởi  <strong>CTV Team</strong>.</p>
+  </div>
+</footer>
+
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!--tại sao nên đến đà nẵng  -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const scrollToSection = (btnSelector, targetSelector) => {
+          const button = document.querySelector(btnSelector);
+          const target = document.querySelector(targetSelector);
+          if (button && target) {
+            button.addEventListener("click", (e) => {
+              e.preventDefault();
+              // Cuộn mượt đến phần đích
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+          }
+        };
+
+        // Liên kết từng nút trong phần "Trải nghiệm"
+        scrollToSection("#btn-dia-danh", "#section-dia-danh");
+        scrollToSection(".experience-item:nth-child(2)", "#section-am-thuc");
+        scrollToSection(".experience-item:nth-child(3)", "#section-nghi-duong");
+        scrollToSection(".experience-item:nth-child(4)", "#section-hoat-dong");
+      });
+    </script>
+
+    <!--lễ hội  -->
+    <script>
+      const danangSlides = document.querySelectorAll(".danang-slide");
+      let danangCurrent = 1;
+
+      function updateFestival() {
+        danangSlides.forEach((slide, i) => {
+          const offset = i - danangCurrent;
+          if (offset === 0) {
+            slide.style.transform = "translateX(0) scale(1)";
+            slide.style.opacity = "1";
+            slide.style.zIndex = "3";
+          } else if (offset === -1) {
+            slide.style.transform = "translateX(-400px) scale(0.8)";
+            slide.style.opacity = "0.6";
+            slide.style.zIndex = "2";
+          } else if (offset === 1) {
+            slide.style.transform = "translateX(400px) scale(0.8)";
+            slide.style.opacity = "0.6";
+            slide.style.zIndex = "2";
+          } else {
+            slide.style.transform = "translateX(0) scale(0.6)";
+            slide.style.opacity = "0";
+            slide.style.zIndex = "1";
+          }
+        });
+      }
+
+      function nextFestival() {
+        danangCurrent = (danangCurrent + 1) % danangSlides.length;
+        updateFestival();
+      }
+
+      function prevFestival() {
+        danangCurrent =
+          (danangCurrent - 1 + danangSlides.length) % danangSlides.length;
+        updateFestival();
+      }
+
+      // Gọi lần đầu
+      updateFestival();
+    </script>
   </body>
 </html>
