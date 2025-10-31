@@ -8,12 +8,10 @@
   width: 100%;
   top: 0;
   z-index: 10;
-  background: linear-gradient(
-    to right,
-    rgba(27, 42, 58, 0.95),
-    rgba(47, 74, 99, 0.85),
-    rgba(79, 133, 169, 0.75)
-  );
+  background: linear-gradient(to right,
+      rgba(27, 42, 58, 0.95),
+      rgba(47, 74, 99, 0.85),
+      rgba(79, 133, 169, 0.75));
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
@@ -82,10 +80,14 @@
 
 
 
-.search-container h2 {
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  letter-spacing: 1px;
+/* THANH TÌM KIẾM */
+.search-container {
+  font-family: "Montagu Slab", serif;
+  width: 60vw;
+  /* Tăng chiều dài thanh tìm kiếm*/
+  max-width: 600px;
 }
+
 
 .search-form {
   width: 100%;
@@ -130,18 +132,19 @@
   transition: color 0.3s ease;
 }
 
+
+
 .btn-search:hover {
   color: #c0e1ff;
 }
 
+
 .diadanh-section {
-  background: linear-gradient(
-    to top,
-    rgba(27, 42, 58, 0.8),
-    rgba(47, 74, 99, 0.6),
-    rgba(79, 133, 169, 0.4),
-    rgba(198, 216, 238, 0.15)
-  );
+  background: linear-gradient(to top,
+      rgba(27, 42, 58, 0.8),
+      rgba(47, 74, 99, 0.6),
+      rgba(79, 133, 169, 0.4),
+      rgba(198, 216, 238, 0.15));
   color: #e8f0f8;
   padding: 100px 60px;
   text-align: center;
@@ -204,16 +207,20 @@
   align-items: stretch;
   background: linear-gradient(to top right, #2f4a63 0%, #4f85a9 70%);
   box-shadow: 0 6px 18px rgba(79, 133, 169, 0.25);
-  color: #e8f0f8;  border-radius: 30px;
+  color: #e8f0f8;
+  border-radius: 30px;
   box-shadow: 0 6px 18px rgba(100, 170, 255, 0.18);
   overflow: hidden;
   transition: all 0.3s ease;
 
   /* 🔹 Kích thước cố định */
-  width: 850px;    /* cố định ngang */
-  height: 400px;   /* cố định dọc */
-  
-  margin: 0 auto;  /* căn giữa màn hình */
+  width: 850px;
+  /* cố định ngang */
+  height: 400px;
+  /* cố định dọc */
+
+  margin: 0 auto;
+  /* căn giữa màn hình */
   gap: 20px;
   padding: 20px;
   position: relative;
@@ -256,7 +263,8 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* nội dung top */
+  justify-content: flex-start;
+  /* nội dung top */
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
@@ -264,8 +272,10 @@
   border-radius: 12px;
 
   /* 🔹 Kích thước nhỏ hơn trước */
-  width: 400px;  /* giảm từ 600px */
-  height: 280px; /* giảm từ 250px */
+  width: 400px;
+  /* giảm từ 600px */
+  height: 280px;
+  /* giảm từ 250px */
   flex: none;
 
   /* 🔹 Căn giữa chiều dọc nếu muốn */
@@ -278,17 +288,20 @@
 .text-box::-webkit-scrollbar {
   width: 8px;
 }
+
 .text-box::-webkit-scrollbar-thumb {
   background-color: #4f85a9;
   border-radius: 10px;
 }
+
 .text-box::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
 /* --- Footer (Night Mode - Xanh đêm nhạt) --- */
 .footer {
-  background: linear-gradient(180deg, #1b2a3a, #2f4a63); /* xanh đêm nhạt */
+  background: linear-gradient(180deg, #1b2a3a, #2f4a63);
+  /* xanh đêm nhạt */
   color: #e8f0f8;
   font-size: 15px;
   line-height: 1.8;
@@ -301,7 +314,8 @@
 }
 
 .footer h5 {
-  color: #ffd27f; /* vàng nhạt nổi bật */
+  color: #ffd27f;
+  /* vàng nhạt nổi bật */
   margin-bottom: 15px;
 }
 
@@ -350,16 +364,20 @@
   .text-box {
     width: 300px;
     height: 180px;
-    margin: auto; /* căn giữa cả ngang lẫn dọc */
+    margin: auto;
+    /* căn giữa cả ngang lẫn dọc */
   }
 }
+
 @media (max-width: 768px) {
   .text-box {
-    width: 300px;      /* thu nhỏ ngang */
-    height: 180px;     /* thu nhỏ dọc */
-    
+    width: 300px;
+    /* thu nhỏ ngang */
+    height: 180px;
+    /* thu nhỏ dọc */
+
     /* ✅ Khoảng trống trên/dưới */
-    margin-top: 20px;  
+    margin-top: 20px;
     margin-bottom: 45px;
 
     /* ✅ Căn giữa ngang */
@@ -408,9 +426,9 @@
 .nuthanhdong.btn-outline-primary {
   position: absolute;
   bottom: 13px;
-   /* left: calc(50% - 50px);                  */
+  /* left: calc(50% - 50px);                  */
   right: 77px;
-   z-index: 10;
+  z-index: 10;
 
   width: 45px;
   height: 45px;
@@ -428,7 +446,8 @@
 
 
 .nuthanhdong.btn-outline-primary:hover {
-  background-color: #14d1ff;  /* xanh sáng neon */
+  background-color: #14d1ff;
+  /* xanh sáng neon */
   border-color: #0aa3cc;
   transform: scale(1.08);
   box-shadow: 0 0 18px rgba(20, 209, 255, 0.9);
@@ -439,8 +458,8 @@
 .nuthanhdong.btn-outline-success {
   position: absolute;
   bottom: 13px;
-  right:16px;
-   /* left: calc(50% + 25px);             */
+  right: 16px;
+  /* left: calc(50% + 25px);             */
   z-index: 16;
 
   width: 45px;
@@ -458,7 +477,8 @@
 }
 
 .nuthanhdong.btn-outline-success:hover {
-  background-color: #ff5b5b;  /* đỏ neon sáng */
+  background-color: #ff5b5b;
+  /* đỏ neon sáng */
   border-color: #cc3a3a;
   transform: scale(1.1);
   box-shadow: 0 0 20px rgba(255, 91, 91, 0.8);
@@ -516,6 +536,7 @@
 
 /* ===== Fix ảnh/bản đồ bị bóp trên iPad / tablet (768 - 1024px) ===== */
 @media (min-width: 768px) and (max-width: 1024px) {
+
   /* nới rộng khung chứa để ảnh có nhiều không gian hơn */
   .content-box {
     max-width: 960px;
@@ -702,17 +723,23 @@
 }
 
 .intro {
-  max-width: 700px;   /* chiều rộng tối đa */
-  margin: 0 auto 60px;  /* căn giữa + khoảng cách dưới */
-  font-size: 20px;      /* giảm font chữ */
-  line-height: 1.6;     /* giữ khoảng cách dòng dễ đọc */
-  text-align: justify;  /* canh đều 2 bên */
-  padding: 0 15px;      /* khoảng cách 2 bên nhỏ, responsive */
+  max-width: 700px;
+  /* chiều rộng tối đa */
+  margin: 0 auto 60px;
+  /* căn giữa + khoảng cách dưới */
+  font-size: 20px;
+  /* giảm font chữ */
+  line-height: 1.6;
+  /* giữ khoảng cách dòng dễ đọc */
+  text-align: justify;
+  /* canh đều 2 bên */
+  padding: 0 15px;
+  /* khoảng cách 2 bên nhỏ, responsive */
   color: #024481;
 }
 
 @media (max-width: 768px) {
-  .intro{
+  .intro {
     font-size: 16px;
     padding: 0 10px;
   }
@@ -728,7 +755,8 @@
   font-style: italic;
   background: linear-gradient(to right, #1b446a, #4f85a9);
   color: #e8f0f8;
-  box-shadow: 0 3px 8px rgba(79, 133, 169, 0.4);  padding: 15px 25px;
+  box-shadow: 0 3px 8px rgba(79, 133, 169, 0.4);
+  padding: 15px 25px;
   border-radius: 15px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }

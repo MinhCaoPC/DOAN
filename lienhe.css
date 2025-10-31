@@ -28,7 +28,7 @@ body {
 .contact-card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(7,35,64,0.06);
+  box-shadow: 0 6px 18px rgba(7, 35, 64, 0.06);
   padding: 22px;
 }
 
@@ -47,7 +47,7 @@ body {
 
 /* Form */
 .form-control:focus {
-  box-shadow: 0 0 0 0.125rem rgba(0,102,204,0.18);
+  box-shadow: 0 0 0 0.125rem rgba(0, 102, 204, 0.18);
   border-color: var(--primary);
 }
 
@@ -64,7 +64,7 @@ body {
 #map {
   height: 320px;
   border-radius: 10px;
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* Mạng xã hội */
@@ -78,7 +78,7 @@ body {
   border-radius: 8px;
   background: #fff;
   color: var(--primary);
-  border: 1px solid rgba(0,0,0,0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   transition: all 0.3s;
 }
 
