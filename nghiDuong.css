@@ -40,14 +40,27 @@
   padding-right: 0 !important;
 }
 
-.login-text {
-  color: #fff;
-  text-decoration: none;
+/* Cố định login sang phải */
+.navbar .login-section {
+  position: absolute;
+  right: 20px;
+  /* cách mép phải một chút */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.login-text:hover {
-  color: #F5F5DC;
+.navbar .login-text {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
+
+.navbar .login-text:hover {
+  color: #F5F5DC;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
 
 #banner {
   position: relative;
@@ -141,12 +154,17 @@
 
 .diadanh-section {
   background: linear-gradient(to top,
-    #1b446a 0%,                  /* đáy: màu tối giữ nguyên */
-    #2f4a63 25%,                 /* xanh đậm nhẹ hơn */
-    #4f85a9 50%,                 /* xanh trung bình */
-    #c6d8ee 75%,                 /* xanh nhạt */
-    #f0f4fb 100%                 /* sáng nhất: gần trắng */
-  );
+      #1b446a 0%,
+      /* đáy: màu tối giữ nguyên */
+      #2f4a63 25%,
+      /* xanh đậm nhẹ hơn */
+      #4f85a9 50%,
+      /* xanh trung bình */
+      #c6d8ee 75%,
+      /* xanh nhạt */
+      #f0f4fb 100%
+      /* sáng nhất: gần trắng */
+    );
   color: #e8f0f8;
   padding: 100px 60px;
   text-align: center;
@@ -303,7 +321,7 @@
 
 /* --- Footer (Night Mode - Xanh đêm nhạt) --- */
 .footer {
-  background: linear-gradient(180deg, #1b446a ,      rgba(79, 133, 169, 0.75));
+  background: linear-gradient(180deg, #1b446a, rgba(79, 133, 169, 0.75));
 
   /* xanh đêm nhạt */
   color: #e8f0f8;
@@ -610,14 +628,15 @@
 
 /* Tablet */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .navbar-collapse .login-section {
+  .navbar .login-section {
+    position: static;
+    transform: none;
     width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 6px;
-    margin-left: auto;
-    font-size: 0.7rem;
+    margin-top: 4px;
+    font-size: 0.9rem;
   }
 
   .login-text i {
@@ -654,18 +673,21 @@
     padding: 6px 8px;
   }
 
-  .navbar-collapse .login-section {
+  /* login-section ngoài collapse */
+  .navbar .login-section {
+    position: static;
+    /* bỏ absolute khi mobile */
+    transform: none;
     width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 6px;
-    margin-left: auto;
-    font-size: 0.7rem;
+    margin-top: 6px;
+    font-size: 0.8rem;
   }
 
   .login-text i {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-right: 3px;
   }
 

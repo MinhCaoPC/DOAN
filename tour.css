@@ -37,17 +37,26 @@
  text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
 
-
-/* Login bên phải */
-.login-text {
- color: #fff;
- text-decoration: none;
+/* Cố định login sang phải */
+.navbar .login-section {
+  position: absolute;
+  right: 20px;   /* cách mép phải một chút */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-
-.login-text:hover {
- color: #F5F5DC;
+.navbar .login-text {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
+
+.navbar .login-text:hover {
+  color: #F5F5DC;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
 
 /* --- Banner --- */
 .banner {
@@ -586,71 +595,67 @@ html {
   }
 }
 
+/* ======================== */
 /* Mobile tweaks */
-@media (max-width:767.98px) {
- .navbar-custom {
-   padding: 6px 14px;
- }
+@media (max-width: 767.98px) {
+  .navbar-custom {
+    padding: 6px 14px;
+  }
 
+  .navbar-brand img {
+    height: 30px;
+  }
 
- .navbar-brand img {
-   height: 30px;
- }
+  .navbar-toggler {
+    padding: 3px 6px;
+    font-size: 14px;
+  }
 
+  .navbar-nav .nav-link {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
 
- .navbar-toggler {
-   padding: 3px 6px;
-   font-size: 14px;
- }
+  /* login-section ngoài collapse */
+  .navbar .login-section {
+    position: static;                /* bỏ absolute khi mobile */
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 6px;
+    font-size: 0.8rem;
+  }
 
-
- .navbar-nav .nav-link {
-   font-size: 12px;
-   padding: 6px 8px;
- }
-
-
- .navbar-collapse .login-section {
-   width: 100%;
-   display: flex;
-   justify-content: flex-end;
-   align-items: center;
-   gap: 6px;
-   margin-left: auto;
-   font-size: .7rem;
- }
-
-
- .login-text i {
-   font-size: .8rem;
-   margin-right: 3px;
- }
+  .login-text i {
+    font-size: 0.9rem;
+    margin-right: 3px;
+  }
 }
 
-
-
-
-
-
+/* ======================== */
 /* Tablet */
-@media (min-width:768px) and (max-width:991.98px) {
-   .navbar-collapse .login-section {
-   width: 100%;
-   display: flex;
-   justify-content: flex-end;
-   align-items: center;
-   gap: 6px;
-   margin-left: auto;
-   font-size: .7rem;
- }
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .navbar .login-section {
+    position: static;
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 4px;
+    font-size: 0.9rem;
+  }
 
-
- .login-text i {
-   font-size: 1.0rem;
-   margin-right: 3px;
- }
-
-
- 
+  .login-text i {
+    font-size: 1rem;
+    margin-right: 3px;
+  }
 }
+
+
+
+
+
 

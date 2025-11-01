@@ -55,7 +55,7 @@ CREATE TABLE MONAN (
     DiaChiMonAn VARCHAR(100) COMMENT 'Khu vực hoặc nơi nổi tiếng món ăn',
     MapLinkMonAn varchar(600) COMMENT 'link lấy từ google map',
     LoaiMonAn varchar(100) COMMENT 'Phân loại món ăn',
-    GiaMonAn DECIMAL(12,2) COMMENT 'Giá món ăn',
+    GiaMonAn VARCHAR(100) COMMENT 'Khoảng giá mon an (ví dụ: 30.000 – 40.000 VNĐ/người)',
     MoTaMonAn TEXT COMMENT 'Thông tin mô tả món ăn',
     ImageLinkMonAn varchar(100) COMMENT 'Đường dẫn lấy ảnh món ăn'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Thông tin các món ăn đặc sản';
@@ -70,7 +70,6 @@ CREATE TABLE KHUNGHIDUONG (
     MapLinkKND VARCHAR(600) COMMENT 'link lấy từ google map',
     LoaiKHD VARCHAR(100) COMMENT 'Loại khu nghỉ dưỡng',
     MoTaKND TEXT COMMENT 'Thông tin mô tả khu nghỉ dưỡng',
-    GiaKND DECIMAL(12,2) COMMENT 'Giá trung bình dịch vụ',
     ImageKND VARCHAR(100) COMMENT 'Link ảnh mô tả khu nghỉ dưỡng'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Thông tin khu nghỉ dưỡng';
 
@@ -91,14 +90,17 @@ CREATE TABLE DIADANH (
 -- ==========================================
 CREATE TABLE TOUR (
     MaTour INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Mã tour du lịch',
-    TenTour VARCHAR(150) NOT NULL COMMENT 'Tên tour du lịch',
-    GiaTour DECIMAL(12,2) COMMENT 'Giá tour',
-    ThoiGianTour VARCHAR(100) COMMENT 'Khoảng thời gian tour',
-    MoTaTour TEXT COMMENT 'Thông tin lịch tour',
-    LichTrinhTour TEXT COMMENT 'Lịch trình tour tính theo ngày',
-    MaDiaDanh INT COMMENT 'Địa danh liên quan',
-    MaMonAn INT COMMENT 'Món ăn đặc trưng trong tour',
-    MaKND INT COMMENT 'Khu nghỉ dưỡng trong tour',
+    TenTour VARCHAR(200) NOT NULL COMMENT 'Tên tour du lịch',
+    MoTaTour TEXT COMMENT 'Mô tả khái quát về tour',
+    GiaTour VARCHAR(100) COMMENT 'Khoảng giá tour (ví dụ: 3.000.000 – 4.000.000 VNĐ/người)',
+    ThoiGianTour VARCHAR(100) COMMENT 'Thời gian tour (ví dụ: 3 ngày 2 đêm)',
+    DoiTuong VARCHAR(200) COMMENT 'Đối tượng khách phù hợp (nhóm bạn, cặp đôi, v.v.)',
+    KhachSan VARCHAR(200) COMMENT 'Thông tin khách sạn hoặc resort trong tour',
+    LichTrinhTour TEXT COMMENT 'Lịch trình chi tiết theo ngày',
+    ImageTour VARCHAR(150) COMMENT 'Đường dẫn ảnh minh họa tour',
+    MaDiaDanh INT NULL COMMENT 'Mã địa danh liên quan',
+    MaMonAn INT NULL COMMENT 'Mã món ăn đặc trưng trong tour',
+    MaKND INT NULL COMMENT 'Mã khu nghỉ dưỡng trong tour',
     FOREIGN KEY (MaDiaDanh) REFERENCES DIADANH(MaDD)
         ON DELETE SET NULL ON UPDATE CASCADE,
     FOREIGN KEY (MaMonAn) REFERENCES MONAN(MaMonAn)
@@ -145,3 +147,7 @@ CREATE TABLE MUCYEUTHICH (
     FOREIGN KEY (MaTour) REFERENCES TOUR(MaTour)
         ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Danh sách các mục người dùng yêu thích';
+
+
+
+
