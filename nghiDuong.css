@@ -141,15 +141,18 @@
 
 .diadanh-section {
   background: linear-gradient(to top,
-      rgba(27, 42, 58, 0.8),
-      rgba(47, 74, 99, 0.6),
-      rgba(79, 133, 169, 0.4),
-      rgba(198, 216, 238, 0.15));
+    #1b446a 0%,                  /* đáy: màu tối giữ nguyên */
+    #2f4a63 25%,                 /* xanh đậm nhẹ hơn */
+    #4f85a9 50%,                 /* xanh trung bình */
+    #c6d8ee 75%,                 /* xanh nhạt */
+    #f0f4fb 100%                 /* sáng nhất: gần trắng */
+  );
   color: #e8f0f8;
   padding: 100px 60px;
   text-align: center;
-  font-family: "Inknut Antiqua", serif;
+  /* font-family: "Inknut Antiqua", serif; */
 }
+
 
 .diadanh-section .intro-text {
   /* font-family: "Montagu Slab", serif; */
@@ -300,7 +303,8 @@
 
 /* --- Footer (Night Mode - Xanh đêm nhạt) --- */
 .footer {
-  background: linear-gradient(180deg, #1b2a3a, #2f4a63);
+  background: linear-gradient(180deg, #1b446a ,      rgba(79, 133, 169, 0.75));
+
   /* xanh đêm nhạt */
   color: #e8f0f8;
   font-size: 15px;
