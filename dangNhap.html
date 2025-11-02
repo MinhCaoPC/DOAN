@@ -14,46 +14,38 @@
 </head>
 
 <body>
-<!-- Navbar -->
   <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-      <div class="container">
-        <!-- Logo -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+      <!-- Logo -->
       <a class="navbar-logo-fixed" href="#">
         <img src="images/logo.png" alt="Logo" class="logo-fixed" />
       </a>
 
-        <!-- Toggler -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarMenu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <!-- Menu -->
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarMenu"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tour.html">TOUR</a>
-            </li>
-          </ul>
-        </div>
+      <!-- Menu -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tour.html">TOUR</a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
   <div class="background">
     <img src="images/banner-DN.png" alt="Da Nang Golden Bridge">
   </div>
@@ -64,13 +56,13 @@
         <div class="logo">LOGO</div>
         <h2>DA NANG TRAVEL</h2>
 
-        <form id="loginForm" onsubmit="return validateLogin()">
-          <input type="text" id="fullname" placeholder="Tên tài khoản hoặc email">
+        <form id="formDangNhap" method="POST">
+          <input type="text" name="TenTaiKhoan" placeholder="Tên tài khoản hoặc email" required>
           <div class="password-field">
-            <input type="password" id="password" placeholder="Mật khẩu">
+            <input type="password" name="MatKhau" placeholder="Mật khẩu" required>
+            <div id="error-message" class="text-danger" style="font-size:13px;"></div>
           </div>
-          <button type="submit" class="login-btn">Đăng nhập</button>
-          <a href="repassword.html" style=" text-align: right; font-size: 14px;">Quên mật khẩu ?</a>
+          <button type="submit">Đăng nhập</button>
         </form>
 
         <p class="register-text">Bạn chưa có tài khoản? <a href="dangKy.html">Đăng ký ngay</a></p>
@@ -83,20 +75,25 @@
   </div>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
-    function validateLogin() {
-      const name = document.getElementById("fullname").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+    const errorMessages = {
+      4: "Tài khoản hoặc mật khẩu không đúng!"
+    };
 
-      if (!name || !email || !password) {
-        alert("⚠️ Vui lòng nhập đầy đủ họ tên, email và mật khẩu trước khi đăng nhập!");
-        return false; // chặn gửi form
+    document.getElementById('formDangNhap').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const res = await fetch('dangNhap.php', { method: 'POST', body: formData });
+      const data = await res.json();
+
+      const errorEl = document.getElementById('error-message');
+      if (data.status === 'error') {
+        errorEl.textContent = errorMessages[data.code] || "Có lỗi xảy ra!";
+      } else {
+        window.location.href = "TrangChu.html";
       }
-
-      alert("✅ Đăng nhập thành công!");
-      return true;
-    }
+    });
   </script>
 </body>
 

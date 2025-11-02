@@ -11,36 +11,41 @@
 </head>
 <body>
 
-<!-- Navbar -->
+ <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-    <div class="container-fluid px-4">
-
+    <div class="container">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="logo.png" alt="Logo" class="logo me-2">
+      <a class="navbar-logo-fixed" href="#">
+        <img src="images/logo.png" alt="Logo" class="logo-fixed" />
       </a>
 
-      <!-- Nút thu gọn -->
+      <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Menu chính -->
+      <!-- Menu -->
       <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="#">TRANG CHỦ</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">ẨM THỰC</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">NGHỈ DƯỠNG</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">TOUR</a></li>
+          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tour.html">TOUR</a>
+          </li>
         </ul>
-      </div>
 
-      <!-- Đăng nhập -->
-      <div class="d-none d-lg-flex align-items-center">
-      <i class="bi bi-person-circle me-2 fs-5" style="color: white;"></i>
+        <div class="login-section" id="login-section">
+          <a href="dangNhap.html" class="login-text">
+            <i class="bi bi-person-circle me-2 fs-5"></i>ĐĂNG NHẬP
+          </a>
+        </div>
       </div>
-
     </div>
   </nav>
 <!-- banner -->
@@ -186,6 +191,38 @@ document.getElementById("tourModalLabel").textContent = tour.ten;
     }
 
     renderTours();
+
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginSection = document.getElementById('login-section');
+      const navbarMenu = document.getElementById('navbarMenu');
+
+      fetch('getUser.php')
+        .then(res => res.json())
+        .then(data => {
+          if (data.loggedIn) {
+            // Thay nội dung login-section
+            loginSection.innerHTML = `
+          <i class="bi bi-person-circle me-2 fs-5"></i>${data.TenTaiKhoan}
+          <a href="dangXuat.php" class="login-text ms-3">
+            <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
+          </a>
+        `;
+
+            // Thay menu nếu muốn thêm mục Yêu thích
+            navbarMenu.querySelector('ul.navbar-nav').innerHTML = `
+          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+          <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
+          <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
+          <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
+          <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
+          <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
+        `;
+          }
+        });
+    });
   </script>
 </body>
 </html>
