@@ -1,0 +1,376 @@
+/* 🌤️ Navbar có nền gradient xanh trời loang dài xuống */
+.navbar-custom {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(135deg,
+      rgba(0, 170, 255, 0.8) 0%,    /* Xanh biển tươi hơn */
+      rgba(100, 210, 255, 0.6) 50%, /* Xanh ngọc nhạt */
+      rgba(230, 250, 255, 0.3) 100% /* Trắng xanh phấn ở cuối */
+  );
+  backdrop-filter: blur(6px);
+  padding: 12px 0;
+  transition: background 0.4s ease;
+}
+
+/* Khi cuộn xuống, làm nền đậm hơn một chút */
+.navbar-custom.scrolled {
+  background: rgba(20, 110, 190, 0.9); /* Xanh biển đậm hơn khi cuộn */
+  backdrop-filter: blur(10px);
+}
+
+/* Giữ màu menu + hover */
+.navbar-custom .nav-link {
+  color: #ffffff;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #d6f4ff;
+  text-shadow: 0 0 8px rgba(200, 240, 255, 0.9);
+}
+
+/* Login bên phải */
+.login-text {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-text:hover {
+  color: #d6f4ff;
+}
+
+/* 🌈 Banner màu xanh trời phấn sáng hơn */
+.favorite-banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  padding: 36px 20px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: linear-gradient(135deg,
+    #f0fbff 0%,   /* trắng xanh */
+    #d6f1ff 30%,  /* xanh baby */
+    #b3e6ff 60%,  /* xanh trời pastel */
+    #ecfaff 100%  /* trắng phấn ở cuối */
+  );
+  box-shadow: 0 10px 30px rgba(10, 60, 120, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 12px 0;
+}
+
+/* hai mảng loang nhẹ tạo cảm giác "phấn" */
+.favorite-banner::before,
+.favorite-banner::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  filter: blur(40px);
+  opacity: 0.45;
+  transform: translateZ(0);
+}
+
+/* mảng bên trái */
+.favorite-banner::before {
+  width: 420px;
+  height: 220px;
+  left: -80px;
+  top: -40px;
+  background: radial-gradient(circle at 20% 30%,
+    rgba(255,255,255,0.9),
+    rgba(240,250,255,0.3) 25%,
+    transparent 55%);
+  mix-blend-mode: screen;
+}
+
+/* mảng bên phải */
+.favorite-banner::after {
+  width: 360px;
+  height: 200px;
+  right: -60px;
+  bottom: -30px;
+  background: radial-gradient(circle at 80% 70%,
+    rgba(255,255,255,0.85),
+    rgba(235,245,255,0.25) 30%,
+    transparent 60%);
+  mix-blend-mode: screen;
+}
+
+/* nội dung chữ */
+.favorite-banner__content h1 {
+  margin: 0;
+  padding: 0 12px;
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 700;
+  color: #045d9c; /* xanh đậm nhẹ hơn, sang và rõ */
+  font-size: clamp(20px, 3.6vw, 34px);
+  letter-spacing: 0.4px;
+  line-height: 1.05;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+}
+
+
+
+/* Đường kẻ ngắn, mỏng, căn giữa */
+.banner-divider {
+  width: 120px;              /* độ dài đường kẻ */
+  height: 1.5px;             /* mỏng hơn */
+  background: #acddff;       /* màu xanh đậm */
+  margin: 24px auto;         /* căn giữa, có khoảng cách trên/dưới */
+  border-radius: 1px;        /* bo nhẹ 2 đầu */
+}
+
+
+
+
+.favorites-section {
+  display: grid;
+  grid-template-columns: 250px 1fr; /* cột trái cố định, cột phải linh hoạt */
+  gap: 24px;
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 0 12px;
+
+  /* ⚡ quan trọng */
+  align-items: start; /* tất cả cột sẽ canh đầu hàng, sidebar không giãn */
+}
+
+/* Sidebar phân loại */
+.favorites-sidebar {
+  background: #f0fbff; /* xanh pastel nhẹ */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 100, 150, 0.08);
+}
+
+.favorites-sidebar h2 {
+  margin-top: 0;
+  color: #045d9c;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.favorites-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.favorites-sidebar li {
+  padding: 10px 0;
+  border-bottom: 1px solid #d6f1ff;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.favorites-sidebar li:hover {
+  background: #d6f1ff;
+  color: #045d9c;
+}
+
+/* Cards yêu thích */
+.favorites-cards {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 card mỗi hàng */
+  gap: 20px;
+}
+
+/* Card */
+/* --- Wrapper quản lý nhiều box --- */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* khoảng cách giữa các box */
+}
+
+/* --- Mỗi box --- */
+/* --- Mỗi box: kích thước cố định --- */
+.content-box {
+  position: relative;
+  display: flex;
+  flex-direction: row; /* desktop: ảnh trái, text phải */
+  align-items: stretch;
+  background: linear-gradient(135deg,
+      #b3e6ff 0%,   /* xanh trời pastel */
+      #d6f1ff 50%,  /* xanh baby nhạt */
+      #ecfaff 100%  /* trắng phấn mịn */
+  );
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  width: 850px;       /* cố định chiều ngang */
+  height: 350px;      /* cố định chiều cao */
+  margin: 12px;
+  overflow: hidden;
+}
+
+/* Hover nổi nhẹ */
+.content-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Ảnh bên trái, kích thước cố định */
+.content-box img {
+  width: 250px;       /* cố định chiều ngang */
+  height: 300px;      /* cố định chiều cao */
+  border-radius: 16px;
+  margin-right: 24px;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover ảnh */
+.content-box:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Text bên phải */
+.text-box {
+  color: #045d9c;
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: left;
+  flex: 1;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+/* Tùy chỉnh thanh cuộn */
+.text-box::-webkit-scrollbar {
+  width: 8px;
+}
+.text-box::-webkit-scrollbar-thumb {
+  background-color: #ff950069;
+  border-radius: 10px;
+}
+.text-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+
+/* Container nút nổi dưới góc phải, xếp ngang */
+.content-box-buttons {
+  position: absolute;
+   top: 16px;         /* từ trên xuống */
+  right: 16px;       /* sát phải */
+  display: flex;
+  flex-direction: row; /* xếp ngang */
+  gap: 12px;          /* khoảng cách giữa 2 nút */
+  z-index: 5;         /* nổi trên ảnh và text */
+}
+
+/* Nút tròn chung */
+.btn-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+
+
+/* Nút X */
+.btn-close {
+  background: #fff;
+  color: #045d9c;
+}
+
+/* Hover nổi mượt */
+.btn-circle:hover {
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+@media (max-width: 767px) {
+  .favorites-section {
+    grid-template-columns: 1fr;
+    margin: 20px auto;
+  }
+
+  .favorites-sidebar {
+    order: -1;
+    margin-bottom: 16px;
+  }
+
+  .favorites-sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
+
+  .favorites-sidebar li {
+    border-bottom: none;
+    background: #d6f1ff;
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .favorites-sidebar li:hover {
+    background: #045d9c;
+    color: #fff;
+  }
+
+  .content-box {
+    flex-direction: column; /* ảnh trên, text dưới */
+    width: 90%;             /* vừa màn hình */
+    height: auto;           /* tự co theo nội dung */
+    align-items: center;
+    padding: 12px;          /* giảm padding cho gọn */
+  }
+
+  .content-box img {
+    width: 100%;
+    height: 220px;          /* ảnh vẫn cố định, vừa nhìn */
+    margin-right: 0;
+    margin-bottom: 12px;    /* khoảng cách vừa phải */
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
+  .text-box {
+    max-height: none;
+    overflow-y: visible;
+    text-align: center;
+    padding: 0;
+    font-size: 16px;       /* hơi nhỏ hơn desktop */
+    line-height: 1.5;
+  }
+
+    .content-box-buttons {
+    right: 50%;
+    transform: translateX(50%); /* căn giữa ngang */
+    bottom: 12px;
+    flex-direction: row; /* vẫn xếp ngang */
+    gap: 10px;
+}
+}
