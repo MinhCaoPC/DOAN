@@ -15,7 +15,10 @@ CREATE TABLE TAIKHOAN (
     MatKhau VARCHAR(100) NOT NULL COMMENT 'Mật khẩu đăng nhập',
     TenTaiKhoan VARCHAR(100) NOT NULL COMMENT 'Tên người dùng hoặc tài khoản',
     Email VARCHAR(100) NOT NULL COMMENT 'Địa chỉ email tài khoản',
-    LoaiTaiKhoan ENUM('KH','AD') DEFAULT 'KH' COMMENT 'Loại tài khoản: KH = Khách hàng, AD = Quản trị viên'
+    LoaiTaiKhoan ENUM('KH','AD') DEFAULT 'KH' COMMENT 'Loại tài khoản: KH = Khách hàng, AD = Quản trị viên',
+    MaXacNhan VARCHAR(10) NULL COMMENT 'Mã xác nhận tạm thời cho quên mật khẩu',
+    ThoiGianXacNhan DATETIME NULL COMMENT 'Thời điểm mã được tạo';
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Thông tin tài khoản người dùng';
 
 

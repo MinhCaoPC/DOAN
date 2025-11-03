@@ -61,8 +61,7 @@ DELIMITER ;
 
 INSERT INTO TAIKHOAN (MaSoTK, MatKhau, TenTaiKhoan, Email, LoaiTaiKhoan)
 VALUES ('AD00000001', 'admin123', 'Quản trị viên', 'minhcao26042005@gmail.com', 'AD');
-INSERT INTO TAIKHOAN (MatKhau, TenTaiKhoan, Email)
-VALUES ('123456', 'Nguyen Van A', 'b@gmail.com');
+
 
 DROP TRIGGER IF EXISTS trg_TAIKHOAN_AutoID;
 
