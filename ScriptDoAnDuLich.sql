@@ -17,7 +17,7 @@ CREATE TABLE TAIKHOAN (
     Email VARCHAR(100) NOT NULL COMMENT 'Địa chỉ email tài khoản',
     LoaiTaiKhoan ENUM('KH','AD') DEFAULT 'KH' COMMENT 'Loại tài khoản: KH = Khách hàng, AD = Quản trị viên',
     MaXacNhan VARCHAR(10) NULL COMMENT 'Mã xác nhận tạm thời cho quên mật khẩu',
-    ThoiGianXacNhan DATETIME NULL COMMENT 'Thời điểm mã được tạo';
+    ThoiGianXacNhan DATETIME NULL COMMENT 'Thời điểm mã được tạo'
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Thông tin tài khoản người dùng';
 
@@ -26,11 +26,9 @@ CREATE TABLE TAIKHOAN (
 -- BẢNG KHÁCH HÀNG
 -- ==========================================
 CREATE TABLE KHACHHANG (
-    MaKH INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Mã khách hàng',
-    HoTen VARCHAR(100) NOT NULL COMMENT 'Họ tên khách hàng',
+	HoVaTen VARCHAR(100) COMMENT'Họ và tên của khách hàng',
     NgaySinh DATE COMMENT 'Ngày sinh',
     SDT VARCHAR(20) COMMENT 'Số điện thoại liên hệ',
-    Email VARCHAR(100) COMMENT 'Địa chỉ email liên hệ',
     MaSoTK VARCHAR(10) NOT NULL COMMENT 'Liên kết đến tài khoản người dùng',
     FOREIGN KEY (MaSoTK) REFERENCES TAIKHOAN(MaSoTK)
         ON DELETE CASCADE
@@ -42,8 +40,12 @@ CREATE TABLE KHACHHANG (
 -- ==========================================
 CREATE TABLE THONGTINTUVAN (
     MaTV INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Mã tư vấn',
-    ThongTinLienLac VARCHAR(200) COMMENT 'Cách thức liên lạc (email, sđt, ...)',
-    MucQuanTam VARCHAR(200) COMMENT 'Nội dung hoặc chủ đề khách hàng quan tâm',
+    HoVaTenTuVan VARCHAR(100) NOT NULL COMMENT 'Họ và tên khách hàng tư vấn',
+    EmailTuVan VARCHAR(100) NOT NULL COMMENT 'Địa chỉ email khách hàng tư vấn',
+    SoDienThoaiTuVan VARCHAR(20) NOT NULL COMMENT 'Số điện thoại liên hệ khách hàng',
+    ChuDeQuanTam VARCHAR(200) COMMENT 'Nội dung hoặc chủ đề khách hàng quan tâm',
+    NoiDung TEXT COMMENT 'Nội dung chi tiết tư vấn',
+    ThoiGianTao DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời gian tạo yêu cầu tư vấn',
     MaSoTK VARCHAR(10) NULL COMMENT 'Tài khoản liên quan (nếu có)',
     FOREIGN KEY (MaSoTK) REFERENCES TAIKHOAN(MaSoTK)
         ON DELETE CASCADE ON UPDATE CASCADE
