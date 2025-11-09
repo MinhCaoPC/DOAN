@@ -87,7 +87,8 @@ CREATE TABLE DIADANH (
     DiaChiDD VARCHAR(200) COMMENT 'Vị trí địa lý',
     MapLinkDD VARCHAR(600) COMMENT 'link map lất từ google map',
     MoTaDD TEXT COMMENT 'Thông tin chi tiết về địa danh',
-    ImageDD VARCHAR(100) COMMENT 'Link ảnh mô tả địa danh'
+    ImageDD VARCHAR(100) COMMENT 'Link ảnh mô tả địa danh',
+    LoaiDD VARCHAR(100) COMMENT 'Nhom dia danh'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Danh sách các địa danh du lịch';
 
 -- ==========================================
@@ -152,6 +153,7 @@ CREATE TABLE MUCYEUTHICH (
     FOREIGN KEY (MaTour) REFERENCES TOUR(MaTour)
         ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Danh sách các mục người dùng yêu thích';
+
 
 
 

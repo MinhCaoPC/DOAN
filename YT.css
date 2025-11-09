@@ -4,50 +4,63 @@
   width: 100%;
   top: 0;
   z-index: 10;
-  background: linear-gradient(135deg,
-      rgba(0, 170, 255, 0.8) 0%,    /* Xanh biển tươi hơn */
-      rgba(100, 210, 255, 0.6) 50%, /* Xanh ngọc nhạt */
-      rgba(230, 250, 255, 0.3) 100% /* Trắng xanh phấn ở cuối */
+  background: linear-gradient(
+    to bottom,
+    rgba(21, 78, 100, 0.85) 0%,   /* phần trên đậm */
+    rgba(78, 189, 240, 0.6) 40%,   /* loang nhẹ */
+    rgba(125, 199, 231, 0.3) 75%,   /* loang nhiều hơn */
+    rgba(182, 233, 254, 0) 100%   /* mờ dần xuống ảnh */
   );
   backdrop-filter: blur(6px);
   padding: 12px 0;
   transition: background 0.4s ease;
 }
-
 .logo-fixed {
   width: 45px;     /* chỉnh logo nhỏ vừa phải */
   height: auto;
   border-radius: 50%; /* bo tròn nhẹ nếu muốn */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 /* Khi cuộn xuống, làm nền đậm hơn một chút */
 .navbar-custom.scrolled {
-  background: rgba(20, 110, 190, 0.9); /* Xanh biển đậm hơn khi cuộn */
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
 }
 
 /* Giữ màu menu + hover */
 .navbar-custom .nav-link {
-  color: #ffffff;
+  color: #fff;
   font-weight: 500;
   padding: 8px 16px;
   transition: color 0.3s ease;
 }
 
 .navbar-custom .nav-link:hover {
-  color: #d6f4ff;
-  text-shadow: 0 0 8px rgba(200, 240, 255, 0.9);
+  color: #F5F5DC;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
 
-/* Login bên phải */
-.login-text {
+/* Cố định login sang phải */
+.navbar .login-section {
+  position: absolute;
+  right: 20px;   /* cách mép phải một chút */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navbar .login-text {
   color: #fff;
   text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.login-text:hover {
-  color: #d6f4ff;
+.navbar .login-text:hover {
+  color: #F5F5DC;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
+
 
 /* 🌈 Banner màu xanh trời phấn sáng hơn */
 .favorite-banner {
