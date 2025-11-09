@@ -5,7 +5,7 @@ $password   = "26042005";
 $dbname     = "QuanLyDuLich";
 
 
-mysqli_report(MYSQLI_REPORT_OFF); // không tự in warning
+mysqli_report(MYSQLI_REPORT_OFF); 
 
 
 $conn = new mysqli($servername, $username, $password, $dbname);
