@@ -159,7 +159,7 @@
 }
 
 .search-input:focus {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(62, 55, 55, 0.25);
   border-color: white;
   color: white;
   outline: none;

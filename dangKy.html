@@ -82,27 +82,67 @@
   </div>
 
   <script>
-const errorMessages = {
-  1: "Mật khẩu không khớp!",
-  2: "Tên tài khoản đã tồn tại!",
-  3: "Email đã được đăng ký!"
-};
+    const errorMessages = {
+      1: "Mật khẩu không khớp!",
+      2: "Tên tài khoản đã tồn tại!",
+      3: "Email đã được đăng ký!",
+      4: "Email không được để trống!",
+      5: "Tên tài khoản không được để trống!",
+      0: "Có lỗi xảy ra, vui lòng thử lại!"
+    };
 
-document.getElementById('formDangKy').addEventListener('submit', async function (e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  const res = await fetch('dangKy.php', { method: 'POST', body: formData });
-  const data = await res.json();
+    const form = document.getElementById('formDangKy');
+    const errorEl = document.getElementById('error-message');
+    const btn = form.querySelector('button[type="submit"]');
+    const inUser = form.querySelector('input[name="TenTaiKhoan"]');
+    const inEmail = form.querySelector('input[name="Email"]');
+    const inPw1 = form.querySelector('input[name="MatKhau"]');
+    const inPw2 = form.querySelector('input[name="MatKhau2"]');
 
-  const errorEl = document.getElementById('error-message');
-  if (data.status === 'error') {
-    // data.code là số lỗi 1/2/3
-    errorEl.textContent = errorMessages[data.code] || "Có lỗi xảy ra!";
-  } else {
-    window.location.href = "TrangChu.html";
-  }
-});
-</script>
+    function markError(inputEl, on) {
+      if (!inputEl) return;
+      if (on) inputEl.classList.add('is-invalid');
+      else inputEl.classList.remove('is-invalid');
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errorEl.textContent = '';
+      [inUser, inEmail, inPw1, inPw2].forEach(i => markError(i, false));
+
+      btn.disabled = true;
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch('dangKy.php', { method: 'POST', body: formData });
+        const data = await res.json();
+
+        if (data.status === 'error') {
+          const code = Number(data.code) || 0;
+          errorEl.textContent = errorMessages[code] || errorMessages[0];
+
+          // Tô lỗi vào field tương ứng để user sửa nhanh
+          if (code === 1) { markError(inPw1, true); markError(inPw2, true); }
+          if (code === 2) { markError(inUser, true); }
+          if (code === 3 || code === 4) { markError(inEmail, true); }
+          if (code === 5) { markError(inUser, true); }
+
+          btn.disabled = false;
+          return;
+        }
+
+        // OK → chuyển trang
+        window.location.href = "TrangChu.html";
+      } catch (err) {
+        errorEl.textContent = errorMessages[0];
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+
+
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

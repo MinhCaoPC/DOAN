@@ -326,138 +326,100 @@
     </script>
     <script>
 
-      const tourList = [
-        {
-          ten: "Khám phá Đà Nẵng – Biển, Núi, Cầu Rồng",
-          moTa: "Tour khám phá toàn diện Đà Nẵng với biển Mỹ Khê, cầu Rồng, bán đảo Sơn Trà và đèo Hải Vân. Phù hợp cho nhóm bạn trẻ hoặc người lần đầu đến Đà Nẵng.",
-          thoiGian: "3 ngày 2 đêm",
-          gia: "3.000.000 – 4.000.000 VNĐ/người",
-          doiTuong: "Nhóm bạn trẻ, người lần đầu đến Đà Nẵng",
-          khachSan: "Khách sạn 3★ trung tâm (gần cầu Rồng / Bạch Đằng)",
-          anh: "images/cau.jpg",
-          lichTrinh: [
-            "Ngày 1: Biển Mỹ Khê, cầu Rồng, café APEC",
-            "Ngày 2: Sơn Trà, Ngũ Hành Sơn, chợ đêm",
-            "Ngày 3: Đèo Hải Vân, hải sản Bé Mặn"
-          ]
-        },
-        {
-          ten: "Nghỉ dưỡng & Thiền tịnh",
-          moTa: "Tour nghỉ dưỡng kết hợp thiền tịnh, thư giãn tại resort 5 sao với spa, yoga và suối khoáng Núi Thần Tài. Dành cho cặp đôi hoặc người cần nghỉ ngơi.",
-          thoiGian: "3 ngày 2 đêm",
-          gia: "6.000.000 – 9.000.000 VNĐ/người",
-          doiTuong: "Cặp đôi, người cần thư giãn",
-          khachSan: "Resort 5★ như Naman Retreat / Hyatt / Pullman",
-          anh: "images/thiendinh.jpg",
-          lichTrinh: [
-            "Ngày 1: Check-in resort, spa, yoga",
-            "Ngày 2: Suối khoáng Núi Thần Tài",
-            "Ngày 3: Café & mua đặc sản tại Chợ Hàn"
-          ]
-        },
-        {
-          ten: "Giải trí & Trải nghiệm",
-          moTa: "Tour vui chơi và trải nghiệm với các điểm nổi bật như Asia Park, Bà Nà Hills, Sky36 và đặc sản Đà Nẵng. Lý tưởng cho nhóm bạn trẻ thích check-in.",
-          thoiGian: "4 ngày 3 đêm",
-          gia: "5.000.000 – 7.000.000 VNĐ/người",
-          doiTuong: "Nhóm bạn trẻ, thích check-in",
-          khachSan: "Khách sạn 4★ trung tâm hoặc ven biển Mỹ Khê",
-          anh: "images/giaitri.jpg",
-          lichTrinh: [
-            "Ngày 1: Asia Park & chợ đêm Helio",
-            "Ngày 2: Bà Nà Hills – Cầu Vàng",
-            "Ngày 3: Sơn Trà, Sky36, đặc sản Đà Nẵng"
-          ]
-        },
-        {
-          ten: "Văn hóa – Tâm linh – Ẩm thực",
-          moTa: "Tour trải nghiệm văn hóa và ẩm thực đặc sắc của Đà Nẵng, kết hợp tham quan chùa Linh Ứng, Ngũ Hành Sơn và thưởng thức món ngon địa phương.",
-          thoiGian: "3 ngày 2 đêm",
-          gia: "3.500.000 – 5.000.000 VNĐ/người",
-          doiTuong: "Người lớn tuổi, yêu văn hóa",
-          khachSan: "Khách sạn 3★ gần sông Hàn",
-          anh: "images/chualinhung.jpg",
-          lichTrinh: [
-            "Ngày 1: Bảo tàng Chăm, cầu Rồng",
-            "Ngày 2: Chùa Linh Ứng, Ngũ Hành Sơn",
-            "Ngày 3: Ẩm thực Chợ Cồn, café The Local Beans"
-          ]
-        },
-        {
-          ten: "Nghỉ dưỡng cao cấp – Trải nghiệm 5 sao",
-          moTa: "Tour nghỉ dưỡng đẳng cấp dành cho cặp đôi, tuần trăng mật hoặc khách cao cấp. Trải nghiệm tại resort 5 sao và du thuyền sông Hàn sang trọng.",
-          thoiGian: "3 ngày 2 đêm",
-          gia: "10.000.000 – 15.000.000 VNĐ/người",
-          doiTuong: "Cặp đôi, tuần trăng mật, khách cao cấp",
-          khachSan: "InterContinental / Furama Resort",
-          anh: "images/hotel.jpg",
-          lichTrinh: [
-            "Ngày 1: Check-in resort 5★, spa & fine dining",
-            "Ngày 2: Bà Nà Hills – Cầu Vàng",
-            "Ngày 3: Du thuyền sông Hàn & tiễn sân bay"
-          ]
-        }
-      ];
-      document.addEventListener("DOMContentLoaded", function () {
-        const tourContent = document.getElementById('tourContent');
-        const tourTabs = document.getElementById('tourTabs');
+let tourList = [];
 
-        // Xóa nội dung tour cũ (nếu có)
-        tourContent.innerHTML = '';
-        tourTabs.innerHTML = '';
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res  = await fetch('tour.php');        // có thể dùng tour.php?id=... nếu cần 1 tour
+    const data = await res.json();
 
-        tourList.forEach((tour, index) => {
-          const tabId = `tour${index + 1}`;
+    // tour.php trả { status: 'success', tourList: [...] }
+    if (data.status === 'success' && Array.isArray(data.tourList)) {
+      tourList = data.tourList;
+    } else {
+      tourList = [];
+    }
 
-          // Tạo tab button
-          const li = document.createElement('li');
-          li.className = 'nav-item';
-          li.innerHTML = `
-      <button class="nav-link ${index === 0 ? 'active' : ''}" 
-              data-bs-toggle="pill" 
-              data-bs-target="#${tabId}" 
-              type="button">
-        Tour ${index + 1}
-      </button>
-    `;
-          tourTabs.appendChild(li);
+    // Nếu bạn đã có hàm renderTours(...) thì gọi luôn:
+    if (typeof renderTours === 'function') {
+      renderTours(tourList);
+    }
 
-          // Tạo tab content
-          const tabPane = document.createElement('div');
-          tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
-          tabPane.id = tabId;
-          tabPane.setAttribute('role', 'tabpanel');
+    // (tuỳ chọn) phát sự kiện cho nơi khác bắt nếu muốn
+    document.dispatchEvent(new CustomEvent('tours:loaded', { detail: { tourList } }));
 
-          // Lịch trình
-          const lichTrinhHtml = tour.lichTrinh.map(item => `<li>${item}</li>`).join('');
+  } catch (err) {
+    console.error('Lỗi tải tour:', err);
+    tourList = [];
+  }
+});
 
-          tabPane.innerHTML = `
+
+
+
+      document.addEventListener('tours:loaded', function (e) {
+  const list = e.detail?.tourList || [];
+  const tourContent = document.getElementById('tourContent');
+  const tourTabs = document.getElementById('tourTabs');
+
+  tourContent.innerHTML = '';
+  tourTabs.innerHTML = '';
+
+  if (!list.length) {
+    tourContent.innerHTML = '<div class="alert alert-warning">Chưa có tour nào.</div>';
+    return;
+  }
+
+  list.forEach((tour, index) => {
+    const tabId = `tour${index + 1}`;
+
+    const li = document.createElement('li');
+    li.className = 'nav-item';
+    li.innerHTML = `
+      <button class="nav-link ${index === 0 ? 'active' : ''}"
+              data-bs-toggle="pill"
+              data-bs-target="#${tabId}"
+              type="button">Tour ${index + 1}</button>`;
+    tourTabs.appendChild(li);
+
+    const tabPane = document.createElement('div');
+    tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+    tabPane.id = tabId;
+    tabPane.setAttribute('role', 'tabpanel');
+
+    const lichTrinh = Array.isArray(tour.lichTrinh) ? tour.lichTrinh : [];
+    const lichTrinhHtml = lichTrinh.map(item => `<li>${item}</li>`).join('');
+
+    tabPane.innerHTML = `
       <div class="row g-4 align-items-center">
         <div class="col-md-6">
-          <img src="${tour.anh}" alt="${tour.ten}" class="tour-img">
+          <img src="${tour.anh || 'images/placeholder.jpg'}" alt="${tour.ten || ''}" class="tour-img">
         </div>
         <div class="col-md-6">
-          <h4 class="fw-bold">TOUR ${index + 1}: ${tour.ten}</h4>
-          <p>⏰ <b>${tour.thoiGian}</b><br>
-          💰 ${tour.gia}<br>
-          👥 ${tour.doiTuong}<br>
-          🏨 ${tour.khachSan}</p>
+          <h4 class="fw-bold">TOUR ${index + 1}: ${tour.ten || ''}</h4>
+          <p>⏰ <b>${tour.thoiGian || ''}</b><br>
+          💰 ${tour.gia || ''}<br>
+          👥 ${tour.doiTuong || ''}<br>
+          🏨 ${tour.khachSan || ''}</p>
           <h6 class="fw-bold">🗓 Lịch trình chi tiết:</h6>
-          <ul>
-            ${lichTrinhHtml}
-          </ul>
+          <ul>${lichTrinhHtml}</ul>
           <button class="fav-btn">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
             <i class="fas fa-heart"></i> Thêm mục yêu thích
           </button>
-          <a href="#" class="btn btn-book mt-2" data-bs-toggle="modal" data-bs-target="#bookingModal" data-tour="${tour.ten}">Đặt ngay</a>
+          <a href="#" class="btn btn-book mt-2" data-bs-toggle="modal"
+             data-bs-target="#bookingModal" data-tour="${tour.ten || ''}">
+            Đặt ngay
+          </a>
         </div>
-      </div>
-    `;
+      </div>`;
+    tourContent.appendChild(tabPane);
+  });
+});
 
-          tourContent.appendChild(tabPane);
-        });
-      });
+
+
+
 
       document.addEventListener("DOMContentLoaded", () => {
         const loginSection = document.getElementById('login-section');

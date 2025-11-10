@@ -414,3 +414,249 @@ VALUES
 SELECT * FROM DIADANH;
 
 
+INSERT INTO KHUNGHIDUONG 
+(TenKND, DiaChiKND, MapLinkKND, LoaiKHD, MoTaKND, ImageKND)
+VALUES
+-- 1. Sun World Bà Nà Hills
+(
+    'Sun World Bà Nà Hills',
+    'Thôn An Sơn, xã Hòa Ninh, huyện Hòa Vang, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9344.564818548868!2d108.0239637961576!3d16.027234286432954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f60e6b3844c9%3A0x5c53b85f61797909!2sSun%20World%20B%C3%A0%20N%C3%A0%20Hills!5e0!3m2!1svi!2s!4v1761386544078!5m2!1svi!2s',
+    'thiennhien',
+    'Sun World Bà Nà Hills là khu du lịch nổi tiếng với khí hậu mát mẻ quanh năm, kiến trúc châu Âu độc đáo, cáp treo hiện đại và Cầu Vàng nổi bật với bàn tay khổng lồ nâng đỡ. Du khách có thể tham quan Làng Pháp, thưởng thức ẩm thực đa dạng, tham gia các trò chơi giải trí và khám phá vườn hoa tuyệt đẹp.',
+    'anh/banahills.jpg'
+),
+
+-- 2. Asia Park
+(
+    'Asia Park',
+    'Số 1 Phan Đăng Lưu, phường Hòa Cường Bắc, quận Hải Châu, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4674680522517!2d108.22305827602098!3d16.041213884634193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219e7a191cc17%3A0xe60f91d4055e3074!2sDA%20NANG%20DOWNTOWN!5e0!3m2!1svi!2s!4v1761807407857!5m2!1svi!2s',
+    'thamquan',
+    'Asia Park là khu vui chơi giải trí hiện đại nổi bật với vòng quay Sun Wheel khổng lồ, nhiều trò chơi cảm giác mạnh, khu vực trò chơi dành cho trẻ em và các công trình kiến trúc lấy cảm hứng từ văn hóa châu Á. Du khách có thể tham gia trò chơi, chụp ảnh, thưởng thức ẩm thực và hòa mình vào không gian sôi động.',
+    'anh/AsianPark.jpg'
+),
+
+-- 3. Sky36
+(
+    'Sky36',
+    'Tầng 35–37, tòa nhà Novotel Danang Premier Han River, 36–38 Bạch Đằng, phường Thạch Thang, quận Hải Châu, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.774534854411!2d108.22126017602173!3d16.07718558460354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183ae54d6015%3A0xa61168c6e58166a2!2sSky36%20Bar%20%26%20Dining!5e0!3m2!1svi!2s!4v1761807723127!5m2!1svi!2s',
+    'thamquan',
+    'Sky36 là bar và lounge cao nhất Đà Nẵng với tầm nhìn toàn cảnh thành phố. Du khách có thể thưởng thức cocktail, âm nhạc sôi động và ngắm cảnh đêm lung linh của thành phố bên sông Hàn.',
+    'anh/Sky360.webp'
+),
+
+-- 4. Du lịch Sông Hàn
+(
+    'Du lịch Sông Hàn',
+    'Dọc hai bờ sông Hàn, trung tâm TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30671.84988975057!2d108.20529037171396!3d16.066463465190893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183d37f5d3d5%3A0xaa3ca36520c7af4c!2zU8O0bmcgSMOgbg!5e0!3m2!1svi!2s!4v1761807780504!5m2!1svi!2s',
+    'thamquan',
+    'Sông Hàn là biểu tượng của Đà Nẵng với nhiều cây cầu nổi tiếng. Du khách có thể đi du thuyền ngắm cảnh, thưởng thức ẩm thực và cảm nhận vẻ đẹp thành phố về đêm.',
+    'anh/SongHan.webp'
+),
+
+-- 5. Núi Thần Tài
+(
+    'Núi Thần Tài',
+    'Quốc lộ 14G, xã Hòa Phú, huyện Hòa Vang, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.9233624441138!2d108.01773288884141!3d15.969378796173947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f79592c03133%3A0xcb326b87969bbea3!2sNui%20Than%20Tai-%20Ebisu%20Onsen%20Resort%20Da%20Nang!5e0!3m2!1svi!2s!4v1761807841818!5m2!1svi!2s',
+    'thamquan',
+    'Núi Thần Tài là khu du lịch sinh thái nổi tiếng với suối khoáng nóng, tắm bùn, spa và cảnh quan núi rừng hùng vĩ. Phù hợp cho gia đình và nhóm bạn muốn nghỉ ngơi và thư giãn.',
+    'anh/Núi Thần Tài.png'
+),
+
+-- 6. VinWonders Nam Hội An
+(
+    'VinWonders Nam Hội An',
+    'Xã Bình Minh, huyện Thăng Bình, tỉnh Quảng Nam (gần Đà Nẵng)',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.3342878792523!2d108.40336798589529!3d15.78631784579725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420bfde49f11d1%3A0x49422ef9074e41ca!2sVinWonders%20Nam%20H%E1%BB%99i%20An!5e0!3m2!1svi!2s!4v1761807898735!5m2!1svi!2s',
+    'thamquan',
+    'VinWonders Nam Hội An là khu vui chơi giải trí hiện đại, quy mô lớn với hàng loạt trò chơi cảm giác mạnh, công viên nước, khu biểu diễn nghệ thuật và trải nghiệm văn hóa Hội An. Phù hợp cho gia đình và du khách muốn tận hưởng ngày vui chơi trọn vẹn.',
+    'anh/vin.jpg'
+),
+
+-- 7. InterContinental Danang Sun Peninsula Resort
+(
+    'InterContinental Danang Sun Peninsula Resort',
+    'Bán đảo Sơn Trà, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3832.9318215347967!2d108.30364047602232!3d16.120827384566155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d9513ec9199%3A0x5ade8a2bd4daad0d!2sInterContinental%20Danang%20Sun%20Peninsula%20Resort!5e0!3m2!1svi!2s!4v1761807957589!5m2!1svi!2s',
+    'nghiduong',
+    'InterContinental Danang Sun Peninsula Resort là khu nghỉ dưỡng 5 sao sang trọng trên bán đảo Sơn Trà, nổi bật với kiến trúc độc đáo, tầm nhìn biển tuyệt đẹp và dịch vụ đẳng cấp quốc tế.',
+    'anh/resort1.png'
+),
+
+-- 8. Furama Resort Danang
+(
+    'Furama Resort Danang',
+    '105 Võ Nguyên Giáp, phường Khuê Mỹ, quận Ngũ Hành Sơn, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.491872097083!2d108.24849317602107!3d16.03994558463522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2!2sFurama%20Resort%20Danang!5e0!3m2!1svi!2s!4v1761808163074!5m2!1svi!2s',
+    'nghiduong',
+    'Furama Resort Danang là khu nghỉ dưỡng cao cấp bên bờ biển Mỹ Khê với kiến trúc sang trọng, hồ bơi rộng, dịch vụ tiện nghi 5 sao và nhiều hoạt động giải trí.',
+    'anh/resort2.jpg'
+),
+
+-- 9. Hyatt Regency Danang Resort & Spa
+(
+    'Hyatt Regency Danang Resort & Spa',
+    '05 Trường Sa, phường Hòa Hải, quận Ngũ Hành Sơn, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.0096282167615!2d108.26162297602069!3d16.013014284658382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314210cf6a42c159%3A0xaeb535cc2b736240!2sHyatt%20Regency%20Danang%20Resort%20and%20Spa!5e0!3m2!1svi!2s!4v1761808201027!5m2!1svi!2s',
+    'nghiduong',
+    'Hyatt Regency Danang Resort & Spa là khu nghỉ dưỡng sang trọng bên bờ biển Non Nước với kiến trúc hiện đại, hồ bơi ngoài trời, spa cao cấp và nhiều tiện nghi đẳng cấp.',
+    'anh/resort3.webp'
+),
+
+-- 10. Naman Retreat
+(
+    'Naman Retreat',
+    'Trường Sa, phường Hòa Hải, quận Ngũ Hành Sơn, TP Đà Nẵng',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.940834853191!2d108.28214283884142!3d15.967554696174338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314210ffff49be83%3A0x4dc264a06ef8baa5!2sNaman%20Retreat!5e0!3m2!1svi!2s!4v1761808756039!5m2!1svi!2s',
+    'nghiduong',
+    'Naman Retreat là khu nghỉ dưỡng nổi tiếng với kiến trúc tre đặc trưng, hòa quyện thiên nhiên và không gian hiện đại. Mang đến trải nghiệm nghỉ dưỡng yên bình và sang trọng.',
+    'anh/resort4.jpg'
+),
+
+-- 11. Pullman Danang Beach Resort
+(
+  'Pullman Danang Beach Resort',
+  '101 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.47995989457!2d108.24751227602104!3d16.04056468463478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217686dfcf229%3A0xa17b1ae3b14af658!2sPullman%20Danang%20Beach%20Resort!5e0!3m2!1svi!2s!4v1761808244473!5m2!1svi!2s',
+  'nghiduong',
+  'Pullman Danang Beach Resort là khu nghỉ dưỡng cao cấp ven biển Mỹ Khê, Đà Nẵng, với các phòng nghỉ sang trọng, hồ bơi rộng, spa thư giãn và các dịch vụ ẩm thực phong phú. Đây là điểm dừng chân lý tưởng cho kỳ nghỉ gia đình hoặc du lịch kết hợp công tác.',
+  'anh/resort5.jpg'
+),
+
+-- 12. Premier Village Danang Resort
+(
+  'Premier Village Danang Resort (Managed by Accor)',
+  '99 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4506113664197!2d108.24817547602112!3d16.04208988463351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217687f97d183%3A0xee49ef38ee262430!2zUHJlbWllciBWaWxsYWdlIMSQw6AgTuG6tW5nIFJlc29ydA!5e0!3m2!1svi!2s!4v1761808272373!5m2!1svi!2s',
+  'nghiduong',
+  'Khu nghỉ dưỡng sang trọng ven biển Đà Nẵng, với các biệt thự hướng biển, hồ bơi riêng, và dịch vụ cao cấp mang đến trải nghiệm nghỉ dưỡng đẳng cấp quốc tế.',
+  'anh/resort6.jpg'
+),
+
+-- 13. Công viên Biển Đông
+(
+  'Công viên Biển Đông',
+  'Võ Nguyên Giáp, Phước Mỹ, Sơn Trà, Đà Nẵng',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.906957619848!2d108.24326187602153!3d16.070317284609338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142171781bc61df%3A0x88236faf8a5f84f8!2zQ8O0bmcgdmnDqm4gQmnhu4NuIMSQw7RuZw!5e0!3m2!1svi!2s!4v1761808305527!5m2!1svi!2s',
+  'thiennhien',
+  'Công viên ven biển nổi tiếng tại Đà Nẵng, nơi du khách có thể tản bộ, ngắm cảnh biển, thưởng thức ẩm thực đường phố và tham gia các hoạt động giải trí ngoài trời.',
+  'anh/CongVien.jpg'
+),
+
+-- 14. Hòa Phú Thành
+(
+  'Khu du lịch sinh thái Hòa Phú Thành',
+  'QL14G, Hòa Phú, Hòa Vang, Đà Nẵng',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3849.4291750182256!2d107.99154042200647!3d15.955569627200813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f77af7e9b92b%3A0xfaf4e097094874f3!2zSMOyYSBQaMO6IFRow6BuaCBUb3VyaXN0IC0gVHLGsOG7o3QgdGjDoWMgxJDDoCBO4bq1bmc!5e0!3m2!1svi!2s!4v1761808357278!5m2!1svi!2s',
+  'thiennhien',
+  'Khu du lịch sinh thái nằm ở ngoại ô Đà Nẵng, nổi bật với cảnh quan núi rừng tươi mát, suối thác, hồ nước trong xanh, thích hợp cho các hoạt động dã ngoại, cắm trại và team building.',
+  'anh/HPT.jpg'
+),
+
+-- 15. Suối Hoa
+(
+  'Khu du lịch Suối Hoa',
+  'Thôn Phú Túc, Hòa Phú, Hòa Vang, Đà Nẵng',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.0567990196837!2d107.99244637601969!3d15.958409984705195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f7e396263a2d%3A0xc5471820f69b2f53!2zS2h1IGR1IGzhu4tjaCBzaW5oIHRow6FpIFN14buRaSBIb2E!5e0!3m2!1svi!2s!4v1761808395156!5m2!1svi!2s',
+  'thiennhien',
+  'Khu du lịch nổi tiếng với suối trong xanh, vườn hoa rực rỡ và không gian yên tĩnh, thích hợp cho các chuyến dã ngoại, thư giãn và tham quan cùng gia đình.',
+  'anh/SH.jpg'
+),
+
+-- 16. Rừng dừa Cẩm Thanh
+(
+  'Rừng dừa Cẩm Thanh',
+  'Thôn Cồn Nhàn, Cẩm Thanh, Hội An, Quảng Nam',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4774.610044886419!2d108.36964843832543!3d15.878690096735962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dae60bab751%3A0x73703c9bc757a0c3!2zUuG7q25nIEThu6thIELhuqN5IE3huqt1!5e0!3m2!1svi!2s!4v1761808435977!5m2!1svi!2s',
+  'thiennhien',
+  'Rừng dừa nổi tiếng gần Hội An với những kênh rạch xanh mát, trải nghiệm thuyền tham quan, ngắm cảnh thiên nhiên hoang sơ và thưởng thức đặc sản địa phương.',
+  'anh/Rừng.jpg'
+),
+
+-- 17. Công viên APEC
+(
+  'Công viên APEC Đà Nẵng',
+  'Đường 2 Tháng 9, Bình Hiên, Hải Châu, Đà Nẵng',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30673.138145755496!2d108.18822457910159!3d16.058105500000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421930165d7dcd%3A0xf9d555ad7f300ab3!2zQ8O0bmcgVmnDqm4gQVBFQw!5e0!3m2!1svi!2s!4v1761809359663!5m2!1svi!2s',
+  'congtrinh',
+  'Công viên APEC nằm bên bờ sông Hàn, được xây dựng để phục vụ Tuần lễ Cấp cao APEC 2017. Không gian rộng, nhiều bãi cỏ, kiến trúc đẹp, là điểm check in nổi bật tại Đà Nẵng.',
+  'anh/APEC.png'
+);
+
+INSERT INTO TOUR (
+    TenTour,
+    MoTaTour,
+    GiaTour,
+    ThoiGianTour,
+    DoiTuong,
+    KhachSan,
+    ImageTour,
+    LichTrinhTour,
+    MaDiaDanh,
+    MaMonAn,
+    MaKND
+) VALUES (
+    'Khám phá Đà Nẵng – Biển, Núi, Cầu Rồng',
+    'Tour khám phá toàn diện Đà Nẵng với biển Mỹ Khê, cầu Rồng, bán đảo Sơn Trà và đèo Hải Vân. Phù hợp cho nhóm bạn trẻ hoặc người lần đầu đến Đà Nẵng.',
+    '3.000.000 – 4.000.000 VNĐ/người',
+    '3 ngày 2 đêm',
+    'Nhóm bạn trẻ, người lần đầu đến Đà Nẵng',
+    'Khách sạn 3★ trung tâm (gần cầu Rồng / Bạch Đằng)',
+    'images/cau.jpg',
+    'Ngày 1: Biển Mỹ Khê, cầu Rồng, café APEC\nNgày 2: Sơn Trà, Ngũ Hành Sơn, chợ đêm\nNgày 3: Đèo Hải Vân, hải sản Bé Mặn',
+    NULL,
+    NULL,
+    NULL
+),
+
+(
+    'Nghỉ dưỡng & Thiền tịnh',
+    'Tour nghỉ dưỡng kết hợp thiền tịnh, thư giãn tại resort 5 sao với spa, yoga và suối khoáng Núi Thần Tài. Dành cho cặp đôi hoặc người cần nghỉ ngơi.',
+    '6.000.000 – 9.000.000 VNĐ/người',
+    '3 ngày 2 đêm',
+    'Cặp đôi, người cần thư giãn',
+    'Resort 5★ như Naman Retreat / Hyatt / Pullman',
+    'images/thiendinh.jpg',
+    'Ngày 1: Check-in resort, spa, yoga\nNgày 2: Suối khoáng Núi Thần Tài\nNgày 3: Café & mua đặc sản tại Chợ Hàn',
+    NULL, NULL, NULL
+),
+
+(
+    'Giải trí & Trải nghiệm',
+    'Tour vui chơi và trải nghiệm với các điểm nổi bật như Asia Park, Bà Nà Hills, Sky36 và đặc sản Đà Nẵng. Lý tưởng cho nhóm bạn trẻ thích check-in.',
+    '5.000.000 – 7.000.000 VNĐ/người',
+    '4 ngày 3 đêm',
+    'Nhóm bạn trẻ, thích check-in',
+    'Khách sạn 4★ trung tâm hoặc ven biển Mỹ Khê',
+    'images/giaitri.jpg',
+    'Ngày 1: Asia Park & chợ đêm Helio\nNgày 2: Bà Nà Hills – Cầu Vàng\nNgày 3: Sơn Trà, Sky36, đặc sản Đà Nẵng',
+    NULL, NULL, NULL
+),
+
+(
+    'Văn hóa – Tâm linh – Ẩm thực',
+    'Tour trải nghiệm văn hóa và ẩm thực đặc sắc của Đà Nẵng, kết hợp tham quan chùa Linh Ứng, Ngũ Hành Sơn và thưởng thức món ngon địa phương.',
+    '3.500.000 – 5.000.000 VNĐ/người',
+    '3 ngày 2 đêm',
+    'Người lớn tuổi, yêu văn hóa',
+    'Khách sạn 3★ gần sông Hàn',
+    'images/chualinhung.jpg',
+    'Ngày 1: Bảo tàng Chăm, cầu Rồng\nNgày 2: Chùa Linh Ứng, Ngũ Hành Sơn\nNgày 3: Ẩm thực Chợ Cồn, café The Local Beans',
+    NULL, NULL, NULL
+),
+
+(
+    'Nghỉ dưỡng cao cấp – Trải nghiệm 5 sao',
+    'Tour nghỉ dưỡng đẳng cấp dành cho cặp đôi, tuần trăng mật hoặc khách cao cấp. Trải nghiệm tại resort 5 sao và du thuyền sông Hàn sang trọng.',
+    '10.000.000 – 15.000.000 VNĐ/người',
+    '3 ngày 2 đêm',
+    'Cặp đôi, tuần trăng mật, khách cao cấp',
+    'InterContinental / Furama Resort',
+    'images/hotel.jpg',
+    'Ngày 1: Check-in resort 5★, spa & fine dining\nNgày 2: Bà Nà Hills – Cầu Vàng\nNgày 3: Du thuyền sông Hàn & tiễn sân bay',
+    NULL, NULL, NULL
+);

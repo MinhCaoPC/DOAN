@@ -393,3 +393,65 @@
     gap: 10px;
 }
 }
+@media (max-width: 767.98px) {
+  .navbar-custom {
+    padding: 6px 14px;
+  }
+
+  .navbar-brand img {
+    height: 30px;
+  }
+
+  .navbar-toggler {
+    padding: 3px 6px;
+    font-size: 14px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  /* login-section ngoài collapse */
+  .navbar .login-section {
+    position: static;                /* bỏ absolute khi mobile */
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 6px;
+    font-size: 0.8rem;
+  }
+
+  .login-text i {
+    font-size: 0.9rem;
+    margin-right: 3px;
+  }
+}
+
+/* ======================== */
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .navbar .login-section {
+    position: static;
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 4px;
+    font-size: 0.9rem;
+  }
+
+  .login-text i {
+    font-size: 1rem;
+    margin-right: 3px;
+  }
+}
+
+
+
+
+
+
