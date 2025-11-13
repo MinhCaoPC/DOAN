@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách yêu thích</title>
-     <!-- Bootstrap -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách yêu thích</title>
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <!-- CSS riêng -->
   <link rel="stylesheet" href="YT.css">
 </head>
+
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" id="navbar">
@@ -52,88 +54,219 @@
     </div>
   </nav>
 
-<!-- banner -->
-<div class="favorite-banner">
-  <div class="favorite-banner__content">
-    <h1>Danh Sách yêu thích</h1>
-  </div>
-</div>
-
-<div class="banner-divider"></div>
-
-
-<div class="favorites-section">
-  <!-- Cột trái: danh sách phân loại -->
-  <aside class="favorites-sidebar">
-    <h2>Phân loại</h2>
-    <ul>
-      <li>Địa danh</li>
-      <li>Ẩm thực</li>
-      <li>Nghỉ dưỡng - vui chơi</li>
-    </ul>
-  </aside>
-
- <!-- Cột phải: danh sách yêu thích -->
-<div class="favorites-cards">
-
-  <div class="content-box">
-    <img src="pic/1.jpg" alt="Ẩm thực 1">
-    <div class="text-box">
-      <h3>Bún mắm nêm Đà Nẵng</h3>
-      <p>Mô tả món ăn, địa điểm, review, hoặc thông tin liên quan...</p>
- 
-   <!-- Nút nổi dưới góc phải -->
-  <div class="content-box-buttons">
-    <button class="btn-circle btn-close">
-      <i class="fa fa-times"></i>
-    </button>
-  </div>
-
+  <!-- banner -->
+  <div class="favorite-banner">
+    <div class="favorite-banner__content">
+      <h1>Danh Sách yêu thích</h1>
     </div>
   </div>
+
+  <div class="banner-divider"></div>
+
+
+  <div class="favorites-section">
+    <!-- Cột trái: danh sách phân loại -->
+    <aside class="favorites-sidebar">
+  <h2>Phân loại</h2>
+  <ul id="filter-list">
+    <li data-filter="ALL" class="active">Tất cả</li>
+    <li data-filter="DIADANH">Địa danh</li>
+    <li data-filter="MONAN">Ẩm thực</li>
+    <li data-filter="KND">Nghỉ dưỡng - vui chơi</li>
+    <li data-filter="TOUR">Tour</li>
+  </ul>
+</aside>
+
+
+
+
+
+    <!-- Cột phải: danh sách yêu thích -->
+    <div class="favorites-cards">
+
+      </div>
 
 
     </div>
   </div>
-</div>
+  </div>
 
-</div>
+  </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  let isLoggedIn = false;
+  let allFavorites = []; // lưu toàn bộ items để filter
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const loginSection = document.getElementById('login-section');
-      const navbarMenu = document.getElementById('navbarMenu');
+  // Render danh sách yêu thích (theo list đã lọc)
+  function renderFavorites(items) {
+    const container = document.querySelector(".favorites-cards");
+    container.innerHTML = "";
 
-      fetch('getUser.php')
-        .then(res => res.json())
-        .then(data => {
-          if (data.loggedIn) {
-            // Thay nội dung login-section
-            loginSection.innerHTML = `
-          
-          <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
-          <a href="dangXuat.php" class="login-text ms-3">
-            <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
-          </a>
-        `;
+    if (!items || items.length === 0) {
+      container.innerHTML = `
+        <div class="alert alert-info">
+          Bạn chưa có mục yêu thích nào. Hãy quay lại các trang Địa danh / Ẩm thực / Nghỉ dưỡng / Tour và bấm icon trái tim 💖 nhé!
+        </div>`;
+      return;
+    }
 
-            // Thay menu nếu muốn thêm mục Yêu thích
-            navbarMenu.querySelector('ul.navbar-nav').innerHTML = `
-          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
-          <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
-          <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
-          <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
-          <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
-          <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
-          <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>
-        `;
-          }
-        });
+    items.forEach((item) => {
+      const box = document.createElement("div");
+      box.className = "content-box";
+
+      // label loại cho đẹp (Địa danh / Ẩm thực / ...)
+      let label = "";
+      switch (item.loai) {
+        case "DIADANH": label = "Địa danh"; break;
+        case "MONAN": label = "Ẩm thực"; break;
+        case "KND": label = "Nghỉ dưỡng - vui chơi"; break;
+        case "TOUR": label = "Tour"; break;
+      }
+
+      box.innerHTML = `
+        <img src="${item.anh}" alt="${item.ten}">
+        <div class="text-box">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">${item.ten}</h3>
+            <span class="badge bg-primary">${label}</span>
+          </div>
+          <p>${item.moTa || ""}</p>
+
+          <div class="content-box-buttons">
+            <button class="btn-circle btn-close" onclick="removeFavorite('${item.loai}', ${item.id})">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(box);
     });
+  }
+
+  // Áp dụng filter theo loại
+  function applyFilter(type) {
+    let filtered = allFavorites;
+
+    if (type && type !== "ALL") {
+      filtered = allFavorites.filter((item) => item.loai === type);
+    }
+
+    renderFavorites(filtered);
+  }
+
+  // Xóa khỏi yêu thích
+  async function removeFavorite(loai, id) {
+    if (!confirm("Bạn chắc chắn muốn xóa mục này khỏi danh sách yêu thích?")) return;
+
+    try {
+      const res = await fetch("YT.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "remove",
+          loai: loai,
+          id: id,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Đã xóa khỏi danh sách yêu thích.");
+        loadFavorites();
+      } else {
+        alert("⚠️ " + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Có lỗi khi xóa yêu thích.");
+    }
+  }
+
+  // Load danh sách yêu thích từ server
+  async function loadFavorites() {
+    try {
+      const res = await fetch("YTList.php", { cache: "no-store" });
+      const data = await res.json();
+
+      if (!data.loggedIn) {
+        alert("Bạn cần đăng nhập để xem mục yêu thích.");
+        window.location.href = "dangNhap.html";
+        return;
+      }
+
+      isLoggedIn = true;
+      allFavorites = data.items || [];
+      // mặc định hiển thị tất cả
+      applyFilter("ALL");
+    } catch (err) {
+      console.error(err);
+      const container = document.querySelector(".favorites-cards");
+      container.innerHTML = `<div class="alert alert-danger">Không tải được danh sách yêu thích.</div>`;
+    }
+  }
+
+  // ========= INIT =========
+  document.addEventListener("DOMContentLoaded", () => {
+    const loginSection = document.getElementById('login-section');
+    const navbarMenu = document.getElementById('navbarMenu');
+
+    // setup click filter
+    const filterList = document.getElementById("filter-list");
+    if (filterList) {
+      filterList.querySelectorAll("li").forEach((li) => {
+        li.addEventListener("click", () => {
+          filterList.querySelectorAll("li").forEach((x) => x.classList.remove("active"));
+          li.classList.add("active");
+          const type = li.dataset.filter || "ALL";
+          applyFilter(type);
+        });
+      });
+    }
+
+    // check user + load favorites
+    fetch('getUser.php')
+      .then(res => res.json())
+      .then(data => {
+        if (data.loggedIn) {
+          isLoggedIn = true;
+
+          // Thay nội dung login-section
+          loginSection.innerHTML = `
+            <a class="login-text" href="suaHS.html">
+              <i class="bi bi-person-circle me-2 fs-5"></i>${data.TenTaiKhoan}
+            </a>
+            <a href="dangXuat.php" class="login-text ms-3">
+              <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
+            </a>
+          `;
+
+          // Thêm mục yêu thích vào menu
+          navbarMenu.querySelector('ul.navbar-nav').innerHTML = `
+            <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+            <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
+            <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
+            <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
+            <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
+            <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
+            <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>
+          `;
+        }
+
+        // Dù login hay không, loadFavorites sẽ tự xử lý redirect
+        loadFavorites();
+      });
+  });
 </script>
 
+
+
+
+
 </body>
+
 </html>

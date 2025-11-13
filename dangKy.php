@@ -55,9 +55,14 @@ try {
     $MaSoTK = $row['MaSoTK'];
 
     // 5) Thêm KHÁCH HÀNG
-    $stmt_kh = $conn->prepare("INSERT INTO KHACHHANG (HoTen, Email, MaSoTK) VALUES (?, ?, ?)");
-    $stmt_kh->bind_param("sss", $TenTaiKhoan, $Email, $MaSoTK);
+  $stmt_kh = $conn->prepare("
+    INSERT INTO KHACHHANG (HoVaTen, GioiTinh, NgaySinh, SDT, MaSoTK)
+    VALUES (?, NULL, NULL, NULL, ?)");
+    $stmt_kh->bind_param("ss", $TenTaiKhoan, $MaSoTK);
     $stmt_kh->execute();
+
+
+
 
     // 6) Lưu session + trả OK
     $_SESSION['MaSoTK']      = $MaSoTK;

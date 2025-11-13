@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', loadKND);
             : ""
           }
               
-              <button class="btn btn-outline-success nuthanhdong" onclick="handleYeuThich()">
+              <button class="btn btn-outline-success nuthanhdong" onclick="handleYeuThich(${diaDanh.id})">
                 <i class="bi bi-heart"></i>
               </button>
             </div>
@@ -291,15 +291,49 @@ document.addEventListener('DOMContentLoaded', loadKND);
     // YÊU THÍCH
     // ===========================
     let isLoggedIn = false;
-    function handleYeuThich() {
+    async function handleYeuThich(id) {
       if (!isLoggedIn) {
-        const goLogin = confirm(
-          "Bạn cần đăng nhập hoặc đăng ký để yêu thích địa danh. Bạn có muốn đăng nhập ngay không?"
-        );
+        const goLogin = confirm("Vui lòng đăng nhập để thêm địa danh vào yêu thích!");
         if (goLogin) window.location.href = "dangNhap.html";
-      } else {
-        alert("💖 Đã thêm vào danh sách yêu thích!");
+        return;
+
       }
+      try {
+        const res = await fetch("YT.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "add",
+            loai: "KND",
+            id: id,
+          }),
+        });
+        const data = await res.json();
+        if (data.needLogin) {
+          alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập!");
+          window.location.href = "dangNhap.html";
+          return;
+        }
+        if (data.success) {
+          alert(data.message || "Đã thêm vào mục yêu thích!");
+        } else {
+          alert(data.message || "Mục này đã có trong mục yêu thích!");
+        }
+
+
+
+
+
+
+
+      }
+      catch (err) {
+        console.error(err);
+        alert("Đã có lỗi xảy ra. Vui lòng thử lại sau!");
+      }
+
     }
 
     // ===========================
@@ -320,6 +354,7 @@ document.addEventListener('DOMContentLoaded', loadKND);
         .then(res => res.json())
         .then(data => {
           if (data.loggedIn) {
+            isLoggedIn = true;
             // Thay nội dung login-section
             loginSection.innerHTML = `
           <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>

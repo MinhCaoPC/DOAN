@@ -1,4 +1,4 @@
-<?php
+<?php 
 // tour.php
 header('Content-Type: application/json; charset=utf-8');
 require_once 'config.php'; // $conn = new mysqli(...)
@@ -26,31 +26,39 @@ try {
     $tours = [];
 
     while ($row = $res->fetch_assoc()) {
-        // Parse lịch trình: nếu cột LichTrinhTour là JSON array thì decode,
-        // còn không thì tách theo dòng/newline.
+        // Parse lịch trình
         $lichTrinhRaw = trim((string)($row['LichTrinhTour'] ?? ''));
         $lichTrinh = [];
 
         if ($lichTrinhRaw !== '') {
-            // Thử decode JSON
             $decoded = json_decode($lichTrinhRaw, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                $lichTrinh = array_values(array_filter(array_map('trim', $decoded), fn($s) => $s !== ''));
+                $lichTrinh = array_values(
+                    array_filter(
+                        array_map('trim', $decoded),
+                        fn($s) => $s !== ''
+                    )
+                );
             } else {
-                // Tách newline
                 $lichTrinh = preg_split("/\r\n|\r|\n/", $lichTrinhRaw);
-                $lichTrinh = array_values(array_filter(array_map('trim', $lichTrinh), fn($s) => $s !== ''));
+                $lichTrinh = array_values(
+                    array_filter(
+                        array_map('trim', $lichTrinh),
+                        fn($s) => $s !== ''
+                    )
+                );
             }
         }
 
         $tours[] = [
+            'id'        => (int)$row['MaTour'],     
             'ten'       => $row['TenTour'] ?? '',
             'moTa'      => $row['MoTaTour'] ?? '',
             'thoiGian'  => $row['ThoiGianTour'] ?? '',
             'gia'       => $row['GiaTour'] ?? '',
             'doiTuong'  => $row['DoiTuong'] ?? '',
             'khachSan'  => $row['KhachSan'] ?? '',
-            'anh'       => $row['ImageTour'] ?? '',   // đường dẫn ảnh
+            'anh'       => $row['ImageTour'] ?? '',
             'lichTrinh' => $lichTrinh
         ];
     }

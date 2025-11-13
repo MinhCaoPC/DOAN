@@ -124,249 +124,6 @@
     <div id="ThuongThucList"></div>
 
 
-    <script>
-  // ======= STATE =======
-  let allItems = [];          // toàn bộ từ DB
-  let listPhan1 = [];         // != 'thuongthuc'
-  let listThuongThuc = [];    // == 'thuongthuc'
-  let currentGroup = 'dacSan'; // mặc định nút đầu tiên
-
-
-  // ======= LOAD FROM DB =======
-  async function loadMonAn() {
-    try {
-      const res = await fetch('Food.php', { cache: 'no-store' });
-      if (!res.ok) throw new Error('Load failed');
-      const data = await res.json();
-
-
-      // Chuẩn hóa key cho dễ dùng ở dưới
-      allItems = (data || []).map(d => ({
-        id: d.MaMonAn,
-        ten: d.TenMonAn,
-        moTa: d.MoTaMonAn,
-        diaChi: d.DiaChiMonAn,
-        gia: d.GiaMonAn,
-        anh: d.ImageLinkMonAn,
-        nhom: d.LoaiMonAn,        // 'dacSan' | 'haiSan' | 'duongPho' | 'dacSanQua' | 'thuongthuc'
-        map: d.MapLinkMonAn       // iframe link
-      }));
-
-
-      listThuongThuc = allItems.filter(x => x.nhom === 'thuongthuc');
-      listPhan1 = allItems.filter(x => x.nhom !== 'thuongthuc');
-
-
-      renderMonAn();            // vẽ Phần 1
-      renderThuongThuc();       // vẽ Phần 2
-    } catch (err) {
-      console.error(err);
-      document.getElementById('MonAnDN').innerHTML =
-        `<div class="alert alert-danger">Không tải được dữ liệu món ăn.</div>`;
-    }
-  }
-
-
-  // ======= RENDER PHẦN 1 =======
-  function renderMonAn(listOverride) {
-    const container = document.getElementById('MonAnDN');
-    const kwEl = document.getElementById('searchInput');
-    const kw = (kwEl?.value || '').trim().toLowerCase();
-
-
-    // nguồn: listPhan1 (trừ 'thuongthuc')
-    let items = Array.isArray(listOverride) ? listOverride : listPhan1;
-
-
-    // lọc theo group (4 nút) + keyword
-    items = items.filter(d =>
-      (currentGroup === 'all' || d.nhom === currentGroup) &&
-      (
-        kw === '' ||
-        (d.ten && d.ten.toLowerCase().includes(kw)) ||
-        (d.moTa && d.moTa.toLowerCase().includes(kw))
-      )
-    );
-
-
-    container.innerHTML = '';
-    if (items.length === 0) {
-      container.innerHTML = `<p class="text-center text-muted">Không có món nào phù hợp.</p>`;
-      return;
-    }
-
-
-    items.forEach((it, idx) => {
-      const hasMap = !!it.map;
-      const html = `
-        <div class="content-box fade-in mb-4" id="item-${idx}">
-          <div id="media-${idx}" class="media-box" data-showing="image">
-            <img src="${it.anh}" alt="${it.ten}" class="media-img rounded shadow-sm" />
-          </div>
-
-
-          <div class="text-box mt-3">
-            <h5 class="text-center fw-bold">${it.ten || ''}</h5>
-            ${it.moTa ? `<p class="mo-ta mb-2">${it.moTa}</p>` : ''}
-            ${it.diaChi ? `<p class="mo-ta mb-2">${it.diaChi}</p>` : ''}
-            ${it.gia ? `<p class="mo-ta mb-2">${it.gia}</p>` : ''}
-          </div>
-
-
-          <div class="actions-fixed">
-            ${hasMap ? `
-              <button class="btn-action btn-icon btn-map" id="btnMap-${idx}"
-                      title="Xem bản đồ / ảnh"
-                      onclick="toggleMap(${idx}, '${encodeURIComponent(it.anh)}', '${encodeURIComponent(it.map)}')">
-                <i class="bi bi-geo-alt"></i>
-              </button>` : ''
-            }
-            <button class="btn-action btn-fav" onclick="handleYeuThich()" title="Yêu thích">
-              <i class="bi bi-heart"></i>
-            </button>
-          </div>
-        </div>`;
-      container.insertAdjacentHTML('beforeend', html);
-    });
-  }
-
-
-  // ảnh <-> map cho Phần 1
-  function toggleMap(index, imgPathEncoded, mapLinkEncoded) {
-    const imgPath = decodeURIComponent(imgPathEncoded);
-    const mapLink = decodeURIComponent(mapLinkEncoded);
-    const mediaDiv = document.getElementById(`media-${index}`);
-    const btn = document.getElementById(`btnMap-${index}`);
-    if (!mediaDiv) return;
-
-
-    const showing = mediaDiv.dataset.showing;
-    if (showing === 'map') {
-      mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh" class="media-img rounded shadow-sm">`;
-      mediaDiv.dataset.showing = 'image';
-      btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-geo-alt');
-    } else {
-      mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
-      mediaDiv.dataset.showing = 'map';
-      btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-image');
-    }
-  }
-
-
-  // ======= SEARCH =======
-  function searchMonAn(e) {
-    e?.preventDefault?.();
-    renderMonAn();
-    return false;
-  }
-
-
-  // ======= FILTER BY GROUP (4 nút phần 1) =======
-  function toggleSection(loai, e) {
-    document.querySelectorAll('.btn-food').forEach(b => b.classList.remove('active'));
-    e?.target?.classList?.add('active');
-
-
-    if (loai === 'haiSan') currentGroup = 'haiSan';
-    else if (loai === 'duongPho') currentGroup = 'duongPho';
-    else if (loai === 'Qua') currentGroup = 'dacSanQua';
-    else currentGroup = 'dacSan';
-
-
-    renderMonAn();
-  }
-
-
-  // ======= PHẦN 2: THƯỞNG THỨC =======
-  function renderThuongThuc() {
-    const wrap = document.getElementById('ThuongThucList');
-    if (!wrap) return;
-
-
-    wrap.innerHTML = '';
-    if (listThuongThuc.length === 0) {
-      wrap.innerHTML = `<p class="text-center text-muted">Chưa có dữ liệu không gian & phong cách thưởng thức.</p>`;
-      return;
-    }
-
-
-    listThuongThuc.forEach((p, idx) => {
-      const hasMap = !!p.map;
-      const html = `
-        <div class="info-box" id="tt-item-${idx}">
-          <div id="tt-media-${idx}" class="info-image" data-showing="image">
-            <img src="${p.anh}" alt="${p.ten || ''}" />
-          </div>
-
-
-          <div class="info-content">
-            <h5 class="text-center"><b>${p.ten || ''}</b></h5>
-            ${p.diaChi ? `<p><b>Địa chỉ:</b> ${p.diaChi}</p>` : ''}
-            ${p.gia ? `<p><b>Giá tham khảo:</b> ${p.gia}</p>` : ''}
-            <p>${p.moTa || ''}</p>
-          </div>
-
-
-          <div class="actions-fixed">
-            ${hasMap ? `
-              <button class="btn-action btn-icon btn-map" id="tt-btnMap-${idx}"
-                      title="Xem bản đồ / ảnh"
-                      onclick="toggleMapTT(${idx}, '${encodeURIComponent(p.anh)}', '${encodeURIComponent(p.map)}')">
-                <i class="bi bi-geo-alt"></i>
-              </button>` : ''
-            }
-            <button class="btn-action btn-fav" onclick="handleYeuThich()" title="Yêu thích">
-              <i class="bi bi-heart"></i>
-            </button>
-          </div>
-        </div>`;
-      wrap.insertAdjacentHTML('beforeend', html);
-    });
-  }
-
-
-  // ảnh <-> map cho Phần 2
-  function toggleMapTT(index, imgPathEncoded, mapLinkEncoded) {
-    const imgPath = decodeURIComponent(imgPathEncoded);
-    const mapLink = decodeURIComponent(mapLinkEncoded);
-    const mediaDiv = document.getElementById(`tt-media-${index}`);
-    const btn = document.getElementById(`tt-btnMap-${index}`);
-    if (!mediaDiv) return;
-
-
-    const showing = mediaDiv.dataset.showing;
-    if (showing === 'map') {
-      mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa điểm" />`;
-      mediaDiv.dataset.showing = 'image';
-      btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-geo-alt');
-    } else {
-      mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
-      mediaDiv.dataset.showing = 'map';
-      btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-image');
-    }
-  }
-
-
-  // ======= YÊU THÍCH (giữ như cũ) =======
-  let isLoggedIn = false;
-  function handleYeuThich() {
-    if (!isLoggedIn) {
-      const goLogin = confirm('Bạn cần đăng nhập để yêu thích. Đi đến trang đăng nhập?');
-      if (goLogin) window.location.href = 'dangNhap.html';
-      return;
-    }
-    alert('💖 Đã thêm vào danh sách yêu thích!');
-  }
-
-
-  // ======= INIT =======
-  document.addEventListener('DOMContentLoaded', () => {
-    // đánh dấu nút đầu tiên active
-    document.querySelector('.btn-food')?.classList.add('active');
-    // nạp dữ liệu
-    loadMonAn();
-  });
-</script>
 
 
 
@@ -375,7 +132,8 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
   </div>
 
@@ -424,8 +182,286 @@
       <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
     </div>
   </footer>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    isLoggedIn = false;
+    // ======= STATE =======
+    let allItems = [];          // toàn bộ từ DB
+    let listPhan1 = [];         // != 'thuongthuc'
+    let listThuongThuc = [];    // == 'thuongthuc'
+    let currentGroup = 'dacSan'; // mặc định nút đầu tiên
+
+
+    // ======= LOAD FROM DB =======
+    async function loadMonAn() {
+      try {
+        const res = await fetch('Food.php', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Load failed');
+        const data = await res.json();
+
+
+        // Chuẩn hóa key cho dễ dùng ở dưới
+        allItems = (data || []).map(d => ({
+          id: d.MaMonAn,
+          ten: d.TenMonAn,
+          moTa: d.MoTaMonAn,
+          diaChi: d.DiaChiMonAn,
+          gia: d.GiaMonAn,
+          anh: d.ImageLinkMonAn,
+          nhom: d.LoaiMonAn,        // 'dacSan' | 'haiSan' | 'duongPho' | 'dacSanQua' | 'thuongthuc'
+          map: d.MapLinkMonAn       // iframe link
+        }));
+
+
+        listThuongThuc = allItems.filter(x => x.nhom === 'thuongthuc');
+        listPhan1 = allItems.filter(x => x.nhom !== 'thuongthuc');
+
+
+        renderMonAn();            // vẽ Phần 1
+        renderThuongThuc();       // vẽ Phần 2
+      } catch (err) {
+        console.error(err);
+        document.getElementById('MonAnDN').innerHTML =
+          `<div class="alert alert-danger">Không tải được dữ liệu món ăn.</div>`;
+      }
+    }
+
+
+    // ======= RENDER PHẦN 1 =======
+    function renderMonAn(listOverride) {
+      const container = document.getElementById('MonAnDN');
+      const kwEl = document.getElementById('searchInput');
+      const kw = (kwEl?.value || '').trim().toLowerCase();
+
+
+      // nguồn: listPhan1 (trừ 'thuongthuc')
+      let items = Array.isArray(listOverride) ? listOverride : listPhan1;
+
+
+      // lọc theo group (4 nút) + keyword
+      items = items.filter(d =>
+        (currentGroup === 'all' || d.nhom === currentGroup) &&
+        (
+          kw === '' ||
+          (d.ten && d.ten.toLowerCase().includes(kw)) ||
+          (d.moTa && d.moTa.toLowerCase().includes(kw))
+        )
+      );
+
+
+      container.innerHTML = '';
+      if (items.length === 0) {
+        container.innerHTML = `<p class="text-center text-muted">Không có món nào phù hợp.</p>`;
+        return;
+      }
+
+
+      items.forEach((it, idx) => {
+        const hasMap = !!it.map;
+        const html = `
+        <div class="content-box fade-in mb-4" id="item-${idx}">
+          <div id="media-${idx}" class="media-box" data-showing="image">
+            <img src="${it.anh}" alt="${it.ten}" class="media-img rounded shadow-sm" />
+          </div>
+
+
+          <div class="text-box mt-3">
+            <h5 class="text-center fw-bold">${it.ten || ''}</h5>
+            ${it.moTa ? `<p class="mo-ta mb-2">${it.moTa}</p>` : ''}
+            ${it.diaChi ? `<p class="mo-ta mb-2">${it.diaChi}</p>` : ''}
+            ${it.gia ? `<p class="mo-ta mb-2">${it.gia}</p>` : ''}
+          </div>
+
+
+          <div class="actions-fixed">
+            ${hasMap ? `
+              <button class="btn-action btn-icon btn-map" id="btnMap-${idx}"
+                      title="Xem bản đồ / ảnh"
+                      onclick="toggleMap(${idx}, '${encodeURIComponent(it.anh)}', '${encodeURIComponent(it.map)}')">
+                <i class="bi bi-geo-alt"></i>
+              </button>` : ''
+          }
+            <button class="btn-action btn-fav" onclick="handleYeuThich(${it.id})" title="Yêu thích">
+              <i class="bi bi-heart"></i>
+            </button>
+          </div>
+        </div>`;
+        container.insertAdjacentHTML('beforeend', html);
+      });
+    }
+
+
+    // ảnh <-> map cho Phần 1
+    function toggleMap(index, imgPathEncoded, mapLinkEncoded) {
+      const imgPath = decodeURIComponent(imgPathEncoded);
+      const mapLink = decodeURIComponent(mapLinkEncoded);
+      const mediaDiv = document.getElementById(`media-${index}`);
+      const btn = document.getElementById(`btnMap-${index}`);
+      if (!mediaDiv) return;
+
+
+      const showing = mediaDiv.dataset.showing;
+      if (showing === 'map') {
+        mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh" class="media-img rounded shadow-sm">`;
+        mediaDiv.dataset.showing = 'image';
+        btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-geo-alt');
+      } else {
+        mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+        mediaDiv.dataset.showing = 'map';
+        btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-image');
+      }
+    }
+
+
+    // ======= SEARCH =======
+    function searchMonAn(e) {
+      e?.preventDefault?.();
+      renderMonAn();
+      return false;
+    }
+
+
+    // ======= FILTER BY GROUP (4 nút phần 1) =======
+    function toggleSection(loai, e) {
+      document.querySelectorAll('.btn-food').forEach(b => b.classList.remove('active'));
+      e?.target?.classList?.add('active');
+
+
+      if (loai === 'haiSan') currentGroup = 'haiSan';
+      else if (loai === 'duongPho') currentGroup = 'duongPho';
+      else if (loai === 'Qua') currentGroup = 'dacSanQua';
+      else currentGroup = 'dacSan';
+
+
+      renderMonAn();
+    }
+
+
+    // ======= PHẦN 2: THƯỞNG THỨC =======
+    function renderThuongThuc() {
+      const wrap = document.getElementById('ThuongThucList');
+      if (!wrap) return;
+
+
+      wrap.innerHTML = '';
+      if (listThuongThuc.length === 0) {
+        wrap.innerHTML = `<p class="text-center text-muted">Chưa có dữ liệu không gian & phong cách thưởng thức.</p>`;
+        return;
+      }
+
+
+      listThuongThuc.forEach((p, idx) => {
+        const hasMap = !!p.map;
+        const html = `
+        <div class="info-box" id="tt-item-${idx}">
+          <div id="tt-media-${idx}" class="info-image" data-showing="image">
+            <img src="${p.anh}" alt="${p.ten || ''}" />
+          </div>
+
+
+          <div class="info-content">
+            <h5 class="text-center"><b>${p.ten || ''}</b></h5>
+            ${p.diaChi ? `<p><b>Địa chỉ:</b> ${p.diaChi}</p>` : ''}
+            ${p.gia ? `<p><b>Giá tham khảo:</b> ${p.gia}</p>` : ''}
+            <p>${p.moTa || ''}</p>
+          </div>
+
+
+          <div class="actions-fixed">
+            ${hasMap ? `
+              <button class="btn-action btn-icon btn-map" id="tt-btnMap-${idx}"
+                      title="Xem bản đồ / ảnh"
+                      onclick="toggleMapTT(${idx}, '${encodeURIComponent(p.anh)}', '${encodeURIComponent(p.map)}')">
+                <i class="bi bi-geo-alt"></i>
+              </button>` : ''
+          }
+            <button class="btn-action btn-fav" onclick="handleYeuThich(${p.id})" title="Yêu thích">
+              <i class="bi bi-heart"></i>
+            </button>
+          </div>
+        </div>`;
+        wrap.insertAdjacentHTML('beforeend', html);
+      });
+    }
+
+
+    // ảnh <-> map cho Phần 2
+    function toggleMapTT(index, imgPathEncoded, mapLinkEncoded) {
+      const imgPath = decodeURIComponent(imgPathEncoded);
+      const mapLink = decodeURIComponent(mapLinkEncoded);
+      const mediaDiv = document.getElementById(`tt-media-${index}`);
+      const btn = document.getElementById(`tt-btnMap-${index}`);
+      if (!mediaDiv) return;
+
+
+      const showing = mediaDiv.dataset.showing;
+      if (showing === 'map') {
+        mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa điểm" />`;
+        mediaDiv.dataset.showing = 'image';
+        btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-geo-alt');
+      } else {
+        mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+        mediaDiv.dataset.showing = 'map';
+        btn?.firstElementChild && (btn.firstElementChild.className = 'bi bi-image');
+      }
+    }
+
+
+
+
+
+    // ======= INIT =======
+    document.addEventListener('DOMContentLoaded', () => {
+      // đánh dấu nút đầu tiên active
+      document.querySelector('.btn-food')?.classList.add('active');
+      // nạp dữ liệu
+      loadMonAn();
+    });
+
+    async function handleYeuThich(id) {
+      if (!isLoggedIn) {
+        const goLogin = confirm("Vui lòng đăng nhập để thêm địa danh vào yêu thích!");
+        if (goLogin) window.location.href = "dangNhap.html";
+        return;
+
+      }
+      try {
+        const res = await fetch("YT.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "add",
+            loai: "MONAN",
+            id: id,
+          }),
+        });
+        const data = await res.json();
+        if (data.needLogin) {
+          alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập!");
+          window.location.href = "dangNhap.html";
+          return;
+        }
+        if (data.success) {
+          alert(data.message || "Đã thêm vào mục yêu thích!");
+        } else {
+          alert(data.message || "Mục này đã có trong mục yêu thích!");
+        }
+
+
+
+
+
+
+
+      }
+      catch (err) {
+        console.error(err);
+        alert("Đã có lỗi xảy ra. Vui lòng thử lại sau!");
+      }
+
+    }
     document.addEventListener("DOMContentLoaded", () => {
       const loginSection = document.getElementById('login-section');
       const navbarMenu = document.getElementById('navbarMenu');
@@ -434,6 +470,7 @@
         .then(res => res.json())
         .then(data => {
           if (data.loggedIn) {
+            isLoggedIn = true;
             // Thay nội dung login-section
             loginSection.innerHTML = `
           <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>

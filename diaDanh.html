@@ -1,370 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Địa Danh Du Lịch</title>
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
 
-    <!-- CSS riêng -->
-    <link rel="stylesheet" href="diaDanh.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Địa Danh Du Lịch</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-      <div class="container">
-        <!-- Logo -->
-        <a class="navbar-logo-fixed" href="#">
-          <img src="images/logo.png" alt="Logo" class="logo-fixed" />
-        </a>
+  <!-- CSS riêng -->
+  <link rel="stylesheet" href="diaDanh.css" />
+</head>
 
-        <!-- Toggler -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarMenu"
-        >
-          <span class="navbar-toggler-icon"></span>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-logo-fixed" href="#">
+        <img src="images/logo.png" alt="Logo" class="logo-fixed" />
+      </a>
+
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="TrangChu.html">TRANG CHỦ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Food.html">ẨM THỰC</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tour.html">TOUR</a>
+          </li>
+        </ul>
+
+        <div class="login-section" id="login-section">
+          <a href="dangNhap.html" class="login-text">
+            <i class="bi bi-person-circle me-2 fs-5"></i>ĐĂNG NHẬP
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <section id="banner" class="position-relative text-center text-light">
+    <img src="anh/banner_diadanh.jpg" alt="Banner" class="banner-img w-100" />
+    <div class="banner-overlay"></div>
+
+    <!-- Thanh tìm kiếm -->
+    <div class="search-container position-absolute top-50 start-50 translate-middle text-center">
+      <h2 class="mb-4 fw-bold text-shadow">Khám Phá Địa Danh Đà Nẵng</h2>
+
+      <form class="search-form position-relative d-inline-block" onsubmit="return searchDiaDanh(event)">
+        <input id="searchInput" type="text" class="form-control search-input" placeholder="Tìm kiếm địa danh..." />
+        <button class="btn-search" type="submit">
+          <i class="bi bi-search"></i>
         </button>
+      </form>
+    </div>
+  </section>
 
-        <!-- Menu -->
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarMenu"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="TrangChu.html">TRANG CHỦ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">ĐỊA DANH NỔI BẬT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="Food.html">ẨM THỰC</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tour.html">TOUR</a>
-            </li>
+  <!-- Giới thiệu + Phân loại -->
+  <section id="diadanh" class="diadanh-section">
+    <div class="intro danang-desc">
+      <p>
+        Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố
+        đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm không
+        ngừng nghỉ.
+        <br /><br />
+        Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán đảo
+        Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê, sự lãng mạn của sông Hàn và
+        nhịp sống đô thị thông minh, hiện đại. Từ Cầu Rồng phun lửa rực rỡ đến
+        Bà Nà Hills như xứ sở cổ tích – Đà Nẵng luôn biết cách chinh phục trái
+        tim du khách.
+      </p>
+    </div>
+
+    <div class="text-center mb-4 buttons">
+      <button class="btn-food active" onclick="toggleSection('dacSan', event)">
+        Địa danh
+      </button>
+      <button class="btn-food" onclick="toggleSection('haiSan', event)">
+        Địa danh thiên nhiên
+      </button>
+      <button class="btn-food" onclick="toggleSection('duongPho', event)">
+        Địa danh công trình kiến trúc
+      </button>
+      <button class="btn-food" onclick="toggleSection('Qua', event)">
+        Địa danh văn hoá - nghệ thuật
+      </button>
+    </div>
+    <section class="content-section">
+      <div id="DiaDanhDN" class="wrapper"></div>
+    </section>
+  </section>
+
+  <!-- 🌊 Footer -->
+  <footer class="footer text-light">
+    <div class="container py-5">
+      <div class="row gy-4">
+        <!-- Logo & Mô tả -->
+        <div class="col-md-4">
+          <h3 class="footer-logo">Đà Nẵng Travel</h3>
+          <p>
+            Khám phá vẻ đẹp Đà Nẵng – thành phố đáng sống nhất Việt Nam. Chúng
+            tôi mang đến những trải nghiệm du lịch độc đáo và tiện lợi.
+          </p>
+        </div>
+
+        <!-- Liên kết nhanh -->
+        <div class="col-md-4">
+          <h5>Liên kết nhanh</h5>
+          <ul class="footer-links">
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="diaDanh.html">Địa Danh</a></li>
+            <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
+            <li><a href="Food.html">Ẩm thực</a></li>
+            <li><a href="tour.html">Tour</a></li>
+            <li><a href="lienhe.html">Liên hệ</a></li>
           </ul>
+        </div>
 
-          <div class="login-section" id="login-section">
-            <a href="dangNhap.html" class="login-text">
-              <i class="bi bi-person-circle me-2 fs-5"></i>ĐĂNG NHẬP
-            </a>
+        <!-- Liên hệ & Mạng xã hội -->
+        <div class="col-md-4">
+          <h5>Liên hệ</h5>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> 123 Đường Bạch Đằng, Đà Nẵng
+          </p>
+          <p><i class="fas fa-phone"></i> 0901 234 567</p>
+          <p><i class="fas fa-envelope"></i> info@danangtravel.vn</p>
+
+          <div class="social-icons mt-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
 
-    <!-- Banner -->
-    <section id="banner" class="position-relative text-center text-light">
-      <img src="anh/banner_diadanh.jpg" alt="Banner" class="banner-img w-100" />
-      <div class="banner-overlay"></div>
+    <div class="footer-bottom text-center py-3">
+      <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
+    </div>
+  </footer>
 
-      <!-- Thanh tìm kiếm -->
-      <div
-        class="search-container position-absolute top-50 start-50 translate-middle text-center"
-      >
-        <h2 class="mb-4 fw-bold text-shadow">Khám Phá Địa Danh Đà Nẵng</h2>
+  <!-- JS -->
+  <script>
+    // ========= STATE =========
+    let diaDanhList = [];
+    let isLoggedIn = false; // bạn đang có check đăng nhập ở dưới
 
-        <form
-          class="search-form position-relative d-inline-block"
-          onsubmit="return searchDiaDanh(event)"
-        >
-          <input
-            id="searchInput"
-            type="text"
-            class="form-control search-input"
-            placeholder="Tìm kiếm địa danh..."
-          />
-          <button class="btn-search" type="submit">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Giới thiệu + Phân loại -->
-    <section id="diadanh" class="diadanh-section">
-      <div class="intro danang-desc">
-        <p>
-          Nằm ngay trung tâm dải đất hình chữ S, Đà Nẵng không chỉ là “thành phố
-          đáng sống nhất Việt Nam” mà còn là một cổng ngõ trải nghiệm không
-          ngừng nghỉ.
-          <br /><br />
-          Nơi đây hội tụ một bản giao hưởng hài hòa: vẻ đẹp hùng vĩ của bán đảo
-          Sơn Trà, sự quyến rũ của bãi biển Mỹ Khê, sự lãng mạn của sông Hàn và
-          nhịp sống đô thị thông minh, hiện đại. Từ Cầu Rồng phun lửa rực rỡ đến
-          Bà Nà Hills như xứ sở cổ tích – Đà Nẵng luôn biết cách chinh phục trái
-          tim du khách.
-        </p>
-      </div>
-
-      <div class="text-center mb-4 buttons">
-        <button
-          class="btn-food active"
-          onclick="toggleSection('dacSan', event)"
-        >
-          Địa danh
-        </button>
-        <button class="btn-food" onclick="toggleSection('haiSan', event)">
-          Địa danh thiên nhiên
-        </button>
-        <button class="btn-food" onclick="toggleSection('duongPho', event)">
-          Địa danh công trình kiến trúc
-        </button>
-        <button class="btn-food" onclick="toggleSection('Qua', event)">
-          Địa danh văn hoá - nghệ thuật
-        </button>
-      </div>
-      <section class="content-section">
-        <div id="DiaDanhDN" class="wrapper"></div>
-      </section>
-    </section>
-
-    <!-- 🌊 Footer -->
-    <footer class="footer text-light">
-      <div class="container py-5">
-        <div class="row gy-4">
-          <!-- Logo & Mô tả -->
-          <div class="col-md-4">
-            <h3 class="footer-logo">Đà Nẵng Travel</h3>
-            <p>
-              Khám phá vẻ đẹp Đà Nẵng – thành phố đáng sống nhất Việt Nam. Chúng
-              tôi mang đến những trải nghiệm du lịch độc đáo và tiện lợi.
-            </p>
-          </div>
-
-          <!-- Liên kết nhanh -->
-          <div class="col-md-4">
-            <h5>Liên kết nhanh</h5>
-            <ul class="footer-links">
-              <li><a href="#about">Giới thiệu</a></li>
-              <li><a href="diaDanh.html">Địa Danh</a></li>
-              <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
-              <li><a href="Food.html">Ẩm thực</a></li>
-              <li><a href="tour.html">Tour</a></li>
-              <li><a href="lienhe.html">Liên hệ</a></li>
-            </ul>
-          </div>
-
-          <!-- Liên hệ & Mạng xã hội -->
-          <div class="col-md-4">
-            <h5>Liên hệ</h5>
-            <p>
-              <i class="fas fa-map-marker-alt"></i> 123 Đường Bạch Đằng, Đà Nẵng
-            </p>
-            <p><i class="fas fa-phone"></i> 0901 234 567</p>
-            <p><i class="fas fa-envelope"></i> info@danangtravel.vn</p>
-
-            <div class="social-icons mt-3">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom text-center py-3">
-        <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
-      </div>
-    </footer>
-
-    <!-- JS -->
-    <script>
-      // ========= STATE =========
-      let diaDanhList = [];
-      let isLoggedIn = false; // bạn đang có check đăng nhập ở dưới
-
-      // ========= LOAD FROM DB =========
-      async function loadDiaDanh() {
-        try {
-          const res = await fetch("diaDanh.php", { cache: "no-store" });
-          if (!res.ok) throw new Error("Load failed");
-          const data = await res.json();
-          // Chuẩn hóa key để dùng y hệt code cũ:
-          // TenDD -> ten, MoTaDD -> moTa, ImageDD -> anh, LoaiDD -> nhom, MapLinkDD -> map
-          diaDanhList = data.map((d) => ({
-            id: d.MaDD,
-            ten: d.TenDD,
-            moTa: d.MoTaDD,
-            anh: d.ImageDD,
-            nhom: d.LoaiDD, // thiennhien | congtrinh | vanhoa
-            map: d.MapLinkDD, // iframe link
-            diaChi: d.DiaDanh, // địa chỉ thực tế (nếu cần hiển thị)
-          }));
-          renderDiaDanh(diaDanhList);
-        } catch (e) {
-          console.error(e);
-          document.getElementById(
-            "DiaDanhDN"
-          ).innerHTML = `<div class="alert alert-danger">Không tải được dữ liệu địa danh.</div>`;
-        }
+    // ========= LOAD FROM DB =========
+    async function loadDiaDanh() {
+      try {
+        const res = await fetch("diaDanh.php", { cache: "no-store" });
+        if (!res.ok) throw new Error("Load failed");
+        const data = await res.json();
+        // Chuẩn hóa key để dùng y hệt code cũ:
+        // TenDD -> ten, MoTaDD -> moTa, ImageDD -> anh, LoaiDD -> nhom, MapLinkDD -> map
+        diaDanhList = data.map((d) => ({
+          id: d.MaDD,
+          ten: d.TenDD,
+          moTa: d.MoTaDD,
+          anh: d.ImageDD,
+          nhom: d.LoaiDD, // thiennhien | congtrinh | vanhoa
+          map: d.MapLinkDD, // iframe link
+          diaChi: d.DiaDanh, // địa chỉ thực tế (nếu cần hiển thị)
+        }));
+        renderDiaDanh(diaDanhList);
+      } catch (e) {
+        console.error(e);
+        document.getElementById(
+          "DiaDanhDN"
+        ).innerHTML = `<div class="alert alert-danger">Không tải được dữ liệu địa danh.</div>`;
       }
+    }
 
-      // ========= RENDER =========
-      function renderDiaDanh(list) {
-        const container = document.getElementById("DiaDanhDN");
-        container.innerHTML = "";
-        list.forEach((diaDanh, index) => {
-          const hasMap = !!diaDanh.map;
-          const html = `
+    // ========= RENDER =========
+    function renderDiaDanh(list) {
+      const container = document.getElementById("DiaDanhDN");
+      container.innerHTML = "";
+      list.forEach((diaDanh, index) => {
+        const hasMap = !!diaDanh.map;
+        const html = `
         <div class="content-box fade-in mb-4" id="item-${index}">
           <div id="media-${index}" class="media-box" data-showing="image">
-            <img src="${diaDanh.anh}" alt="${
-            diaDanh.ten
+            <img src="${diaDanh.anh}" alt="${diaDanh.ten
           }" class="rounded shadow-sm w-100" />
           </div>
 
 
           <div class="text-box mt-3">
             <h5 class="text-center fw-bold">${diaDanh.ten}</h5>
-            ${
-              diaDanh.diaChi
-                ? `<p class="text-center text-muted mb-1"><i class="bi bi-geo-alt"></i> ${diaDanh.diaChi}</p>`
-                : ``
-            }
+            ${diaDanh.diaChi
+            ? `<p class="text-center text-muted mb-1"><i class="bi bi-geo-alt"></i> ${diaDanh.diaChi}</p>`
+            : ``
+          }
             <p class="mo-ta mb-2">${diaDanh.moTa}</p>
 
 
             <div class="d-flex justify-content-center gap-3 flex-wrap">
-              ${
-                hasMap
-                  ? `<button class="btn btn-outline-primary nuthanhdong"
+              ${hasMap
+            ? `<button class="btn btn-outline-primary nuthanhdong"
                              id="btnMap-${index}"
                              onclick="toggleMap(${index}, '${encodeURIComponent(
-                      diaDanh.anh
-                    )}', '${encodeURIComponent(diaDanh.map)}')">
+              diaDanh.anh
+            )}', '${encodeURIComponent(diaDanh.map)}')">
                        <i class="bi bi-geo-alt"></i>
                      </button>`
-                  : ``
-              }
-              <button class="btn btn-outline-success nuthanhdong" onclick="handleYeuThich(${
-                diaDanh.id || "null"
-              })">
+            : ``
+          }
+              <button class="btn btn-outline-success nuthanhdong" onclick="handleYeuThich(${diaDanh.id || "null"
+          })">
                 <i class="bi bi-heart"></i>
               </button>
             </div>
           </div>
         </div>
       `;
-          container.insertAdjacentHTML("beforeend", html);
-        });
-      }
+        container.insertAdjacentHTML("beforeend", html);
+      });
+    }
 
-      // ========= SEARCH =========
-      function searchDiaDanh(e) {
-        e.preventDefault();
-        const kw = document
-          .getElementById("searchInput")
-          .value.trim()
-          .toLowerCase();
-        const filtered = diaDanhList.filter(
-          (d) =>
-            d.ten.toLowerCase().includes(kw) ||
+    // ========= SEARCH =========
+    function searchDiaDanh(e) {
+      e.preventDefault();
+      const kw = document
+        .getElementById("searchInput")
+        .value.trim()
+        .toLowerCase();
+      const filtered = diaDanhList.filter(
+        (d) =>
+          d.ten.toLowerCase().includes(kw) ||
+          d.moTa.toLowerCase().includes(kw) ||
+          (d.diaChi && d.diaChi.toLowerCase().includes(kw))
+      );
+      renderDiaDanh(filtered);
+      return false;
+    }
+
+    // ========= FILTER BY GROUP =========
+    function toggleSection(loai, e) {
+      document
+        .querySelectorAll(".btn-food")
+        .forEach((b) => b.classList.remove("active"));
+      e.target.classList.add("active");
+
+      let nhom = "";
+      if (loai === "haiSan") nhom = "thiennhien";
+      else if (loai === "duongPho") nhom = "congtrinh";
+      else if (loai === "Qua") nhom = "vanhoa";
+      else nhom = "all";
+
+      const kw = document
+        .getElementById("searchInput")
+        .value.trim()
+        .toLowerCase();
+      const filtered = diaDanhList.filter(
+        (d) =>
+          (nhom === "all" || d.nhom === nhom) &&
+          (d.ten.toLowerCase().includes(kw) ||
             d.moTa.toLowerCase().includes(kw) ||
-            (d.diaChi && d.diaChi.toLowerCase().includes(kw))
-        );
-        renderDiaDanh(filtered);
-        return false;
+            (d.diaChi && d.diaChi.toLowerCase().includes(kw)))
+      );
+      renderDiaDanh(filtered);
+    }
+
+    // ========= IMG <-> MAP =========
+    function toggleMap(index, imgPathEncoded, mapLinkEncoded) {
+      const imgPath = decodeURIComponent(imgPathEncoded);
+      const mapLink = decodeURIComponent(mapLinkEncoded);
+      const mediaDiv = document.getElementById(`media-${index}`);
+      const btn = document.getElementById(`btnMap-${index}`);
+      const showing = mediaDiv.dataset.showing;
+
+      if (showing === "map") {
+        mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa danh" class="img-fluid rounded shadow-sm" />`;
+        mediaDiv.dataset.showing = "image";
+        btn.firstElementChild.className = "bi bi-geo-alt";
+      } else {
+        mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
+        mediaDiv.dataset.showing = "map";
+        btn.firstElementChild.className = "bi bi-image";
       }
+    }
 
-      // ========= FILTER BY GROUP =========
-      function toggleSection(loai, e) {
-        document
-          .querySelectorAll(".btn-food")
-          .forEach((b) => b.classList.remove("active"));
-        e.target.classList.add("active");
+    // ========= FAVORITE (tùy bạn nối API) =========
+    async function handleYeuThich(id) {
+      if (!isLoggedIn) {
+        const goLogin = confirm("Vui lòng đăng nhập để thêm địa danh vào yêu thích!");
+        if (goLogin) window.location.href = "dangNhap.html";
+        return;
 
-        let nhom = "";
-        if (loai === "haiSan") nhom = "thiennhien";
-        else if (loai === "duongPho") nhom = "congtrinh";
-        else if (loai === "Qua") nhom = "vanhoa";
-        else nhom = "all";
-
-        const kw = document
-          .getElementById("searchInput")
-          .value.trim()
-          .toLowerCase();
-        const filtered = diaDanhList.filter(
-          (d) =>
-            (nhom === "all" || d.nhom === nhom) &&
-            (d.ten.toLowerCase().includes(kw) ||
-              d.moTa.toLowerCase().includes(kw) ||
-              (d.diaChi && d.diaChi.toLowerCase().includes(kw)))
-        );
-        renderDiaDanh(filtered);
       }
-
-      // ========= IMG <-> MAP =========
-      function toggleMap(index, imgPathEncoded, mapLinkEncoded) {
-        const imgPath = decodeURIComponent(imgPathEncoded);
-        const mapLink = decodeURIComponent(mapLinkEncoded);
-        const mediaDiv = document.getElementById(`media-${index}`);
-        const btn = document.getElementById(`btnMap-${index}`);
-        const showing = mediaDiv.dataset.showing;
-
-        if (showing === "map") {
-          mediaDiv.innerHTML = `<img src="${imgPath}" alt="ảnh địa danh" class="img-fluid rounded shadow-sm" />`;
-          mediaDiv.dataset.showing = "image";
-          btn.firstElementChild.className = "bi bi-geo-alt";
-        } else {
-          mediaDiv.innerHTML = `<iframe src="${mapLink}" width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"></iframe>`;
-          mediaDiv.dataset.showing = "map";
-          btn.firstElementChild.className = "bi bi-image";
-        }
-      }
-
-      // ========= FAVORITE (tùy bạn nối API) =========
-      function handleYeuThich(id) {
-        if (!isLoggedIn) {
-          const goLogin = confirm(
-            "Bạn cần đăng nhập để yêu thích địa danh. Đi đến trang đăng nhập?"
-          );
-          if (goLogin) window.location.href = "dangNhap.html";
+      try {
+        const res = await fetch("YT.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "add",
+            loai: "DIADANH",
+            id: id,
+          }),
+        });
+        const data = await res.json();
+        if (data.needLogin) {
+          alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập!");
+          window.location.href = "dangNhap.html";
           return;
         }
-        alert("💖 Đã thêm vào danh sách yêu thích!");
-        // TODO: fetch('api_favorite.php', {method:'POST', body: JSON.stringify({diadanh_id:id})})
+        if (data.success) {
+          alert(data.message || "Đã thêm vào mục yêu thích!");
+        } else {
+          alert(data.message || "Mục này đã có trong mục yêu thích!");
+        }
+
+
+
+
+
+
+
+      }
+      catch (err) {
+        console.error(err);
+        alert("Đã có lỗi xảy ra. Vui lòng thử lại sau!");
       }
 
-      // ========= INIT =========
-      window.onload = function () {
-        loadDiaDanh(); // nạp từ DB thay cho data cứng
-      };
+    }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const loginSection = document.getElementById("login-section");
-        const navbarMenu = document.getElementById("navbarMenu");
+    // ========= INIT =========
+    window.onload = function () {
+      loadDiaDanh(); // nạp từ DB thay cho data cứng
+    };
 
-        fetch("getUser.php")
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.loggedIn) {
-              // Thay nội dung login-section
-              loginSection.innerHTML = `
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginSection = document.getElementById("login-section");
+      const navbarMenu = document.getElementById("navbarMenu");
+
+      fetch("getUser.php")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.loggedIn) {
+            isLoggedIn = true;
+            // Thay nội dung login-section
+            loginSection.innerHTML = `
           <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
           <a href="dangXuat.php" class="login-text ms-3">
             <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
           </a>
         `;
 
-              // Thay menu nếu muốn thêm mục Yêu thích
-              navbarMenu.querySelector("ul.navbar-nav").innerHTML = `
+            // Thay menu nếu muốn thêm mục Yêu thích
+            navbarMenu.querySelector("ul.navbar-nav").innerHTML = `
           <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
           <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
           <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
@@ -373,13 +377,11 @@
           <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
           <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>
         `;
-            }
-          });
-      });
-    </script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      defer
-    ></script>
-  </body>
+          }
+        });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+
 </html>

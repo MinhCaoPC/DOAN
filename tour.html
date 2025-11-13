@@ -326,71 +326,71 @@
     </script>
     <script>
 
-let tourList = [];
+      let tourList = [];
 
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const res  = await fetch('tour.php');        // có thể dùng tour.php?id=... nếu cần 1 tour
-    const data = await res.json();
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          const res = await fetch('tour.php');        // có thể dùng tour.php?id=... nếu cần 1 tour
+          const data = await res.json();
 
-    // tour.php trả { status: 'success', tourList: [...] }
-    if (data.status === 'success' && Array.isArray(data.tourList)) {
-      tourList = data.tourList;
-    } else {
-      tourList = [];
-    }
+          // tour.php trả { status: 'success', tourList: [...] }
+          if (data.status === 'success' && Array.isArray(data.tourList)) {
+            tourList = data.tourList;
+          } else {
+            tourList = [];
+          }
 
-    // Nếu bạn đã có hàm renderTours(...) thì gọi luôn:
-    if (typeof renderTours === 'function') {
-      renderTours(tourList);
-    }
+          // Nếu bạn đã có hàm renderTours(...) thì gọi luôn:
+          if (typeof renderTours === 'function') {
+            renderTours(tourList);
+          }
 
-    // (tuỳ chọn) phát sự kiện cho nơi khác bắt nếu muốn
-    document.dispatchEvent(new CustomEvent('tours:loaded', { detail: { tourList } }));
+          // (tuỳ chọn) phát sự kiện cho nơi khác bắt nếu muốn
+          document.dispatchEvent(new CustomEvent('tours:loaded', { detail: { tourList } }));
 
-  } catch (err) {
-    console.error('Lỗi tải tour:', err);
-    tourList = [];
-  }
-});
+        } catch (err) {
+          console.error('Lỗi tải tour:', err);
+          tourList = [];
+        }
+      });
 
 
 
 
       document.addEventListener('tours:loaded', function (e) {
-  const list = e.detail?.tourList || [];
-  const tourContent = document.getElementById('tourContent');
-  const tourTabs = document.getElementById('tourTabs');
+        const list = e.detail?.tourList || [];
+        const tourContent = document.getElementById('tourContent');
+        const tourTabs = document.getElementById('tourTabs');
 
-  tourContent.innerHTML = '';
-  tourTabs.innerHTML = '';
+        tourContent.innerHTML = '';
+        tourTabs.innerHTML = '';
 
-  if (!list.length) {
-    tourContent.innerHTML = '<div class="alert alert-warning">Chưa có tour nào.</div>';
-    return;
-  }
+        if (!list.length) {
+          tourContent.innerHTML = '<div class="alert alert-warning">Chưa có tour nào.</div>';
+          return;
+        }
 
-  list.forEach((tour, index) => {
-    const tabId = `tour${index + 1}`;
+        list.forEach((tour, index) => {
+          const tabId = `tour${index + 1}`;
 
-    const li = document.createElement('li');
-    li.className = 'nav-item';
-    li.innerHTML = `
+          const li = document.createElement('li');
+          li.className = 'nav-item';
+          li.innerHTML = `
       <button class="nav-link ${index === 0 ? 'active' : ''}"
               data-bs-toggle="pill"
               data-bs-target="#${tabId}"
               type="button">Tour ${index + 1}</button>`;
-    tourTabs.appendChild(li);
+          tourTabs.appendChild(li);
 
-    const tabPane = document.createElement('div');
-    tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
-    tabPane.id = tabId;
-    tabPane.setAttribute('role', 'tabpanel');
+          const tabPane = document.createElement('div');
+          tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+          tabPane.id = tabId;
+          tabPane.setAttribute('role', 'tabpanel');
 
-    const lichTrinh = Array.isArray(tour.lichTrinh) ? tour.lichTrinh : [];
-    const lichTrinhHtml = lichTrinh.map(item => `<li>${item}</li>`).join('');
+          const lichTrinh = Array.isArray(tour.lichTrinh) ? tour.lichTrinh : [];
+          const lichTrinhHtml = lichTrinh.map(item => `<li>${item}</li>`).join('');
 
-    tabPane.innerHTML = `
+          tabPane.innerHTML = `
       <div class="row g-4 align-items-center">
         <div class="col-md-6">
           <img src="${tour.anh || 'images/placeholder.jpg'}" alt="${tour.ten || ''}" class="tour-img">
@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           🏨 ${tour.khachSan || ''}</p>
           <h6 class="fw-bold">🗓 Lịch trình chi tiết:</h6>
           <ul>${lichTrinhHtml}</ul>
-          <button class="fav-btn">
+          <button class="fav-btn" onclick="handleYeuThich(${tour.id})">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
             <i class="fas fa-heart"></i> Thêm mục yêu thích
           </button>
@@ -413,12 +413,56 @@ document.addEventListener('DOMContentLoaded', async () => {
           </a>
         </div>
       </div>`;
-    tourContent.appendChild(tabPane);
-  });
-});
+          tourContent.appendChild(tabPane);
+        });
+      });
+
+
+      isLoggedIn = false;
+      async function handleYeuThich(id) {
+        if (!isLoggedIn) {
+          const goLogin = confirm("Vui lòng đăng nhập để thêm địa danh vào yêu thích!");
+          if (goLogin) window.location.href = "dangNhap.html";
+          return;
+
+        }
+        try {
+          const res = await fetch("YT.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              action: "add",
+              loai: "TOUR",
+              id: id,
+            }),
+          });
+          const data = await res.json();
+          if (data.needLogin) {
+            alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập!");
+            window.location.href = "dangNhap.html";
+            return;
+          }
+          if (data.success) {
+            alert(data.message || "Đã thêm vào mục yêu thích!");
+          } else {
+            alert(data.message || "Mục này đã có trong mục yêu thích!");
+          }
 
 
 
+
+
+
+
+        }
+        catch (err) {
+          console.error(err);
+          alert("Đã có lỗi xảy ra. Vui lòng thử lại sau!");
+        }
+
+      }
 
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -429,6 +473,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           .then(res => res.json())
           .then(data => {
             if (data.loggedIn) {
+              isLoggedIn = true;
               // Thay nội dung login-section
               loginSection.innerHTML = `
           <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
