@@ -10,7 +10,7 @@
 <body>
 
   <div class="profile-header text-center text-white">
-    <button class="btn-back" onclick="window.location.href='TrangChu.html'">Trở về ←</button>
+    <button class="btn-back" onclick="window.location.href='TrangChu.html'">Trở về</button>
     <h5 class="fw-bold">Sửa Hồ Sơ</h5>
     <button class="btn-save" id="saveProfile">Lưu</button>
 
@@ -23,10 +23,18 @@
   <div class="container mt-3 mb-5">
     <form id="profileForm">
       <div class="profile-item">
-        <label>Tên</label>
-        <input type="text" id="hoTen" placeholder="Nhập tên của bạn">
+        <label>Tên tài khoản</label>
+        <input type="text" id="taiKhoan">
       </div>
-
+      <div class="profile-item">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Nhập email">
+      </div>
+      
+      <hr> <div class="profile-item">
+        <label>Họ và tên</label>
+        <input type="text" id="hoTen" placeholder="Nhập họ và tên của bạn">
+      </div>
       <div class="profile-item">
         <label>Giới tính</label>
         <select id="gioiTinh">
@@ -36,34 +44,26 @@
           <option value="Khác">Khác</option>
         </select>
       </div>
-
       <div class="profile-item">
         <label>Ngày sinh</label>
         <input type="date" id="ngaySinh">
       </div>
-
       <div class="profile-item">
         <label>Địa chỉ</label>
         <input type="text" id="diaChi">
       </div>
-
       <div class="profile-item">
         <label>Số điện thoại</label>
         <input type="tel" id="soDienThoai" placeholder="Nhập số điện thoại">
       </div>
-
-      <div class="profile-item">
-        <label>Email</label>
-        <input type="email" id="email" placeholder="Nhập email">
-      </div>
+      
     </form>
   </div>
 
-  <script>
-    // Hiển thị avatar
+<script>
+    // Xử lý hiển thị avatar (Giữ nguyên)
     const avatarInput = document.getElementById("avatarInput");
     const avatarPreview = document.getElementById("avatarPreview");
-
     avatarInput.addEventListener("change", (e) => {
       const file = e.target.files[0];
       if (file) {
@@ -76,34 +76,87 @@
       }
     });
 
-    // Khi mở trang, tải thông tin đã lưu
+    // === TẢI THÔNG TIN KHI MỞ TRANG (ĐÃ CẬP NHẬT) ===
     window.onload = () => {
-      const saved = localStorage.getItem("userProfile");
-      if (saved) {
-        const data = JSON.parse(saved);
-        document.getElementById("hoTen").value = data.hoTen || "";
-        document.getElementById("gioiTinh").value = data.gioiTinh || "";
-        document.getElementById("ngaySinh").value = data.ngaySinh || "";
-        document.getElementById("diaChi").value = data.diaChi || "";
-        document.getElementById("soDienThoai").value = data.soDienThoai || "";
-        document.getElementById("email").value = data.email || "";
-      }
+      // 1. Tải thông tin hồ sơ từ CSDL
+      fetch('getHS.php')
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(err => Promise.reject(err));
+          }
+          return response.json();
+        })
+        .then(result => {
+          if (result.success && result.data) {
+            const data = result.data;
+            
+            // Sửa 1: Lấy TenTaiKhoan và Email từ CSDL
+            document.getElementById("taiKhoan").value = data.TenTaiKhoan || "";
+            document.getElementById("email").value = data.Email || "";
+            
+            // Sửa 2: Lấy các trường KHACHHANG
+            document.getElementById("hoTen").value = data.HoVaTen || "";
+            document.getElementById("gioiTinh").value = data.GioiTinh || "";
+            document.getElementById("ngaySinh").value = data.NgaySinh || "";
+            document.getElementById("diaChi").value = data.DiaChi || "";
+            document.getElementById("soDienThoai").value = data.SDT || "";
+          } else {
+            alert(result.message || "Không thể tải thông tin hồ sơ.");
+          }
+        })
+        .catch(error => {
+          console.error('Lỗi khi tải hồ sơ:', error);
+          alert('Lỗi: ' + (error.message || 'Không thể kết nối.'));
+          if (error.message === 'Bạn chưa đăng nhập.') {
+            window.location.href = 'dang_nhap.html'; // Chuyển về trang đăng nhập
+          }
+        });
+
+      // 2. Tải avatar (giữ nguyên)
       const savedAvatar = localStorage.getItem("userAvatar");
       if (savedAvatar) avatarPreview.src = savedAvatar;
     };
 
-    // Lưu thông tin
+    // === LƯU THÔNG TIN (ĐÃ CẬP NHẬT) ===
     document.getElementById("saveProfile").addEventListener("click", () => {
+      
+      // Sửa 1: Thêm hộp thoại xác nhận
+      if (!confirm("Bạn chắc chắn muốn lưu thay đổi này?")) {
+        return; // Dừng lại nếu người dùng chọn "Hủy"
+      }
+
+      // Sửa 2: Lấy TẤT CẢ dữ liệu từ form, bao gồm cả taiKhoan và email
       const data = {
+        tenTaiKhoan: document.getElementById("taiKhoan").value, // Thêm Tên tài khoản
+        email: document.getElementById("email").value,          // Thêm Email
         hoTen: document.getElementById("hoTen").value,
         gioiTinh: document.getElementById("gioiTinh").value,
         ngaySinh: document.getElementById("ngaySinh").value,
         diaChi: document.getElementById("diaChi").value,
-        soDienThoai: document.getElementById("soDienThoai").value,
-        email: document.getElementById("email").value
+        soDienThoai: document.getElementById("soDienThoai").value
       };
-      localStorage.setItem("userProfile", JSON.stringify(data));
-      alert("Hồ sơ đã được lưu thành công!");
+
+      // 2. Gửi dữ liệu lên server (file upHS.php)
+      fetch('upHS.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        // 3. Hiển thị thông báo từ server
+        alert(result.message); // Hiển thị thông báo (thành công hoặc lỗi)
+        
+        if (result.success) {
+          console.log("Đã cập nhật hồ sơ lên CSDL.");
+        }
+      })
+      .catch(error => {
+        console.error('Lỗi khi cập nhật hồ sơ:', error);
+        alert('Đã xảy ra lỗi kết nối. Vui lòng thử lại.');
+      });
     });
   </script>
 

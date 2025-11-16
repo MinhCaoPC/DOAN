@@ -321,6 +321,15 @@
   transform: scale(1.15);
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
+.clickable-card {
+  cursor: pointer; /* Đổi con trỏ chuột thành hình bàn tay */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable-card:hover {
+  transform: translateY(-5px); /* Nhấc thẻ lên một chút */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ */
+}
 
 @media (max-width: 767px) {
   .favorites-section {

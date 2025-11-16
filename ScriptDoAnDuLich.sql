@@ -29,6 +29,7 @@ CREATE TABLE KHACHHANG (
 	HoVaTen VARCHAR(100) COMMENT'Họ và tên của khách hàng',
     GioiTinh ENUM('Nam', 'Nữ', 'Khác') COMMENT 'Giới tính',
     NgaySinh DATE COMMENT 'Ngày sinh',
+    DiaChi VARCHAR(255) NULL COMMENT 'Địa chỉ của khách hàng',
     SDT VARCHAR(20) COMMENT 'Số điện thoại liên hệ',
     MaSoTK VARCHAR(10) NOT NULL COMMENT 'Liên kết đến tài khoản người dùng',
     FOREIGN KEY (MaSoTK) REFERENCES TAIKHOAN(MaSoTK)

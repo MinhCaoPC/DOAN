@@ -99,6 +99,26 @@
   let isLoggedIn = false;
   let allFavorites = []; // lưu toàn bộ items để filter
 
+  // ⭐ 1. (MỚI) HÀM TẠO LINK ĐỘNG
+  // Hàm này tạo link chính xác cho từng loại
+  function getLinkForItem(item) {
+    switch (item.loai) {
+      case "DIADANH":
+        return `diaDanh.html#item-dd-${item.id}`;
+      case "MONAN":
+        return `Food.html#item-monan-${item.id}`;
+      case "KND":
+        return `nghiDuong.html#item-knd-${item.id}`;
+      case "TOUR":
+        // Trang tour của bạn không có ID # cho từng tour,
+        // nên chúng ta sẽ link đến đầu mục tour
+        return `tour.html#tour`;
+      default:
+        return null; // Không có link
+    }
+  }
+
+
   // Render danh sách yêu thích (theo list đã lọc)
   function renderFavorites(items) {
     const container = document.querySelector(".favorites-cards");
@@ -114,7 +134,26 @@
 
     items.forEach((item) => {
       const box = document.createElement("div");
-      box.className = "content-box";
+      box.className = "content-box"; // Giữ nguyên "content-box" của bạn
+
+      // ⭐ 2. (THAY ĐỔI) Thêm sự kiện onclick cho thẻ DIV
+      const link = getLinkForItem(item);
+      if (link) {
+        // Thêm class 'clickable' để bạn có thể thêm CSS (ví dụ: đổi con trỏ chuột)
+        box.classList.add("clickable-card"); 
+        
+        // Thêm sự kiện onclick để chuyển trang
+        box.onclick = function(event) {
+          // Rất quan trọng: Chỉ điều hướng nếu click không phải là vào nút "close"
+          // (nếu không bấm nút Xóa cũng sẽ bị nhảy trang)
+          if (event.target.closest('.btn-close')) {
+            return;
+          }
+          // Điều hướng đến link
+          window.location.href = link;
+        };
+      }
+
 
       // label loại cho đẹp (Địa danh / Ẩm thực / ...)
       let label = "";
@@ -134,7 +173,7 @@
           <p>${item.moTa || ""}</p>
           <span class="badge bg-primary">${label}</span>
           <div class="content-box-buttons">
-            <button class="btn-circle btn-close" onclick="removeFavorite('${item.loai}', ${item.id})">
+            <button class="btn-circle btn-close" onclick="removeFavorite('${item.loai}', ${item.id}, event)">
               <i class="fa fa-times"></i>
             </button>
           </div>
@@ -157,7 +196,13 @@
   }
 
   // Xóa khỏi yêu thích
-  async function removeFavorite(loai, id) {
+  // ⭐ 3. (THAY ĐỔI) Thêm 'event' và dùng event.stopPropagation()
+  async function removeFavorite(loai, id, event) {
+    // Ngăn chặn sự kiện click lan ra (bubbling) thẻ div cha (tránh bị nhảy trang)
+    if (event) {
+        event.stopPropagation();
+    }
+
     if (!confirm("Bạn chắc chắn muốn xóa mục này khỏi danh sách yêu thích?")) return;
 
     try {
@@ -176,7 +221,7 @@
       const data = await res.json();
       if (data.success) {
         alert("Đã xóa khỏi danh sách yêu thích.");
-        loadFavorites();
+        loadFavorites(); // Tải lại danh sách
       } else {
         alert("⚠️ " + data.message);
       }
@@ -200,8 +245,9 @@
 
       isLoggedIn = true;
       allFavorites = data.items || [];
-      // mặc định hiển thị tất cả
-      applyFilter("ALL");
+      // Tải lại theo filter đang active
+      const activeFilter = document.querySelector("#filter-list li.active")?.dataset.filter || "ALL";
+      applyFilter(activeFilter);
     } catch (err) {
       console.error(err);
       const container = document.querySelector(".favorites-cards");
@@ -261,7 +307,6 @@
       });
   });
 </script>
-
 
 
 

@@ -159,10 +159,33 @@
   </footer>
 
   <!-- JS -->
-  <script>
+<script>
     // ========= STATE =========
     let diaDanhList = [];
     let isLoggedIn = false; // bạn đang có check đăng nhập ở dưới
+
+    // ⭐ 1. TÁCH CODE SCROLL CỦA BẠN RA HÀM RIÊNG
+    // Chúng ta sẽ gọi hàm này ở 2 nơi
+    function handleHashScroll() {
+      const hash = window.location.hash; // Lấy #item-dd-1
+      if (hash) {
+        // Chờ 1 chút để đảm bảo DOM đã render xong
+        setTimeout(() => {
+          const targetElement = document.querySelector(hash); // Tìm phần tử
+          if (targetElement) {
+            // Nếu tìm thấy, cuộn mượt đến nó
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // (Thêm) Hiệu ứng cho đẹp
+            targetElement.style.transition = 'box-shadow 0.3s ease-in-out';
+            targetElement.style.boxShadow = '0 0 15px 5px rgba(0, 123, 255, 0.7)';
+            setTimeout(() => {
+                targetElement.style.boxShadow = 'none';
+            }, 2000); // Tắt hiệu ứng sau 2 giây
+          }
+        }, 200); // Chờ 200ms
+      }
+    }
 
     // ========= LOAD FROM DB =========
     async function loadDiaDanh() {
@@ -170,18 +193,23 @@
         const res = await fetch("diaDanh.php", { cache: "no-store" });
         if (!res.ok) throw new Error("Load failed");
         const data = await res.json();
-        // Chuẩn hóa key để dùng y hệt code cũ:
-        // TenDD -> ten, MoTaDD -> moTa, ImageDD -> anh, LoaiDD -> nhom, MapLinkDD -> map
+        
         diaDanhList = data.map((d) => ({
           id: d.MaDD,
           ten: d.TenDD,
           moTa: d.MoTaDD,
           anh: d.ImageDD,
-          nhom: d.LoaiDD, // thiennhien | congtrinh | vanhoa
-          map: d.MapLinkDD, // iframe link
-          diaChi: d.DiaDanh, // địa chỉ thực tế (nếu cần hiển thị)
+          nhom: d.LoaiDD, 
+          map: d.MapLinkDD, 
+          diaChi: d.DiaDanh, 
         }));
+        
         renderDiaDanh(diaDanhList);
+        
+        // ⭐ 2. GỌI HÀM SCROLL SAU KHI TẢI XONG
+        // (Đây chính là code cũ của bạn, nhưng giờ nằm trong hàm)
+        handleHashScroll(); 
+        
       } catch (e) {
         console.error(e);
         document.getElementById(
@@ -196,14 +224,13 @@
       container.innerHTML = "";
       list.forEach((diaDanh, index) => {
         const hasMap = !!diaDanh.map;
+        // Dòng này đã đúng (id="item-dd-...")
         const html = `
-        <div class="content-box fade-in mb-4" id="item-${index}">
+        <div class="content-box fade-in mb-4" id="item-dd-${diaDanh.id}">
           <div id="media-${index}" class="media-box" data-showing="image">
             <img src="${diaDanh.anh}" alt="${diaDanh.ten
           }" class="rounded shadow-sm w-100" />
           </div>
-
-
           <div class="text-box mt-3">
             <h5 class="text-center fw-bold">${diaDanh.ten}</h5>
             ${diaDanh.diaChi
@@ -211,8 +238,6 @@
             : ``
           }
             <p class="mo-ta mb-2">${diaDanh.moTa}</p>
-
-
             <div class="d-flex justify-content-center gap-3 flex-wrap">
               ${hasMap
             ? `<button class="btn btn-outline-primary nuthanhdong"
@@ -236,9 +261,9 @@
       });
     }
 
-    // ========= SEARCH =========
-    function searchDiaDanh(e) {
-      e.preventDefault();
+    // ========= CÁC HÀM KHÁC (GIỮ NGUYÊN) =========
+    function searchDiaDanh(e) { /* ... (code cũ của bạn) ... */ 
+        e.preventDefault();
       const kw = document
         .getElementById("searchInput")
         .value.trim()
@@ -252,10 +277,8 @@
       renderDiaDanh(filtered);
       return false;
     }
-
-    // ========= FILTER BY GROUP =========
-    function toggleSection(loai, e) {
-      document
+    function toggleSection(loai, e) { /* ... (code cũ của bạn) ... */ 
+        document
         .querySelectorAll(".btn-food")
         .forEach((b) => b.classList.remove("active"));
       e.target.classList.add("active");
@@ -279,10 +302,8 @@
       );
       renderDiaDanh(filtered);
     }
-
-    // ========= IMG <-> MAP =========
-    function toggleMap(index, imgPathEncoded, mapLinkEncoded) {
-      const imgPath = decodeURIComponent(imgPathEncoded);
+    function toggleMap(index, imgPathEncoded, mapLinkEncoded) { /* ... (code cũ của bạn) ... */ 
+        const imgPath = decodeURIComponent(imgPathEncoded);
       const mapLink = decodeURIComponent(mapLinkEncoded);
       const mediaDiv = document.getElementById(`media-${index}`);
       const btn = document.getElementById(`btnMap-${index}`);
@@ -298,10 +319,8 @@
         btn.firstElementChild.className = "bi bi-image";
       }
     }
-
-    // ========= FAVORITE (tùy bạn nối API) =========
-    async function handleYeuThich(id) {
-      if (!isLoggedIn) {
+    async function handleYeuThich(id) { /* ... (code cũ của bạn) ... */ 
+        if (!isLoggedIn) {
         const goLogin = confirm("Vui lòng đăng nhập để thêm địa danh vào yêu thích!");
         if (goLogin) window.location.href = "dangNhap.html";
         return;
@@ -330,27 +349,27 @@
         } else {
           alert(data.message || "Mục này đã có trong mục yêu thích!");
         }
-
-
-
-
-
-
-
       }
       catch (err) {
         console.error(err);
         alert("Đã có lỗi xảy ra. Vui lòng thử lại sau!");
       }
-
     }
 
-    // ========= INIT =========
-    window.onload = function () {
-      loadDiaDanh(); // nạp từ DB thay cho data cứng
-    };
+    // ========= INIT (SỬA LẠI) =========
+    
+    // Bỏ hàm window.onload cũ
+    // window.onload = function () { ... };
 
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Tải địa danh
+      loadDiaDanh();
+
+      // ⭐ 3. THÊM TAI NGHE (ĐÂY LÀ MẤU CHỐT)
+      // Lắng nghe sự kiện khi dấu # thay đổi (khi bạn click link lần 2)
+      window.addEventListener('hashchange', handleHashScroll);
+
+      // 2. Xử lý login (Giữ nguyên code của bạn)
       const loginSection = document.getElementById("login-section");
       const navbarMenu = document.getElementById("navbarMenu");
 
@@ -359,29 +378,24 @@
         .then((data) => {
           if (data.loggedIn) {
             isLoggedIn = true;
-            // Thay nội dung login-section
             loginSection.innerHTML = `
-          <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
-          <a href="dangXuat.php" class="login-text ms-3">
-            <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
-          </a>
-        `;
-
-            // Thay menu nếu muốn thêm mục Yêu thích
+              <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
+              <a href="dangXuat.php" class="login-text ms-3">
+                <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
+              </a>`;
             navbarMenu.querySelector("ul.navbar-nav").innerHTML = `
-          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
-          <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
-          <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
-          <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
-          <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
-          <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
-          <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>
-        `;
+              <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+              <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
+              <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
+              <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
+              <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
+              <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
+              <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>
+            `;
           }
         });
     });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
-
 </html>

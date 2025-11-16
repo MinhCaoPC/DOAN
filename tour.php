@@ -1,74 +1,92 @@
-<?php 
-// tour.php
+<?php
 header('Content-Type: application/json; charset=utf-8');
-require_once 'config.php'; // $conn = new mysqli(...)
+require_once 'config.php'; // Kết nối CSDL
 
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+// BƯỚC 1: TẠO CÁC "BẢN ĐỒ" TỪ KHÓA
+// Lấy tất cả địa danh, món ăn, KND để biết tên và ID của chúng
+$mapDiaDanh = [];
+$mapMonAn = [];
+$mapKND = [];
 
-try {
-    // Lấy 1 tour cụ thể (?id=) hoặc tất cả
-    $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
+// Lấy Địa danh (sắp xếp từ dài đến ngắn để thay thế chính xác)
+$resultDD = $conn->query("SELECT MaDD, TenDD FROM DIADANH ORDER BY LENGTH(TenDD) DESC");
+while ($row = $resultDD->fetch_assoc()) {
+    // Key là tên (ví dụ: 'Bà Nà Hills'), Value là link
+    $mapDiaDanh[$row['TenDD']] = "diaDanh.html#item-dd-" . $row['MaDD'];
+}
 
-    if ($id) {
-        $sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTour
-                FROM TOUR WHERE MaTour = ? LIMIT 1";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-    } else {
-        $sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTour
-                FROM TOUR ORDER BY MaTour ASC";
-        $stmt = $conn->prepare($sql);
-    }
+// Lấy Món ăn (sắp xếp từ dài đến ngắn)
+$resultMA = $conn->query("SELECT MaMonAn, TenMonAn FROM MONAN ORDER BY LENGTH(TenMonAn) DESC");
+while ($row = $resultMA->fetch_assoc()) {
+    $mapMonAn[$row['TenMonAn']] = "Food.html#item-monan-" . $row['MaMonAn'];
+}
 
-    $stmt->execute();
-    $res = $stmt->get_result();
+// Lấy Khu nghỉ dưỡng (sắp xếp từ dài đến ngắn)
+$resultKND = $conn->query("SELECT MaKND, TenKND FROM KHUNGHIDUONG ORDER BY LENGTH(TenKND) DESC");
+while ($row = $resultKND->fetch_assoc()) {
+    $mapKND[$row['TenKND']] = "nghiDuong.html#item-knd-" . $row['MaKND'];
+}
 
-    $tours = [];
+// Gộp tất cả bản đồ lại, ưu tiên Địa danh > Món Ăn > KND
+$masterMap = $mapDiaDanh + $mapMonAn + $mapKND;
 
-    while ($row = $res->fetch_assoc()) {
-        // Parse lịch trình
-        $lichTrinhRaw = trim((string)($row['LichTrinhTour'] ?? ''));
-        $lichTrinh = [];
+// Lấy các keys (từ khóa) và các values (links)
+$keywords = array_keys($masterMap);
+$links = array_values($masterMap);
 
-        if ($lichTrinhRaw !== '') {
-            $decoded = json_decode($lichTrinhRaw, true);
-            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                $lichTrinh = array_values(
-                    array_filter(
-                        array_map('trim', $decoded),
-                        fn($s) => $s !== ''
-                    )
-                );
-            } else {
-                $lichTrinh = preg_split("/\r\n|\r|\n/", $lichTrinhRaw);
-                $lichTrinh = array_values(
-                    array_filter(
-                        array_map('trim', $lichTrinh),
-                        fn($s) => $s !== ''
-                    )
-                );
-            }
-        }
-
-        $tours[] = [
-            'id'        => (int)$row['MaTour'],     
-            'ten'       => $row['TenTour'] ?? '',
-            'moTa'      => $row['MoTaTour'] ?? '',
-            'thoiGian'  => $row['ThoiGianTour'] ?? '',
-            'gia'       => $row['GiaTour'] ?? '',
-            'doiTuong'  => $row['DoiTuong'] ?? '',
-            'khachSan'  => $row['KhachSan'] ?? '',
-            'anh'       => $row['ImageTour'] ?? '',
-            'lichTrinh' => $lichTrinh
-        ];
-    }
-
-    echo json_encode(['status' => 'success', 'tourList' => $tours], JSON_UNESCAPED_UNICODE);
-
-} catch (mysqli_sql_exception $e) {
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'msg' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+// Tạo mảng thẻ <a> để thay thế
+// Ví dụ: "Bà Nà Hills" sẽ được thay bằng "<a href='diaDanh.html#item-dd-1'>Bà Nà Hills</a>"
+$replacements = [];
+foreach ($masterMap as $keyword => $link) {
+    // Thêm class 'itinerary-link' để bạn có thể CSS nếu muốn
+    $replacements[] = '<a href="' . $link . '" class="itinerary-link">' . htmlspecialchars($keyword) . '</a>';
 }
 
 
+// BƯỚC 2: LẤY THÔNG TIN TOUR VÀ XỬ LÝ LỊCH TRÌNH
+$sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTour FROM TOUR";
+$resultTour = $conn->query($sql);
 
+$tourList = [];
+while ($tour = $resultTour->fetch_assoc()) {
+    
+    // Xử lý lịch trình (LichTrinhTour)
+    $lichTrinhText = $tour['LichTrinhTour'] ?? '';
+    
+    // Tách lịch trình theo từng dòng (xuống hàng)
+    $lines = explode("\n", $lichTrinhText);
+    
+    $processedLichTrinh = [];
+    foreach ($lines as $line) {
+        if (empty(trim($line))) continue;
+        
+        // Đây là phép màu:
+        // Thay thế tất cả $keywords (ví dụ: "Bà Nà Hills")
+        // bằng $replacements (ví dụ: "<a href=...'>Bà Nà Hills</a>")
+        // trong dòng ($line) này.
+        $processedLine = str_replace($keywords, $replacements, $line);
+        
+        $processedLichTrinh[] = $processedLine; // Thêm dòng đã xử lý vào mảng
+    }
+
+    // Tạo mảng dữ liệu trả về cho JS
+    $tourList[] = [
+        "id" => (int)$tour['MaTour'],
+        "ten" => $tour['TenTour'],
+        "anh" => $tour['ImageTour'],
+        "thoiGian" => $tour['ThoiGianTour'],
+        "gia" => number_format($tour['GiaTour'], 0, ',', '.') . ' VNĐ', // Định dạng giá tiền
+        "doiTuong" => $tour['DoiTuong'],
+        "khachSan" => $tour['KhachSan'],
+        "lichTrinh" => $processedLichTrinh // Trả về lịch trình ĐÃ CHỨA link HTML
+    ];
+}
+
+$conn->close();
+
+// Trả về JSON
+echo json_encode([
+    'status' => 'success',
+    'tourList' => $tourList
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+?>

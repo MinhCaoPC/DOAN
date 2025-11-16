@@ -602,7 +602,7 @@ INSERT INTO TOUR (
 ) VALUES (
     'Khám phá Đà Nẵng – Biển, Núi, Cầu Rồng',
     'Tour khám phá toàn diện Đà Nẵng với biển Mỹ Khê, cầu Rồng, bán đảo Sơn Trà và đèo Hải Vân. Phù hợp cho nhóm bạn trẻ hoặc người lần đầu đến Đà Nẵng.',
-    '3.000.000 – 4.000.000 VNĐ/người',
+    4000000,
     '3 ngày 2 đêm',
     'Nhóm bạn trẻ, người lần đầu đến Đà Nẵng',
     'Khách sạn 3★ trung tâm (gần cầu Rồng / Bạch Đằng)',
@@ -616,7 +616,7 @@ INSERT INTO TOUR (
 (
     'Nghỉ dưỡng & Thiền tịnh',
     'Tour nghỉ dưỡng kết hợp thiền tịnh, thư giãn tại resort 5 sao với spa, yoga và suối khoáng Núi Thần Tài. Dành cho cặp đôi hoặc người cần nghỉ ngơi.',
-    '6.000.000 – 9.000.000 VNĐ/người',
+    9000000,
     '3 ngày 2 đêm',
     'Cặp đôi, người cần thư giãn',
     'Resort 5★ như Naman Retreat / Hyatt / Pullman',
@@ -628,7 +628,7 @@ INSERT INTO TOUR (
 (
     'Giải trí & Trải nghiệm',
     'Tour vui chơi và trải nghiệm với các điểm nổi bật như Asia Park, Bà Nà Hills, Sky36 và đặc sản Đà Nẵng. Lý tưởng cho nhóm bạn trẻ thích check-in.',
-    '5.000.000 – 7.000.000 VNĐ/người',
+    7000000,
     '4 ngày 3 đêm',
     'Nhóm bạn trẻ, thích check-in',
     'Khách sạn 4★ trung tâm hoặc ven biển Mỹ Khê',
@@ -640,7 +640,7 @@ INSERT INTO TOUR (
 (
     'Văn hóa – Tâm linh – Ẩm thực',
     'Tour trải nghiệm văn hóa và ẩm thực đặc sắc của Đà Nẵng, kết hợp tham quan chùa Linh Ứng, Ngũ Hành Sơn và thưởng thức món ngon địa phương.',
-    '3.500.000 – 5.000.000 VNĐ/người',
+    '5000000',
     '3 ngày 2 đêm',
     'Người lớn tuổi, yêu văn hóa',
     'Khách sạn 3★ gần sông Hàn',
@@ -652,7 +652,7 @@ INSERT INTO TOUR (
 (
     'Nghỉ dưỡng cao cấp – Trải nghiệm 5 sao',
     'Tour nghỉ dưỡng đẳng cấp dành cho cặp đôi, tuần trăng mật hoặc khách cao cấp. Trải nghiệm tại resort 5 sao và du thuyền sông Hàn sang trọng.',
-    '10.000.000 – 15.000.000 VNĐ/người',
+    15000000,
     '3 ngày 2 đêm',
     'Cặp đôi, tuần trăng mật, khách cao cấp',
     'InterContinental / Furama Resort',
@@ -660,3 +660,5 @@ INSERT INTO TOUR (
     'Ngày 1: Check-in resort 5★, spa & fine dining\nNgày 2: Bà Nà Hills – Cầu Vàng\nNgày 3: Du thuyền sông Hàn & tiễn sân bay',
     NULL, NULL, NULL
 );
+
+
