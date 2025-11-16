@@ -121,7 +121,7 @@
         ngayKhoiHanh: "02/10/2025",
         soNguoi: 3,
         tongTien: "9.000.000 VNĐ",
-        trangThai: "Đã thanh toán",
+        trangThai: "Đặt thành công",
         chiTiet: `TOUR 1: KHÁM PHÁ ĐÀ NẴNG – BIỂN, NÚI, CẦU RỒNG
                   ⏰ Thời gian: 3 ngày 2 đêm
                   💰 Mức giá: 3.000.000 – 4.000.000 VNĐ/người
@@ -176,7 +176,7 @@ Ngày 1: Biển Mỹ Khê, cầu Rồng, café APEC
       tours.forEach((t, i) => {
         const row = document.createElement("tr");
         let badgeClass = "bg-secondary";
-        if (t.trangThai === "Đã thanh toán") badgeClass = "bg-success";
+        if (t.trangThai === "Đặt thành công") badgeClass = "bg-success";
         else if (t.trangThai === "Chờ xác nhận") badgeClass = "bg-warning text-dark";
         else if (t.trangThai === "Đã hủy") badgeClass = "bg-danger";
 

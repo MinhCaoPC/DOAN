@@ -43,6 +43,11 @@
       </div>
 
       <div class="profile-item">
+        <label>Địa chỉ</label>
+        <input type="text" id="diaChi">
+      </div>
+
+      <div class="profile-item">
         <label>Số điện thoại</label>
         <input type="tel" id="soDienThoai" placeholder="Nhập số điện thoại">
       </div>
@@ -79,6 +84,7 @@
         document.getElementById("hoTen").value = data.hoTen || "";
         document.getElementById("gioiTinh").value = data.gioiTinh || "";
         document.getElementById("ngaySinh").value = data.ngaySinh || "";
+        document.getElementById("diaChi").value = data.diaChi || "";
         document.getElementById("soDienThoai").value = data.soDienThoai || "";
         document.getElementById("email").value = data.email || "";
       }
@@ -92,6 +98,7 @@
         hoTen: document.getElementById("hoTen").value,
         gioiTinh: document.getElementById("gioiTinh").value,
         ngaySinh: document.getElementById("ngaySinh").value,
+        diaChi: document.getElementById("diaChi").value,
         soDienThoai: document.getElementById("soDienThoai").value,
         email: document.getElementById("email").value
       };

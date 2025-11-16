@@ -99,7 +99,7 @@ CREATE TABLE TOUR (
     MaTour INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Mã tour du lịch',
     TenTour VARCHAR(200) NOT NULL COMMENT 'Tên tour du lịch',
     MoTaTour TEXT COMMENT 'Mô tả khái quát về tour',
-    GiaTour VARCHAR(100) COMMENT 'Khoảng giá tour (ví dụ: 3.000.000 – 4.000.000 VNĐ/người)',
+    GiaTour DECIMAL(10,2 )COMMENT ' giá tour (ví dụ 4.000.000 VNĐ/người)',
     ThoiGianTour VARCHAR(100) COMMENT 'Thời gian tour (ví dụ: 3 ngày 2 đêm)',
     DoiTuong VARCHAR(200) COMMENT 'Đối tượng khách phù hợp (nhóm bạn, cặp đôi, v.v.)',
     KhachSan VARCHAR(200) COMMENT 'Thông tin khách sạn hoặc resort trong tour',
@@ -125,6 +125,9 @@ CREATE TABLE LICHSU (
     MaTour INT NOT NULL COMMENT 'Tour được đặt',
 	SDTT VARCHAR(20) COMMENT 'Số điện thoại đặt tour',
     EmailT VARCHAR(100) NOT NULL COMMENT 'Địa chỉ email đặt tour',
+    SoLuongKhach TINYINT COMMENT 'Số lượng khách đi tour đó',
+    TongTien DECIMAL(12,2) COMMENT 'Tổng số tiền tour',
+    TrangThai ENUM('TC','CXN','DH','YCH') COMMENT 'Trang thái tour đặt thành công, chờ xác nhận, đã huỷ, yêu cầu huỷ',
     ThoiGian DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời gian đặt tour',
     FOREIGN KEY (MaSoTK) REFERENCES TAIKHOAN(MaSoTK)
         ON DELETE CASCADE ON UPDATE CASCADE,
