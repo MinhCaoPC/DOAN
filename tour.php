@@ -43,8 +43,7 @@ foreach ($masterMap as $keyword => $link) {
 }
 
 
-// BƯỚC 2: LẤY THÔNG TIN TOUR VÀ XỬ LÝ LỊCH TRÌNH
-$sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTour FROM TOUR";
+$sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTourMain, ImageTourSub FROM TOUR";
 $resultTour = $conn->query($sql);
 
 $tourList = [];
@@ -73,7 +72,8 @@ while ($tour = $resultTour->fetch_assoc()) {
     $tourList[] = [
         "id" => (int)$tour['MaTour'],
         "ten" => $tour['TenTour'],
-        "anh" => $tour['ImageTour'],
+        "anh" => $tour['ImageTourMain'], // Dùng ImageTourMain cho ảnh chính của tour
+        "anhSub" => $tour['ImageTourSub'],
         "thoiGian" => $tour['ThoiGianTour'],
         "gia" => number_format($tour['GiaTour'], 0, ',', '.') . ' VNĐ', // Định dạng giá tiền
         "doiTuong" => $tour['DoiTuong'],

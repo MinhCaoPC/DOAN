@@ -587,6 +587,12 @@ VALUES
   'anh/APEC.png'
 );
 
+USE QuanLyDuLich;
+
+-- ==========================================
+-- INSERT 5 TOUR MỚI
+-- ==========================================
+-- Đã sửa lại LichTrinhTour để khớp 100% với tên trong CSDL
 INSERT INTO TOUR (
     TenTour,
     MoTaTour,
@@ -595,10 +601,7 @@ INSERT INTO TOUR (
     DoiTuong,
     KhachSan,
     ImageTour,
-    LichTrinhTour,
-    MaDiaDanh,
-    MaMonAn,
-    MaKND
+    LichTrinhTour
 ) VALUES (
     'Khám phá Đà Nẵng – Biển, Núi, Cầu Rồng',
     'Tour khám phá toàn diện Đà Nẵng với biển Mỹ Khê, cầu Rồng, bán đảo Sơn Trà và đèo Hải Vân. Phù hợp cho nhóm bạn trẻ hoặc người lần đầu đến Đà Nẵng.',
@@ -607,12 +610,8 @@ INSERT INTO TOUR (
     'Nhóm bạn trẻ, người lần đầu đến Đà Nẵng',
     'Khách sạn 3★ trung tâm (gần cầu Rồng / Bạch Đằng)',
     'images/cau.jpg',
-    'Ngày 1: Biển Mỹ Khê, cầu Rồng, café APEC\nNgày 2: Sơn Trà, Ngũ Hành Sơn, chợ đêm\nNgày 3: Đèo Hải Vân, hải sản Bé Mặn',
-    NULL,
-    NULL,
-    NULL
+    'Ngày 1: Bãi Biển Mỹ Khê, Cầu Rồng, café APEC\nNgày 2: Bán Đảo Sơn Trà, Núi Ngũ Hành Sơn, chợ đêm\nNgày 3: Đèo Hải Vân, Hải sản Năm Đảnh'
 ),
-
 (
     'Nghỉ dưỡng & Thiền tịnh',
     'Tour nghỉ dưỡng kết hợp thiền tịnh, thư giãn tại resort 5 sao với spa, yoga và suối khoáng Núi Thần Tài. Dành cho cặp đôi hoặc người cần nghỉ ngơi.',
@@ -621,10 +620,8 @@ INSERT INTO TOUR (
     'Cặp đôi, người cần thư giãn',
     'Resort 5★ như Naman Retreat / Hyatt / Pullman',
     'images/thiendinh.jpg',
-    'Ngày 1: Check-in resort, spa, yoga\nNgày 2: Suối khoáng Núi Thần Tài\nNgày 3: Café & mua đặc sản tại Chợ Hàn',
-    NULL, NULL, NULL
+    'Ngày 1: Check-in resort, spa, yoga\nNgày 2: Núi Thần Tài\nNgày 3: Café & mua đặc sản tại Chợ Hàn – Thiên đường của đồ lưu niệm và mua sắm'
 ),
-
 (
     'Giải trí & Trải nghiệm',
     'Tour vui chơi và trải nghiệm với các điểm nổi bật như Asia Park, Bà Nà Hills, Sky36 và đặc sản Đà Nẵng. Lý tưởng cho nhóm bạn trẻ thích check-in.',
@@ -633,22 +630,18 @@ INSERT INTO TOUR (
     'Nhóm bạn trẻ, thích check-in',
     'Khách sạn 4★ trung tâm hoặc ven biển Mỹ Khê',
     'images/giaitri.jpg',
-    'Ngày 1: Asia Park & chợ đêm Helio\nNgày 2: Bà Nà Hills – Cầu Vàng\nNgày 3: Sơn Trà, Sky36, đặc sản Đà Nẵng',
-    NULL, NULL, NULL
+    'Ngày 1: Asia Park & Chợ đêm Helio – Thiên đường ẩm thực về đêm ở Đà Nẵng\nNgày 2: Sun World Bà Nà Hills – Cầu Vàng\nNgày 3: Bán Đảo Sơn Trà, Sky36, đặc sản Đà Nẵng'
 ),
-
 (
     'Văn hóa – Tâm linh – Ẩm thực',
     'Tour trải nghiệm văn hóa và ẩm thực đặc sắc của Đà Nẵng, kết hợp tham quan chùa Linh Ứng, Ngũ Hành Sơn và thưởng thức món ngon địa phương.',
-    '5000000',
+    5000000,
     '3 ngày 2 đêm',
     'Người lớn tuổi, yêu văn hóa',
     'Khách sạn 3★ gần sông Hàn',
     'images/chualinhung.jpg',
-    'Ngày 1: Bảo tàng Chăm, cầu Rồng\nNgày 2: Chùa Linh Ứng, Ngũ Hành Sơn\nNgày 3: Ẩm thực Chợ Cồn, café The Local Beans',
-    NULL, NULL, NULL
+    'Ngày 1: Bảo tàng Chăm, Cầu Rồng\nNgày 2: Chùa Linh Ứng, Núi Ngũ Hành Sơn\nNgày 3: Chợ Cồn – Nơi mua bán tấp nập của người dân bản địa, café The Local Beans'
 ),
-
 (
     'Nghỉ dưỡng cao cấp – Trải nghiệm 5 sao',
     'Tour nghỉ dưỡng đẳng cấp dành cho cặp đôi, tuần trăng mật hoặc khách cao cấp. Trải nghiệm tại resort 5 sao và du thuyền sông Hàn sang trọng.',
@@ -657,8 +650,72 @@ INSERT INTO TOUR (
     'Cặp đôi, tuần trăng mật, khách cao cấp',
     'InterContinental / Furama Resort',
     'images/hotel.jpg',
-    'Ngày 1: Check-in resort 5★, spa & fine dining\nNgày 2: Bà Nà Hills – Cầu Vàng\nNgày 3: Du thuyền sông Hàn & tiễn sân bay',
-    NULL, NULL, NULL
+    'Ngày 1: Check-in resort 5★, spa & fine dining\nNgày 2: Sun World Bà Nà Hills – Cầu Vàng\nNgày 3: Du lịch Sông Hàn & tiễn sân bay'
 );
+
+
+-- ==========================================
+-- 1. LIÊN KẾT TOUR VỚI ĐỊA DANH (TOUR_DIADANH)
+-- ==========================================
+
+-- Tour 1: 'Khám phá Đà Nẵng' (Mỹ Khê, Cầu Rồng, Sơn Trà, Ngũ Hành Sơn, Đèo Hải Vân [Không có ID])
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (1, 1); -- Bãi biển Mỹ Khê
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (1, 5); -- Cầu Rồng
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (1, 3); -- Bán đảo Sơn Trà
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (1, 2); -- Ngũ Hành Sơn
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (1, 11); -- Liên kết Đèo Hải Vân
+
+-- Tour 2: 'Nghỉ dưỡng & Thiền tịnh' (Núi Thần Tài [Không có ID], Chợ Hàn)
+INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (2, 34); -- Chợ Hàn
+
+-- Tour 3: 'Giải trí & Trải nghiệm' (Asia Park, Bà Nà, Cầu Vàng, Sơn Trà, Sky36)
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (3, 2); -- Asia Park
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (3, 1);  -- Bà Nà Hills
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (3, 4);  -- Cầu Vàng
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (3, 3);  -- Bán đảo Sơn Trà
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (3, 3); -- Sky36
+
+-- Tour 4: 'Văn hóa – Tâm linh' (Bảo tàng Chăm [Không có ID], Cầu Rồng, Chùa Linh Ứng, Ngũ Hành Sơn, Chợ Cồn [Không có ID])
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (4, 5); -- Cầu Rồng
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (4, 7); -- Chùa Linh Ứng
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (4, 2); -- Ngũ Hành Sơn
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (4, 10); -- Liên kết Bảo tàng Chăm
+INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (4, 32);    -- Liên kết Chợ Cồn
+
+-- Tour 5: 'Nghỉ dưỡng cao cấp' (Bà Nà, Cầu Vàng, Sông Hàn)
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (5, 1); -- Bà Nà Hills
+INSERT INTO TOUR_DIADANH (MaTour, MaDiaDanh) VALUES (5, 4); -- Cầu Vàng
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (5, 4); -- Sông Hàn
+
+
+-- ==========================================
+-- 2. LIÊN KẾT TOUR VỚI KHU NGHỈ DƯỠNG (TOUR_KND)
+-- ==========================================
+
+-- Tour 2: 'Nghỉ dưỡng & Thiền tịnh' (Hyatt, Pullman)
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (2, 9); -- Hyatt Regency
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (2, 11); -- Pullman Danang
+
+-- Tour 5: 'Nghỉ dưỡng cao cấp' (InterContinental, Furama)
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (5, 7); -- InterContinental Danang
+INSERT INTO TOUR_KND (MaTour, MaKND) VALUES (5, 8); -- Furama Resort
+
+
+-- ==========================================
+-- 3. LIÊN KẾT TOUR VỚI MÓN ĂN (TOUR_MONAN)
+-- ==========================================
+
+-- Tour 1: 'Khám phá Đà Nẵng' (Hải sản)
+INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (1, 14); -- Hải sản
+
+-- Tour 3: 'Giải trí & Trải nghiệm' (Đặc sản Đà Nẵng - chung chung, có thể gán các món nổi bật)
+INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (3, 1); -- Mì Quảng
+INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (3, 5); -- Bánh tráng cuốn thịt heo
+
+
+
+SELECT * FROM DIADANH;
+SELECT * FROM MONAN;
+SELECT * FROM KHUNGHIDUONG;
 
 
