@@ -106,7 +106,8 @@ CREATE TABLE TOUR (
     KhachSan VARCHAR(200) COMMENT 'Thông tin khách sạn hoặc resort trong tour',
     LichTrinhTour TEXT COMMENT 'Lịch trình chi tiết theo ngày',
     ImageTourMain VARCHAR(150) COMMENT 'Đường dẫn ảnh minh họa tour chính',
-    ImageTourSub VARCHAR(150) COMMENT 'Đường dẫn ảnh minh họa tour phụ'
+    ImageTourSub VARCHAR(150) COMMENT 'Đường dẫn ảnh minh họa tour phụ',
+    LaNoiBat BOOLEAN DEFAULT FALSE COMMENT 'Đánh dấu tour nổi bật'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Danh sách các tour du lịch';
 
 CREATE TABLE TOUR_DIADANH (
@@ -166,8 +167,10 @@ CREATE TABLE LICHSU (
     MaDatTour INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Mã đặt tour',
     MaSoTK VARCHAR(10) NOT NULL COMMENT 'Tài khoản đặt tour',
     MaTour INT NOT NULL COMMENT 'Tour được đặt',
+    HoVaTenT VARCHAR(100) COMMENT 'Họ và tên khách đặt tour',
 	SDTT VARCHAR(20) COMMENT 'Số điện thoại đặt tour',
     EmailT VARCHAR(100) NOT NULL COMMENT 'Địa chỉ email đặt tour',
+    DiaChiT VARCHAR(255) NULL COMMENT 'Địa chỉ của khách hàng đặt tour',
     SoLuongKhach TINYINT COMMENT 'Số lượng khách đi tour đó',
     TongTien DECIMAL(12,2) COMMENT 'Tổng số tiền tour',
     TrangThai ENUM('TC','CXN','DH','YCH') COMMENT 'Trang thái tour đặt thành công, chờ xác nhận, đã huỷ, yêu cầu huỷ',

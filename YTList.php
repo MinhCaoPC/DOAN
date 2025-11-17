@@ -39,7 +39,7 @@ $sql = "
    UNION ALL
 
    SELECT 'TOUR' AS loai, m.MaYeuThich, t.MaTour AS id,
-          t.TenTour AS ten, t.MoTaTour AS moTa, t.ImageTour AS anh
+          t.TenTour AS ten, t.MoTaTour AS moTa, t.ImageTourMain AS anh  -- <-- ĐÃ SỬA Ở ĐÂY
    FROM MUCYEUTHICH m
    JOIN TOUR t ON m.MaTour = t.MaTour
    WHERE m.MaSoTK = ? AND m.Loai = 'TOUR'

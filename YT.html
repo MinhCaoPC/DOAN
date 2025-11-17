@@ -255,12 +255,11 @@
     }
   }
 
-  // ========= INIT =========
   document.addEventListener("DOMContentLoaded", () => {
     const loginSection = document.getElementById('login-section');
     const navbarMenu = document.getElementById('navbarMenu');
 
-    // setup click filter
+    // setup click filter (giữ nguyên)
     const filterList = document.getElementById("filter-list");
     if (filterList) {
       filterList.querySelectorAll("li").forEach((li) => {
@@ -302,13 +301,13 @@
           `;
         }
 
-        // Dù login hay không, loadFavorites sẽ tự xử lý redirect
+
         loadFavorites();
       });
+      
+
   });
 </script>
-
-
 
 
 </body>

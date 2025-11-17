@@ -156,6 +156,35 @@
 .btn-search:hover {
   color: #c0e1ff;
 }
+/* --- CSS CHO KHUNG GỢI Ý TÌM KIẾM --- */
+#suggestionsBox {
+  display: none;
+  z-index: 1000;
+  top: 100%; /* Hiển thị ngay dưới ô input */
+  left: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left; /* Đảm bảo chữ canh trái */
+}
+
+/* Khi có nội dung thì mới hiện ra */
+#suggestionsBox:not(:empty) {
+  display: block;
+}
+
+/* Định dạng các mục gợi ý */
+#suggestionsBox .list-group-item {
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  border-top: 1px solid #eee;
+}
+#suggestionsBox .list-group-item:first-child {
+  border-top: none;
+}
+#suggestionsBox .list-group-item:hover {
+  background-color: #f0f0f0;
+}
 
 
 .diadanh-section {

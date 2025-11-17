@@ -43,7 +43,7 @@ foreach ($masterMap as $keyword => $link) {
 }
 
 
-$sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTourMain, ImageTourSub FROM TOUR";
+$sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTourMain, ImageTourSub FROM TOUR WHERE LaNoiBat = 0";
 $resultTour = $conn->query($sql);
 
 $tourList = [];
