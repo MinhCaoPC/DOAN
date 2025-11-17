@@ -105,17 +105,59 @@ CREATE TABLE TOUR (
     DoiTuong VARCHAR(200) COMMENT 'Đối tượng khách phù hợp (nhóm bạn, cặp đôi, v.v.)',
     KhachSan VARCHAR(200) COMMENT 'Thông tin khách sạn hoặc resort trong tour',
     LichTrinhTour TEXT COMMENT 'Lịch trình chi tiết theo ngày',
-    ImageTour VARCHAR(150) COMMENT 'Đường dẫn ảnh minh họa tour',
-    MaDiaDanh INT NULL COMMENT 'Mã địa danh liên quan',
-    MaMonAn INT NULL COMMENT 'Mã món ăn đặc trưng trong tour',
-    MaKND INT NULL COMMENT 'Mã khu nghỉ dưỡng trong tour',
-    FOREIGN KEY (MaDiaDanh) REFERENCES DIADANH(MaDD)
-        ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (MaMonAn) REFERENCES MONAN(MaMonAn)
-        ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (MaKND) REFERENCES KHUNGHIDUONG(MaKND)
-        ON DELETE SET NULL ON UPDATE CASCADE
+    ImageTourMain VARCHAR(150) COMMENT 'Đường dẫn ảnh minh họa tour chính',
+    ImageTourSub VARCHAR(150) COMMENT 'Đường dẫn ảnh minh họa tour phụ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Danh sách các tour du lịch';
+
+CREATE TABLE TOUR_DIADANH (
+    MaTour INT NOT NULL COMMENT 'Khóa ngoại từ bảng TOUR',
+    MaDiaDanh INT NOT NULL COMMENT 'Khóa ngoại từ bảng DIADANH (MaDD)',
+    
+    -- Khóa chính phức hợp, đảm bảo 1 tour không bị lặp 1 địa danh
+    PRIMARY KEY (MaTour, MaDiaDanh), 
+    
+    -- Khóa ngoại liên kết đến bảng TOUR
+    FOREIGN KEY (MaTour) REFERENCES TOUR(MaTour)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+        
+    -- Khóa ngoại liên kết đến bảng DIADANH
+    -- Lưu ý: Cột MaDD trong bảng DIADANH của bạn
+    FOREIGN KEY (MaDiaDanh) REFERENCES DIADANH(MaDD) 
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Liên kết Tour và Địa danh';
+
+CREATE TABLE TOUR_MONAN (
+    MaTour INT NOT NULL COMMENT 'Khóa ngoại từ bảng TOUR',
+    MaMonAn INT NOT NULL COMMENT 'Khóa ngoại từ bảng MONAN',
+    
+    -- Khóa chính
+    PRIMARY KEY (MaTour, MaMonAn),
+    
+    -- Khóa ngoại
+    FOREIGN KEY (MaTour) REFERENCES TOUR(MaTour)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (MaMonAn) REFERENCES MONAN(MaMonAn)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Liên kết Tour và Món ăn';
+
+
+
+
+CREATE TABLE TOUR_KND (
+    MaTour INT NOT NULL COMMENT 'Khóa ngoại từ bảng TOUR',
+    MaKND INT NOT NULL COMMENT 'Khóa ngoại từ bảng KHUNGHIDUONG',
+    
+    -- Khóa chính
+    PRIMARY KEY (MaTour, MaKND),
+    
+    -- Khóa ngoại
+    FOREIGN KEY (MaTour) REFERENCES TOUR(MaTour)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (MaKND) REFERENCES KHUNGHIDUONG(MaKND)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Liên kết Tour và Khu nghỉ dưỡng';
+
+
 
 -- ==========================================
 -- BẢNG LỊCH SỬ ĐẶT TOUR
@@ -164,6 +206,12 @@ CREATE TABLE MUCYEUTHICH (
    FOREIGN KEY (MaTour) REFERENCES TOUR(MaTour)
        ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Danh sách các mục người dùng yêu thích';
+
+
+DROP DATABASE QuanLyDuLich;
+
+
+
 
 
 

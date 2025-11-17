@@ -600,7 +600,8 @@ INSERT INTO TOUR (
     ThoiGianTour,
     DoiTuong,
     KhachSan,
-    ImageTour,
+    ImageTourMain,
+    ImageTourSub,
     LichTrinhTour
 ) VALUES (
     'Khám phá Đà Nẵng – Biển, Núi, Cầu Rồng',
@@ -609,7 +610,7 @@ INSERT INTO TOUR (
     '3 ngày 2 đêm',
     'Nhóm bạn trẻ, người lần đầu đến Đà Nẵng',
     'Khách sạn 3★ trung tâm (gần cầu Rồng / Bạch Đằng)',
-    'images/cau.jpg',
+    'images/cau.jpg','images/banner-DN.png',
     'Ngày 1: Bãi Biển Mỹ Khê, Cầu Rồng, café APEC\nNgày 2: Bán Đảo Sơn Trà, Núi Ngũ Hành Sơn, chợ đêm\nNgày 3: Đèo Hải Vân, Hải sản Năm Đảnh'
 ),
 (
@@ -619,7 +620,7 @@ INSERT INTO TOUR (
     '3 ngày 2 đêm',
     'Cặp đôi, người cần thư giãn',
     'Resort 5★ như Naman Retreat / Hyatt / Pullman',
-    'images/thiendinh.jpg',
+    'images/thiendinh.jpg','images/yoga.jpg',
     'Ngày 1: Check-in resort, spa, yoga\nNgày 2: Núi Thần Tài\nNgày 3: Café & mua đặc sản tại Chợ Hàn – Thiên đường của đồ lưu niệm và mua sắm'
 ),
 (
@@ -629,7 +630,7 @@ INSERT INTO TOUR (
     '4 ngày 3 đêm',
     'Nhóm bạn trẻ, thích check-in',
     'Khách sạn 4★ trung tâm hoặc ven biển Mỹ Khê',
-    'images/giaitri.jpg',
+    'images/giaitri.jpg','images/GT.jpg',
     'Ngày 1: Asia Park & Chợ đêm Helio – Thiên đường ẩm thực về đêm ở Đà Nẵng\nNgày 2: Sun World Bà Nà Hills – Cầu Vàng\nNgày 3: Bán Đảo Sơn Trà, Sky36, đặc sản Đà Nẵng'
 ),
 (
@@ -639,7 +640,7 @@ INSERT INTO TOUR (
     '3 ngày 2 đêm',
     'Người lớn tuổi, yêu văn hóa',
     'Khách sạn 3★ gần sông Hàn',
-    'images/chualinhung.jpg',
+    'images/chualinhung.jpg','images/amthuc.jpg',
     'Ngày 1: Bảo tàng Chăm, Cầu Rồng\nNgày 2: Chùa Linh Ứng, Núi Ngũ Hành Sơn\nNgày 3: Chợ Cồn – Nơi mua bán tấp nập của người dân bản địa, café The Local Beans'
 ),
 (
@@ -649,7 +650,7 @@ INSERT INTO TOUR (
     '3 ngày 2 đêm',
     'Cặp đôi, tuần trăng mật, khách cao cấp',
     'InterContinental / Furama Resort',
-    'images/hotel.jpg',
+    'images/hotel.jpg','images/ks.jpg',
     'Ngày 1: Check-in resort 5★, spa & fine dining\nNgày 2: Sun World Bà Nà Hills – Cầu Vàng\nNgày 3: Du lịch Sông Hàn & tiễn sân bay'
 );
 
@@ -717,5 +718,6 @@ INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (3, 5); -- Bánh tráng cuốn t
 SELECT * FROM DIADANH;
 SELECT * FROM MONAN;
 SELECT * FROM KHUNGHIDUONG;
+
 
 
