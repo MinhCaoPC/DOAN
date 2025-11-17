@@ -154,42 +154,121 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <script>
-    // Khởi tạo bản đồ Leaflet
-    const map = L.map('map').setView([16.0678, 108.2208], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+    // Biến toàn cục để lưu thông tin người dùng (nếu có)
+    let currentUser = null;
 
-    const places = [
-      { name: 'Cầu Rồng', coords: [16.0615, 108.2271] },
-      { name: 'Biển Mỹ Khê', coords: [16.0635, 108.2510] },
-      { name: 'Bà Nà Hills', coords: [15.9970, 107.9884] }
-    ];
+    // --- 1. Xử lý logic chung khi trang tải ---
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // Khởi tạo bản đồ Leaflet (giữ nguyên code cũ của bạn)
+      const map = L.map('map').setView([16.0678, 108.2208], 12);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      const places = [
+        { name: 'Cầu Rồng', coords: [16.0615, 108.2271] },
+        { name: 'Biển Mỹ Khê', coords: [16.0635, 108.2510] },
+        { name: 'Bà Nà Hills', coords: [15.9970, 107.9884] }
+      ];
+      places.forEach(p => {
+        L.marker(p.coords).addTo(map).bindPopup(`<strong>${p.name}</strong>`);
+      });
 
-    places.forEach(p => {
-      L.marker(p.coords).addTo(map).bindPopup(`<strong>${p.name}</strong>`);
+      // Năm tự động (giữ nguyên code cũ)
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // --- 2. TỰ ĐỘNG ĐIỀN FORM (LOGIC MỚI) ---
+      // (Giống như các trang khác, ta gọi getUser.php)
+      fetch('getUser.php')
+        .then(res => res.json())
+        .then(data => {
+          if (data.loggedIn) {
+            currentUser = data;
+            
+            // Tự động điền thông tin vào form
+            // Logic: Ưu tiên HoVaTen, nếu trống thì dùng TenTaiKhoan
+            if (document.getElementById('name')) {
+              document.getElementById('name').value = currentUser.HoVaTen || currentUser.TenTaiKhoan || '';
+            }
+            // Lấy SDT từ KHACHHANG
+            if (document.getElementById('sdt')) {
+              document.getElementById('sdt').value = currentUser.SDT || '';
+            }
+            // Lấy Email từ TAIKHOAN
+            if (document.getElementById('email')) {
+              document.getElementById('email').value = currentUser.Email || '';
+            }
+          }
+        })
+        .catch(err => console.error("Lỗi tải thông tin người dùng:", err));
     });
 
-    // Xử lý form
+
+    // --- 3. XỬ LÝ SUBMIT FORM (SỬA LẠI HOÀN TOÀN) ---
     const form = document.getElementById('contactForm');
     const success = document.getElementById('successMessage');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
+    
+    // Thêm 'async' để dùng 'await'
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Ngăn form gửi theo cách truyền thống
+      
       if (!form.checkValidity()) {
         form.classList.add('was-validated');
         return;
       }
-      success.classList.remove('d-none');
-      setTimeout(() => {
-        form.reset();
-        form.classList.remove('was-validated');
-      }, 1000);
-    });
+      
+      // Tắt nút gửi để tránh spam
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang gửi...';
 
-    // Năm tự động
-    document.getElementById('year').textContent = new Date().getFullYear();
+      // Lấy dữ liệu từ form
+      const formData = {
+          name: document.getElementById('name').value,
+          sdt: document.getElementById('sdt').value,
+          email: document.getElementById('email').value,
+          subject: document.getElementById('subject').value,
+          message: document.getElementById('message').value
+      };
+
+      try {
+        // Gửi dữ liệu đến file PHP
+        const res = await fetch('lienhe.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        const result = await res.json();
+
+        if (result.success) {
+          // Gửi thành công
+          success.classList.remove('d-none'); // Hiện thông báo
+          form.reset(); // Xóa form
+          form.classList.remove('was-validated');
+        } else {
+          // Gửi thất bại (do server báo lỗi)
+          alert('Gửi thất bại: ' + (result.message || 'Lỗi không xác định.'));
+        }
+
+      } catch (err) {
+        // Lỗi mạng hoặc kết nối
+        console.error('Lỗi khi gửi form:', err);
+        alert('Đã xảy ra lỗi mạng. Vui lòng thử lại.');
+      } finally {
+         // Bật lại nút gửi dù thành công hay thất bại
+         submitButton.disabled = false;
+         submitButton.innerHTML = 'Gửi yêu cầu';
+         
+         // Ẩn thông báo thành công sau 5 giây
+         setTimeout(() => {
+            success.classList.add('d-none');
+         }, 5000);
+      }
+    });
   </script>
 
 </body>
-
 </html>
