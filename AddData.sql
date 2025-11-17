@@ -421,7 +421,7 @@ VALUES
 (
     'Sun World Bà Nà Hills',
     'Thôn An Sơn, xã Hòa Ninh, huyện Hòa Vang, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9344.…N%C3%A0%20Hills!5e0!3m2!1svi!2s!4v1761386544078!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.750193757586!2d108.0302222760495!3d16.02651438464691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f60e6b3844c9%3A0x5c53b85f61797909!2sSun%20World%20B%C3%A0%20N%C3%A0%20Hills!5e0!3m2!1svi!2s!4v1763390325039!5m2!1svi!2s',
     'vuichoi',
     'Sun World Bà Nà Hills là khu du lịch nổi tiếng với khí hậu mát mẻ quanh năm, kiến trúc châu Âu độc đáo, cáp treo hiện đại và Cầu Vàng nổi bật với bàn tay khổng lồ nâng đỡ. Du khách có thể tham quan Làng Pháp, thưởng thức ẩm thực đa dạng, tham gia các trò chơi giải trí và khám phá vườn hoa tuyệt đẹp.',
     'anh/banahills.jpg'
@@ -431,7 +431,7 @@ VALUES
 (
     'Asia Park',
     'Số 1 Phan Đăng Lưu, phường Hòa Cường Bắc, quận Hải Châu, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.…NANG%20DOWNTOWN!5e0!3m2!1svi!2s!4v1761807407857!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4674680522508!2d108.22305827604967!3d16.04121388463423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219e7a191cc17%3A0xe60f91d4055e3074!2sDA%20NANG%20DOWNTOWN!5e0!3m2!1svi!2s!4v1763390442792!5m2!1svi!2s',
     'vuichoi',
     'Asia Park là khu vui chơi giải trí hiện đại nổi bật với vòng quay Sun Wheel khổng lồ, nhiều trò chơi cảm giác mạnh, khu vực trò chơi dành cho trẻ em và các công trình kiến trúc lấy cảm hứng từ văn hóa châu Á. Du khách có thể tham gia trò chơi, chụp ảnh, thưởng thức ẩm thực và hòa mình vào không gian sôi động.',
     'anh/AsianPark.jpg'
@@ -441,7 +441,7 @@ VALUES
 (
     'Sky36',
     'Tầng 35–37, tòa nhà Novotel Danang Premier Han River, 36–38 Bạch Đằng, phường Thạch Thang, quận Hải Châu, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.…%20%26%20Dining!5e0!3m2!1svi!2s!4v1761807723127!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.7701707889514!2d108.2210557760504!3d16.077411884603258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183afab4a42d%3A0xd52dbe9e28e83835!2zS2jDoWNoIHPhuqFuIE5vdm90ZWwgxJDDoCBO4bq1bmc!5e0!3m2!1svi!2s!4v1763390504613!5m2!1svi!2s',
     'vuichoi',
     'Sky36 là bar và lounge cao nhất Đà Nẵng với tầm nhìn toàn cảnh thành phố. Du khách có thể thưởng thức cocktail, âm nhạc sôi động và ngắm cảnh đêm lung linh của thành phố bên sông Hàn.',
     'anh/Sky360.webp'
@@ -451,7 +451,7 @@ VALUES
 (
     'Du lịch Sông Hàn',
     'Dọc hai bờ sông Hàn, trung tâm TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30671…zU8O0bmcgSMOgbg!5e0!3m2!1svi!2s!4v1761807780504!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30671.84988975054!2d108.20529037354378!3d16.066463465191074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142183d37f5d3d5%3A0xaa3ca36520c7af4c!2zU8O0bmcgSMOgbg!5e0!3m2!1svi!2s!4v1763390546103!5m2!1svi!2s',
     'vuichoi',
 'Sông Hàn là biểu tượng của Đà Nẵng với nhiều cây cầu nổi tiếng. Du khách có thể đi du thuyền ngắm cảnh, thưởng thức ẩm thực và cảm nhận vẻ đẹp thành phố về đêm.',
     'anh/SongHan.webp'
@@ -461,7 +461,7 @@ VALUES
 (
     'Núi Thần Tài',
     'Quốc lộ 14G, xã Hòa Phú, huyện Hòa Vang, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.…ort%20Da%20Nang!5e0!3m2!1svi!2s!4v1761807841818!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.923362444118!2d108.01773288884863!3d15.969378796173975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f79575cfb7c1%3A0xf0646efeed30cb8f!2zSG90IFNwcmluZ3MgUGFyayAtIEPDtG5nIHZpw6puIFN14buRaSBraG_DoW5nIG7Ds25nIE7DumkgVGjhuqduIFTDoGkgxJDDoCBO4bq1bmc!5e0!3m2!1svi!2s!4v1763390644638!5m2!1svi!2s',
     'sinhthai',
     'Núi Thần Tài là khu du lịch sinh thái nổi tiếng với suối khoáng nóng, tắm bùn, spa và cảnh quan núi rừng hùng vĩ. Phù hợp cho gia đình và nhóm bạn muốn nghỉ ngơi và thư giãn.',
     'anh/Núi Thần Tài.png'
@@ -471,7 +471,7 @@ VALUES
 (
     'VinWonders Nam Hội An',
     'Xã Bình Minh, huyện Thăng Bình, tỉnh Quảng Nam (gần Đà Nẵng)',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.…%E1%BB%99i%20An!5e0!3m2!1svi!2s!4v1761807898735!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.3342871393675!2d108.4056639760456!3d15.786317884852938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420bfde49f11d1%3A0x49422ef9074e41ca!2sVinWonders%20Nam%20H%E1%BB%99i%20An!5e0!3m2!1svi!2s!4v1763390808237!5m2!1svi!2s',
     'vuichoi',
     'VinWonders Nam Hội An là khu vui chơi giải trí hiện đại, quy mô lớn với hàng loạt trò chơi cảm giác mạnh, công viên nước, khu biểu diễn nghệ thuật và trải nghiệm văn hóa Hội An. Phù hợp cho gia đình và du khách muốn tận hưởng ngày vui chơi trọn vẹn.',
     'anh/vin.jpg'
@@ -481,7 +481,7 @@ VALUES
 (
     'InterContinental Danang Sun Peninsula Resort',
     'Bán đảo Sơn Trà, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3832.…insula%20Resort!5e0!3m2!1svi!2s!4v1761807957589!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3832.9318215347967!2d108.30364047605104!3d16.120827384566173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31423d9513ec9199%3A0x5ade8a2bd4daad0d!2sInterContinental%20Danang%20Sun%20Peninsula%20Resort!5e0!3m2!1svi!2s!4v1763390931531!5m2!1svi!2s',
     'nghiduong',
     'InterContinental Danang Sun Peninsula Resort là khu nghỉ dưỡng 5 sao sang trọng trên bán đảo Sơn Trà, nổi bật với kiến trúc độc đáo, tầm nhìn biển tuyệt đẹp và dịch vụ đẳng cấp quốc tế.',
     'anh/resort1.png'
