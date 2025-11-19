@@ -12,12 +12,29 @@ require_once 'conn.php';
 header('Content-Type: application/json'); // Thiết lập kiểu trả về JSON
 
 $action = $_GET['action'] ?? '';
+
+// Nếu không có action, hiển thị hướng dẫn
+if (empty($action)) {
+    $response = [
+        'status' => 'info', 
+        'message' => 'API Quản lý Địa danh',
+        'endpoints' => [
+            'read' => 'GET add_diadanh.php?action=read',
+            'add' => 'POST add_diadanh.php?action=add (với form data)',
+            'delete' => 'POST add_diadanh.php?action=delete (với MaDD và ImagePath)'
+        ]
+    ];
+    goto end_script;
+}
+
 $response = ['status' => 'error', 'message' => 'Hành động không hợp lệ.'];
 
-// Đường dẫn hệ thống: Dùng '../pic/' để đi lên một cấp từ ADMIN/ rồi vào pic/
-$fs_upload_dir = '../pic/'; 
-// Đường dẫn CSDL/Trình duyệt: Dùng '../pic/' để trình duyệt truy cập từ ADMIN/
-$db_image_prefix = '../pic/'; 
+// ✅ ĐÚNG: Đường dẫn HỆ THỐNG để PHP upload file (từ ADMIN/ lên cấp cha rồi vào anh/)
+$fs_upload_dir = __DIR__ . '/../anh/'; 
+
+// ✅ ĐÚNG: Đường dẫn TRÌNH DUYỆT để hiển thị ảnh (từ root domain)
+// Sẽ lưu vào DB: /anh/ten_file.jpg (Đây là đường dẫn tối ưu nhất)
+$db_image_prefix = '/anh/'; 
 
 try {
     
@@ -49,8 +66,8 @@ try {
         $mapLinkDD = $_POST['mapLinkDD'] ?? '';
         $moTaDD    = $_POST['moTaDD'] ?? '';
         
-        if (empty($tenDD) || empty($moTaDD) || empty($_FILES['imageDD']['name'])) {
-            $response = ['status' => 'error', 'message' => 'Vui lòng điền đầy đủ Tên, Mô tả và chọn Ảnh Địa danh.'];
+        if (empty($tenDD) || empty($moTaDD) || empty($_FILES['imageDD']['name']) || empty($loaiDD)) {
+            $response = ['status' => 'error', 'message' => 'Vui lòng điền đầy đủ Tên, Loại, Mô tả và chọn Ảnh Địa danh.'];
             goto end_script;
         }
 
@@ -61,22 +78,33 @@ try {
             $file_info = $_FILES['imageDD'];
             $file_extension = pathinfo($file_info['name'], PATHINFO_EXTENSION);
             
+            // Kiểm tra định dạng file hợp lệ
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            if (!in_array(strtolower($file_extension), $allowed_extensions)) {
+                $response = ['status' => 'error', 'message' => 'Chỉ chấp nhận file ảnh: JPG, PNG, GIF, WEBP'];
+                goto end_script;
+            }
+            
             // Tạo tên file duy nhất 
             $new_file_name = uniqid('dd_', true) . '.' . strtolower($file_extension);
-            // Đường dẫn file TẠM THỜI trên server
+            
+            // Đường dẫn FILE SYSTEM để lưu file
             $target_file = $fs_upload_dir . $new_file_name; 
 
-            // Kiểm tra và tạo thư mục pic/ nếu chưa tồn tại
+            // Kiểm tra và tạo thư mục anh/ nếu chưa tồn tại
             if (!is_dir($fs_upload_dir)) {
-                @mkdir($fs_upload_dir, 0777, true); 
+                if (!@mkdir($fs_upload_dir, 0755, true)) {
+                    $response = ['status' => 'error', 'message' => 'Không thể tạo thư mục anh/. Kiểm tra quyền thư mục.'];
+                    goto end_script;
+                }
             }
             
             // Di chuyển file tạm sang thư mục đích
             if (move_uploaded_file($file_info['tmp_name'], $target_file)) {
-                // Lưu đường dẫn TƯƠNG ĐỐI TRÌNH DUYỆT vào CSDL
+                // Lưu đường dẫn WEB vào CSDL
                 $image_link = $db_image_prefix . $new_file_name; 
             } else {
-                $response = ['status' => 'error', 'message' => 'Lỗi khi di chuyển file ảnh. Kiểm tra quyền ghi của thư mục `../pic/`.'];
+                $response = ['status' => 'error', 'message' => 'Lỗi khi di chuyển file ảnh. Kiểm tra quyền ghi của thư mục anh/'];
                 goto end_script;
             }
         } else {
@@ -90,8 +118,12 @@ try {
         $stmt->bind_param("ssssss", $tenDD, $diaChiDD, $mapLinkDD, $moTaDD, $image_link, $loaiDD);
         
         if ($stmt->execute()) {
-            $response = ['status' => 'success', 'message' => 'Thêm Địa danh **' . htmlspecialchars($tenDD) . '** thành công.'];
+            $response = ['status' => 'success', 'message' => 'Thêm Địa danh "' . htmlspecialchars($tenDD) . '" thành công.'];
         } else {
+            // Xóa file ảnh nếu insert DB thất bại
+            if (!empty($target_file) && file_exists($target_file)) {
+                @unlink($target_file);
+            }
             $response = ['status' => 'error', 'message' => 'Lỗi CSDL khi chèn Địa danh: ' . $conn->error];
         }
     }
@@ -114,9 +146,16 @@ try {
         
         if ($stmt->execute() && $stmt->affected_rows > 0) {
             // 2. Xóa file ảnh trên server
-            // Dùng $imagePath (ví dụ: ../pic/dd_...jpg) để xóa file vật lý
-            if (!empty($imagePath) && strpos($imagePath, $db_image_prefix) === 0 && file_exists($imagePath)) {
-                @unlink($imagePath); 
+            // Chuyển đổi đường dẫn WEB (/anh/...) sang đường dẫn FILE SYSTEM
+            if (!empty($imagePath) && strpos($imagePath, $db_image_prefix) === 0) {
+                // Lấy tên file từ đường dẫn web: /anh/dd_xxx.jpg -> dd_xxx.jpg
+                $filename = basename($imagePath);
+                // Tạo đường dẫn file system
+                $file_to_delete = $fs_upload_dir . $filename;
+                
+                if (file_exists($file_to_delete)) {
+                    @unlink($file_to_delete); 
+                }
             }
             $response = ['status' => 'success', 'message' => 'Xóa Địa danh ' . $maDD . ' thành công.'];
         } else {

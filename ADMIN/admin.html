@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* CSS Styling - Giữ nguyên */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f6f9;
         }
 
-        /* Sidebar Styling */
         .sidebar {
             height: 100vh;
             width: 260px;
@@ -55,13 +52,11 @@
             width: 20px;
         }
 
-        /* Main Content Styling */
         .main-content {
             margin-left: 260px;
             padding: 20px;
         }
 
-        /* Navbar styling */
         .top-navbar {
             background-color: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
@@ -72,7 +67,6 @@
             margin-bottom: 20px;
         }
 
-        /* Cards for Dashboard */
         .card-box {
             border: none;
             border-radius: 10px;
@@ -104,7 +98,6 @@
             color: white;
         }
 
-        /* Hide/Show sections */
         .section-content {
             display: none;
         }
@@ -120,33 +113,28 @@
     <div class="sidebar">
         <h4><i class="fas fa-plane-departure"></i> Admin Đà Nẵng</h4>
 
-        <a href="#" onclick="showSection('dashboard')" class="nav-link active">
+        <a href="#" onclick="showSection('dashboard', event)" class="nav-link active">
             <i class="fas fa-tachometer-alt"></i> Tổng quan
         </a>
-
-        <a href="#" onclick="showSection('users')" class="nav-link">
+        <a href="#" onclick="showSection('users', event)" class="nav-link">
             <i class="fas fa-users"></i> Quản lý Tài khoản KH
         </a>
-
-        <a href="#" onclick="showSection('tours')" class="nav-link">
+        <a href="#" onclick="showSection('tours', event)" class="nav-link">
             <i class="fas fa-map-marked-alt"></i> Quản lý Tour
         </a>
-
-        <a href="#" onclick="showSection('locations')" class="nav-link">
+        <a href="#" onclick="showSection('locations', event)" class="nav-link">
             <i class="fas fa-landmark"></i> Địa danh
         </a>
-        <a href="#" onclick="showSection('resort')" class="nav-link">
+        <a href="#" onclick="showSection('resort', event)" class="nav-link">
             <i class="fas fa-landmark"></i> Nghỉ dưỡng
         </a>
-        <a href="#" onclick="showSection('food')" class="nav-link">
+        <a href="#" onclick="showSection('food', event)" class="nav-link">
             <i class="fas fa-utensils"></i> Ẩm thực
         </a>
-
-        <a href="#" onclick="showSection('booking')" class="nav-link">
+        <a href="#" onclick="showSection('booking', event)" class="nav-link">
             <i class="fas fa-history"></i> Lịch sử Đặt Tour
         </a>
-
-        <a href="#" onclick="showSection('contacts')" class="nav-link">
+        <a href="#" onclick="showSection('contacts', event)" class="nav-link">
             <i class="fas fa-envelope"></i> Liên hệ cần tư vấn
         </a>
     </div>
@@ -231,8 +219,7 @@
             </div>
             <div class="card card-box p-3">
                 <p>Danh sách các tour Đà Nẵng - Hội An - Bà Nà...</p>
-                <div class="alert alert-info">Chức năng cập nhật thông tin Tour, giá vé, lịch trình... (Cần triển khai
-                    logic CRUD Tour trong file `tour_handler.php` riêng).</div>
+                <div class="alert alert-info">Chức năng cập nhật thông tin Tour, giá vé, lịch trình...</div>
             </div>
         </div>
 
@@ -290,9 +277,13 @@
                                         <input type="text" class="form-control" id="tenDD" name="tenDD" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="loaiDD" class="form-label">Loại Địa danh</label>
-                                        <input type="text" class="form-control" id="loaiDD" name="loaiDD"
-                                            placeholder="Ví dụ: Di tích, Bãi biển, Công viên">
+                                        <label for="loaiDD" class="form-label">Loại Địa danh (*)</label>
+                                        <select class="form-control" id="loaiDD" name="loaiDD" required>
+                                            <option value="">-- Chọn Loại Địa danh --</option>
+                                            <option value="thiennhien">Thiên nhiên</option>
+                                            <option value="congtrinh">Công trình</option>
+                                            <option value="vanhoa">Văn hóa</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -328,7 +319,7 @@
 
         <div id="food" class="section-content">
             <h3>Cập nhật Món ăn</h3>
-            <p>Form nhập liệu cho ẩm thực địa phương... (Cần triển khai logic CRUD cho MONAN).</p>
+            <p>Form nhập liệu cho ẩm thực địa phương...</p>
         </div>
 
     </div>
@@ -336,10 +327,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Hàm tải dữ liệu tổng quan cho Dashboard
+        // Hàm normalizeImagePath đã được xóa theo yêu cầu
+        
         async function loadDashboardData() {
             try {
-                // Đã đổi tên file thành dashboard.php
                 const response = await fetch('dashboard.php');
                 const result = await response.json();
 
@@ -351,24 +342,20 @@
                     document.querySelector('#dashboard .bg-gradient-info h3').textContent = data.total_locations;
                 } else {
                     console.error("Lỗi Dashboard:", result.message);
-                    alert("Lỗi tải dữ liệu Dashboard: " + result.message);
                 }
             } catch (error) {
                 console.error('Lỗi kết nối Dashboard:', error);
-                alert('Lỗi kết nối server khi tải Dashboard.');
             }
         }
 
-        // Hàm tải danh sách Khách hàng
         async function loadUsersData() {
             const tableBody = document.querySelector('#users table tbody');
 
             try {
-                // Đã đổi tên file thành admin.php
                 const response = await fetch('admin.php?action=read');
                 const result = await response.json();
 
-                tableBody.innerHTML = ''; // Xóa nội dung cũ
+                tableBody.innerHTML = '';
 
                 if (result.status === 'success') {
                     result.data.forEach(user => {
@@ -388,19 +375,16 @@
                         tableBody.insertAdjacentHTML('beforeend', row);
                     });
                 } else {
-                    tableBody.innerHTML = `<tr><td colspan="6">Lỗi tải dữ liệu khách hàng: ${result.message}</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="6">Lỗi tải dữ liệu: ${result.message}</td></tr>`;
                 }
             } catch (error) {
                 console.error('Lỗi kết nối Users:', error);
-                // tableBody đã được định nghĩa ở trên, nên sử dụng được ở đây
-                tableBody.innerHTML = `<tr><td colspan="6">Lỗi kết nối server khi tải danh sách khách hàng.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="6">Lỗi kết nối server.</td></tr>`;
             }
         }
 
-        // Hàm tải danh sách Liên hệ cần tư vấn
         async function loadContactsData() {
             try {
-                // Đã đổi tên file thành nhanlienhe.php
                 const response = await fetch('nhanlienhe.php');
                 const result = await response.json();
                 const contactList = document.getElementById('contact-list');
@@ -426,12 +410,10 @@
                 }
             } catch (error) {
                 console.error('Lỗi kết nối Contacts:', error);
-                document.getElementById('contact-list').innerHTML = `<div class="alert alert-danger">Lỗi kết nối server khi tải danh sách liên hệ.</div>`;
+                document.getElementById('contact-list').innerHTML = `<div class="alert alert-danger">Lỗi kết nối server.</div>`;
             }
         }
 
-
-        // Ví dụ về hàm xóa (sử dụng AJAX POST)
         async function deleteUser(maSoTK) {
             if (!confirm(`Bạn có chắc chắn muốn xóa tài khoản ${maSoTK} không?`)) return;
 
@@ -439,7 +421,6 @@
                 const formData = new FormData();
                 formData.append('MaSoTK', maSoTK);
 
-                // Đã đổi tên file thành admin.php
                 const response = await fetch('admin.php?action=delete', {
                     method: 'POST',
                     body: formData
@@ -448,7 +429,7 @@
 
                 if (result.status === 'success') {
                     alert(result.message);
-                    loadUsersData(); // Tải lại danh sách sau khi xóa
+                    loadUsersData();
                 } else {
                     alert('Lỗi: ' + result.message);
                 }
@@ -457,57 +438,53 @@
                 alert('Lỗi kết nối server: ' + error);
             }
         }
-        // Hàm thêm Địa danh
-    async function addLocation() {
-        const form = document.getElementById('addLocationForm');
-        const submitBtn = document.getElementById('submitLocationBtn');
-        // Sử dụng FormData để tự động đóng gói dữ liệu form, bao gồm cả file ảnh
-        const formData = new FormData(form); 
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Đang xử lý...';
+        async function addLocation() {
+            const form = document.getElementById('addLocationForm');
+            const submitBtn = document.getElementById('submitLocationBtn');
+            const formData = new FormData(form);
 
-        try {
-            // Gửi dữ liệu đến file locations_handler.php với action=add
-            const response = await fetch('add_diadanh.php?action=add', { 
-                method: 'POST',
-                body: formData // Gửi FormData bao gồm cả file
-            });
-            const result = await response.json();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Đang xử lý...';
 
-            if (result.status === 'success') {
-                alert(result.message);
-                form.reset(); // Reset form sau khi thành công
-                // Đóng modal 
-                const modal = bootstrap.Modal.getInstance(document.getElementById('addLocationModal'));
-                if (modal) {
-                    modal.hide();
+            try {
+                const response = await fetch('add_diadanh.php?action=add', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    alert(result.message);
+                    form.reset();
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addLocationModal'));
+                    if (modal) {
+                        modal.hide();
+                    }
+                    loadLocationsData();
+                } else {
+                    alert('Lỗi: ' + result.message);
                 }
-            } else {
-                alert('Lỗi: ' + result.message);
+
+            } catch (error) {
+                console.error('Lỗi kết nối server:', error);
+                alert('Lỗi kết nối server khi thêm Địa danh.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Lưu Địa danh';
             }
-
-        } catch (error) {
-            console.error('Lỗi kết nối server:', error);
-            alert('Lỗi kết nối server khi thêm Địa danh. Kiểm tra file add_diadanh.php.');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Lưu Địa danh';
         }
-    }
 
-    async function loadLocationsData() {
-    const cardBox = document.querySelector('#locations .card-box');
-    // Tạo cấu trúc bảng
-    cardBox.innerHTML = `
+        async function loadLocationsData() {
+            const cardBox = document.querySelector('#locations .card-box');
+            cardBox.innerHTML = `
         <h4>Danh sách Địa danh</h4>
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Ảnh</th>
-                        <th>Tên Địa danh</th>
+                        <th>Đường dẫn Ảnh</th> <th>Tên Địa danh</th>
                         <th>Loại</th>
                         <th>Địa chỉ</th>
                         <th>Hành động</th>
@@ -517,24 +494,22 @@
             </table>
         </div>
     `;
-    const tableBody = cardBox.querySelector('tbody'); 
+            const tableBody = cardBox.querySelector('tbody');
 
-    try {
-        // Gửi yêu cầu GET để lấy danh sách
-        const response = await fetch('locations_handler.php?action=read'); 
-        const result = await response.json();
-        
-        tableBody.innerHTML = ''; 
-        
-        if (result.status === 'success') {
-            result.data.forEach(location => {
-                // Hiển thị ảnh từ đường dẫn đã lưu (pic/...)
-                const imgTag = `<img src="${location.ImageDD}" alt="${location.TenDD}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">`;
-                const row = `
+            try {
+                const response = await fetch('add_diadanh.php?action=read');
+                const result = await response.json();
+
+                tableBody.innerHTML = '';
+
+                if (result.status === 'success') {
+                    result.data.forEach(location => {
+                        // ĐÃ SỬA: Chỉ hiển thị đường dẫn ImageDD từ CSDL
+                        const imagePathDisplay = location.ImageDD; 
+                        const row = `
                     <tr>
                         <td>${location.MaDD}</td>
-                        <td>${imgTag}</td>
-                        <td>${location.TenDD}</td>
+                        <td>${imagePathDisplay}</td> <td>${location.TenDD}</td>
                         <td>${location.LoaiDD || 'N/A'}</td>
                         <td>${location.DiaChiDD || 'N/A'}</td>
                         <td>
@@ -543,71 +518,71 @@
                         </td>
                     </tr>
                 `;
-                tableBody.insertAdjacentHTML('beforeend', row);
-            });
-        } else {
-             tableBody.innerHTML = `<tr><td colspan="6">Lỗi tải dữ liệu Địa danh: ${result.message}</td></tr>`;
-        }
-    } catch (error) {
-        console.error('Lỗi kết nối Locations:', error);
-        tableBody.innerHTML = `<tr><td colspan="6">Lỗi kết nối server khi tải danh sách Địa danh.</td></tr>`;
-    }
-}
-
-// Hàm xóa Địa danh (DELETE)
-async function deleteLocation(maDD, imagePath) {
-    if (!confirm(`Bạn có chắc chắn muốn xóa Địa danh ID ${maDD} không? Thao tác này sẽ xóa cả ảnh (${imagePath}) trên server.`)) return;
-
-    try {
-        const formData = new FormData();
-        formData.append('MaDD', maDD);
-        // Gửi cả đường dẫn ảnh để PHP có thể xóa file vật lý
-        formData.append('ImagePath', imagePath); 
-        
-        const response = await fetch('locations_handler.php?action=delete', { 
-            method: 'POST',
-            body: formData
-        });
-        const result = await response.json();
-
-        if (result.status === 'success') {
-            alert(result.message);
-            loadLocationsData(); // Tải lại danh sách sau khi xóa
-        } else {
-            alert('Lỗi: ' + result.message);
+                        tableBody.insertAdjacentHTML('beforeend', row);
+                    });
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="6">Lỗi tải dữ liệu: ${result.message}</td></tr>`;
+                }
+            } catch (error) {
+                console.error('Lỗi kết nối Locations:', error);
+                tableBody.innerHTML = `<tr><td colspan="6">Lỗi kết nối server.</td></tr>`;
+            }
         }
 
-    } catch (error) {
-        alert('Lỗi kết nối server: ' + error);
-    }
-}
+        async function deleteLocation(maDD, imagePath) {
+            if (!confirm(`Bạn có chắc chắn muốn xóa Địa danh ID ${maDD} không?`)) return;
 
+            try {
+                const formData = new FormData();
+                formData.append('MaDD', maDD);
+                formData.append('ImagePath', imagePath);
 
-        function showSection(sectionId) {
-        // ... (Logic chuyển tab) ...
-        const sections = document.querySelectorAll('.section-content');
-        sections.forEach(sec => sec.classList.remove('active'));
+                const response = await fetch('add_diadanh.php?action=delete', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
 
-        const navLinks = document.querySelectorAll('.sidebar .nav-link');
-        navLinks.forEach(link => link.classList.remove('active'));
+                if (result.status === 'success') {
+                    alert(result.message);
+                    loadLocationsData();
+                } else {
+                    alert('Lỗi: ' + result.message);
+                }
 
-        document.getElementById(sectionId).classList.add('active');
-        event.currentTarget.classList.add('active');
-
-        // Tải dữ liệu tương ứng
-        if (sectionId === 'dashboard') {
-            loadDashboardData();
-        } else if (sectionId === 'users') {
-            loadUsersData();
-        } else if (sectionId === 'contacts') {
-             loadContactsData();
-        } else if (sectionId === 'locations') { // <-- BỔ SUNG ĐIỀU KIỆN NÀY
-             loadLocationsData();               // <-- GỌI HÀM TẢI DANH SÁCH ĐỊA DANH
+            } catch (error) {
+                alert('Lỗi kết nối server: ' + error);
+            }
         }
-        // ... (Thêm các hàm load dữ liệu cho tours, food, booking...)
-    }
 
-        // Tải dữ liệu ban đầu cho Dashboard
+        function showSection(sectionId, event) {
+            if (event) {
+                event.preventDefault();
+            }
+
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            if (sectionId === 'dashboard') {
+                loadDashboardData();
+            } else if (sectionId === 'users') {
+                loadUsersData();
+            } else if (sectionId === 'contacts') {
+                loadContactsData();
+            } else if (sectionId === 'locations') {
+                loadLocationsData();
+            }
+        }
+
         window.onload = loadDashboardData; 
     </script>
 </body>
