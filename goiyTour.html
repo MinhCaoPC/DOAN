@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gợi Ý Tour Du Lịch</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding-top: 80px; /* Dành chỗ cho navbar fixed */
+            background-color: #f7f9fc;
+        }
+
+        /* Navbar & Footer Styling (Lấy từ diaDanh.css) */
+        .navbar-custom {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1050;
+            background: linear-gradient(
+                to right,
+                rgba(135, 206, 250, 1) 0%, 
+                rgba(135, 206, 250, 0.9) 10%,
+                rgba(135, 206, 250, 0.8) 25%,
+                rgba(176, 224, 230, 0.7) 50%,
+                rgba(135, 206, 250, 0.85) 80%,
+                rgba(135, 206, 250, 0.95) 100%
+            );
+            backdrop-filter: blur(6px);
+            padding: 12px 0;
+        }
+
+        .logo-fixed {
+            width: 45px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .navbar-custom .nav-link {
+            color: #fff;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #F5F5DC;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .navbar .login-section {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .navbar .login-text {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        /* Main Content Area */
+        .recommendation-container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-title {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Feature Groups */
+        .feature-group-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-group {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .feature-group h2 {
+            margin-top: 0;
+            color: #28a745;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-group input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .feature-group label {
+            display: inline-block;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        #submit-button {
+            margin-top: 30px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        #submit-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        #loading-message { 
+            color: orange; 
+            font-style: italic; 
+            margin-top: 15px;
+        }
+        
+        /* Tour Results Styling */
+        #recommendation-results { 
+            margin-top: 50px; 
+            padding-top: 20px; 
+            border-top: 3px solid #007bff;
+        }
+
+        .tour-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .tour-item { 
+            background: #fff;
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .tour-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .tour-item strong a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: color 0.2s;
+        }
+        .tour-item strong a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .score-info {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .score-info span {
+            font-weight: 600;
+            color: #dc3545; /* Màu đỏ cho Tỷ lệ khớp */
+        }
+        
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding-top: 30px;
+            font-size: 0.9rem;
+        }
+
+        .footer-logo {
+            font-weight: bold;
+            color: #87cefa;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #fff;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-logo-fixed" href="TrangChu.html">
+                <img src="images/logo.png" alt="Logo" class="logo-fixed" />
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
+                </ul>
+
+                <div class="login-section" id="login-section">
+                    <a href="dangNhap.html" class="login-text">
+                        <i class="bi bi-person-circle me-2 fs-5"></i>ĐĂNG NHẬP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="recommendation-container">
+        <h1 class="main-title"><i class="bi bi-compass-fill"></i> Công Cụ Gợi Ý Tour Du Lịch Thông Minh</h1>
+        <p class="text-center text-muted mb-4">Vui lòng chọn các tiêu chí yêu thích của bạn từ danh sách dưới đây để nhận gợi ý.</p>
+
+        <form id="recommendation-form">
+            <div id="dynamic-features" class="feature-group-wrapper">
+                <p id="loading-message" class="col-12 text-center">Đang tải danh sách Địa danh, Nghỉ dưỡng, Ẩm thực từ CSDL...</p>
+                </div>
+
+            <div class="text-center">
+                <button type="submit" id="submit-button" class="btn btn-primary" disabled>
+                    <i class="bi bi-search"></i> Gợi Ý Tour Ngay
+                </button>
+            </div>
+        </form>
+
+        <div id="recommendation-results">
+            <p class="text-center text-secondary">Chọn các mục yêu thích và nhấn nút "Gợi Ý Tour Ngay" để xem kết quả.</p>
+        </div>
+    </section>
+
+    <footer class="footer text-light">
+        <div class="container py-5">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h3 class="footer-logo">Đà Nẵng Travel</h3>
+                    <p>Khám phá vẻ đẹp Đà Nẵng – thành phố đáng sống nhất Việt Nam. Chúng tôi mang đến những trải nghiệm du lịch độc đáo và tiện lợi.</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="footer-links">
+                        <li><a href="TrangChu.html#about">Giới thiệu</a></li>
+                        <li><a href="diaDanh.html">Địa Danh</a></li>
+                        <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
+                        <li><a href="Food.html">Ẩm thực</a></li>
+                        <li><a href="tour.html">Tour</a></li>
+                        <li><a href="lienhe.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5>Liên hệ</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Đường Bạch Đằng, Đà Nẵng</p>
+                    <p><i class="fas fa-phone"></i> 0901 234 567</p>
+                    <p><i class="fas fa-envelope"></i> info@danangtravel.vn</p>
+
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center py-3">
+            <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        const recommendationForm = document.getElementById('recommendation-form');
+        const dynamicFeatures = document.getElementById('dynamic-features');
+        const submitButton = document.getElementById('submit-button');
+        const resultsDiv = document.getElementById('recommendation-results');
+        const loginSection = document.getElementById('login-section');
+
+        // Hàm 1: Lấy dữ liệu động từ PHP và xây dựng form
+        function loadFeatures() {
+            // SỬA LỖI: Đảm bảo gọi đúng file PHP là goiyTour.php
+            fetch('goiyTour.php?action=get_features')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.features) {
+                    let html = '';
+                    const features = data.features;
+                    
+                    // Xây dựng HTML cho từng nhóm Địa danh, KND, Món ăn
+                    for (const key in features) {
+                        const featureData = features[key];
+                        if (featureData.error) {
+                            html += `<div class="col-12" style="color:red;">${featureData.error}</div>`;
+                            continue;
+                        }
+
+                        html += `<div class="feature-group">`;
+                        html += `<h2>${featureData.emoji} ${featureData.title}</h2>`;
+                        
+                        if (featureData.items.length === 0) {
+                            html += `<p class="text-muted">Chưa có mục nào được thêm vào bảng liên quan.</p>`;
+                        } else {
+                            featureData.items.forEach(item => {
+                                const id = item.id;
+                                const name = item.name;
+                                // Dùng <label> để làm cho toàn bộ text có thể click
+                                html += `<label><input type='checkbox' name='${key}[]' value='${id}'> ${name}</label><br>`;
+                            });
+                        }
+                        html += `</div>`;
+                    }
+
+                    dynamicFeatures.innerHTML = html;
+                    submitButton.disabled = false; // Kích hoạt nút sau khi tải xong
+                    
+                } else {
+                    dynamicFeatures.innerHTML = `<p class="col-12" style="color:red;">Không thể tải dữ liệu: ${data.error || 'Lỗi không xác định.'}</p>`;
+                }
+            })
+            .catch(error => {
+                dynamicFeatures.innerHTML = `<p class="col-12" style="color:red;">Lỗi kết nối server: ${error.message}. Vui lòng kiểm tra file goiyTour.php và config.php.</p>`;
+            });
+        }
+        
+        // Hàm 2: Xử lý sự kiện submit form và gọi API gợi ý
+        recommendationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(recommendationForm);
+            const data = { action: 'recommend' }; 
+
+            // Chuyển FormData sang JSON
+            formData.forEach((value, key) => {
+                if (key.endsWith('[]')) {
+                    const cleanKey = key.slice(0, -2);
+                    if (!data[cleanKey]) {
+                        data[cleanKey] = [];
+                    }
+                    data[cleanKey].push(value);
+                }
+            });
+
+            resultsDiv.innerHTML = '<p class="text-center"><i class="bi bi-arrow-repeat spin"></i> Đang tính toán độ tương đồng và gợi ý tour...</p>';
+
+            // Gửi yêu cầu AJAX POST đến goiyTour.php
+            fetch('goiyTour.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Lỗi HTTP: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(tours => {
+                resultsDiv.innerHTML = ''; 
+
+                if (Array.isArray(tours)) {
+                    if (tours.length > 0) {
+                        let html = '<h2>🌟 Top Tour Gợi Ý Dành Cho Bạn</h2><div class="tour-list">';
+                        tours.forEach((tour, index) => {
+                            // TÍNH NĂNG MỚI: Thêm link chuyển đến tour.html#item-tour-[MaTour]
+                            html += `
+                                <div class="tour-item">
+                                    <div>
+                                        <strong>${index + 1}. <a href="tour.html#item-tour-${tour.MaTour}">${tour.TenTour}</a></strong>
+                                    </div>
+                                    <div class="score-info">
+                                        Độ tương đồng: ${tour.DiemTuongDong} điểm<br>
+                                        Tỷ lệ khớp: <span>${tour.TyLeTuongDong}%</span>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        html += '</div>';
+                        resultsDiv.innerHTML = html;
+                    } else {
+                        resultsDiv.innerHTML = '<p class="text-center text-danger">Không tìm thấy tour nào có đặc trưng khớp với lựa chọn của bạn. Vui lòng thử lại với các tiêu chí khác.</p>';
+                    }
+                } else if (tours.error) {
+                     resultsDiv.innerHTML = `<p class="text-center" style="color:red;">Lỗi xử lý: ${tours.error}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi gợi ý:', error);
+                resultsDiv.innerHTML = `<p class="text-center" style="color: red;">Đã xảy ra lỗi kết nối: ${error.message}</p>`;
+            });
+        });
+
+        // Tải các tùy chọn ngay khi trang được load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFeatures();
+            
+            // Logic kiểm tra đăng nhập và cập nhật Navbar (Lấy từ diaDanh.js)
+            fetch("getUser.php")
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.loggedIn) {
+                        loginSection.innerHTML = `
+                        <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
+                        <a href="dangXuat.php" class="login-text ms-3">
+                            <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
+                        </a>`;
+                        
+                        // Cập nhật menu nếu đăng nhập
+                        document.querySelector("#navbarMenu ul.navbar-nav").innerHTML = `
+                            <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+                            <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
+                            <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
+                            <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
+                            <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
+                            <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
+                            <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>
+                        `;
+                    }
+                });
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,4 +1,7 @@
 USE QuanLyDuLich;
+-- MK đầu tiên : Admin123
+INSERT INTO TAIKHOAN(MaSoTK,MatKhau,TenTaiKhoan,Email,LoaiTaiKhoan)VALUES(
+'AD00000001','$2y$12$F1FxphOzMNgPw8vjgsdrgu3ZxDCiGYBLEKZhzQUuUQAYkyOivpdXm','Admin01','minhcao26042005@gmail.com','AD');
 
 -- Dữ liệu 
 -- Món Ăn
@@ -755,11 +758,9 @@ INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (1, 14); -- Hải sản
 INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (3, 1); -- Mì Quảng
 INSERT INTO TOUR_MONAN (MaTour, MaMonAn) VALUES (3, 5); -- Bánh tráng cuốn thịt heo
 
+SELECT * FROM TAIKHOAN
 
 
-SELECT * FROM DIADANH;
-SELECT * FROM MONAN;
-SELECT * FROM KHUNGHIDUONG;
 
 
 

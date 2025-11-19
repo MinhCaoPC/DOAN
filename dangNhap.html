@@ -77,6 +77,8 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
     const errorMessages = {
       4: "Tài khoản hoặc mật khẩu không đúng!"
@@ -85,17 +87,26 @@
     document.getElementById('formDangNhap').addEventListener('submit', async function (e) {
       e.preventDefault();
       const formData = new FormData(this);
-      const res = await fetch('dangNhap.php', { method: 'POST', body: formData });
+      
+      // Đặt URL đúng: Tên file bạn gửi lên là dangNhap.php
+      const res = await fetch('dangNhap.php', { method: 'POST', body: formData }); 
       const data = await res.json();
 
       const errorEl = document.getElementById('error-message');
+      errorEl.textContent = ''; // Xóa thông báo lỗi cũ
+
       if (data.status === 'error') {
+        // Xử lý lỗi
         errorEl.textContent = errorMessages[data.code] || "Có lỗi xảy ra!";
       } else {
-        window.location.href = "TrangChu.html";
+        // Đăng nhập thành công, chuyển hướng theo URL được trả về từ server
+        window.location.href = data.redirect;
       }
     });
   </script>
+</body>
+
+</html>
 </body>
 
 </html>

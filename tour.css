@@ -591,6 +591,76 @@ html {
   padding: 3px 0;
 }
 
+/* --- NÚT GỢI Ý TOUR CỐ ĐỊNH --- */
+
+.floating-btn {
+    /* Cố định vị trí */
+    position: fixed;
+    bottom: 20px; /* Cách đáy 20px */
+    right: 20px; /* Cách lề phải 20px */
+    
+    /* Thiết kế hình tròn */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    
+    /* Màu sắc và bóng */
+    background-color: #007bff; /* Màu xanh Bootstrap Primary */
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    
+    /* Căn giữa biểu tượng */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Chuyển động mượt */
+    transition: all 0.3s ease;
+    text-decoration: none; /* Bỏ gạch chân */
+    z-index: 1050; /* Đảm bảo nó nằm trên các element khác, ví dụ: modal */
+    
+    /* Ẩn text mặc định */
+    overflow: hidden; 
+    font-size: 24px;
+}
+
+.floating-btn:hover {
+    background-color: #0056b3;
+    width: 150px; /* Mở rộng khi di chuột (tùy chọn) */
+    border-radius: 30px; /* Làm cong các cạnh khi mở rộng */
+}
+
+/* Thêm tooltip hiển thị khi hover */
+.floating-btn .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    margin-left: 10px; /* Cách icon một chút */
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap; /* Giữ text trên 1 hàng */
+    transition: opacity 0.3s ease;
+}
+
+.floating-btn:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Ẩn tooltip khi ở trạng thái bình thường */
+.floating-btn .tooltip-text {
+    display: none;
+}
+
+/* Hiển thị tooltip khi hover */
+.floating-btn:hover .tooltip-text {
+    display: inline;
+}
+
+/* Điều chỉnh icon cho hợp lý */
+.floating-btn i {
+    margin: 0;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {

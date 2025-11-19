@@ -84,11 +84,14 @@
 
 
     </div>
-    <!-- Tour nổi bật -->
+    <div class="tab-content" id="tourContent">
+    </div>
+    
+    <h2 class="text-center mb-4 fw-bold">✨ Tour nổi bật khác</h2>
+    
     <div id="tourCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <h2 class="text-center mb-4 fw-bold">✨ Tour nổi bật khác</h2>
-      </div>
+        </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#tourCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Trước</span>
@@ -97,8 +100,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Sau</span>
       </button>
-
-      <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    </div> <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content p-4">
             <h5 class="modal-title mb-3 text-center" id="bookingModalLabel">Đặt Tour Ngay</h5>
@@ -135,7 +137,7 @@
           </div>
         </div>
       </div>
-      <!-- Vì sao nên chọn -->
+      
       <section class="why-choose py-5">
         <div class="container text-center">
           <h3 class="fw-bold mb-4">🌟 Vì sao nên chọn chúng tôi?</h3>
@@ -160,19 +162,16 @@
       </section>
 
 
-      <!-- 🌊 Footer -->
       <footer class="footer text-light">
         <div class="container py-5">
           <div class="row gy-4">
 
-            <!-- Logo & Mô tả -->
             <div class="col-md-4">
               <h3 class="footer-logo">Đà Nẵng Travel</h3>
               <p>Khám phá vẻ đẹp Đà Nẵng – thành phố đáng sống nhất Việt Nam.
                 Chúng tôi mang đến những trải nghiệm du lịch độc đáo và tiện lợi.</p>
             </div>
 
-            <!-- Liên kết nhanh -->
             <div class="col-md-4">
               <h5>Liên kết nhanh</h5>
               <ul class="footer-links">
@@ -185,7 +184,6 @@
               </ul>
             </div>
 
-            <!-- Liên hệ & Mạng xã hội -->
             <div class="col-md-4">
               <h5>Liên hệ</h5>
               <p><i class="fas fa-map-marker-alt"></i> 123 Đường Bạch Đằng, Đà Nẵng</p>
@@ -205,21 +203,67 @@
           <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
         </div>
       </footer>
+      
+      <a href="goiyTour.html" class="floating-btn" title="Gợi ý Tour cá nhân">
+        <i class="bi bi-robot"></i>
+        <span class="tooltip-text">Gợi ý Tour</span>
+      </a>
+
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
 <script>
   // Biến toàn cục để dùng chung
   let tourList = [];
   let isLoggedIn = false;
   let currentUser = null;
 
+  // --- HÀM 0: Xử lý Hash Link (FIX LỖI CƠ BẢN) ---
+  function handleHashScroll() {
+      const hash = window.location.hash; // Lấy hash, ví dụ: #item-tour-123
+
+      if (hash && hash.startsWith('#item-tour-')) {
+          // 1. Tìm nút điều hướng (nav-link) tương ứng với hash
+          // Nút này có data-bs-target = hash
+          const tabTrigger = document.querySelector(`[data-bs-target="${hash}"]`);
+          const targetElement = document.querySelector(hash);
+
+          if (tabTrigger) {
+              // 2. Kích hoạt tab bằng Bootstrap API
+              const tab = new bootstrap.Tab(tabTrigger);
+              tab.show();
+              
+              // 3. Cuộn đến vị trí của tab (thêm delay để Bootstrap kịp kích hoạt)
+              setTimeout(() => { 
+                  if (targetElement) {
+                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      // Thêm hiệu ứng nổi bật tạm thời
+                      targetElement.style.boxShadow = '0 0 15px 5px rgba(255, 193, 7, 0.7)';
+                      setTimeout(() => {
+                          targetElement.style.boxShadow = 'none';
+                      }, 2000);
+                  }
+              }, 200);
+
+          } else if (targetElement) {
+            // Nếu hash không phải là tab (ví dụ: #tour), vẫn cuộn
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+      } else if (hash) {
+           // Cho các hash khác (ví dụ: #tour)
+          const targetElement = document.querySelector(hash);
+          if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+      }
+  }
+
   // --- HÀM 1: Tải tour chính (gallery, tabs) ---
   async function loadMainTours() {
     try {
-      const res = await fetch('tour.php'); // File này đã sửa (WHERE LaNoiBat = 0)
+      // Đảm bảo fetch xong mới thực hiện các bước tiếp theo
+      const res = await fetch('tour.php'); 
       const data = await res.json();
 
       if (data.status === 'success' && Array.isArray(data.tourList)) {
@@ -273,13 +317,13 @@
           carouselInner.appendChild(item);
         });
 
-        // ⭐ SỬA LỖI 1: Khởi động carousel để nó tự chạy
+        // Khởi động carousel
         const carouselElement = document.getElementById('tourCarousel');
         const carousel = new bootstrap.Carousel(carouselElement, {
-            interval: 3000, // Thời gian trượt 3 giây (bạn có thể đổi)
+            interval: 3000, 
             ride: 'carousel'
         });
-        carousel.cycle(); // Bắt đầu trượt
+        carousel.cycle(); 
 
       }
     } catch (err) {
@@ -319,6 +363,7 @@
 
   // --- SỰ KIỆN 1: Khi DOM tải xong ---
   document.addEventListener("DOMContentLoaded", () => {
+    
     // Tải tour chính và tour nổi bật
     loadMainTours();
     loadFeaturedTours(); 
@@ -343,31 +388,31 @@
             <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
             <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
             <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
-            <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
+            <li class="nav-item"><a class="nav-link active" href="tour.html">TOUR</a></li>
+            <li class="nav-item"><a class="nav-link" href="goiyTour.html">GỢI Ý TOUR</a></li>
             <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
             <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>`;
         }
       });
     
-    // Xử lý click cho gallery
+    // Xử lý click cho gallery (Tối ưu hóa để dùng chung hàm handleHashScroll)
     const galleryContainer = document.querySelector(".gallery");
     if (galleryContainer) {
       galleryContainer.addEventListener("click", function (event) {
         if (event.target.tagName === 'IMG') {
           const img = event.target;
-          const tourId = img.getAttribute("data-tour");
-          const target = document.querySelector(tourId);
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-            const tabTrigger = document.querySelector(`[data-bs-target="${tourId}"]`);
-            if (tabTrigger) {
-              const tab = new bootstrap.Tab(tabTrigger);
-              tab.show();
-            }
+          const tourHash = img.getAttribute("data-tour"); // e.g., #item-tour-123
+          if (tourHash) {
+            // Thay đổi hash, sẽ kích hoạt window.onhashchange
+            window.location.hash = tourHash; 
+            event.preventDefault(); // Ngăn hành vi mặc định nếu là link
           }
         }
       });
     }
+
+    // Gắn sự kiện để xử lý hash khi tải trang và khi hash thay đổi
+    window.addEventListener('hashchange', handleHashScroll);
   });
 
   // --- SỰ KIỆN 2: Khi tour chính tải xong (Vẽ gallery, tabs) ---
@@ -387,23 +432,32 @@
     }
 
     list.forEach((tour, index) => {
-      const tabId = `tour${index + 1}`;
+      // ✅ SỬA LỖI: Sử dụng MaTour để tạo ID linkable
+      const tourItemId = `item-tour-${tour.id}`; 
+      
       // 1. TẠO ẢNH CHO GALLERY
       const img = document.createElement('img');
       img.src = tour.anhSub || 'images/placeholder.jpg';
       img.alt = tour.ten || 'Ảnh tour';
-      img.setAttribute('data-tour', `#${tabId}`);
+      // ✅ Gán ID mới cho data-tour
+      img.setAttribute('data-tour', `#${tourItemId}`); 
       galleryContainer.appendChild(img);
+
       // 2. TẠO NÚT TAB
       const li = document.createElement('li');
       li.className = 'nav-item';
-      li.innerHTML = `<button class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" data-bs-target="#${tabId}" type="button">Tour ${index + 1}</button>`;
+      // ✅ Gán ID mới cho data-bs-target
+      li.innerHTML = `<button class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" data-bs-target="#${tourItemId}" type="button">Tour ${index + 1}</button>`;
       tourTabs.appendChild(li);
+
       // 3. TẠO NỘI DUNG TAB
       const tabPane = document.createElement('div');
+      // Tab đầu tiên active nếu không có hash
       tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
-      tabPane.id = tabId;
+      // ✅ Gán ID mới cho Tab Pane
+      tabPane.id = tourItemId; 
       tabPane.setAttribute('role', 'tabpanel');
+
       const lichTrinh = Array.isArray(tour.lichTrinh) ? tour.lichTrinh : [];
       const lichTrinhHtml = lichTrinh.map(item => `<li>${item}</li>`).join('');
       tabPane.innerHTML = `
@@ -432,6 +486,9 @@
         </div>`;
       tourContent.appendChild(tabPane);
     });
+
+    // Sau khi tải và vẽ xong tour, gọi hàm xử lý hash để kích hoạt tab (nếu có hash)
+    handleHashScroll();
   });
 
   // --- SỰ KIỆN 3: Xử lý Modal (Tự động điền) ---
@@ -455,8 +512,6 @@
     const inputSoLuong = bookingModal.querySelector('#inputSoLuong');
 
     if (currentUser) {
-      // ⭐ SỬA LOGIC AUTO-FILL TẠI ĐÂY
-      
       // Yêu cầu: Ưu tiên HoVaTen, nếu trống thì dùng TenTaiKhoan
       inputHoTen.value = currentUser.HoVaTen || currentUser.TenTaiKhoan || '';
       
@@ -525,8 +580,9 @@
       alert('Đã xảy ra lỗi kết nối. Vui lòng thử lại.');
     }
   });
-</script>
 
+  // ✅ Bỏ hàm handleHashScroll cũ ở cuối vì đã hợp nhất logic
+</script>
 
 </body>
 
