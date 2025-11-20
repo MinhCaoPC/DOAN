@@ -1,90 +1,93 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-require_once 'config.php'; // Kết nối CSDL
+require_once 'config.php'; 
 
-// BƯỚC 1: TẠO CÁC "BẢN ĐỒ" TỪ KHÓA
-// Lấy tất cả địa danh, món ăn, KND để biết tên và ID của chúng
-$mapDiaDanh = [];
-$mapMonAn = [];
-$mapKND = [];
-
-// Lấy Địa danh (sắp xếp từ dài đến ngắn để thay thế chính xác)
-$resultDD = $conn->query("SELECT MaDD, TenDD FROM DIADANH ORDER BY LENGTH(TenDD) DESC");
-while ($row = $resultDD->fetch_assoc()) {
-    // Key là tên (ví dụ: 'Bà Nà Hills'), Value là link
-    $mapDiaDanh[$row['TenDD']] = "diaDanh.html#item-dd-" . $row['MaDD'];
+function executeAndFetchMap($conn, $procedureName, $idColumn, $nameColumn, $linkPrefix) {
+    $map = [];
+    
+    if ($conn->multi_query("CALL $procedureName()")) {
+        
+        $result = $conn->store_result();
+        
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $map[$row[$nameColumn]] = $linkPrefix . $row[$idColumn];
+            }
+            $result->free();
+        }
+        
+        while ($conn->next_result()) {
+        }
+    } else {
+        error_log("Lỗi khi gọi SP $procedureName: " . $conn->error);
+    }
+    return $map;
 }
 
-// Lấy Món ăn (sắp xếp từ dài đến ngắn)
-$resultMA = $conn->query("SELECT MaMonAn, TenMonAn FROM MONAN ORDER BY LENGTH(TenMonAn) DESC");
-while ($row = $resultMA->fetch_assoc()) {
-    $mapMonAn[$row['TenMonAn']] = "Food.html#item-monan-" . $row['MaMonAn'];
-}
+// =========================================================================
+// BƯỚC 1: GỌI CÁC STORED PROCEDURE ĐỂ TẠO "BẢN ĐỒ" TỪ KHÓA
+// =========================================================================
 
-// Lấy Khu nghỉ dưỡng (sắp xếp từ dài đến ngắn)
-$resultKND = $conn->query("SELECT MaKND, TenKND FROM KHUNGHIDUONG ORDER BY LENGTH(TenKND) DESC");
-while ($row = $resultKND->fetch_assoc()) {
-    $mapKND[$row['TenKND']] = "nghiDuong.html#item-knd-" . $row['MaKND'];
-}
+$mapDiaDanh = executeAndFetchMap($conn, 'GetDiaDanhMap', 'MaDD', 'TenDD', 'diaDanh.html#item-dd-');
+$mapMonAn = executeAndFetchMap($conn, 'GetMonAnMap', 'MaMonAn', 'TenMonAn', 'Food.html#item-monan-');
+$mapKND = executeAndFetchMap($conn, 'GetKhuNghiDuongMap', 'MaKND', 'TenKND', 'nghiDuong.html#item-knd-');
 
-// Gộp tất cả bản đồ lại, ưu tiên Địa danh > Món Ăn > KND
 $masterMap = $mapDiaDanh + $mapMonAn + $mapKND;
 
-// Lấy các keys (từ khóa) và các values (links)
 $keywords = array_keys($masterMap);
-$links = array_values($masterMap);
 
-// Tạo mảng thẻ <a> để thay thế
-// Ví dụ: "Bà Nà Hills" sẽ được thay bằng "<a href='diaDanh.html#item-dd-1'>Bà Nà Hills</a>"
 $replacements = [];
 foreach ($masterMap as $keyword => $link) {
-    // Thêm class 'itinerary-link' để bạn có thể CSS nếu muốn
     $replacements[] = '<a href="' . $link . '" class="itinerary-link">' . htmlspecialchars($keyword) . '</a>';
 }
 
-
-$sql = "SELECT MaTour, TenTour, MoTaTour, GiaTour, ThoiGianTour, DoiTuong, KhachSan, LichTrinhTour, ImageTourMain, ImageTourSub FROM TOUR WHERE LaNoiBat = 0";
-$resultTour = $conn->query($sql);
-
+// =========================================================================
+// BƯỚC 2: GỌI STORED PROCEDURE LẤY DANH SÁCH TOUR
+// =========================================================================
 $tourList = [];
-while ($tour = $resultTour->fetch_assoc()) {
-    
-    // Xử lý lịch trình (LichTrinhTour)
-    $lichTrinhText = $tour['LichTrinhTour'] ?? '';
-    
-    // Tách lịch trình theo từng dòng (xuống hàng)
-    $lines = explode("\n", $lichTrinhText);
-    
-    $processedLichTrinh = [];
-    foreach ($lines as $line) {
-        if (empty(trim($line))) continue;
-        
-        // Đây là phép màu:
-        // Thay thế tất cả $keywords (ví dụ: "Bà Nà Hills")
-        // bằng $replacements (ví dụ: "<a href=...'>Bà Nà Hills</a>")
-        // trong dòng ($line) này.
-        $processedLine = str_replace($keywords, $replacements, $line);
-        
-        $processedLichTrinh[] = $processedLine; // Thêm dòng đã xử lý vào mảng
-    }
 
-    // Tạo mảng dữ liệu trả về cho JS
-    $tourList[] = [
-        "id" => (int)$tour['MaTour'],
-        "ten" => $tour['TenTour'],
-        "anh" => $tour['ImageTourMain'], // Dùng ImageTourMain cho ảnh chính của tour
-        "anhSub" => $tour['ImageTourSub'],
-        "thoiGian" => $tour['ThoiGianTour'],
-        "gia" => number_format($tour['GiaTour'], 0, ',', '.') . ' VNĐ', // Định dạng giá tiền
-        "doiTuong" => $tour['DoiTuong'],
-        "khachSan" => $tour['KhachSan'],
-        "lichTrinh" => $processedLichTrinh // Trả về lịch trình ĐÃ CHỨA link HTML
-    ];
+if ($conn->multi_query("CALL GetTourList()")) {
+    $resultTour = $conn->store_result();
+
+    if ($resultTour) {
+        while ($tour = $resultTour->fetch_assoc()) {
+            
+            $lichTrinhText = $tour['LichTrinhTour'] ?? '';
+            $lines = explode("\n", $lichTrinhText);
+            $processedLichTrinh = [];
+            
+            foreach ($lines as $line) {
+                if (empty(trim($line))) continue;
+                
+                $processedLine = str_replace($keywords, $replacements, $line);
+                
+                $processedLichTrinh[] = $processedLine;
+            }
+
+            $tourList[] = [
+                "id" => (int)$tour['MaTour'],
+                "ten" => $tour['TenTour'],
+                "anh" => $tour['ImageTourMain'], 
+                "anhSub" => $tour['ImageTourSub'],
+                "thoiGian" => $tour['ThoiGianTour'],
+                "gia" => number_format($tour['GiaTour'], 0, ',', '.') . ' VNĐ',
+                "doiTuong" => $tour['DoiTuong'],
+                "khachSan" => $tour['KhachSan'],
+                "lichTrinh" => $processedLichTrinh
+            ];
+        }
+        $resultTour->free();
+    }
+    
+    while ($conn->next_result()) {
+    }
+} else {
+    error_log("Lỗi khi gọi SP GetTourList: " . $conn->error);
 }
+
 
 $conn->close();
 
-// Trả về JSON
 echo json_encode([
     'status' => 'success',
     'tourList' => $tourList

@@ -99,24 +99,22 @@
   let isLoggedIn = false;
   let allFavorites = []; // lưu toàn bộ items để filter
 
-  // ⭐ 1. (MỚI) HÀM TẠO LINK ĐỘNG
-  // Hàm này tạo link chính xác cho từng loại
-  function getLinkForItem(item) {
-    switch (item.loai) {
-      case "DIADANH":
-        return `diaDanh.html#item-dd-${item.id}`;
-      case "MONAN":
-        return `Food.html#item-monan-${item.id}`;
-      case "KND":
-        return `nghiDuong.html#item-knd-${item.id}`;
-      case "TOUR":
-        // Trang tour của bạn không có ID # cho từng tour,
-        // nên chúng ta sẽ link đến đầu mục tour
-        return `tour.html#tour`;
-      default:
-        return null; // Không có link
-    }
+function getLinkForItem(item) {
+  switch (item.loai) {
+    case "DIADANH":
+      return `diaDanh.html#item-dd-${item.id}`;
+    case "MONAN":
+      return `Food.html#item-monan-${item.id}`;
+    case "KND":
+      return `nghiDuong.html#item-knd-${item.id}`;
+      
+    case "TOUR":
+      return `tour.html#item-tour-${item.id}`; 
+      
+    default:
+      return null; 
   }
+}
 
 
   // Render danh sách yêu thích (theo list đã lọc)

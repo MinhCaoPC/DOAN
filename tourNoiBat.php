@@ -2,32 +2,36 @@
 header('Content-Type: application/json; charset=utf-8');
 require_once 'config.php'; // Kết nối CSDL
 
-// ⭐ SỬA LẠI SQL: Lấy thêm GiaTour và ThoiGianTour
-$sql = "SELECT MaTour, TenTour, ImageTourMain, GiaTour, ThoiGianTour 
-        FROM TOUR 
-        WHERE LaNoiBat = 1";
+$featuredTours = [];
 
-$result = $conn->query($sql);
-if (!$result) {
-    // Xử lý lỗi nếu query thất bại
+// GỌI STORED PROCEDURE GetFeaturedTours
+if ($conn->multi_query("CALL GetFeaturedTours()")) {
+    $result = $conn->store_result();
+    
+    if ($result) {
+        while ($tour = $result->fetch_assoc()) {
+            $featuredTours[] = [
+                "id" => (int)$tour['MaTour'],
+                "ten" => $tour['TenTour'],
+                "anh" => $tour['ImageTourMain'],
+                "gia" => number_format($tour['GiaTour'], 0, ',', '.') . ' VNĐ',
+                "thoiGian" => $tour['ThoiGianTour']
+            ];
+        }
+        $result->free();
+    }
+    
+    // Rất quan trọng: Xóa bộ đệm kết quả cuối cùng để tránh lỗi truy vấn sau
+    while ($conn->next_result()) {
+    }
+} else {
+    // Xử lý lỗi nếu việc gọi Procedure thất bại
     echo json_encode([
         'status' => 'error',
-        'message' => 'Lỗi truy vấn CSDL: ' . $conn->error
+        'message' => 'Lỗi gọi Stored Procedure: ' . $conn->error
     ]);
+    $conn->close();
     exit;
-}
-
-$featuredTours = [];
-while ($tour = $result->fetch_assoc()) {
-    $featuredTours[] = [
-        "id" => (int)$tour['MaTour'],
-        "ten" => $tour['TenTour'],
-        "anh" => $tour['ImageTourMain'], // Dùng ảnh chính
-        
-        // ⭐ THÊM VÀO: Giá và Thời gian
-        "gia" => number_format($tour['GiaTour'], 0, ',', '.') . ' VNĐ',
-        "thoiGian" => $tour['ThoiGianTour']
-    ];
 }
 
 $conn->close();
