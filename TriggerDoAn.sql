@@ -1,7 +1,7 @@
 USE QuanLyDuLich;
 
 
-
+-- Tạo tài khoản
 DELIMITER $$
 
 CREATE TRIGGER trg_TAIKHOAN_AutoID
@@ -52,6 +52,82 @@ END$$
 
 DELIMITER ;
 
+
+-- Lấy danh sách Tour
+DELIMITER $$
+
+CREATE PROCEDURE GetTourList()
+BEGIN
+    SELECT 
+        MaTour, 
+        TenTour, 
+        MoTaTour, 
+        GiaTour, 
+        ThoiGianTour, 
+        DoiTuong, 
+        KhachSan, 
+        LichTrinhTour, 
+        ImageTourMain, 
+        ImageTourSub 
+    FROM TOUR 
+    WHERE LaNoiBat = 0;
+END$$
+
+DELIMITER ;
+
+-- Lấy các Địa danh qua tour
+DELIMITER $$
+
+CREATE PROCEDURE GetDiaDanhMap()
+BEGIN
+    SELECT MaDD, TenDD 
+    FROM DIADANH 
+    ORDER BY LENGTH(TenDD) DESC;
+END$$
+
+DELIMITER ;
+
+-- Lấy các Món ăn qua tour
+DELIMITER $$
+
+CREATE PROCEDURE GetMonAnMap()
+BEGIN
+    SELECT MaMonAn, TenMonAn 
+    FROM MONAN 
+    ORDER BY LENGTH(TenMonAn) DESC;
+END$$
+
+DELIMITER ;
+
+-- Lấy các Khu nghỉ dưỡng qua tour
+DELIMITER $$
+
+CREATE PROCEDURE GetKhuNghiDuongMap()
+BEGIN
+    SELECT MaKND, TenKND 
+    FROM KHUNGHIDUONG 
+    ORDER BY LENGTH(TenKND) DESC;
+END$$
+
+DELIMITER ;
+
+
+-- Lấy tour nổi bật 
+DELIMITER $$
+
+CREATE PROCEDURE GetFeaturedTours()
+BEGIN
+    SELECT 
+        MaTour, 
+        TenTour, 
+        ImageTourMain, 
+        GiaTour, 
+        ThoiGianTour 
+    FROM TOUR 
+    WHERE LaNoiBat = 1;
+END$$
+
+DELIMITER ;
 
 
 
