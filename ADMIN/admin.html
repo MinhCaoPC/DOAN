@@ -7,9 +7,8 @@
     <title>Admin - Web Du Lịch Đà Nẵng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <link rel="stylesheet" href="ADMIN/admin.css">
-
 </head>
 
 <body>
@@ -21,7 +20,7 @@
             <i class="fas fa-tachometer-alt"></i> Tổng quan
         </a>
         <a href="#" onclick="showSection('users', event)" class="nav-link">
-            <i class="fas fa-users"></i> Quản lý Tài khoản KH
+            <i class="fas fa-users"></i> Quản lý Tài khoản
         </a>
         <a href="#" onclick="showSection('tours', event)" class="nav-link">
             <i class="fas fa-map-marked-alt"></i> Quản lý Tour
@@ -54,40 +53,127 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="#"><i class="fas fa-key"></i> Đặt lại mật khẩu</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
-                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             </div>
         </div>
 
-        <div id="dashboard" class="section-content active">
+<div id="dashboard" class="section-content active">
             <h3>Tổng quan hệ thống</h3>
+            
             <div class="row mt-4">
                 <div class="col-md-3">
-                    <div class="card card-box bg-gradient-primary p-3">
-                        <h3>...</h3>
-                        <p>Tour hiện có</p>
+                    <div class="card card-box bg-primary text-white p-3 mb-3 h-100 shadow-sm" 
+                         onclick="showSection('tours')" 
+                         style="cursor: pointer; transition: 0.3s;" 
+                         onmouseover="this.style.transform='scale(1.03)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 id="stat-tours">0</h3>
+                                <p class="mb-0">Tour Du Lịch</p>
+                            </div>
+                            <i class="fas fa-map-marked-alt fa-2x opacity-50"></i>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-md-3">
-                    <div class="card card-box bg-gradient-success p-3">
-                        <h3>...</h3>
-                        <p>Khách hàng</p>
+                    <div class="card card-box bg-success text-white p-3 mb-3 h-100 shadow-sm"
+                         onclick="showSection('booking')" 
+                         style="cursor: pointer; transition: 0.3s;"
+                         onmouseover="this.style.transform='scale(1.03)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 id="stat-bookings">0</h3>
+                                <p class="mb-0">Đơn Đặt Tour</p>
+                            </div>
+                            <i class="fas fa-shopping-cart fa-2x opacity-50"></i>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-md-3">
-                    <div class="card card-box bg-gradient-warning p-3">
-                        <h3>...</h3>
-                        <p>Yêu cầu tư vấn mới</p>
+                    <div class="card card-box bg-warning text-dark p-3 mb-3 h-100 shadow-sm"
+                         onclick="showSection('users')" 
+                         style="cursor: pointer; transition: 0.3s;"
+                         onmouseover="this.style.transform='scale(1.03)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 id="stat-accounts">0</h3>
+                                <p class="mb-0">Tài khoản (KH/AD)</p>
+                            </div>
+                            <i class="fas fa-users fa-2x opacity-50"></i>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-md-3">
-                    <div class="card card-box bg-gradient-info p-3">
-                        <h3>...</h3>
-                        <p>Địa danh & Món ăn</p>
+                    <div class="card card-box bg-info text-white p-3 mb-3 h-100 shadow-sm"
+                         onclick="showSection('contacts')" 
+                         style="cursor: pointer; transition: 0.3s;"
+                         onmouseover="this.style.transform='scale(1.03)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 id="stat-contacts">0</h3>
+                                <p class="mb-0">Yêu cầu tư vấn</p>
+                            </div>
+                            <i class="fas fa-envelope fa-2x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-4">
+                    <div class="card card-box bg-danger text-white p-3 mb-3 h-100 shadow-sm"
+                         onclick="showSection('locations')" 
+                         style="cursor: pointer; transition: 0.3s;"
+                         onmouseover="this.style.transform='scale(1.03)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 id="stat-diadanh">0</h3>
+                                <p class="mb-0">Địa danh</p>
+                            </div>
+                            <i class="fas fa-landmark fa-2x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-box bg-secondary text-white p-3 mb-3 h-100 shadow-sm"
+                         onclick="showSection('food')" 
+                         style="cursor: pointer; transition: 0.3s;"
+                         onmouseover="this.style.transform='scale(1.03)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 id="stat-monan">0</h3>
+                                <p class="mb-0">Món ăn / Ẩm thực</p>
+                            </div>
+                            <i class="fas fa-utensils fa-2x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-box bg-dark text-white p-3 mb-3 h-100 shadow-sm"
+                         onclick="showSection('resort')" 
+                         style="cursor: pointer; transition: 0.3s;"
+                         onmouseover="this.style.transform='scale(1.03)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 id="stat-resorts">0</h3>
+                                <p class="mb-0">Khu Nghỉ dưỡng</p>
+                            </div>
+                            <i class="fas fa-umbrella-beach fa-2x opacity-50"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,7 +181,7 @@
 
         <div id="users" class="section-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3>Quản lý Tài khoản Khách hàng</h3>
+                <h3>Quản lý Tài khoản</h3>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
                     <i class="fas fa-plus"></i> Thêm tài khoản
                 </button>
@@ -105,16 +191,10 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Tên đăng nhập</th>
-                            <th>Email</th>
-                            <th>Họ và Tên</th>
-                            <th>SĐT</th>
-                            <th>Hành động</th>
+                            <th>ID</th> <th>Tên đăng nhập</th> <th>Email</th> <th>Họ và Tên</th> <th>SĐT</th> <th>Hành động</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
 
@@ -180,8 +260,7 @@
                                         <option value="AD">Quản trị viên (Admin)</option>
                                     </select>
                                     <div class="form-text text-warning">
-                                        <i class="fas fa-exclamation-triangle"></i> Lưu ý: Nếu chuyển sang "Quản trị
-                                        viên", tài khoản này sẽ biến mất khỏi danh sách Khách hàng.
+                                        <i class="fas fa-exclamation-triangle"></i> Lưu ý: Chuyển sang "Quản trị viên" sẽ thay đổi ID.
                                     </div>
                                 </div>
 
@@ -200,8 +279,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label text-danger">Đổi mật khẩu (Để trống nếu không đổi)</label>
-                                    <input type="password" class="form-control" name="MatKhau"
-                                        placeholder="Nhập mật khẩu mới...">
+                                    <input type="password" class="form-control" name="MatKhau" placeholder="Nhập mật khẩu mới...">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -212,14 +290,244 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div id="tours" class="section-content">
-            <p>Quản lý Tour...</p>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>Quản lý Tour Du Lịch</h3>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTourModal">
+                    <i class="fas fa-plus"></i> Thêm Tour mới
+                </button>
+            </div>
+
+            <div class="card card-box p-3">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ảnh chính</th>
+                                <th style="width: 25%">Tên Tour</th>
+                                <th>Giá</th>
+                                <th>Thời gian</th>
+                                <th>Nổi bật</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal fade" id="addTourModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl"> <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thêm Tour mới</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="addTourForm" onsubmit="event.preventDefault(); addTour();" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tên Tour (*)</label>
+                                        <input type="text" class="form-control" name="TenTour" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Giá (VNĐ)</label>
+                                        <input type="number" class="form-control" name="GiaTour">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Thời gian (VD: 3N2Đ)</label>
+                                        <input type="text" class="form-control" name="ThoiGianTour">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Đối tượng khách</label>
+                                        <input type="text" class="form-control" name="DoiTuong">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Khách sạn / Resort</label>
+                                        <input type="text" class="form-control" name="KhachSan">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ảnh Chính (*)</label>
+                                        <input type="file" class="form-control" name="ImageTourMain" accept="image/*" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ảnh Phụ (Banner)</label>
+                                        <input type="file" class="form-control" name="ImageTourSub" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="checkNoiBat" name="LaNoiBat" value="1">
+                                    <label class="form-check-label fw-bold text-danger" for="checkNoiBat">Là Tour Nổi Bật</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả ngắn</label>
+                                    <textarea class="form-control" name="MoTaTour" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Lịch trình chi tiết</label>
+                                    <textarea class="form-control" name="LichTrinhTour" rows="5" placeholder="Ngày 1: ... &#10;Ngày 2: ..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-primary" id="btnSaveTour">Lưu Tour</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editTourModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title">Cập nhật Tour</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="editTourForm" onsubmit="event.preventDefault(); updateTour();" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <input type="hidden" id="editMaTour" name="MaTour">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tên Tour (*)</label>
+                                        <input type="text" class="form-control" id="editTenTour" name="TenTour" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Giá</label>
+                                        <input type="number" class="form-control" id="editGiaTour" name="GiaTour">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Thời gian</label>
+                                        <input type="text" class="form-control" id="editThoiGianTour" name="ThoiGianTour">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Đối tượng</label>
+                                        <input type="text" class="form-control" id="editDoiTuong" name="DoiTuong">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Khách sạn</label>
+                                        <input type="text" class="form-control" id="editKhachSan" name="KhachSan">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Thay đổi Ảnh Chính</label>
+                                        <input type="file" class="form-control" name="ImageTourMain" accept="image/*">
+                                        <img id="previewEditTourMain" src="" style="height: 60px; margin-top:5px; display:none">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Thay đổi Ảnh Phụ</label>
+                                        <input type="file" class="form-control" name="ImageTourSub" accept="image/*">
+                                        <img id="previewEditTourSub" src="" style="height: 60px; margin-top:5px; display:none">
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="editLaNoiBat" name="LaNoiBat" value="1">
+                                    <label class="form-check-label fw-bold text-danger" for="editLaNoiBat">Là Tour Nổi Bật</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả ngắn</label>
+                                    <textarea class="form-control" id="editMoTaTour" name="MoTaTour" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Lịch trình chi tiết</label>
+                                    <textarea class="form-control" id="editLichTrinhTour" name="LichTrinhTour" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-warning" id="btnUpdateTour">Lưu thay đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="booking" class="section-content">
-            <p>Lịch sử đặt tour...</p>
+            <h3>Quản lý Lịch sử Đặt Tour</h3>
+            
+            <div class="card card-box p-3 mt-3">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Mã Đơn</th>
+                                <th>Khách hàng</th>
+                                <th style="width: 30%">Tour & Thời gian</th>
+                                <th>SL & Tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editBookingModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Chi tiết Đơn hàng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="editBookingForm" onsubmit="event.preventDefault(); updateBooking();">
+                            <div class="modal-body">
+                                <input type="hidden" id="bk_MaDatTour" name="MaDatTour">
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tên Khách hàng</label>
+                                        <input type="text" class="form-control" id="bk_HoVaTenT" name="HoVaTenT">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input type="text" class="form-control" id="bk_SDTT" name="SDTT">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="bk_EmailT" name="EmailT">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="bk_DiaChiT" name="DiaChiT">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Số lượng khách</label>
+                                        <input type="number" class="form-control" id="bk_SoLuongKhach" name="SoLuongKhach">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Trạng thái đơn hàng</label>
+                                        <select class="form-select fw-bold" id="bk_TrangThai" name="TrangThai">
+                                            <option value="CXN">Chờ xác nhận</option>
+                                            <option value="TC" class="text-success">Thành công (Đã duyệt)</option>
+                                            <option value="YCH" class="text-warning">Yêu cầu hủy</option>
+                                            <option value="DH" class="text-danger">Đã hủy</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-info text-white" id="btnUpdateBooking">Cập nhật</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="contacts" class="section-content">
             <div class="list-group mt-3" id="contact-list"></div>
@@ -228,12 +536,9 @@
         <div id="locations" class="section-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Quản lý Địa danh</h3>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLocationModal"><i
-                        class="fas fa-plus"></i> Thêm Địa danh mới</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLocationModal"><i class="fas fa-plus"></i> Thêm Địa danh mới</button>
             </div>
-
-            <div class="card card-box p-3">
-            </div>
+            <div class="card card-box p-3"></div>
 
             <div class="modal fade" id="addLocationModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -242,8 +547,7 @@
                             <h5 class="modal-title">Thêm Địa danh mới</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                        <form id="addLocationForm" onsubmit="event.preventDefault(); addLocation();"
-                            enctype="multipart/form-data">
+                        <form id="addLocationForm" onsubmit="event.preventDefault(); addLocation();" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -279,8 +583,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                <button type="submit" class="btn btn-primary" id="submitLocationBtn">Lưu Địa
-                                    danh</button>
+                                <button type="submit" class="btn btn-primary" id="submitLocationBtn">Lưu Địa danh</button>
                             </div>
                         </form>
                     </div>
@@ -294,8 +597,7 @@
                             <h5 class="modal-title">Chỉnh sửa Địa danh</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                        <form id="editLocationForm" onsubmit="event.preventDefault(); updateLocation();"
-                            enctype="multipart/form-data">
+                        <form id="editLocationForm" onsubmit="event.preventDefault(); updateLocation();" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <input type="hidden" id="editMaDD" name="MaDD">
                                 <div class="row">
@@ -323,30 +625,27 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Mô tả chi tiết</label>
-                                    <textarea class="form-control" id="editMoTaDD" name="moTaDD" rows="4"
-                                        required></textarea>
+                                    <textarea class="form-control" id="editMoTaDD" name="moTaDD" rows="4" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Thay đổi ảnh (Nếu cần)</label>
-                                    <input class="form-control" type="file" id="editImageDD" name="imageDD"
-                                        accept="image/*">
+                                    <input class="form-control" type="file" id="editImageDD" name="imageDD" accept="image/*">
                                     <div class="form-text text-danger">Để trống nếu muốn giữ lại ảnh cũ.</div>
                                     <div class="mt-2">
-                                        <img id="previewEditImage" src="" alt="Ảnh hiện tại"
-                                            style="height: 80px; display: none;">
+                                        <img id="previewEditImage" src="" alt="Ảnh hiện tại" style="height: 80px; display: none;">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-warning" id="submitEditLocationBtn">Lưu thay
-                                    đổi</button>
+                                <button type="submit" class="btn btn-warning" id="submitEditLocationBtn">Lưu thay đổi</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
         <div id="resort" class="section-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Quản lý Khu Nghỉ Dưỡng</h3>
@@ -354,9 +653,7 @@
                     <i class="fas fa-plus"></i> Thêm mới nghỉ dưỡng
                 </button>
             </div>
-
-            <div class="card card-box p-3">
-            </div>
+            <div class="card card-box p-3"></div>
 
             <div class="modal fade" id="addResortModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -365,8 +662,7 @@
                             <h5 class="modal-title">Thêm Nghỉ Dưỡng Mới</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                        <form id="addResortForm" onsubmit="event.preventDefault(); addResort();"
-                            enctype="multipart/form-data">
+                        <form id="addResortForm" onsubmit="event.preventDefault(); addResort();" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -417,8 +713,7 @@
                             <h5 class="modal-title">Cập nhật Nghỉ Dưỡng</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                        <form id="editResortForm" onsubmit="event.preventDefault(); updateResort();"
-                            enctype="multipart/form-data">
+                        <form id="editResortForm" onsubmit="event.preventDefault(); updateResort();" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <input type="hidden" id="editMaKND" name="MaKND">
                                 <div class="row">
@@ -447,22 +742,18 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Mô tả chi tiết</label>
-                                    <textarea class="form-control" id="editMoTaKND" name="moTaKND" rows="4"
-                                        required></textarea>
+                                    <textarea class="form-control" id="editMoTaKND" name="moTaKND" rows="4" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Thay đổi ảnh (Nếu cần)</label>
-                                    <input class="form-control" type="file" id="editImageKND" name="imageKND"
-                                        accept="image/*">
+                                    <input class="form-control" type="file" id="editImageKND" name="imageKND" accept="image/*">
                                     <div class="form-text text-danger">Để trống nếu giữ ảnh cũ.</div>
-                                    <img id="previewEditResortImg" src=""
-                                        style="height: 80px; margin-top:5px; display: none;">
+                                    <img id="previewEditResortImg" src="" style="height: 80px; margin-top:5px; display: none;">
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-warning" id="submitEditResortBtn">Lưu thay
-                                    đổi</button>
+                                <button type="submit" class="btn btn-warning" id="submitEditResortBtn">Lưu thay đổi</button>
                             </div>
                         </form>
                     </div>
@@ -471,511 +762,158 @@
         </div>
 
         <div id="food" class="section-content">
-            <p>Cập nhật Món ăn...</p>
-        </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>Quản lý Ẩm thực</h3>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFoodModal">
+                    <i class="fas fa-plus"></i> Thêm Món ăn
+                </button>
+            </div>
 
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-
-        let currentLocationList = [];
-
-        async function loadDashboardData() {
-            try {
-                // Sửa đường dẫn: 'dashboard.php' -> 'ADMIN/dashboard.php'
-                const response = await fetch('ADMIN/dashboard.php');
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    const data = result.data;
-                    document.querySelector('#dashboard .bg-gradient-primary h3').textContent = data.total_tours || 0;
-                    document.querySelector('#dashboard .bg-gradient-success h3').textContent = data.total_customers || 0;
-                    document.querySelector('#dashboard .bg-gradient-warning h3').textContent = data.new_contacts || 0;
-                    document.querySelector('#dashboard .bg-gradient-info h3').textContent = data.total_locations || 0;
-                }
-            } catch (error) {
-                console.error('Lỗi kết nối Dashboard:', error);
-            }
-        }
-
-        async function loadUsersData() {
-            const tableBody = document.querySelector('#users table tbody');
-            tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Đang tải...</td></tr>';
-
-            try {
-                // Nhớ thêm ADMIN/ nếu file admin.html nằm ở root
-                const response = await fetch('ADMIN/admin.php?action=read');
-                const result = await response.json();
-
-                tableBody.innerHTML = '';
-                if (result.status === 'success') {
-                    currentUserList = result.data; // Lưu dữ liệu
-
-                    if (result.data.length === 0) {
-                        tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Chưa có khách hàng nào.</td></tr>';
-                        return;
-                    }
-
-                    result.data.forEach((user, index) => {
-                        const row = `
-                        <tr>
-                            <td>${user.MaSoTK}</td>
-                            <td><strong>${user.TenTaiKhoan}</strong></td>
-                            <td>${user.Email}</td>
-                            <td>${user.HoVaTen || '-'}</td>
-                            <td>${user.SDT || '-'}</td>
-                            <td>
-                                <button class="btn btn-sm btn-warning" onclick="openEditUserModal(${index})">
-                                    <i class="fas fa-edit"></i> Sửa
-                                </button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteUser('${user.MaSoTK}')">
-                                    <i class="fas fa-trash"></i> Xoá
-                                </button>
-                            </td>
-                        </tr>`;
-                        tableBody.insertAdjacentHTML('beforeend', row);
-                    });
-                } else {
-                    tableBody.innerHTML = `<tr><td colspan="6" class="text-danger">${result.message}</td></tr>`;
-                }
-            } catch (error) {
-                console.error('Lỗi Users:', error);
-                tableBody.innerHTML = `<tr><td colspan="6" class="text-danger">Lỗi kết nối server.</td></tr>`;
-            }
-        }
-
-        // Hàm Thêm User
-        async function addUser() {
-            const form = document.getElementById('addUserForm');
-            const btn = document.getElementById('btnSaveUser');
-
-            btn.disabled = true; btn.textContent = 'Đang lưu...';
-
-            try {
-                const formData = new FormData(form);
-                const response = await fetch('ADMIN/admin.php?action=add', {
-                    method: 'POST',
-                    body: formData
-                });
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    alert(result.message);
-                    form.reset();
-                    // Đóng modal
-                    bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
-                    loadUsersData(); // Load lại bảng
-                } else {
-                    alert('Lỗi: ' + result.message);
-                }
-            } catch (error) {
-                alert('Lỗi kết nối: ' + error);
-            } finally {
-                btn.disabled = false; btn.textContent = 'Lưu tài khoản';
-            }
-        }
-        async function loadContactsData() {
-            try {
-
-                const response = await fetch('ADMIN/nhanlienhe.php');
-                const result = await response.json();
-                const contactList = document.getElementById('contact-list');
-                contactList.innerHTML = '';
-
-                if (result.status === 'success' && result.data.length > 0) {
-                    result.data.forEach(contact => {
-                        const time = new Date(contact.ThoiGianTao).toLocaleString('vi-VN');
-                        const row = `
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">${contact.HoVaTenTuVan} - ${contact.ChuDeQuanTam}</h5>
-                                <small>${time}</small>
-                            </div>
-                            <p class="mb-1">${contact.EmailTuVan} | ${contact.SoDienThoaiTuVan}</p>
-                        </a>`;
-                        contactList.insertAdjacentHTML('beforeend', row);
-                    });
-                } else {
-                    contactList.innerHTML = `<div class="alert alert-warning">Không có yêu cầu tư vấn mới.</div>`;
-                }
-            } catch (error) {
-                console.error('Lỗi Contacts:', error);
-            }
-        }
-
-        async function deleteUser(maSoTK) {
-            if (!confirm(`Xóa tài khoản ${maSoTK}?`)) return;
-            try {
-                const formData = new FormData();
-                formData.append('MaSoTK', maSoTK);
-                const response = await fetch('ADMIN/admin.php?action=delete', { method: 'POST', body: formData });
-                const result = await response.json();
-                if (result.status === 'success') loadUsersData();
-                else alert(result.message);
-            } catch (error) { alert('Lỗi: ' + error); }
-        }
-        function openEditUserModal(index) {
-            const user = currentUserList[index];
-            if (!user) return;
-
-            // Điền dữ liệu vào form
-            document.getElementById('editMaSoTK').value = user.MaSoTK;
-            document.getElementById('editTenTaiKhoan').value = user.TenTaiKhoan;
-            
-
-            document.getElementById('editLoaiTaiKhoan').value = user.LoaiTaiKhoan || 'KH'; 
-            // ---------------------
-
-            document.getElementById('editEmail').value = user.Email;
-            document.getElementById('editHoVaTen').value = user.HoVaTen;
-            document.getElementById('editSDT').value = user.SDT;
-            
-            // Mở modal
-            new bootstrap.Modal(document.getElementById('editUserModal')).show();
-        }
-
-        //  Hàm Cập nhật User
-        async function updateUser() {
-            const form = document.getElementById('editUserForm');
-            const btn = document.getElementById('btnUpdateUser');
-
-            btn.disabled = true; btn.textContent = 'Đang lưu...';
-
-            try {
-                const formData = new FormData(form);
-                const response = await fetch('ADMIN/admin.php?action=update', {
-                    method: 'POST',
-                    body: formData
-                });
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    alert(result.message);
-                    bootstrap.Modal.getInstance(document.getElementById('editUserModal')).hide();
-                    loadUsersData();
-                } else {
-                    alert('Lỗi: ' + result.message);
-                }
-            } catch (error) {
-                alert('Lỗi kết nối: ' + error);
-            } finally {
-                btn.disabled = false; btn.textContent = 'Lưu thay đổi';
-            }
-        }
-        // --- SECTION ĐỊA DANH ---
-
-        async function addLocation() {
-            const form = document.getElementById('addLocationForm');
-            const submitBtn = document.getElementById('submitLocationBtn');
-            const formData = new FormData(form);
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Đang xử lý...';
-
-            try {
-                // Sửa đường dẫn: thêm ADMIN/
-                const response = await fetch('ADMIN/add_diadanh.php?action=add', { method: 'POST', body: formData });
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    alert(result.message);
-                    form.reset();
-                    bootstrap.Modal.getInstance(document.getElementById('addLocationModal')).hide();
-                    loadLocationsData();
-                } else {
-                    alert('Lỗi: ' + result.message);
-                }
-            } catch (error) {
-                console.error(error);
-                alert('Lỗi kết nối server.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Lưu Địa danh';
-            }
-        }
-
-        // === SỬA 3: HÀM loadLocationsData ĐÃ ĐƯỢC LÀM SẠCH (Không còn lồng nhau) ===
-        async function loadLocationsData() {
-            const cardBox = document.querySelector('#locations .card-box');
-            // Reset nội dung
-            cardBox.innerHTML = `
-                <h4>Danh sách Địa danh</h4>
+            <div class="card card-box p-3">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Ảnh</th> 
-                                <th>Tên Địa danh</th>
+                                <th>Ảnh</th>
+                                <th style="width: 20%;">Tên Món</th>
                                 <th>Loại</th>
-                                <th>Địa chỉ</th>
+                                <th>Giá</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            </tbody>
                     </table>
                 </div>
-            `;
-            const tableBody = cardBox.querySelector('tbody');
+            </div>
 
-            try {
-                // Sửa đường dẫn: thêm ADMIN/
-                const response = await fetch('ADMIN/add_diadanh.php?action=read');
-                const result = await response.json(); // Ở đây nếu sai đường dẫn sẽ báo lỗi < (token <)
+            <div class="modal fade" id="addFoodModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thêm Món ăn mới</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="addFoodForm" onsubmit="event.preventDefault(); addFood();" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tên Món ăn (*)</label>
+                                        <input type="text" class="form-control" name="TenMonAn" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Loại Món (*)</label>
+                                        <select class="form-control" name="LoaiMonAn" required>
+                                            <option value="">-- Chọn loại --</option>
+                                            <option value="dacSan">Đặc sản</option>
+                                            <option value="haiSan">Hải sản</option>
+                                            <option value="duongPho">Đường phố (Ăn vặt)</option>
+                                            <option value="dacSanQua">Đặc sản làm quà</option>
+                                            <option value="thuongthuc">Địa điểm thưởng thức (Chợ)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Giá (VD: 30.000 - 50.000 VNĐ)</label>
+                                        <input type="text" class="form-control" name="GiaMonAn">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ảnh mô tả (*)</label>
+                                        <input type="file" class="form-control" name="ImageLinkMonAn" accept="image/*" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ / Gợi ý quán</label>
+                                    <input type="text" class="form-control" name="DiaChiMonAn">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Link Google Map</label>
+                                    <input type="url" class="form-control" name="MapLinkMonAn">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả chi tiết</label>
+                                    <textarea class="form-control" name="MoTaMonAn" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-primary" id="btnSaveFood">Lưu Món ăn</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-                tableBody.innerHTML = '';
+            <div class="modal fade" id="editFoodModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title">Cập nhật Món ăn</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="editFoodForm" onsubmit="event.preventDefault(); updateFood();" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <input type="hidden" id="editMaMonAn" name="MaMonAn">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tên Món ăn (*)</label>
+                                        <input type="text" class="form-control" id="editTenMonAn" name="TenMonAn" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Loại Món (*)</label>
+                                        <select class="form-control" id="editLoaiMonAn" name="LoaiMonAn" required>
+                                            <option value="dacSan">Đặc sản</option>
+                                            <option value="haiSan">Hải sản</option>
+                                            <option value="duongPho">Đường phố (Ăn vặt)</option>
+                                            <option value="dacSanQua">Đặc sản làm quà</option>
+                                            <option value="thuongthuc">Địa điểm thưởng thức (Chợ)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Giá</label>
+                                        <input type="text" class="form-control" id="editGiaMonAn" name="GiaMonAn">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Thay đổi ảnh (Nếu cần)</label>
+                                        <input type="file" class="form-control" name="ImageLinkMonAn" accept="image/*">
+                                        <div class="mt-2">
+                                            <img id="previewEditFood" src="" style="height: 60px; display: none;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="editDiaChiMonAn" name="DiaChiMonAn">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Link Google Map</label>
+                                    <input type="url" class="form-control" id="editMapLinkMonAn" name="MapLinkMonAn">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả chi tiết</label>
+                                    <textarea class="form-control" id="editMoTaMonAn" name="MoTaMonAn" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-warning" id="btnUpdateFood">Lưu thay đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                if (result.status === 'success') {
-                    currentLocationList = result.data; // Lưu dữ liệu để dùng cho nút Sửa
+    </div>
 
-                    result.data.forEach((location, index) => {
-                        const imgTag = location.ImageDD
-                            ? `<img src="${location.ImageDD}" style="height: 50px; width: 80px; object-fit: cover;">`
-                            : 'Không có ảnh';
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="ADMIN/admin.js"></script>
 
-                        const row = `
-                            <tr>
-                                <td>${location.MaDD}</td>
-                                <td>${imgTag}</td> 
-                                <td><strong>${location.TenDD}</strong></td>
-                                <td>${location.LoaiDD || 'N/A'}</td>
-                                <td>${location.DiaChiDD || 'N/A'}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" onclick="openEditLocationModal(${index})">
-                                        <i class="fas fa-edit"></i> Sửa
-                                    </button>
-                                    <button class="btn btn-sm btn-danger" onclick="deleteLocation('${location.MaDD}', '${location.ImageDD}')">
-                                        <i class="fas fa-trash"></i> Xoá
-                                    </button>
-                                </td>
-                            </tr>
-                        `;
-                        tableBody.insertAdjacentHTML('beforeend', row);
-                    });
-                } else {
-                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center">${result.message}</td></tr>`;
-                }
-            } catch (error) {
-                console.error('Lỗi Locations:', error);
-                tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Lỗi kết nối server (Kiểm tra đường dẫn API).</td></tr>`;
-            }
-        }
-
-        async function deleteLocation(maDD, imagePath) {
-            if (!confirm(`Xóa Địa danh ID ${maDD}?`)) return;
-            try {
-                const formData = new FormData();
-                formData.append('MaDD', maDD);
-                formData.append('ImagePath', imagePath);
-
-                // Sửa đường dẫn
-                const response = await fetch('ADMIN/add_diadanh.php?action=delete', { method: 'POST', body: formData });
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    alert(result.message);
-                    loadLocationsData();
-                } else {
-                    alert('Lỗi: ' + result.message);
-                }
-            } catch (error) { alert('Lỗi: ' + error); }
-        }
-
-        // Hàm mở Modal Sửa
-        function openEditLocationModal(index) {
-            const data = currentLocationList[index];
-            if (!data) return;
-
-            document.getElementById('editMaDD').value = data.MaDD;
-            document.getElementById('editTenDD').value = data.TenDD;
-            document.getElementById('editLoaiDD').value = data.LoaiDD;
-            document.getElementById('editDiaChiDD').value = data.DiaChiDD;
-            document.getElementById('editMapLinkDD').value = data.MapLinkDD;
-            document.getElementById('editMoTaDD').value = data.MoTaDD;
-            document.getElementById('editImageDD').value = "";
-
-            const imgPreview = document.getElementById('previewEditImage');
-            if (data.ImageDD) {
-                imgPreview.src = data.ImageDD;
-                imgPreview.style.display = 'block';
-            } else {
-                imgPreview.style.display = 'none';
-            }
-
-            new bootstrap.Modal(document.getElementById('editLocationModal')).show();
-        }
-
-        // Hàm cập nhật
-        async function updateLocation() {
-            const form = document.getElementById('editLocationForm');
-            const submitBtn = document.getElementById('submitEditLocationBtn');
-            const formData = new FormData(form);
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Đang lưu...';
-
-            try {
-                // Sửa đường dẫn: thêm ADMIN/
-                const response = await fetch('ADMIN/add_diadanh.php?action=update', { method: 'POST', body: formData });
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    alert(result.message);
-                    bootstrap.Modal.getInstance(document.getElementById('editLocationModal')).hide();
-                    loadLocationsData();
-                } else {
-                    alert('Lỗi: ' + result.message);
-                }
-            } catch (error) {
-                console.error(error);
-                alert('Lỗi khi cập nhật.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Lưu thay đổi';
-            }
-        }
-
-        // --- 1. Thay thế hàm showSection cũ bằng hàm này ---
-        function showSection(sectionId, event) {
-            if (event) event.preventDefault();
-
-            // Ẩn tất cả section và xóa active ở link
-            document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.sidebar .nav-link').forEach(link => link.classList.remove('active'));
-
-            // Hiển thị section được chọn
-            const target = document.getElementById(sectionId);
-            if (target) target.classList.add('active');
-
-            if (event && event.currentTarget) event.currentTarget.classList.add('active');
-
-            // Routing: Gọi hàm load dữ liệu tương ứng
-            if (sectionId === 'dashboard') loadDashboardData();
-            else if (sectionId === 'users') loadUsersData();
-            else if (sectionId === 'contacts') loadContactsData();
-            else if (sectionId === 'locations') loadLocationsData();
-            else if (sectionId === 'resort') loadResortsData(); // <--- MỚI THÊM DÒNG NÀY
-        }
-
-        // --- 2. Thêm các hàm xử lý Nghỉ Dưỡng vào cuối script ---
-
-        let currentResortList = []; // Biến lưu danh sách tạm
-
-        async function loadResortsData() {
-            const cardBox = document.querySelector('#resort .card-box');
-            cardBox.innerHTML = `
-                <h4>Danh sách Nghỉ Dưỡng</h4>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead>
-                            <tr>
-                                <th>ID</th> <th>Ảnh</th> <th>Tên KND</th> <th>Loại</th> <th>Địa chỉ</th> <th>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>`;
-            const tableBody = cardBox.querySelector('tbody');
-
-            try {
-                // CHÚ Ý: Đường dẫn có ADMIN/
-                const response = await fetch('ADMIN/add_nghiduong.php?action=read');
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    currentResortList = result.data;
-                    tableBody.innerHTML = '';
-                    result.data.forEach((item, index) => {
-                        const imgTag = item.ImageKND ? `<img src="${item.ImageKND}" style="height: 50px; width: 80px; object-fit: cover;">` : '';
-                        const row = `
-                            <tr>
-                                <td>${item.MaKND}</td>
-                                <td>${imgTag}</td>
-                                <td><strong>${item.TenKND}</strong></td>
-                                <td>${item.LoaiKHD || 'N/A'}</td>
-                                <td>${item.DiaChiKND || ''}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" onclick="openEditResortModal(${index})"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-danger" onclick="deleteResort('${item.MaKND}', '${item.ImageKND}')"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>`;
-                        tableBody.insertAdjacentHTML('beforeend', row);
-                    });
-                } else {
-                    tableBody.innerHTML = `<tr><td colspan="6">${result.message}</td></tr>`;
-                }
-            } catch (err) { console.error(err); }
-        }
-
-        async function addResort() {
-            const form = document.getElementById('addResortForm');
-            const btn = document.getElementById('submitResortBtn');
-            btn.disabled = true; btn.textContent = 'Đang lưu...';
-
-            try {
-                const res = await fetch('ADMIN/add_nghiduong.php?action=add', { method: 'POST', body: new FormData(form) });
-                const json = await res.json();
-                alert(json.message);
-                if (json.status === 'success') {
-                    form.reset();
-                    bootstrap.Modal.getInstance(document.getElementById('addResortModal')).hide();
-                    loadResortsData();
-                }
-            } catch (e) { alert('Lỗi kết nối server'); }
-            finally { btn.disabled = false; btn.textContent = 'Lưu lại'; }
-        }
-
-        function openEditResortModal(index) {
-            const data = currentResortList[index];
-            if (!data) return;
-
-            document.getElementById('editMaKND').value = data.MaKND;
-            document.getElementById('editTenKND').value = data.TenKND;
-            document.getElementById('editLoaiKHD').value = data.LoaiKHD;
-            document.getElementById('editDiaChiKND').value = data.DiaChiKND;
-            document.getElementById('editMapLinkKND').value = data.MapLinkKND;
-            document.getElementById('editMoTaKND').value = data.MoTaKND;
-            document.getElementById('editImageKND').value = '';
-
-            const imgPre = document.getElementById('previewEditResortImg');
-            if (data.ImageKND) { imgPre.src = data.ImageKND; imgPre.style.display = 'block'; }
-            else imgPre.style.display = 'none';
-
-            new bootstrap.Modal(document.getElementById('editResortModal')).show();
-        }
-
-        async function updateResort() {
-            const form = document.getElementById('editResortForm');
-            const btn = document.getElementById('submitEditResortBtn');
-            btn.disabled = true; btn.textContent = 'Đang lưu...';
-
-            try {
-                const res = await fetch('ADMIN/add_nghiduong.php?action=update', { method: 'POST', body: new FormData(form) });
-                const json = await res.json();
-                alert(json.message);
-                if (json.status === 'success') {
-                    bootstrap.Modal.getInstance(document.getElementById('editResortModal')).hide();
-                    loadResortsData();
-                }
-            } catch (e) { alert('Lỗi: ' + e); }
-            finally { btn.disabled = false; btn.textContent = 'Lưu thay đổi'; }
-        }
-
-        async function deleteResort(id, imgPath) {
-            if (!confirm('Xóa Khu nghỉ dưỡng ID ' + id + '?')) return;
-            try {
-                const fd = new FormData(); fd.append('MaKND', id); fd.append('ImagePath', imgPath);
-                const res = await fetch('ADMIN/add_nghiduong.php?action=delete', { method: 'POST', body: fd });
-                const json = await res.json();
-                alert(json.message);
-                if (json.status === 'success') loadResortsData();
-            } catch (e) { alert('Lỗi: ' + e); }
-        }
-
-        window.onload = loadDashboardData; 
-    </script>
 </body>
-
 </html>

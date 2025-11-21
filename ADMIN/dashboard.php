@@ -1,64 +1,58 @@
 <?php
-
-ob_start(); 
-
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
+// ADMIN/dashboard.php
+ob_start();
 require_once 'conn.php'; 
-
-
-$stats = [
-    'total_tours' => 0,
-    'total_customers' => 0,
-    'new_contacts' => 0,
-    'total_locations' => 0
-];
-
-$output = ['status' => 'error', 'message' => 'Lỗi không xác định.']; 
-
-try {
-    
-    $sql_tours = "SELECT COUNT(MaTour) AS total FROM TOUR";
-    $result_tours = $conn->query($sql_tours);
-    $stats['total_tours'] = $result_tours->fetch_assoc()['total'];
-
-    
-    $sql_customers = "SELECT COUNT(MaSoTK) AS total FROM TAIKHOAN WHERE LoaiTaiKhoan = 'KH'";
-    $result_customers = $conn->query($sql_customers);
-    $stats['total_customers'] = $result_customers->fetch_assoc()['total'];
-
-    
-    $sql_contacts = "SELECT COUNT(MaTV) AS total FROM THONGTINTUVAN WHERE ThoiGianTao >= DATE_SUB(NOW(), INTERVAL 7 DAY)";
-    $result_contacts = $conn->query($sql_contacts);
-    $stats['new_contacts'] = $result_contacts->fetch_assoc()['total'];
-
-    
-    $total_dd = $conn->query("SELECT COUNT(MaDD) AS total FROM DIADANH")->fetch_assoc()['total'];
-    $total_ma = $conn->query("SELECT COUNT(MaMonAn) AS total FROM MONAN")->fetch_assoc()['total'];
-    $total_knd = $conn->query("SELECT COUNT(MaKND) AS total FROM KHUNGHIDUONG")->fetch_assoc()['total'];
-    $stats['total_locations'] = $total_dd + $total_ma + $total_knd;
-
-    
-    $output = ['status' => 'success', 'data' => $stats];
-
-} catch (Exception $e) {
-    
-    http_response_code(500);
-    $output = ['status' => 'error', 'message' => 'Lỗi truy vấn CSDL: ' . $e->getMessage()];
-}
-
-
-ob_clean(); 
 
 header('Content-Type: application/json');
 
+$stats = [
+    'total_accounts' => 0, // Tổng tài khoản
+    'total_tours'    => 0, // Tổng tour
+    'total_bookings' => 0, // Tổng đơn đặt tour
+    'total_contacts' => 0, // Tổng liên hệ
+    'total_diadanh'  => 0, // Tổng địa danh
+    'total_monan'    => 0, // Tổng món ăn
+    'total_resorts'  => 0  // Tổng nghỉ dưỡng
+];
 
-echo json_encode($output);
+$response = ['status' => 'error', 'message' => 'Lỗi không xác định.']; 
 
+try {
+    // 1. Đếm Tài khoản (Bao gồm cả KH và AD)
+    $res = $conn->query("SELECT COUNT(*) AS total FROM TAIKHOAN");
+    $stats['total_accounts'] = $res->fetch_assoc()['total'];
 
+    // 2. Đếm Tour
+    $res = $conn->query("SELECT COUNT(*) AS total FROM TOUR");
+    $stats['total_tours'] = $res->fetch_assoc()['total'];
+
+    // 3. Đếm Đơn đặt tour (Booking)
+    $res = $conn->query("SELECT COUNT(*) AS total FROM LICHSU");
+    $stats['total_bookings'] = $res->fetch_assoc()['total'];
+
+    // 4. Đếm Yêu cầu tư vấn
+    $res = $conn->query("SELECT COUNT(*) AS total FROM THONGTINTUVAN");
+    $stats['total_contacts'] = $res->fetch_assoc()['total'];
+
+    // 5. Đếm Địa danh
+    $res = $conn->query("SELECT COUNT(*) AS total FROM DIADANH");
+    $stats['total_diadanh'] = $res->fetch_assoc()['total'];
+
+    // 6. Đếm Món ăn
+    $res = $conn->query("SELECT COUNT(*) AS total FROM MONAN");
+    $stats['total_monan'] = $res->fetch_assoc()['total'];
+
+    // 7. Đếm Khu nghỉ dưỡng
+    $res = $conn->query("SELECT COUNT(*) AS total FROM KHUNGHIDUONG");
+    $stats['total_resorts'] = $res->fetch_assoc()['total'];
+
+    $response = ['status' => 'success', 'data' => $stats];
+
+} catch (Exception $e) {
+    $response = ['status' => 'error', 'message' => $e->getMessage()];
+}
+
+ob_clean();
+echo json_encode($response);
 $conn->close();
-exit; 
 ?>
