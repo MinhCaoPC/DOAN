@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Web Du Lịch Đà Nẵng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="admin.css">
+
+    <link rel="stylesheet" href="ADMIN/admin.css">
 
 </head>
 
@@ -28,7 +30,7 @@
             <i class="fas fa-landmark"></i> Địa danh
         </a>
         <a href="#" onclick="showSection('resort', event)" class="nav-link">
-            <i class="fas fa-landmark"></i> Nghỉ dưỡng
+            <i class="fas fa-umbrella-beach"></i> Nghỉ dưỡng
         </a>
         <a href="#" onclick="showSection('food', event)" class="nav-link">
             <i class="fas fa-utensils"></i> Ẩm thực
@@ -66,25 +68,25 @@
             <div class="row mt-4">
                 <div class="col-md-3">
                     <div class="card card-box bg-gradient-primary p-3">
-                        <h3>150</h3>
+                        <h3>...</h3>
                         <p>Tour hiện có</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-box bg-gradient-success p-3">
-                        <h3>1,200</h3>
+                        <h3>...</h3>
                         <p>Khách hàng</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-box bg-gradient-warning p-3">
-                        <h3>45</h3>
+                        <h3>...</h3>
                         <p>Yêu cầu tư vấn mới</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-box bg-gradient-info p-3">
-                        <h3>300</h3>
+                        <h3>...</h3>
                         <p>Địa danh & Món ăn</p>
                     </div>
                 </div>
@@ -94,8 +96,11 @@
         <div id="users" class="section-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Quản lý Tài khoản Khách hàng</h3>
-                <button class="btn btn-primary"><i class="fas fa-plus"></i> Thêm tài khoản</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <i class="fas fa-plus"></i> Thêm tài khoản
+                </button>
             </div>
+
             <div class="card card-box p-3">
                 <table class="table table-hover">
                     <thead>
@@ -112,42 +117,112 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thêm Khách hàng mới</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="addUserForm" onsubmit="event.preventDefault(); addUser();">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Tên đăng nhập (*)</label>
+                                    <input type="text" class="form-control" name="TenTaiKhoan" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mật khẩu (*)</label>
+                                    <input type="password" class="form-control" name="MatKhau" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email (*)</label>
+                                    <input type="email" class="form-control" name="Email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và Tên</label>
+                                    <input type="text" class="form-control" name="HoVaTen">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control" name="SDT">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-primary" id="btnSaveUser">Lưu tài khoản</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title">Cập nhật thông tin</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="editUserForm" onsubmit="event.preventDefault(); updateUser();">
+                            <div class="modal-body">
+                                <input type="hidden" id="editMaSoTK" name="MaSoTK">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="editTenTaiKhoan" readonly disabled>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Phân quyền</label>
+                                    <select class="form-control" id="editLoaiTaiKhoan" name="LoaiTaiKhoan">
+                                        <option value="KH">Khách hàng</option>
+                                        <option value="AD">Quản trị viên (Admin)</option>
+                                    </select>
+                                    <div class="form-text text-warning">
+                                        <i class="fas fa-exclamation-triangle"></i> Lưu ý: Nếu chuyển sang "Quản trị
+                                        viên", tài khoản này sẽ biến mất khỏi danh sách Khách hàng.
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email (*)</label>
+                                    <input type="email" class="form-control" id="editEmail" name="Email" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và Tên</label>
+                                    <input type="text" class="form-control" id="editHoVaTen" name="HoVaTen">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="editSDT" name="SDT">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-danger">Đổi mật khẩu (Để trống nếu không đổi)</label>
+                                    <input type="password" class="form-control" name="MatKhau"
+                                        placeholder="Nhập mật khẩu mới...">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-warning" id="btnUpdateUser">Lưu thay đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div id="tours" class="section-content">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3>Danh sách Tour Du Lịch</h3>
-                <button class="btn btn-success"><i class="fas fa-plus"></i> Cập nhật Tour mới</button>
-            </div>
-            <div class="card card-box p-3">
-                <p>Danh sách các tour Đà Nẵng - Hội An - Bà Nà...</p>
-                <div class="alert alert-info">Chức năng cập nhật thông tin Tour, giá vé, lịch trình...</div>
-            </div>
+            <p>Quản lý Tour...</p>
         </div>
-
         <div id="booking" class="section-content">
-            <h3>Quản lý Lịch sử Đặt Tour</h3>
-            <div class="card card-box p-3 mt-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Mã Đơn</th>
-                            <th>Khách hàng</th>
-                            <th>Tour</th>
-                            <th>Ngày đi</th>
-                            <th>Trạng thái</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+            <p>Lịch sử đặt tour...</p>
         </div>
-
         <div id="contacts" class="section-content">
-            <h3>Thông tin liên hệ cần tư vấn</h3>
-            <div class="list-group mt-3" id="contact-list">
-            </div>
+            <div class="list-group mt-3" id="contact-list"></div>
         </div>
 
         <div id="locations" class="section-content">
@@ -158,30 +233,27 @@
             </div>
 
             <div class="card card-box p-3">
-                <h4>Danh sách Địa danh</h4>
-                <p>Danh sách các Địa danh sẽ được hiển thị ở đây.</p>
             </div>
 
-            <div class="modal fade" id="addLocationModal" tabindex="-1" aria-labelledby="addLocationModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="addLocationModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addLocationModalLabel">Thêm Địa danh mới</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title">Thêm Địa danh mới</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <form id="addLocationForm" onsubmit="event.preventDefault(); addLocation();"
                             enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="tenDD" class="form-label">Tên Địa danh (*)</label>
-                                        <input type="text" class="form-control" id="tenDD" name="tenDD" required>
+                                        <label class="form-label">Tên Địa danh (*)</label>
+                                        <input type="text" class="form-control" name="tenDD" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="loaiDD" class="form-label">Loại Địa danh (*)</label>
-                                        <select class="form-control" id="loaiDD" name="loaiDD" required>
-                                            <option value="">-- Chọn Loại Địa danh --</option>
+                                        <label class="form-label">Loại Địa danh (*)</label>
+                                        <select class="form-control" name="loaiDD" required>
+                                            <option value="">-- Chọn Loại --</option>
                                             <option value="thiennhien">Thiên nhiên</option>
                                             <option value="congtrinh">Công trình</option>
                                             <option value="vanhoa">Văn hóa</option>
@@ -189,23 +261,20 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="diaChiDD" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="diaChiDD" name="diaChiDD">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="diaChiDD">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="mapLinkDD" class="form-label">Link Google Map</label>
-                                    <input type="url" class="form-control" id="mapLinkDD" name="mapLinkDD">
+                                    <label class="form-label">Link Google Map</label>
+                                    <input type="url" class="form-control" name="mapLinkDD">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="moTaDD" class="form-label">Mô tả chi tiết</label>
-                                    <textarea class="form-control" id="moTaDD" name="moTaDD" rows="4"
-                                        required></textarea>
+                                    <label class="form-label">Mô tả chi tiết</label>
+                                    <textarea class="form-control" name="moTaDD" rows="4" required></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imageDD" class="form-label">Ảnh Địa danh (*)</label>
-                                    <input class="form-control" type="file" id="imageDD" name="imageDD" accept="image/*"
-                                        required>
-                                    <div class="form-text">Chọn ảnh định dạng JPG, PNG, GIF.</div>
+                                    <label class="form-label">Ảnh Địa danh (*)</label>
+                                    <input class="form-control" type="file" name="imageDD" accept="image/*" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -217,11 +286,192 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="editLocationModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title">Chỉnh sửa Địa danh</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="editLocationForm" onsubmit="event.preventDefault(); updateLocation();"
+                            enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <input type="hidden" id="editMaDD" name="MaDD">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tên Địa danh (*)</label>
+                                        <input type="text" class="form-control" id="editTenDD" name="tenDD" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Loại Địa danh (*)</label>
+                                        <select class="form-control" id="editLoaiDD" name="loaiDD" required>
+                                            <option value="">-- Chọn Loại --</option>
+                                            <option value="thiennhien">Thiên nhiên</option>
+                                            <option value="congtrinh">Công trình</option>
+                                            <option value="vanhoa">Văn hóa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="editDiaChiDD" name="diaChiDD">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Link Google Map</label>
+                                    <input type="url" class="form-control" id="editMapLinkDD" name="mapLinkDD">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả chi tiết</label>
+                                    <textarea class="form-control" id="editMoTaDD" name="moTaDD" rows="4"
+                                        required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Thay đổi ảnh (Nếu cần)</label>
+                                    <input class="form-control" type="file" id="editImageDD" name="imageDD"
+                                        accept="image/*">
+                                    <div class="form-text text-danger">Để trống nếu muốn giữ lại ảnh cũ.</div>
+                                    <div class="mt-2">
+                                        <img id="previewEditImage" src="" alt="Ảnh hiện tại"
+                                            style="height: 80px; display: none;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-warning" id="submitEditLocationBtn">Lưu thay
+                                    đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="resort" class="section-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>Quản lý Khu Nghỉ Dưỡng</h3>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addResortModal">
+                    <i class="fas fa-plus"></i> Thêm mới nghỉ dưỡng
+                </button>
+            </div>
+
+            <div class="card card-box p-3">
+            </div>
+
+            <div class="modal fade" id="addResortModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thêm Nghỉ Dưỡng Mới</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="addResortForm" onsubmit="event.preventDefault(); addResort();"
+                            enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tên Khu Nghỉ Dưỡng (*)</label>
+                                        <input type="text" class="form-control" name="tenKND" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Loại hình (*)</label>
+                                        <select class="form-control" name="loaiKHD" required>
+                                            <option value="">-- Chọn Loại --</option>
+                                            <option value="Resort">Resort</option>
+                                            <option value="KhachSan">Khách sạn</option>
+                                            <option value="Homestay">Homestay</option>
+                                            <option value="Villa">Villa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="diaChiKND">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Link Google Map</label>
+                                    <input type="url" class="form-control" name="mapLinkKND">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả chi tiết</label>
+                                    <textarea class="form-control" name="moTaKND" rows="4" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ảnh mô tả (*)</label>
+                                    <input class="form-control" type="file" name="imageKND" accept="image/*" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-primary" id="submitResortBtn">Lưu lại</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editResortModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title">Cập nhật Nghỉ Dưỡng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="editResortForm" onsubmit="event.preventDefault(); updateResort();"
+                            enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <input type="hidden" id="editMaKND" name="MaKND">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tên Khu Nghỉ Dưỡng (*)</label>
+                                        <input type="text" class="form-control" id="editTenKND" name="tenKND" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Loại hình (*)</label>
+                                        <select class="form-control" id="editLoaiKHD" name="loaiKHD" required>
+                                            <option value="">-- Chọn Loại --</option>
+                                            <option value="Resort">Resort</option>
+                                            <option value="KhachSan">Khách sạn</option>
+                                            <option value="Homestay">Homestay</option>
+                                            <option value="Villa">Villa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="editDiaChiKND" name="diaChiKND">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Link Google Map</label>
+                                    <input type="url" class="form-control" id="editMapLinkKND" name="mapLinkKND">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả chi tiết</label>
+                                    <textarea class="form-control" id="editMoTaKND" name="moTaKND" rows="4"
+                                        required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Thay đổi ảnh (Nếu cần)</label>
+                                    <input class="form-control" type="file" id="editImageKND" name="imageKND"
+                                        accept="image/*">
+                                    <div class="form-text text-danger">Để trống nếu giữ ảnh cũ.</div>
+                                    <img id="previewEditResortImg" src=""
+                                        style="height: 80px; margin-top:5px; display: none;">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-warning" id="submitEditResortBtn">Lưu thay
+                                    đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="food" class="section-content">
-            <h3>Cập nhật Món ăn</h3>
-            <p>Form nhập liệu cho ẩm thực địa phương...</p>
+            <p>Cập nhật Món ăn...</p>
         </div>
 
     </div>
@@ -229,20 +479,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        
+
+        let currentLocationList = [];
+
         async function loadDashboardData() {
             try {
-                const response = await fetch('dashboard.php');
+                // Sửa đường dẫn: 'dashboard.php' -> 'ADMIN/dashboard.php'
+                const response = await fetch('ADMIN/dashboard.php');
                 const result = await response.json();
 
                 if (result.status === 'success') {
                     const data = result.data;
-                    document.querySelector('#dashboard .bg-gradient-primary h3').textContent = data.total_tours;
-                    document.querySelector('#dashboard .bg-gradient-success h3').textContent = data.total_customers;
-                    document.querySelector('#dashboard .bg-gradient-warning h3').textContent = data.new_contacts;
-                    document.querySelector('#dashboard .bg-gradient-info h3').textContent = data.total_locations;
-                } else {
-                    console.error("Lỗi Dashboard:", result.message);
+                    document.querySelector('#dashboard .bg-gradient-primary h3').textContent = data.total_tours || 0;
+                    document.querySelector('#dashboard .bg-gradient-success h3').textContent = data.total_customers || 0;
+                    document.querySelector('#dashboard .bg-gradient-warning h3').textContent = data.new_contacts || 0;
+                    document.querySelector('#dashboard .bg-gradient-info h3').textContent = data.total_locations || 0;
                 }
             } catch (error) {
                 console.error('Lỗi kết nối Dashboard:', error);
@@ -251,42 +502,84 @@
 
         async function loadUsersData() {
             const tableBody = document.querySelector('#users table tbody');
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Đang tải...</td></tr>';
 
             try {
-                const response = await fetch('admin.php?action=read');
+                // Nhớ thêm ADMIN/ nếu file admin.html nằm ở root
+                const response = await fetch('ADMIN/admin.php?action=read');
                 const result = await response.json();
 
                 tableBody.innerHTML = '';
-
                 if (result.status === 'success') {
-                    result.data.forEach(user => {
+                    currentUserList = result.data; // Lưu dữ liệu
+
+                    if (result.data.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Chưa có khách hàng nào.</td></tr>';
+                        return;
+                    }
+
+                    result.data.forEach((user, index) => {
                         const row = `
                         <tr>
                             <td>${user.MaSoTK}</td>
-                            <td>${user.TenTaiKhoan}</td>
+                            <td><strong>${user.TenTaiKhoan}</strong></td>
                             <td>${user.Email}</td>
-                            <td>${user.HoVaTen || 'N/A'}</td>
-                            <td>${user.SDT || 'N/A'}</td>
+                            <td>${user.HoVaTen || '-'}</td>
+                            <td>${user.SDT || '-'}</td>
                             <td>
-                                <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Sửa</button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteUser('${user.MaSoTK}')"><i class="fas fa-trash"></i> Xoá</button>
+                                <button class="btn btn-sm btn-warning" onclick="openEditUserModal(${index})">
+                                    <i class="fas fa-edit"></i> Sửa
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteUser('${user.MaSoTK}')">
+                                    <i class="fas fa-trash"></i> Xoá
+                                </button>
                             </td>
-                        </tr>
-                    `;
+                        </tr>`;
                         tableBody.insertAdjacentHTML('beforeend', row);
                     });
                 } else {
-                    tableBody.innerHTML = `<tr><td colspan="6">Lỗi tải dữ liệu: ${result.message}</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-danger">${result.message}</td></tr>`;
                 }
             } catch (error) {
-                console.error('Lỗi kết nối Users:', error);
-                tableBody.innerHTML = `<tr><td colspan="6">Lỗi kết nối server.</td></tr>`;
+                console.error('Lỗi Users:', error);
+                tableBody.innerHTML = `<tr><td colspan="6" class="text-danger">Lỗi kết nối server.</td></tr>`;
             }
         }
 
+        // Hàm Thêm User
+        async function addUser() {
+            const form = document.getElementById('addUserForm');
+            const btn = document.getElementById('btnSaveUser');
+
+            btn.disabled = true; btn.textContent = 'Đang lưu...';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('ADMIN/admin.php?action=add', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    alert(result.message);
+                    form.reset();
+                    // Đóng modal
+                    bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
+                    loadUsersData(); // Load lại bảng
+                } else {
+                    alert('Lỗi: ' + result.message);
+                }
+            } catch (error) {
+                alert('Lỗi kết nối: ' + error);
+            } finally {
+                btn.disabled = false; btn.textContent = 'Lưu tài khoản';
+            }
+        }
         async function loadContactsData() {
             try {
-                const response = await fetch('nhanlienhe.php');
+
+                const response = await fetch('ADMIN/nhanlienhe.php');
                 const result = await response.json();
                 const contactList = document.getElementById('contact-list');
                 contactList.innerHTML = '';
@@ -297,32 +590,62 @@
                         const row = `
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">${contact.HoVaTenTuVan} - Chủ đề: ${contact.ChuDeQuanTam}</h5>
+                                <h5 class="mb-1">${contact.HoVaTenTuVan} - ${contact.ChuDeQuanTam}</h5>
                                 <small>${time}</small>
                             </div>
-                            <p class="mb-1">Email: ${contact.EmailTuVan} | SĐT: ${contact.SoDienThoaiTuVan}</p>
-                            <small>Nội dung: ${contact.NoiDung.substring(0, 100)}...</small>
-                        </a>
-                    `;
+                            <p class="mb-1">${contact.EmailTuVan} | ${contact.SoDienThoaiTuVan}</p>
+                        </a>`;
                         contactList.insertAdjacentHTML('beforeend', row);
                     });
                 } else {
                     contactList.innerHTML = `<div class="alert alert-warning">Không có yêu cầu tư vấn mới.</div>`;
                 }
             } catch (error) {
-                console.error('Lỗi kết nối Contacts:', error);
-                document.getElementById('contact-list').innerHTML = `<div class="alert alert-danger">Lỗi kết nối server.</div>`;
+                console.error('Lỗi Contacts:', error);
             }
         }
 
         async function deleteUser(maSoTK) {
-            if (!confirm(`Bạn có chắc chắn muốn xóa tài khoản ${maSoTK} không?`)) return;
-
+            if (!confirm(`Xóa tài khoản ${maSoTK}?`)) return;
             try {
                 const formData = new FormData();
                 formData.append('MaSoTK', maSoTK);
+                const response = await fetch('ADMIN/admin.php?action=delete', { method: 'POST', body: formData });
+                const result = await response.json();
+                if (result.status === 'success') loadUsersData();
+                else alert(result.message);
+            } catch (error) { alert('Lỗi: ' + error); }
+        }
+        function openEditUserModal(index) {
+            const user = currentUserList[index];
+            if (!user) return;
 
-                const response = await fetch('admin.php?action=delete', {
+            // Điền dữ liệu vào form
+            document.getElementById('editMaSoTK').value = user.MaSoTK;
+            document.getElementById('editTenTaiKhoan').value = user.TenTaiKhoan;
+            
+
+            document.getElementById('editLoaiTaiKhoan').value = user.LoaiTaiKhoan || 'KH'; 
+            // ---------------------
+
+            document.getElementById('editEmail').value = user.Email;
+            document.getElementById('editHoVaTen').value = user.HoVaTen;
+            document.getElementById('editSDT').value = user.SDT;
+            
+            // Mở modal
+            new bootstrap.Modal(document.getElementById('editUserModal')).show();
+        }
+
+        //  Hàm Cập nhật User
+        async function updateUser() {
+            const form = document.getElementById('editUserForm');
+            const btn = document.getElementById('btnUpdateUser');
+
+            btn.disabled = true; btn.textContent = 'Đang lưu...';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('ADMIN/admin.php?action=update', {
                     method: 'POST',
                     body: formData
                 });
@@ -330,15 +653,18 @@
 
                 if (result.status === 'success') {
                     alert(result.message);
+                    bootstrap.Modal.getInstance(document.getElementById('editUserModal')).hide();
                     loadUsersData();
                 } else {
                     alert('Lỗi: ' + result.message);
                 }
-
             } catch (error) {
-                alert('Lỗi kết nối server: ' + error);
+                alert('Lỗi kết nối: ' + error);
+            } finally {
+                btn.disabled = false; btn.textContent = 'Lưu thay đổi';
             }
         }
+        // --- SECTION ĐỊA DANH ---
 
         async function addLocation() {
             const form = document.getElementById('addLocationForm');
@@ -349,99 +675,103 @@
             submitBtn.textContent = 'Đang xử lý...';
 
             try {
-                const response = await fetch('add_diadanh.php?action=add', {
-                    method: 'POST',
-                    body: formData
-                });
+                // Sửa đường dẫn: thêm ADMIN/
+                const response = await fetch('ADMIN/add_diadanh.php?action=add', { method: 'POST', body: formData });
                 const result = await response.json();
 
                 if (result.status === 'success') {
                     alert(result.message);
                     form.reset();
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addLocationModal'));
-                    if (modal) {
-                        modal.hide();
-                    }
+                    bootstrap.Modal.getInstance(document.getElementById('addLocationModal')).hide();
                     loadLocationsData();
                 } else {
                     alert('Lỗi: ' + result.message);
                 }
-
             } catch (error) {
-                console.error('Lỗi kết nối server:', error);
-                alert('Lỗi kết nối server khi thêm Địa danh.');
+                console.error(error);
+                alert('Lỗi kết nối server.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Lưu Địa danh';
             }
         }
 
+        // === SỬA 3: HÀM loadLocationsData ĐÃ ĐƯỢC LÀM SẠCH (Không còn lồng nhau) ===
         async function loadLocationsData() {
             const cardBox = document.querySelector('#locations .card-box');
+            // Reset nội dung
             cardBox.innerHTML = `
-        <h4>Danh sách Địa danh</h4>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Đường dẫn Ảnh</th> <th>Tên Địa danh</th>
-                        <th>Loại</th>
-                        <th>Địa chỉ</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    `;
+                <h4>Danh sách Địa danh</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ảnh</th> 
+                                <th>Tên Địa danh</th>
+                                <th>Loại</th>
+                                <th>Địa chỉ</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            `;
             const tableBody = cardBox.querySelector('tbody');
 
             try {
-                const response = await fetch('add_diadanh.php?action=read');
-                const result = await response.json();
+                // Sửa đường dẫn: thêm ADMIN/
+                const response = await fetch('ADMIN/add_diadanh.php?action=read');
+                const result = await response.json(); // Ở đây nếu sai đường dẫn sẽ báo lỗi < (token <)
 
                 tableBody.innerHTML = '';
 
                 if (result.status === 'success') {
-                    result.data.forEach(location => {
-                        // ĐÃ SỬA: Chỉ hiển thị đường dẫn ImageDD từ CSDL
-                        const imagePathDisplay = location.ImageDD; 
+                    currentLocationList = result.data; // Lưu dữ liệu để dùng cho nút Sửa
+
+                    result.data.forEach((location, index) => {
+                        const imgTag = location.ImageDD
+                            ? `<img src="${location.ImageDD}" style="height: 50px; width: 80px; object-fit: cover;">`
+                            : 'Không có ảnh';
+
                         const row = `
-                    <tr>
-                        <td>${location.MaDD}</td>
-                        <td>${imagePathDisplay}</td> <td>${location.TenDD}</td>
-                        <td>${location.LoaiDD || 'N/A'}</td>
-                        <td>${location.DiaChiDD || 'N/A'}</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Sửa</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteLocation('${location.MaDD}', '${location.ImageDD}')"><i class="fas fa-trash"></i> Xoá</button>
-                        </td>
-                    </tr>
-                `;
+                            <tr>
+                                <td>${location.MaDD}</td>
+                                <td>${imgTag}</td> 
+                                <td><strong>${location.TenDD}</strong></td>
+                                <td>${location.LoaiDD || 'N/A'}</td>
+                                <td>${location.DiaChiDD || 'N/A'}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" onclick="openEditLocationModal(${index})">
+                                        <i class="fas fa-edit"></i> Sửa
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteLocation('${location.MaDD}', '${location.ImageDD}')">
+                                        <i class="fas fa-trash"></i> Xoá
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
                         tableBody.insertAdjacentHTML('beforeend', row);
                     });
                 } else {
-                    tableBody.innerHTML = `<tr><td colspan="6">Lỗi tải dữ liệu: ${result.message}</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center">${result.message}</td></tr>`;
                 }
             } catch (error) {
-                console.error('Lỗi kết nối Locations:', error);
-                tableBody.innerHTML = `<tr><td colspan="6">Lỗi kết nối server.</td></tr>`;
+                console.error('Lỗi Locations:', error);
+                tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Lỗi kết nối server (Kiểm tra đường dẫn API).</td></tr>`;
             }
         }
 
         async function deleteLocation(maDD, imagePath) {
-            if (!confirm(`Bạn có chắc chắn muốn xóa Địa danh ID ${maDD} không?`)) return;
-
+            if (!confirm(`Xóa Địa danh ID ${maDD}?`)) return;
             try {
                 const formData = new FormData();
                 formData.append('MaDD', maDD);
                 formData.append('ImagePath', imagePath);
 
-                const response = await fetch('add_diadanh.php?action=delete', {
-                    method: 'POST',
-                    body: formData
-                });
+                // Sửa đường dẫn
+                const response = await fetch('ADMIN/add_diadanh.php?action=delete', { method: 'POST', body: formData });
                 const result = await response.json();
 
                 if (result.status === 'success') {
@@ -450,38 +780,198 @@
                 } else {
                     alert('Lỗi: ' + result.message);
                 }
+            } catch (error) { alert('Lỗi: ' + error); }
+        }
 
+        // Hàm mở Modal Sửa
+        function openEditLocationModal(index) {
+            const data = currentLocationList[index];
+            if (!data) return;
+
+            document.getElementById('editMaDD').value = data.MaDD;
+            document.getElementById('editTenDD').value = data.TenDD;
+            document.getElementById('editLoaiDD').value = data.LoaiDD;
+            document.getElementById('editDiaChiDD').value = data.DiaChiDD;
+            document.getElementById('editMapLinkDD').value = data.MapLinkDD;
+            document.getElementById('editMoTaDD').value = data.MoTaDD;
+            document.getElementById('editImageDD').value = "";
+
+            const imgPreview = document.getElementById('previewEditImage');
+            if (data.ImageDD) {
+                imgPreview.src = data.ImageDD;
+                imgPreview.style.display = 'block';
+            } else {
+                imgPreview.style.display = 'none';
+            }
+
+            new bootstrap.Modal(document.getElementById('editLocationModal')).show();
+        }
+
+        // Hàm cập nhật
+        async function updateLocation() {
+            const form = document.getElementById('editLocationForm');
+            const submitBtn = document.getElementById('submitEditLocationBtn');
+            const formData = new FormData(form);
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Đang lưu...';
+
+            try {
+                // Sửa đường dẫn: thêm ADMIN/
+                const response = await fetch('ADMIN/add_diadanh.php?action=update', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    alert(result.message);
+                    bootstrap.Modal.getInstance(document.getElementById('editLocationModal')).hide();
+                    loadLocationsData();
+                } else {
+                    alert('Lỗi: ' + result.message);
+                }
             } catch (error) {
-                alert('Lỗi kết nối server: ' + error);
+                console.error(error);
+                alert('Lỗi khi cập nhật.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Lưu thay đổi';
             }
         }
 
+        // --- 1. Thay thế hàm showSection cũ bằng hàm này ---
         function showSection(sectionId, event) {
-            if (event) {
-                event.preventDefault();
-            }
+            if (event) event.preventDefault();
 
-            const sections = document.querySelectorAll('.section-content');
-            sections.forEach(sec => sec.classList.remove('active'));
+            // Ẩn tất cả section và xóa active ở link
+            document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => link.classList.remove('active'));
 
-            const navLinks = document.querySelectorAll('.sidebar .nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
+            // Hiển thị section được chọn
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.add('active');
 
-            document.getElementById(sectionId).classList.add('active');
+            if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+            // Routing: Gọi hàm load dữ liệu tương ứng
+            if (sectionId === 'dashboard') loadDashboardData();
+            else if (sectionId === 'users') loadUsersData();
+            else if (sectionId === 'contacts') loadContactsData();
+            else if (sectionId === 'locations') loadLocationsData();
+            else if (sectionId === 'resort') loadResortsData(); // <--- MỚI THÊM DÒNG NÀY
+        }
 
-            if (sectionId === 'dashboard') {
-                loadDashboardData();
-            } else if (sectionId === 'users') {
-                loadUsersData();
-            } else if (sectionId === 'contacts') {
-                loadContactsData();
-            } else if (sectionId === 'locations') {
-                loadLocationsData();
-            }
+        // --- 2. Thêm các hàm xử lý Nghỉ Dưỡng vào cuối script ---
+
+        let currentResortList = []; // Biến lưu danh sách tạm
+
+        async function loadResortsData() {
+            const cardBox = document.querySelector('#resort .card-box');
+            cardBox.innerHTML = `
+                <h4>Danh sách Nghỉ Dưỡng</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>ID</th> <th>Ảnh</th> <th>Tên KND</th> <th>Loại</th> <th>Địa chỉ</th> <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>`;
+            const tableBody = cardBox.querySelector('tbody');
+
+            try {
+                // CHÚ Ý: Đường dẫn có ADMIN/
+                const response = await fetch('ADMIN/add_nghiduong.php?action=read');
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    currentResortList = result.data;
+                    tableBody.innerHTML = '';
+                    result.data.forEach((item, index) => {
+                        const imgTag = item.ImageKND ? `<img src="${item.ImageKND}" style="height: 50px; width: 80px; object-fit: cover;">` : '';
+                        const row = `
+                            <tr>
+                                <td>${item.MaKND}</td>
+                                <td>${imgTag}</td>
+                                <td><strong>${item.TenKND}</strong></td>
+                                <td>${item.LoaiKHD || 'N/A'}</td>
+                                <td>${item.DiaChiKND || ''}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" onclick="openEditResortModal(${index})"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteResort('${item.MaKND}', '${item.ImageKND}')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>`;
+                        tableBody.insertAdjacentHTML('beforeend', row);
+                    });
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="6">${result.message}</td></tr>`;
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        async function addResort() {
+            const form = document.getElementById('addResortForm');
+            const btn = document.getElementById('submitResortBtn');
+            btn.disabled = true; btn.textContent = 'Đang lưu...';
+
+            try {
+                const res = await fetch('ADMIN/add_nghiduong.php?action=add', { method: 'POST', body: new FormData(form) });
+                const json = await res.json();
+                alert(json.message);
+                if (json.status === 'success') {
+                    form.reset();
+                    bootstrap.Modal.getInstance(document.getElementById('addResortModal')).hide();
+                    loadResortsData();
+                }
+            } catch (e) { alert('Lỗi kết nối server'); }
+            finally { btn.disabled = false; btn.textContent = 'Lưu lại'; }
+        }
+
+        function openEditResortModal(index) {
+            const data = currentResortList[index];
+            if (!data) return;
+
+            document.getElementById('editMaKND').value = data.MaKND;
+            document.getElementById('editTenKND').value = data.TenKND;
+            document.getElementById('editLoaiKHD').value = data.LoaiKHD;
+            document.getElementById('editDiaChiKND').value = data.DiaChiKND;
+            document.getElementById('editMapLinkKND').value = data.MapLinkKND;
+            document.getElementById('editMoTaKND').value = data.MoTaKND;
+            document.getElementById('editImageKND').value = '';
+
+            const imgPre = document.getElementById('previewEditResortImg');
+            if (data.ImageKND) { imgPre.src = data.ImageKND; imgPre.style.display = 'block'; }
+            else imgPre.style.display = 'none';
+
+            new bootstrap.Modal(document.getElementById('editResortModal')).show();
+        }
+
+        async function updateResort() {
+            const form = document.getElementById('editResortForm');
+            const btn = document.getElementById('submitEditResortBtn');
+            btn.disabled = true; btn.textContent = 'Đang lưu...';
+
+            try {
+                const res = await fetch('ADMIN/add_nghiduong.php?action=update', { method: 'POST', body: new FormData(form) });
+                const json = await res.json();
+                alert(json.message);
+                if (json.status === 'success') {
+                    bootstrap.Modal.getInstance(document.getElementById('editResortModal')).hide();
+                    loadResortsData();
+                }
+            } catch (e) { alert('Lỗi: ' + e); }
+            finally { btn.disabled = false; btn.textContent = 'Lưu thay đổi'; }
+        }
+
+        async function deleteResort(id, imgPath) {
+            if (!confirm('Xóa Khu nghỉ dưỡng ID ' + id + '?')) return;
+            try {
+                const fd = new FormData(); fd.append('MaKND', id); fd.append('ImagePath', imgPath);
+                const res = await fetch('ADMIN/add_nghiduong.php?action=delete', { method: 'POST', body: fd });
+                const json = await res.json();
+                alert(json.message);
+                if (json.status === 'success') loadResortsData();
+            } catch (e) { alert('Lỗi: ' + e); }
         }
 
         window.onload = loadDashboardData; 

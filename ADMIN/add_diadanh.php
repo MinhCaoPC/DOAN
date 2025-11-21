@@ -127,6 +127,94 @@ try {
             $response = ['status' => 'error', 'message' => 'Lỗi CSDL khi chèn Địa danh: ' . $conn->error];
         }
     }
+
+    // ==========================================
+    // UPDATE: Sửa Địa danh
+    // ==========================================
+    else if ($action == 'update' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+        
+        $maDD      = $_POST['MaDD'] ?? '';
+        $tenDD     = $_POST['tenDD'] ?? '';
+        $loaiDD    = $_POST['loaiDD'] ?? '';
+        $diaChiDD  = $_POST['diaChiDD'] ?? '';
+        $mapLinkDD = $_POST['mapLinkDD'] ?? '';
+        $moTaDD    = $_POST['moTaDD'] ?? '';
+
+        if (empty($maDD) || empty($tenDD) || empty($loaiDD)) {
+            $response = ['status' => 'error', 'message' => 'Thiếu thông tin bắt buộc (Mã, Tên, Loại).'];
+            goto end_script;
+        }
+
+        // Kiểm tra xem có upload ảnh mới không
+        $has_new_image = false;
+        $image_link = '';
+        $target_file = '';
+
+        if (isset($_FILES['imageDD']) && $_FILES['imageDD']['error'] == UPLOAD_ERR_OK) {
+            $has_new_image = true;
+            // --- Xử lý upload ảnh mới (Giống phần ADD) ---
+            $file_info = $_FILES['imageDD'];
+            $file_extension = pathinfo($file_info['name'], PATHINFO_EXTENSION);
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            
+            if (!in_array(strtolower($file_extension), $allowed_extensions)) {
+                $response = ['status' => 'error', 'message' => 'Chỉ chấp nhận file ảnh: JPG, PNG, GIF, WEBP'];
+                goto end_script;
+            }
+            
+            $new_file_name = uniqid('dd_', true) . '.' . strtolower($file_extension);
+            $target_file = $fs_upload_dir . $new_file_name;
+
+            if (!is_dir($fs_upload_dir)) @mkdir($fs_upload_dir, 0755, true);
+
+            if (move_uploaded_file($file_info['tmp_name'], $target_file)) {
+                $image_link = $db_image_prefix . $new_file_name;
+            } else {
+                $response = ['status' => 'error', 'message' => 'Lỗi khi di chuyển file ảnh mới.'];
+                goto end_script;
+            }
+        }
+
+        // --- Cập nhật CSDL ---
+        if ($has_new_image) {
+            // 1. Lấy đường dẫn ảnh CŨ để xóa
+            $stmt_get = $conn->prepare("SELECT ImageDD FROM DIADANH WHERE MaDD = ?");
+            $stmt_get->bind_param("i", $maDD);
+            $stmt_get->execute();
+            $result_get = $stmt_get->get_result();
+            $old_image_path = '';
+            if ($row = $result_get->fetch_assoc()) {
+                $old_image_path = $row['ImageDD'];
+            }
+            $stmt_get->close();
+
+            // 2. Cập nhật thông tin và Ảnh Mới
+            $stmt = $conn->prepare("UPDATE DIADANH SET TenDD=?, DiaChiDD=?, MapLinkDD=?, MoTaDD=?, LoaiDD=?, ImageDD=? WHERE MaDD=?");
+            $stmt->bind_param("ssssssi", $tenDD, $diaChiDD, $mapLinkDD, $moTaDD, $loaiDD, $image_link, $maDD);
+            
+            if ($stmt->execute()) {
+                // Xóa ảnh cũ nếu update thành công
+                if (!empty($old_image_path) && strpos($old_image_path, $db_image_prefix) === 0) {
+                    $file_delete = $fs_upload_dir . basename($old_image_path);
+                    if (file_exists($file_delete)) @unlink($file_delete);
+                }
+                $response = ['status' => 'success', 'message' => 'Cập nhật Địa danh và Ảnh thành công.'];
+            } else {
+                $response = ['status' => 'error', 'message' => 'Lỗi CSDL: ' . $conn->error];
+            }
+
+        } else {
+            // Không có ảnh mới, chỉ update thông tin
+            $stmt = $conn->prepare("UPDATE DIADANH SET TenDD=?, DiaChiDD=?, MapLinkDD=?, MoTaDD=?, LoaiDD=? WHERE MaDD=?");
+            $stmt->bind_param("sssssi", $tenDD, $diaChiDD, $mapLinkDD, $moTaDD, $loaiDD, $maDD);
+            
+            if ($stmt->execute()) {
+                $response = ['status' => 'success', 'message' => 'Cập nhật thông tin thành công (giữ nguyên ảnh cũ).'];
+            } else {
+                $response = ['status' => 'error', 'message' => 'Lỗi CSDL: ' . $conn->error];
+            }
+        }
+    }
     
     // ==========================================
     // DELETE: Xóa Địa danh

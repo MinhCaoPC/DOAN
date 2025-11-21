@@ -3,169 +3,95 @@ session_start();
 header('Content-Type: application/json; charset=utf-8');
 require 'config.php';
 
-
-// 🧑‍💻 Bắt buộc phải đăng nhập
-if (!isset($_SESSION['MaSoTK'])) {
-    echo json_encode([
-        'success'   => false,
-        'needLogin' => true,
-        'message'   => 'Bạn cần đăng nhập.'
-    ]);
-    exit;
+// Hàm ghi log để kiểm tra dữ liệu (DEBUG)
+function logDebug($msg) {
+    file_put_contents('debug_log.txt', date('[Y-m-d H:i:s] ') . $msg . PHP_EOL, FILE_APPEND);
 }
 
+// 1. Kiểm tra đăng nhập
+if (!isset($_SESSION['MaSoTK'])) {
+    echo json_encode(['success' => false, 'message' => 'Bạn cần đăng nhập.']);
+    exit;
+}
 
 $maSoTK = $_SESSION['MaSoTK'];
 
-
-// Lấy body JSON
+// 2. Nhận dữ liệu JSON
 $raw  = file_get_contents('php://input');
 $data = json_decode($raw, true);
 
+// Ghi log dữ liệu nhận được để xem lỗi nằm ở đâu
+logDebug("User: $maSoTK | Raw Input: " . $raw);
 
-$action = $data['action'] ?? 'add';
+$action = $data['action'] ?? '';
 $loai   = $data['loai']   ?? '';
 $id     = (int)($data['id'] ?? 0);
 
-
-if (!$loai || !$id) {
+// 3. Kiểm tra dữ liệu đầu vào kỹ hơn
+if (empty($action) || empty($loai) || $id <= 0) {
+    logDebug("ERROR: Thiếu tham số. Action: $action, Loai: $loai, ID: $id");
     echo json_encode([
         'success' => false,
-        'message' => 'Thiếu tham số.'
+        'message' => 'Thiếu tham số hoặc dữ liệu không hợp lệ.',
+        'debug_info' => "Received: action=$action, loai=$loai, id=$id" // Trả về để bạn thấy trên trình duyệt
     ]);
     exit;
 }
 
+try {
+    // Thiết lập charset cho kết nối để tránh lỗi font/collation ở tầng PHP
+    $conn->set_charset("utf8mb4");
 
-// Xác định cột ID tương ứng theo loại
-$col = null;
-switch ($loai) {
-    case 'DIADANH':
-        $col = 'MaDiaDanh';
-        break;
-    case 'MONAN':
-        $col = 'MaMonAn';
-        break;
-    case 'KND':
-        $col = 'MaKND';
-        break;
-    case 'TOUR':
-        $col = 'MaTour';
-        break;
-    default:
+    if ($action === 'add') {
+        $sql = "CALL AddFavoriteItem(?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $maSoTK, $loai, $id);
+        
+        if (!$stmt->execute()) { throw new Exception($stmt->error); }
+
+        $res = $stmt->get_result();
+        $row = $res->fetch_assoc();
+        $resultCode = $row['result'] ?? 'ERROR';
+        $stmt->close();
+        while($conn->more_results()) { $conn->next_result(); }
+
+        // Phản hồi
+        $msgs = [
+            'SUCCESS' => 'Đã thêm vào danh sách yêu thích.',
+            'LIMIT' => 'Đã đạt giới hạn 99 mục.',
+            'EXISTS' => 'Mục này đã có trong danh sách.',
+            'INVALID_TYPE' => 'Loại mục không hợp lệ.'
+        ];
+        
         echo json_encode([
-            'success' => false,
-            'message' => 'Loại không hợp lệ.'
+            'success' => ($resultCode === 'SUCCESS'),
+            'message' => $msgs[$resultCode] ?? 'Lỗi hệ thống.'
         ]);
-        exit;
-}
 
+    } elseif ($action === 'remove') {
+        $sql = "CALL RemoveFavoriteItem(?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $maSoTK, $loai, $id);
+        
+        if (!$stmt->execute()) { throw new Exception($stmt->error); }
 
-if ($action === 'add') {
+        $res = $stmt->get_result();
+        $row = $res->fetch_assoc();
+        $affected = (int)($row['affected_rows'] ?? 0);
+        $stmt->close();
+        while($conn->more_results()) { $conn->next_result(); }
 
-
-    // 🔹 Check giới hạn 99 mục yêu thích / tài khoản
-    $check = $conn->prepare("SELECT COUNT(*) AS total FROM MUCYEUTHICH WHERE MaSoTK = ?");
-    $check->bind_param("s", $maSoTK);
-    $check->execute();
-    $rs  = $check->get_result();
-    $row = $rs->fetch_assoc();
-    $check->close();
-
-
-    if ((int)$row['total'] >= 99) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Bạn đã đạt tối đa 99 mục yêu thích. Vui lòng xóa bớt trước khi thêm mới.'
-        ]);
-        exit;
-    }
-
-
-    // 🔹 Kiểm tra đã tồn tại chưa (tự xử lý, không dùng ON DUPLICATE KEY)
-    $checkEx = $conn->prepare("
-        SELECT MaYeuThich 
-        FROM MUCYEUTHICH 
-        WHERE MaSoTK = ? AND Loai = ? AND $col = ?
-        LIMIT 1
-    ");
-    $checkEx->bind_param("ssi", $maSoTK, $loai, $id);
-    $checkEx->execute();
-    $rsEx = $checkEx->get_result();
-
-
-    if ($rsEx->num_rows > 0) {
-        // Đã tồn tại
-        echo json_encode([
-            'success' => false,
-            'reason'  => 'exists',
-            'message' => 'Mục này đã có trong danh sách yêu thích.'
-        ]);
-        exit;
-    }
-    $checkEx->close();
-
-
-    // 🔹 Thêm mới
-    $sql = "INSERT INTO MUCYEUTHICH (MaSoTK, Loai, $col)
-            VALUES (?, ?, ?)";
-
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssi", $maSoTK, $loai, $id);
-
-
-    if ($stmt->execute()) {
-        echo json_encode([
-            'success' => true,
-            'message' => 'Đã thêm vào danh sách yêu thích.'
-        ]);
+        if ($affected > 0) {
+            echo json_encode(['success' => true, 'message' => 'Đã xóa thành công.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Không tìm thấy mục cần xóa.']);
+        }
     } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Lỗi SQL: ' . $stmt->error
-        ]);
-    }
-    $stmt->close();
-
-
-} elseif ($action === 'remove') {
-
-
-    // 🔹 Xóa mục yêu thích
-    $sql = "DELETE FROM MUCYEUTHICH 
-            WHERE MaSoTK = ? AND Loai = ? AND $col = ?";
-
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssi", $maSoTK, $loai, $id);
-    $stmt->execute();
-
-
-    if ($stmt->affected_rows > 0) {
-        echo json_encode([
-            'success' => true,
-            'message' => 'Đã xóa khỏi danh sách yêu thích.'
-        ]);
-    } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Không tìm thấy mục cần xóa (có thể đã bị xóa trước đó).'
-        ]);
+        echo json_encode(['success' => false, 'message' => 'Action không hợp lệ.']);
     }
 
-
-    $stmt->close();
-
-
-} else {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Action không hợp lệ.'
-    ]);
+} catch (Exception $e) {
+    logDebug("SQL Error: " . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Lỗi SQL: ' . $e->getMessage()]);
 }
-
-
-
-
-
+?>

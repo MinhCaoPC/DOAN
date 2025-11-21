@@ -229,29 +229,44 @@ function getLinkForItem(item) {
     }
   }
 
-  // Load danh sách yêu thích từ server
-  async function loadFavorites() {
+
+async function loadFavorites() {
     try {
-      const res = await fetch("YTList.php", { cache: "no-store" });
-      const data = await res.json();
+        const res = await fetch("YTList.php", { cache: "no-store" });
+        if (!res.ok) {
 
-      if (!data.loggedIn) {
-        alert("Bạn cần đăng nhập để xem mục yêu thích.");
-        window.location.href = "dangNhap.html";
-        return;
-      }
+            const errorBody = await res.json().catch(() => ({ 
+                error: `HTTP Error: ${res.status} ${res.statusText}. Không thể kết nối CSDL.` 
+            }));
+            
+            throw new Error(errorBody.error || `Lỗi không xác định từ server: ${res.status}`);
+        }
 
-      isLoggedIn = true;
-      allFavorites = data.items || [];
-      // Tải lại theo filter đang active
-      const activeFilter = document.querySelector("#filter-list li.active")?.dataset.filter || "ALL";
-      applyFilter(activeFilter);
+        const data = await res.json();
+
+        if (!data.loggedIn) {
+            alert("Bạn cần đăng nhập để xem mục yêu thích.");
+            window.location.href = "dangNhap.html";
+            return;
+        }
+
+        isLoggedIn = true;
+        allFavorites = data.items || [];
+        const activeFilter = document.querySelector("#filter-list li.active")?.dataset.filter || "ALL";
+        applyFilter(activeFilter);
+        
     } catch (err) {
-      console.error(err);
-      const container = document.querySelector(".favorites-cards");
-      container.innerHTML = `<div class="alert alert-danger">Không tải được danh sách yêu thích.</div>`;
+        console.error("Lỗi khi tải mục yêu thích:", err.message);
+        
+        const container = document.querySelector(".favorites-cards");
+        container.innerHTML = `
+            <div class="alert alert-danger">
+                Không tải được danh sách yêu thích. <br>
+                Chi tiết lỗi: **${err.message}**
+            </div>
+        `;
     }
-  }
+}
 
   document.addEventListener("DOMContentLoaded", () => {
     const loginSection = document.getElementById('login-section');

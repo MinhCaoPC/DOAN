@@ -1,64 +1,86 @@
 <?php
 session_start();
+// Thiết lập header JSON để đảm bảo trình duyệt biết nội dung là JSON
 header('Content-Type: application/json; charset=utf-8');
-require 'config.php';
 
+// Báo cáo tất cả lỗi PHP (chỉ nên dùng khi debug)
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
+require 'config.php'; // Đảm bảo file config.php kết nối CSDL đúng
+
+// 1. Xử lý trường hợp chưa đăng nhập
 if (!isset($_SESSION['MaSoTK'])) {
     echo json_encode([
         'loggedIn' => false,
-        'items' => []
+        'items' => [],
+        'error' => 'Người dùng chưa đăng nhập.'
     ]);
     exit;
 }
 
 $maSoTK = $_SESSION['MaSoTK'];
 
-$sql = "
-   SELECT 'DIADANH' AS loai, m.MaYeuThich, d.MaDD AS id,
-          d.TenDD AS ten, d.MoTaDD AS moTa, d.ImageDD AS anh
-   FROM MUCYEUTHICH m
-   JOIN DIADANH d ON m.MaDiaDanh = d.MaDD
-   WHERE m.MaSoTK = ? AND m.Loai = 'DIADANH'
+// 2. Chuẩn bị lệnh gọi Stored Procedure
+$sql = "CALL GetFavoriteItems(?)";
 
-   UNION ALL
+try {
+    // Sử dụng prepared statement để truyền tham số
+    if (!($stmt = $conn->prepare($sql))) {
+        // Lỗi chuẩn bị statement (thường do Stored Procedure không tồn tại)
+        throw new Exception("Lỗi chuẩn bị truy vấn: " . $conn->error);
+    }
+    
+    // Bind tham số
+    $stmt->bind_param("s", $maSoTK);
 
-   SELECT 'MONAN' AS loai, m.MaYeuThich, a.MaMonAn AS id,
-          a.TenMonAn AS ten, a.MoTaMonAn AS moTa, a.ImageLinkMonAn AS anh
-   FROM MUCYEUTHICH m
-   JOIN MONAN a ON m.MaMonAn = a.MaMonAn
-   WHERE m.MaSoTK = ? AND m.Loai = 'MONAN'
+    // Thực thi
+    if (!$stmt->execute()) {
+        // Lỗi thực thi
+        throw new Exception("Lỗi thực thi Stored Procedure: " . $stmt->error);
+    }
 
-   UNION ALL
+    // Lấy kết quả
+    $result = $stmt->get_result();
+    
+    // Xử lý kết quả
+    $items = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $items[] = $row;
+        }
+        $result->free(); // Giải phóng bộ nhớ kết quả
+    }
 
-   SELECT 'KND' AS loai, m.MaYeuThich, k.MaKND AS id,
-          k.TenKND AS ten, k.MoTaKND AS moTa, k.ImageKND AS anh
-   FROM MUCYEUTHICH m
-   JOIN KHUNGHIDUONG k ON m.MaKND = k.MaKND
-   WHERE m.MaSoTK = ? AND m.Loai = 'KND'
+    // Đóng statement
+    $stmt->close();
+    
+    // QUAN TRỌNG: Trong mysqli, sau khi gọi Stored Procedure,
+    // cần gọi $conn->next_result() để chuẩn bị cho truy vấn tiếp theo (nếu có)
+    // hoặc chỉ đơn giản là dọn dẹp bộ đệm.
+    while ($conn->next_result()) {
+        if ($res = $conn->store_result()) {
+            $res->free();
+        }
+    }
+    
+    // 3. Trả về JSON thành công
+    echo json_encode([
+        'loggedIn' => true,
+        'items' => $items
+    ]);
 
-   UNION ALL
-
-   SELECT 'TOUR' AS loai, m.MaYeuThich, t.MaTour AS id,
-          t.TenTour AS ten, t.MoTaTour AS moTa, t.ImageTourMain AS anh  -- <-- ĐÃ SỬA Ở ĐÂY
-   FROM MUCYEUTHICH m
-   JOIN TOUR t ON m.MaTour = t.MaTour
-   WHERE m.MaSoTK = ? AND m.Loai = 'TOUR'
-";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssss", $maSoTK, $maSoTK, $maSoTK, $maSoTK);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$items = [];
-while ($row = $result->fetch_assoc()) {
-    $items[] = $row;
+} catch (Exception $e) {
+    // 4. Bắt lỗi và trả về JSON lỗi
+    http_response_code(500); // Thiết lập mã lỗi HTTP
+    echo json_encode([
+        'loggedIn' => true, // Giả định là đã đăng nhập, nhưng lỗi ở truy vấn
+        'items' => [],
+        'error' => 'Lỗi CSDL khi lấy yêu thích: ' . $e->getMessage()
+    ]);
+    
+    // Ghi log lỗi để debug
+    error_log("YTList.php Error: " . $e->getMessage()); 
 }
-
-echo json_encode([
-    'loggedIn' => true,
-    'items' => $items
-]);
-
-
-
+// Chú ý: Không đóng $conn ở đây nếu $conn là global và được dùng ở nơi khác
+?>

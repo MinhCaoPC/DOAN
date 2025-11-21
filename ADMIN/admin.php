@@ -1,141 +1,227 @@
 <?php
+// ADMIN/admin.php
 ob_start();
-require_once 'conn.php';
-// check_admin_login(); // Giữ nguyên hàm kiểm tra đăng nhập
+require_once 'conn.php'; 
+
+header('Content-Type: application/json');
 
 $action = $_GET['action'] ?? '';
 $response = ['status' => 'error', 'message' => 'Hành động không hợp lệ.'];
 
-// Thiết lập hàm xử lý lỗi CSDL từ Trigger
-function handle_trigger_error($conn_error_message) {
-    // Phân tích mã lỗi do Trigger định nghĩa (APP:CODE=X;MSG=Y)
-    if (strpos($conn_error_message, 'APP:CODE=') !== false) {
-        if (strpos($conn_error_message, 'EMAIL_EXISTS') !== false) {
-            return ['status' => 'error', 'message' => 'Lỗi: Email đã được sử dụng.'];
-        } elseif (strpos($conn_error_message, 'USERNAME_EXISTS') !== false) {
-            return ['status' => 'error', 'message' => 'Lỗi: Tên tài khoản đã tồn tại.'];
-        } elseif (strpos($conn_error_message, 'EMAIL_EMPTY') !== false) {
-            return ['status' => 'error', 'message' => 'Lỗi: Email không được để trống.'];
-        } elseif (strpos($conn_error_message, 'USERNAME_EMPTY') !== false) {
-            return ['status' => 'error', 'message' => 'Lỗi: Tên tài khoản không được để trống.'];
-        }
+// --- 1. HÀM TẠO MÃ KH (PHP tự tính cho trường hợp Update từ AD -> KH) ---
+function taoMaKH($conn) {
+    $sql = "SELECT MaSoTK FROM TAIKHOAN WHERE LoaiTaiKhoan = 'KH' ORDER BY MaSoTK DESC LIMIT 1";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        $lastId = $result->fetch_assoc()['MaSoTK']; 
+        $number = intval(substr($lastId, 2)); 
+        return 'KH' . str_pad($number + 1, 8, '0', STR_PAD_LEFT);
     }
-    // Lỗi không phải do Trigger định nghĩa (lỗi MySQL chung)
-    return ['status' => 'error', 'message' => 'Lỗi xử lý CSDL: ' . $conn_error_message];
+    return 'KH00000001';
+}
+
+// --- 2. HÀM TẠO MÃ AD ---
+function taoMaAD($conn) {
+    $sql = "SELECT MaSoTK FROM TAIKHOAN WHERE LoaiTaiKhoan = 'AD' ORDER BY MaSoTK DESC LIMIT 1";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        $lastId = $result->fetch_assoc()['MaSoTK']; 
+        $number = intval(substr($lastId, 2)); 
+        return 'AD' . str_pad($number + 1, 8, '0', STR_PAD_LEFT);
+    }
+    return 'AD00000001';
 }
 
 try {
-
     // ==========================================
-    // CREATE: Thêm tài khoản Khách hàng
-    // **ĐÃ CẬP NHẬT để tận dụng TRIGGER**
+    // 1. READ: Lấy TOÀN BỘ danh sách
     // ==========================================
-    if ($action == 'add' && $_SERVER['REQUEST_METHOD'] == 'POST') {
-        $username = $_POST['username'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
-        $fullname = $_POST['fullname'] ?? '';
-        
-        // Mã hóa mật khẩu
-        $hashed_password = hash_password($password);
-
-        // Chèn vào bảng TAIKHOAN. Trigger sẽ tự động sinh MaSoTK ('KH...') và kiểm tra trùng lặp.
-        // Cột MaSoTK được SET NULL để Trigger tự sinh.
-        $stmt_tk = $conn->prepare("INSERT INTO TAIKHOAN (MaSoTK, MatKhau, TenTaiKhoan, Email, LoaiTaiKhoan) VALUES (NULL, ?, ?, ?, 'KH')");
-        // Tham số: MatKhau, TenTaiKhoan, Email
-        $stmt_tk->bind_param("sss", $hashed_password, $username, $email);
-        
-        // Thực thi lệnh. Nếu có lỗi từ TRIGGER, $stmt_tk->execute() sẽ thất bại.
-        if (!$stmt_tk->execute()) {
-            // Xử lý lỗi từ Trigger
-            $response = handle_trigger_error($conn->error);
-        } else {
-            // Lấy MaSoTK vừa được sinh ra (MaSoTK mới đã có trong CSDL)
-            $new_MaSoTK = $conn->insert_id; // Lưu ý: Lấy ID từ cột MaSoTK VARCHAR là không chính xác, ta phải query lại.
-
-            // *Cách lấy MaSoTK chính xác nhất sau khi INSERT bởi Trigger*
-            // Giả định Email là duy nhất, ta dùng Email để truy vấn lại Mã số TK.
-            $stmt_get_id = $conn->prepare("SELECT MaSoTK FROM TAIKHOAN WHERE Email = ?");
-            $stmt_get_id->bind_param("s", $email);
-            $stmt_get_id->execute();
-            $result_id = $stmt_get_id->get_result();
-            $new_MaSoTK = $result_id->fetch_assoc()['MaSoTK'];
-            
-            // Chèn vào bảng KHACHHANG
-            $stmt_kh = $conn->prepare("INSERT INTO KHACHHANG (HoVaTen, MaSoTK) VALUES (?, ?)");
-            $stmt_kh->bind_param("ss", $fullname, $new_MaSoTK);
-            $stmt_kh->execute();
-
-            $response = ['status' => 'success', 'message' => 'Thêm tài khoản khách hàng thành công. Mã số: ' . $new_MaSoTK];
-        }
-    }
-    
-    // ==========================================
-    // READ, UPDATE, DELETE (Giữ nguyên logic cũ, hoặc tối ưu nếu cần)
-    // ==========================================
-    // ... (Thêm logic cho read, update, delete tương tự như lần trước) ...
-    // READ
-    else if ($action == 'read') {
-        $sql = "SELECT T.MaSoTK, T.TenTaiKhoan, T.Email, K.HoVaTen, K.SDT 
+    if ($action == 'read') {
+        $sql = "SELECT T.MaSoTK, T.TenTaiKhoan, T.Email, T.LoaiTaiKhoan, K.HoVaTen, K.SDT 
                 FROM TAIKHOAN T 
                 LEFT JOIN KHACHHANG K ON T.MaSoTK = K.MaSoTK
-                WHERE T.LoaiTaiKhoan = 'KH'";
+                ORDER BY T.LoaiTaiKhoan ASC, T.MaSoTK DESC"; 
+        
         $result = $conn->query($sql);
-        $users = [];
-        while ($row = $result->fetch_assoc()) {
-            $users[] = $row;
+        $data = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) $data[] = $row;
+            $response = ['status' => 'success', 'data' => $data];
+        } else {
+             $response = ['status' => 'error', 'message' => 'Lỗi DB: ' . $conn->error];
         }
-        $response = ['status' => 'success', 'data' => $users];
     }
-    // DELETE
+
+    // ==========================================
+    // 2. ADD: Thêm Tài khoản
+    // ==========================================
+    else if ($action == 'add' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+        $tenTK = $_POST['TenTaiKhoan'] ?? '';
+        $matKhau = $_POST['MatKhau'] ?? '';
+        $email = $_POST['Email'] ?? '';
+        $hoTen = $_POST['HoVaTen'] ?? ''; 
+        $sdt = $_POST['SDT'] ?? '';
+
+        if (empty($tenTK) || empty($matKhau) || empty($email)) {
+            $response = ['status' => 'error', 'message' => 'Thiếu thông tin bắt buộc.'];
+            goto end_script;
+        }
+
+        $check = $conn->prepare("SELECT MaSoTK FROM TAIKHOAN WHERE TenTaiKhoan = ? OR Email = ?");
+        $check->bind_param("ss", $tenTK, $email);
+        $check->execute();
+        if ($check->get_result()->num_rows > 0) {
+            $response = ['status' => 'error', 'message' => 'Tên đăng nhập hoặc Email đã tồn tại.'];
+            goto end_script;
+        }
+
+        $passHash = md5($matKhau); 
+        $loaiTK = 'KH'; 
+
+        $conn->begin_transaction();
+        try {
+            // Insert TAIKHOAN (Để Trigger tự sinh MaSoTK)
+            $stmt1 = $conn->prepare("INSERT INTO TAIKHOAN (TenTaiKhoan, MatKhau, Email, LoaiTaiKhoan) VALUES (?, ?, ?, ?)");
+            $stmt1->bind_param("ssss", $tenTK, $passHash, $email, $loaiTK);
+            
+            if (!$stmt1->execute()) throw new Exception($stmt1->error);
+
+            // Lấy lại MaSoTK vừa sinh
+            $stmtGetID = $conn->prepare("SELECT MaSoTK FROM TAIKHOAN WHERE TenTaiKhoan = ?");
+            $stmtGetID->bind_param("s", $tenTK);
+            $stmtGetID->execute();
+            $newID = $stmtGetID->get_result()->fetch_assoc()['MaSoTK'];
+
+            // Insert KHACHHANG
+            $stmt2 = $conn->prepare("INSERT INTO KHACHHANG (MaSoTK, HoVaTen, SDT) VALUES (?, ?, ?)");
+            $stmt2->bind_param("sss", $newID, $hoTen, $sdt);
+            if (!$stmt2->execute()) throw new Exception("Lỗi thêm chi tiết: " . $stmt2->error);
+
+            $conn->commit();
+            $response = ['status' => 'success', 'message' => "Đã thêm tài khoản $newID."];
+        } catch (Exception $ex) {
+            $conn->rollback();
+            $msg = $ex->getMessage();
+            if (strpos($msg, 'EMAIL_EXISTS') !== false) $msg = "Email đã tồn tại.";
+            if (strpos($msg, 'USERNAME_EXISTS') !== false) $msg = "Tên đăng nhập đã tồn tại.";
+            $response = ['status' => 'error', 'message' => $msg];
+        }
+    }
+
+    // ==========================================
+    // 3. UPDATE: Sửa & Phân quyền (2 CHIỀU)
+    // ==========================================
+    else if ($action == 'update' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+        $maSoTK  = $_POST['MaSoTK'] ?? '';
+        $email   = $_POST['Email'] ?? '';
+        $hoTen   = $_POST['HoVaTen'] ?? ''; 
+        $sdt     = $_POST['SDT'] ?? '';
+        $matKhau = $_POST['MatKhau'] ?? '';
+        $loaiTK_Moi = $_POST['LoaiTaiKhoan'] ?? 'KH'; 
+
+        if (empty($maSoTK) || empty($email)) {
+            $response = ['status' => 'error', 'message' => 'Thiếu Mã TK hoặc Email.'];
+            goto end_script;
+        }
+
+        $conn->begin_transaction();
+        try {
+            $changeID = false;
+            $newMaSoTK = $maSoTK; // Mặc định giữ nguyên
+            $msg = "Cập nhật thành công.";
+
+            // --- LOGIC ĐỔI MÃ 2 CHIỀU ---
+            // 1. Nếu đang KH -> chuyển sang AD
+            if (strpos($maSoTK, 'KH') === 0 && $loaiTK_Moi == 'AD') {
+                $changeID = true;
+                $newMaSoTK = taoMaAD($conn); 
+                $msg = "Đã nâng cấp lên Admin ($newMaSoTK).";
+            }
+            // 2. Nếu đang AD -> chuyển về KH
+            else if (strpos($maSoTK, 'AD') === 0 && $loaiTK_Moi == 'KH') {
+                $changeID = true;
+                $newMaSoTK = taoMaKH($conn); 
+                $msg = "Đã chuyển về Khách hàng ($newMaSoTK).";
+            }
+
+            // 1. Update TAIKHOAN
+            // Xây dựng câu SQL dựa trên việc có đổi ID và có đổi Pass không
+            $sqlSet = "Email=?";
+            $params = [$email];
+            $types = "s";
+
+            if (!empty($matKhau)) { // Có đổi pass
+                $sqlSet .= ", MatKhau=?";
+                $params[] = md5($matKhau);
+                $types .= "s";
+            }
+
+            if ($changeID) { // Có đổi quyền & đổi mã
+                $sqlSet .= ", LoaiTaiKhoan=?, MaSoTK=?";
+                $params[] = $loaiTK_Moi;
+                $params[] = $newMaSoTK;
+                $types .= "ss";
+            }
+
+            // WHERE MaSoTK cũ
+            $sql = "UPDATE TAIKHOAN SET $sqlSet WHERE MaSoTK=?";
+            $params[] = $maSoTK;
+            $types .= "s";
+
+            $stmt1 = $conn->prepare($sql);
+            $stmt1->bind_param($types, ...$params);
+
+            if (!$stmt1->execute()) throw new Exception("Lỗi update Tài khoản: " . $stmt1->error);
+
+            // 2. Update KHACHHANG
+            // Do có ON UPDATE CASCADE, ID bên KHACHHANG đã tự đổi theo $newMaSoTK
+            // Ta cần đảm bảo dữ liệu KHACHHANG tồn tại (đặc biệt khi từ AD -> KH, có thể AD chưa có row trong KHACHHANG)
+            
+            $checkKH = $conn->query("SELECT MaSoTK FROM KHACHHANG WHERE MaSoTK = '$newMaSoTK'");
+            
+            if ($checkKH->num_rows > 0) {
+                // Đã có row -> Update
+                $stmt2 = $conn->prepare("UPDATE KHACHHANG SET HoVaTen=?, SDT=? WHERE MaSoTK=?");
+                $stmt2->bind_param("sss", $hoTen, $sdt, $newMaSoTK);
+                $stmt2->execute();
+            } else {
+                // Chưa có row -> Insert mới
+                $stmt2 = $conn->prepare("INSERT INTO KHACHHANG (MaSoTK, HoVaTen, SDT) VALUES (?, ?, ?)");
+                $stmt2->bind_param("sss", $newMaSoTK, $hoTen, $sdt);
+                $stmt2->execute();
+            }
+
+            $conn->commit();
+            $response = ['status' => 'success', 'message' => $msg];
+
+        } catch (Exception $ex) {
+            $conn->rollback();
+            $response = ['status' => 'error', 'message' => $ex->getMessage()];
+        }
+    }
+
+    // ==========================================
+    // 4. DELETE
+    // ==========================================
     else if ($action == 'delete' && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $maSoTK = $_POST['MaSoTK'] ?? '';
-        
-        $stmt = $conn->prepare("DELETE FROM TAIKHOAN WHERE MaSoTK = ? AND LoaiTaiKhoan = 'KH'");
-        $stmt->bind_param("s", $maSoTK);
-        $stmt->execute();
-        
-        if ($stmt->affected_rows > 0) {
-            $response = ['status' => 'success', 'message' => 'Xóa tài khoản ' . $maSoTK . ' thành công.'];
-        } else {
-            $response = ['status' => 'error', 'message' => 'Không tìm thấy tài khoản để xóa.'];
+        if (empty($maSoTK)) {
+            $response = ['status' => 'error', 'message' => 'Thiếu ID.'];
+            goto end_script;
         }
-    }
-    // UPDATE
-    else if ($action == 'update' && $_SERVER['REQUEST_METHOD'] == 'POST') {
-        // ... (Logic cập nhật: Giữ nguyên cách dùng Transaction nếu có nhiều thao tác CSDL) ...
-        $maSoTK = $_POST['MaSoTK'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $fullname = $_POST['fullname'] ?? '';
-        $sdt = $_POST['sdt'] ?? '';
+        $stmt = $conn->prepare("DELETE FROM TAIKHOAN WHERE MaSoTK = ?");
+        $stmt->bind_param("s", $maSoTK);
         
-        $conn->begin_transaction();
-
-        // 1. Cập nhật bảng TAIKHOAN
-        $stmt_tk = $conn->prepare("UPDATE TAIKHOAN SET Email = ? WHERE MaSoTK = ? AND LoaiTaiKhoan = 'KH'");
-        $stmt_tk->bind_param("ss", $email, $maSoTK);
-        $stmt_tk->execute();
-        
-        // 2. Cập nhật bảng KHACHHANG
-        $stmt_kh = $conn->prepare("UPDATE KHACHHANG SET HoVaTen = ?, SDT = ? WHERE MaSoTK = ?");
-        $stmt_kh->bind_param("sss", $fullname, $sdt, $maSoTK);
-        $stmt_kh->execute();
-
-        $conn->commit();
-        $response = ['status' => 'success', 'message' => 'Cập nhật tài khoản ' . $maSoTK . ' thành công.'];
+        if ($stmt->execute()) $response = ['status' => 'success', 'message' => 'Đã xóa.'];
+        else $response = ['status' => 'error', 'message' => 'Lỗi DB: ' . $conn->error];
     }
-
 
 } catch (Exception $e) {
-    // Xử lý lỗi PHP chung
-    if ($conn->in_transaction) {
-        $conn->rollback();
-    }
     $response = ['status' => 'error', 'message' => 'Lỗi hệ thống: ' . $e->getMessage()];
 }
+
+end_script:
 ob_clean();
-// Trả về kết quả JSON
-header('Content-Type: application/json');
 echo json_encode($response);
 $conn->close();
 ?>

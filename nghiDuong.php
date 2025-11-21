@@ -1,13 +1,13 @@
 <?php
-// nghiDuong.php
+
 header('Content-Type: application/json; charset=utf-8');
 require_once 'config.php';
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try {
-    $sql = "SELECT MaKND, TenKND, DiaChiKND, MapLinkKND, LoaiKHD, MoTaKND, ImageKND
-            FROM KHUNGHIDUONG
-            ORDER BY MaKND ASC";
+    // 🟢 THAY ĐỔI: Gọi Stored Procedure thay vì câu SELECT dài dòng
+    $sql = "CALL GetKhuNghiDuongList()";
+    
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $res = $stmt->get_result();
@@ -23,24 +23,23 @@ try {
             $mapLinks[$fileKey] = $row['MapLinkKND'] ?? '';
         }
 
-        // ⭐ --- SỬA LẠI LOGIC SWITCH TẠI ĐÂY --- ⭐
-        // Chúng ta sẽ lấy LoaiKHD (vuichoi, nghiduong,...)
         $loaiRaw = strtolower(trim($row['LoaiKHD'] ?? 'all'));
-        
-        // Không cần switch/case nữa, chỉ cần dùng trực tiếp
-        // (JavaScript đã xử lý việc map 'haiSan' -> 'vuichoi' rồi)
+
         $nhom = $loaiRaw; 
-        // ⭐ --- HẾT PHẦN SỬA --- ⭐
 
         $diaDanhList[] = [
-            'id'     => (int)$row['MaKND'], // JS đọc 'id'
-            'ten'    => $row['TenKND'] ?? '', // JS đọc 'ten'
-            'moTa'   => $row['MoTaKND'] ?? '', // JS đọc 'moTa'
-            'anh'    => $imgPath,              // JS đọc 'anh'
-            'nhom'   => $nhom,                 // JS đọc 'nhom'
-            'diaChi' => $row['DiaChiKND'] ?? '' // JS đọc 'diaChi'
+            'id'     => (int)$row['MaKND'], 
+            'ten'    => $row['TenKND'] ?? '', 
+            'moTa'   => $row['MoTaKND'] ?? '', 
+            'anh'    => $imgPath,              
+            'nhom'   => $nhom,                 
+            'diaChi' => $row['DiaChiKND'] ?? '' 
         ];
     }
+
+
+    $stmt->close();
+    while($conn->more_results()) { $conn->next_result(); }
 
     echo json_encode([
         'status'      => 'success',

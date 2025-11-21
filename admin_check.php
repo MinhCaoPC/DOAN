@@ -18,7 +18,7 @@ header('Content-Type: text/html; charset=utf-8');
 
 // Dùng hàm readfile() để đọc và gửi nội dung của file admin.html
 // đến trình duyệt. Trình duyệt sẽ thấy nó như là admin.html.
-readfile('admin.html');
+readfile('ADMIN/admin.html');
 
 exit(); 
 ?>
