@@ -86,12 +86,12 @@
     </div>
     <div class="tab-content" id="tourContent">
     </div>
-    
+
     <h2 class="text-center mb-4 fw-bold">✨ Tour nổi bật khác</h2>
-    
+
     <div id="tourCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        </div>
+      </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#tourCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Trước</span>
@@ -100,197 +100,198 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Sau</span>
       </button>
-    </div> <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content p-4">
-            <h5 class="modal-title mb-3 text-center" id="bookingModalLabel">Đặt Tour Ngay</h5>
+    </div>
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-4">
+          <h5 class="modal-title mb-3 text-center" id="bookingModalLabel">Đặt Tour Ngay</h5>
 
-            <form id="bookingForm">
-              <div class="mb-3">
-                <label class="form-label">Chọn tour</label>
-                <input type="text" id="selectedTour" class="form-control" readonly>
-                <input type="hidden" id="selectedTourId" name="MaTour">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Họ và tên</label>
-                <input type="text" class="form-control" id="inputHoTen" placeholder="Nhập họ tên của bạn" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Số điện thoại</label>
-                <input type="tel" class="form-control" id="inputSDT" placeholder="Nhập số điện thoại" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="Nhập email" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Địa chỉ</label>
-                <input type="text" class="form-control" id="inputDiaChi" placeholder="Địa chỉ hiên tại">
-              </div>
+          <form id="bookingForm">
+            <div class="mb-3">
+              <label class="form-label">Chọn tour</label>
+              <input type="text" id="selectedTour" class="form-control" readonly>
+              <input type="hidden" id="selectedTourId" name="MaTour">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Họ và tên</label>
+              <input type="text" class="form-control" id="inputHoTen" placeholder="Nhập họ tên của bạn" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Số điện thoại</label>
+              <input type="tel" class="form-control" id="inputSDT" placeholder="Nhập số điện thoại" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="inputEmail" placeholder="Nhập email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Địa chỉ</label>
+              <input type="text" class="form-control" id="inputDiaChi" placeholder="Địa chỉ hiên tại">
+            </div>
 
-              <div class="mb-3">
-                <label class="form-label">Số lượng khách</label>
-                <input type="number" class="form-control" id="inputSoLuong" value="1" min="1" required>
-              </div>
-              <button type="submit" class="btn btn-book w-100 mt-2">Xác nhận đặt tour</button>
-            </form>
+            <div class="mb-3">
+              <label class="form-label">Số lượng khách</label>
+              <input type="number" class="form-control" id="inputSoLuong" value="1" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-book w-100 mt-2">Xác nhận đặt tour</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <section class="why-choose py-5">
+      <div class="container text-center">
+        <h3 class="fw-bold mb-4">🌟 Vì sao nên chọn chúng tôi?</h3>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <i class="bi bi-star-fill fs-1 text-warning"></i>
+            <h5 class="fw-bold mt-2">Uy tín hàng đầu</h5>
+            <p>Đối tác của các khu du lịch và khách sạn lớn tại Đà Nẵng.</p>
+          </div>
+          <div class="col-md-4">
+            <i class="bi bi-wallet2 fs-1 text-success"></i>
+            <h5 class="fw-bold mt-2">Giá tốt – Trọn gói</h5>
+            <p>Không phụ phí ẩn, bao gồm xe đưa đón và hướng dẫn viên.</p>
+          </div>
+          <div class="col-md-4">
+            <i class="bi bi-heart-fill fs-1 text-danger"></i>
+            <h5 class="fw-bold mt-2">Chăm sóc tận tâm</h5>
+            <p>Hỗ trợ 24/7 trước, trong và sau khi đi tour.</p>
           </div>
         </div>
       </div>
-      
-      <section class="why-choose py-5">
-        <div class="container text-center">
-          <h3 class="fw-bold mb-4">🌟 Vì sao nên chọn chúng tôi?</h3>
-          <div class="row g-4">
-            <div class="col-md-4">
-              <i class="bi bi-star-fill fs-1 text-warning"></i>
-              <h5 class="fw-bold mt-2">Uy tín hàng đầu</h5>
-              <p>Đối tác của các khu du lịch và khách sạn lớn tại Đà Nẵng.</p>
-            </div>
-            <div class="col-md-4">
-              <i class="bi bi-wallet2 fs-1 text-success"></i>
-              <h5 class="fw-bold mt-2">Giá tốt – Trọn gói</h5>
-              <p>Không phụ phí ẩn, bao gồm xe đưa đón và hướng dẫn viên.</p>
-            </div>
-            <div class="col-md-4">
-              <i class="bi bi-heart-fill fs-1 text-danger"></i>
-              <h5 class="fw-bold mt-2">Chăm sóc tận tâm</h5>
-              <p>Hỗ trợ 24/7 trước, trong và sau khi đi tour.</p>
+    </section>
+
+
+    <footer class="footer text-light">
+      <div class="container py-5">
+        <div class="row gy-4">
+
+          <div class="col-md-4">
+            <h3 class="footer-logo">Đà Nẵng Travel</h3>
+            <p>Khám phá vẻ đẹp Đà Nẵng – thành phố đáng sống nhất Việt Nam.
+              Chúng tôi mang đến những trải nghiệm du lịch độc đáo và tiện lợi.</p>
+          </div>
+
+          <div class="col-md-4">
+            <h5>Liên kết nhanh</h5>
+            <ul class="footer-links">
+              <li><a href="#about">Giới thiệu</a></li>
+              <li><a href="diaDanh.html">Địa Danh</a></li>
+              <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
+              <li><a href="Food.html">Ẩm thực</a></li>
+              <li><a href="tour.html">Tour</a></li>
+              <li><a href="lienhe.html">Liên hệ</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4">
+            <h5>Liên hệ</h5>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Đường Bạch Đằng, Đà Nẵng</p>
+            <p><i class="fas fa-phone"></i> 0901 234 567</p>
+            <p><i class="fas fa-envelope"></i> info@danangtravel.vn</p>
+
+            <div class="social-icons mt-3">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-tiktok"></i></a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      <div class="footer-bottom text-center py-3">
+        <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
+      </div>
+    </footer>
+
+    <a href="goiyTour.html" id="btnGoiYTour" class="floating-btn" title="Gợi ý Tour cá nhân" style="display: none;">
+      <i class="bi bi-robot"></i>
+      <span class="tooltip-text">Gợi ý Tour</span>
+    </a>
 
 
-      <footer class="footer text-light">
-        <div class="container py-5">
-          <div class="row gy-4">
-
-            <div class="col-md-4">
-              <h3 class="footer-logo">Đà Nẵng Travel</h3>
-              <p>Khám phá vẻ đẹp Đà Nẵng – thành phố đáng sống nhất Việt Nam.
-                Chúng tôi mang đến những trải nghiệm du lịch độc đáo và tiện lợi.</p>
-            </div>
-
-            <div class="col-md-4">
-              <h5>Liên kết nhanh</h5>
-              <ul class="footer-links">
-                <li><a href="#about">Giới thiệu</a></li>
-                <li><a href="diaDanh.html">Địa Danh</a></li>
-                <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
-                <li><a href="Food.html">Ẩm thực</a></li>
-                <li><a href="tour.html">Tour</a></li>
-                <li><a href="lienhe.html">Liên hệ</a></li>
-              </ul>
-            </div>
-
-            <div class="col-md-4">
-              <h5>Liên hệ</h5>
-              <p><i class="fas fa-map-marker-alt"></i> 123 Đường Bạch Đằng, Đà Nẵng</p>
-              <p><i class="fas fa-phone"></i> 0901 234 567</p>
-              <p><i class="fas fa-envelope"></i> info@danangtravel.vn</p>
-
-              <div class="social-icons mt-3">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom text-center py-3">
-          <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
-        </div>
-      </footer>
-      
-      <a href="goiyTour.html" class="floating-btn" title="Gợi ý Tour cá nhân">
-        <i class="bi bi-robot"></i>
-        <span class="tooltip-text">Gợi ý Tour</span>
-      </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script>
+      // Biến toàn cục để dùng chung
+      let tourList = [];
+      let isLoggedIn = false;
+      let currentUser = null;
 
-<script>
-  // Biến toàn cục để dùng chung
-  let tourList = [];
-  let isLoggedIn = false;
-  let currentUser = null;
+      // --- HÀM 0: Xử lý Hash Link (FIX LỖI CƠ BẢN) ---
+      function handleHashScroll() {
+        const hash = window.location.hash; // Lấy hash, ví dụ: #item-tour-123
 
-  // --- HÀM 0: Xử lý Hash Link (FIX LỖI CƠ BẢN) ---
-  function handleHashScroll() {
-      const hash = window.location.hash; // Lấy hash, ví dụ: #item-tour-123
-
-      if (hash && hash.startsWith('#item-tour-')) {
+        if (hash && hash.startsWith('#item-tour-')) {
           // 1. Tìm nút điều hướng (nav-link) tương ứng với hash
           // Nút này có data-bs-target = hash
           const tabTrigger = document.querySelector(`[data-bs-target="${hash}"]`);
           const targetElement = document.querySelector(hash);
 
           if (tabTrigger) {
-              // 2. Kích hoạt tab bằng Bootstrap API
-              const tab = new bootstrap.Tab(tabTrigger);
-              tab.show();
-              
-              // 3. Cuộn đến vị trí của tab (thêm delay để Bootstrap kịp kích hoạt)
-              setTimeout(() => { 
-                  if (targetElement) {
-                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      // Thêm hiệu ứng nổi bật tạm thời
-                      targetElement.style.boxShadow = '0 0 15px 5px rgba(255, 193, 7, 0.7)';
-                      setTimeout(() => {
-                          targetElement.style.boxShadow = 'none';
-                      }, 2000);
-                  }
-              }, 200);
+            // 2. Kích hoạt tab bằng Bootstrap API
+            const tab = new bootstrap.Tab(tabTrigger);
+            tab.show();
+
+            // 3. Cuộn đến vị trí của tab (thêm delay để Bootstrap kịp kích hoạt)
+            setTimeout(() => {
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Thêm hiệu ứng nổi bật tạm thời
+                targetElement.style.boxShadow = '0 0 15px 5px rgba(255, 193, 7, 0.7)';
+                setTimeout(() => {
+                  targetElement.style.boxShadow = 'none';
+                }, 2000);
+              }
+            }, 200);
 
           } else if (targetElement) {
             // Nếu hash không phải là tab (ví dụ: #tour), vẫn cuộn
             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-      } else if (hash) {
-           // Cho các hash khác (ví dụ: #tour)
+        } else if (hash) {
+          // Cho các hash khác (ví dụ: #tour)
           const targetElement = document.querySelector(hash);
           if (targetElement) {
-              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
+        }
       }
-  }
 
-  // --- HÀM 1: Tải tour chính (gallery, tabs) ---
-  async function loadMainTours() {
-    try {
-      // Đảm bảo fetch xong mới thực hiện các bước tiếp theo
-      const res = await fetch('tour.php'); 
-      const data = await res.json();
+      // --- HÀM 1: Tải tour chính (gallery, tabs) ---
+      async function loadMainTours() {
+        try {
+          // Đảm bảo fetch xong mới thực hiện các bước tiếp theo
+          const res = await fetch('tour.php');
+          const data = await res.json();
 
-      if (data.status === 'success' && Array.isArray(data.tourList)) {
-        tourList = data.tourList;
-      } else {
-        tourList = [];
+          if (data.status === 'success' && Array.isArray(data.tourList)) {
+            tourList = data.tourList;
+          } else {
+            tourList = [];
+          }
+          document.dispatchEvent(new CustomEvent('tours:loaded', { detail: { tourList } }));
+        } catch (err) {
+          console.error('Lỗi tải tour chính:', err);
+          tourList = [];
+        }
       }
-      document.dispatchEvent(new CustomEvent('tours:loaded', { detail: { tourList } }));
-    } catch (err) {
-      console.error('Lỗi tải tour chính:', err);
-      tourList = [];
-    }
-  }
 
-  // --- HÀM 2: Tải tour nổi bật (carousel) ---
-  async function loadFeaturedTours() {
-    try {
-      const res = await fetch('tourNoiBat.php');
-      const data = await res.json();
-      if (data.status === 'success' && Array.isArray(data.featuredTours)) {
-        const carouselInner = document.querySelector("#tourCarousel .carousel-inner");
-        data.featuredTours.forEach((tour, index) => {
-          const activeClass = (index === 0) ? 'active' : '';
-          const item = document.createElement('div');
-          item.className = `carousel-item ${activeClass}`;
-          
-          item.innerHTML = `
+      // --- HÀM 2: Tải tour nổi bật (carousel) ---
+      async function loadFeaturedTours() {
+        try {
+          const res = await fetch('tourNoiBat.php');
+          const data = await res.json();
+          if (data.status === 'success' && Array.isArray(data.featuredTours)) {
+            const carouselInner = document.querySelector("#tourCarousel .carousel-inner");
+            data.featuredTours.forEach((tour, index) => {
+              const activeClass = (index === 0) ? 'active' : '';
+              const item = document.createElement('div');
+              item.className = `carousel-item ${activeClass}`;
+
+              item.innerHTML = `
             <div class="card">
               <img src="${tour.anh || 'images/placeholder.jpg'}" class="card-img-top" alt="${tour.ten}">
               <div class="card-body text-center">
@@ -314,76 +315,76 @@
                 </a>
               </div>
             </div>`;
-          carouselInner.appendChild(item);
-        });
+              carouselInner.appendChild(item);
+            });
 
-        // Khởi động carousel
-        const carouselElement = document.getElementById('tourCarousel');
-        const carousel = new bootstrap.Carousel(carouselElement, {
-            interval: 3000, 
-            ride: 'carousel'
-        });
-        carousel.cycle(); 
+            // Khởi động carousel
+            const carouselElement = document.getElementById('tourCarousel');
+            const carousel = new bootstrap.Carousel(carouselElement, {
+              interval: 3000,
+              ride: 'carousel'
+            });
+            carousel.cycle();
 
+          }
+        } catch (err) {
+          console.error('Lỗi tải tour nổi bật:', err);
+        }
       }
-    } catch (err) {
-      console.error('Lỗi tải tour nổi bật:', err);
-    }
-  }
 
-  // --- HÀM 3: Xử lý Yêu thích ---
-  async function handleYeuThich(id) {
-    if (!isLoggedIn) {
-      const goLogin = confirm("Vui lòng đăng nhập để thêm tour vào yêu thích!");
-      if (goLogin) window.location.href = "dangNhap.html";
-      return;
-    }
-    try {
-      const res = await fetch("YT.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "add", loai: "TOUR", id: id }),
-      });
-      const data = await res.json();
-      if (data.needLogin) {
-        alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập!");
-        window.location.href = "dangNhap.html";
-        return;
+      // --- HÀM 3: Xử lý Yêu thích ---
+      async function handleYeuThich(id) {
+        if (!isLoggedIn) {
+          const goLogin = confirm("Vui lòng đăng nhập để thêm tour vào yêu thích!");
+          if (goLogin) window.location.href = "dangNhap.html";
+          return;
+        }
+        try {
+          const res = await fetch("YT.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "add", loai: "TOUR", id: id }),
+          });
+          const data = await res.json();
+          if (data.needLogin) {
+            alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập!");
+            window.location.href = "dangNhap.html";
+            return;
+          }
+          if (data.success) {
+            alert(data.message || "Đã thêm vào mục yêu thích!");
+          } else {
+            alert(data.message || "Mục này đã có trong mục yêu thích!");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Đã có lỗi xảy ra. Vui lòng thử lại sau!");
+        }
       }
-      if (data.success) {
-        alert(data.message || "Đã thêm vào mục yêu thích!");
-      } else {
-        alert(data.message || "Mục này đã có trong mục yêu thích!");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Đã có lỗi xảy ra. Vui lòng thử lại sau!");
-    }
-  }
 
-  // --- SỰ KIỆN 1: Khi DOM tải xong ---
-  document.addEventListener("DOMContentLoaded", () => {
-    
-    // Tải tour chính và tour nổi bật
-    loadMainTours();
-    loadFeaturedTours(); 
+      // --- SỰ KIỆN 1: Khi DOM tải xong ---
+      document.addEventListener("DOMContentLoaded", () => {
 
-    // Xử lý đăng nhập
-    const loginSection = document.getElementById('login-section');
-    const navbarMenu = document.getElementById('navbarMenu');
+        // Tải tour chính và tour nổi bật
+        loadMainTours();
+        loadFeaturedTours();
 
-    fetch('getUser.php')
-      .then(res => res.json())
-      .then(data => {
-        if (data.loggedIn) {
-          isLoggedIn = true;
-          currentUser = data; // Lưu thông tin user
-          loginSection.innerHTML = `
+        // Xử lý đăng nhập
+        const loginSection = document.getElementById('login-section');
+        const navbarMenu = document.getElementById('navbarMenu');
+
+        fetch('getUser.php')
+          .then(res => res.json())
+          .then(data => {
+            if (data.loggedIn) {
+              isLoggedIn = true;
+              currentUser = data; // Lưu thông tin user
+              loginSection.innerHTML = `
             <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
             <a href="dangXuat.php" class="login-text ms-3">
               <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
             </a>`;
-          navbarMenu.querySelector('ul.navbar-nav').innerHTML = `
+              navbarMenu.querySelector('ul.navbar-nav').innerHTML = `
             <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
             <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
             <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
@@ -391,75 +392,79 @@
             <li class="nav-item"><a class="nav-link active" href="tour.html">TOUR</a></li>
             <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
             <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>`;
+              const btnGoiY = document.getElementById('btnGoiYTour');
+              if (btnGoiY) {
+                btnGoiY.style.display = 'flex'; 
+              }
+            }
+          });
+
+        // Xử lý click cho gallery (Tối ưu hóa để dùng chung hàm handleHashScroll)
+        const galleryContainer = document.querySelector(".gallery");
+        if (galleryContainer) {
+          galleryContainer.addEventListener("click", function (event) {
+            if (event.target.tagName === 'IMG') {
+              const img = event.target;
+              const tourHash = img.getAttribute("data-tour"); // e.g., #item-tour-123
+              if (tourHash) {
+                // Thay đổi hash, sẽ kích hoạt window.onhashchange
+                window.location.hash = tourHash;
+                event.preventDefault(); // Ngăn hành vi mặc định nếu là link
+              }
+            }
+          });
         }
+
+        // Gắn sự kiện để xử lý hash khi tải trang và khi hash thay đổi
+        window.addEventListener('hashchange', handleHashScroll);
       });
-    
-    // Xử lý click cho gallery (Tối ưu hóa để dùng chung hàm handleHashScroll)
-    const galleryContainer = document.querySelector(".gallery");
-    if (galleryContainer) {
-      galleryContainer.addEventListener("click", function (event) {
-        if (event.target.tagName === 'IMG') {
-          const img = event.target;
-          const tourHash = img.getAttribute("data-tour"); // e.g., #item-tour-123
-          if (tourHash) {
-            // Thay đổi hash, sẽ kích hoạt window.onhashchange
-            window.location.hash = tourHash; 
-            event.preventDefault(); // Ngăn hành vi mặc định nếu là link
-          }
+
+      // --- SỰ KIỆN 2: Khi tour chính tải xong (Vẽ gallery, tabs) ---
+      document.addEventListener('tours:loaded', function (e) {
+        const list = e.detail?.tourList || [];
+        const tourContent = document.getElementById('tourContent');
+        const tourTabs = document.getElementById('tourTabs');
+        const galleryContainer = document.querySelector(".gallery");
+
+        tourContent.innerHTML = '';
+        tourTabs.innerHTML = '';
+        galleryContainer.innerHTML = '';
+
+        if (!list.length) {
+          tourContent.innerHTML = '<div class="alert alert-warning">Chưa có tour nào.</div>';
+          return;
         }
-      });
-    }
 
-    // Gắn sự kiện để xử lý hash khi tải trang và khi hash thay đổi
-    window.addEventListener('hashchange', handleHashScroll);
-  });
+        list.forEach((tour, index) => {
+          // ✅ SỬA LỖI: Sử dụng MaTour để tạo ID linkable
+          const tourItemId = `item-tour-${tour.id}`;
 
-  // --- SỰ KIỆN 2: Khi tour chính tải xong (Vẽ gallery, tabs) ---
-  document.addEventListener('tours:loaded', function (e) {
-    const list = e.detail?.tourList || [];
-    const tourContent = document.getElementById('tourContent');
-    const tourTabs = document.getElementById('tourTabs');
-    const galleryContainer = document.querySelector(".gallery");
+          // 1. TẠO ẢNH CHO GALLERY
+          const img = document.createElement('img');
+          img.src = tour.anhSub || 'images/placeholder.jpg';
+          img.alt = tour.ten || 'Ảnh tour';
+          // ✅ Gán ID mới cho data-tour
+          img.setAttribute('data-tour', `#${tourItemId}`);
+          galleryContainer.appendChild(img);
 
-    tourContent.innerHTML = '';
-    tourTabs.innerHTML = '';
-    galleryContainer.innerHTML = '';
+          // 2. TẠO NÚT TAB
+          const li = document.createElement('li');
+          li.className = 'nav-item';
+          // ✅ Gán ID mới cho data-bs-target
+          li.innerHTML = `<button class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" data-bs-target="#${tourItemId}" type="button">Tour ${index + 1}</button>`;
+          tourTabs.appendChild(li);
 
-    if (!list.length) {
-      tourContent.innerHTML = '<div class="alert alert-warning">Chưa có tour nào.</div>';
-      return;
-    }
+          // 3. TẠO NỘI DUNG TAB
+          const tabPane = document.createElement('div');
+          // Tab đầu tiên active nếu không có hash
+          tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+          // ✅ Gán ID mới cho Tab Pane
+          tabPane.id = tourItemId;
+          tabPane.setAttribute('role', 'tabpanel');
 
-    list.forEach((tour, index) => {
-      // ✅ SỬA LỖI: Sử dụng MaTour để tạo ID linkable
-      const tourItemId = `item-tour-${tour.id}`; 
-      
-      // 1. TẠO ẢNH CHO GALLERY
-      const img = document.createElement('img');
-      img.src = tour.anhSub || 'images/placeholder.jpg';
-      img.alt = tour.ten || 'Ảnh tour';
-      // ✅ Gán ID mới cho data-tour
-      img.setAttribute('data-tour', `#${tourItemId}`); 
-      galleryContainer.appendChild(img);
-
-      // 2. TẠO NÚT TAB
-      const li = document.createElement('li');
-      li.className = 'nav-item';
-      // ✅ Gán ID mới cho data-bs-target
-      li.innerHTML = `<button class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" data-bs-target="#${tourItemId}" type="button">Tour ${index + 1}</button>`;
-      tourTabs.appendChild(li);
-
-      // 3. TẠO NỘI DUNG TAB
-      const tabPane = document.createElement('div');
-      // Tab đầu tiên active nếu không có hash
-      tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
-      // ✅ Gán ID mới cho Tab Pane
-      tabPane.id = tourItemId; 
-      tabPane.setAttribute('role', 'tabpanel');
-
-      const lichTrinh = Array.isArray(tour.lichTrinh) ? tour.lichTrinh : [];
-      const lichTrinhHtml = lichTrinh.map(item => `<li>${item}</li>`).join('');
-      tabPane.innerHTML = `
+          const lichTrinh = Array.isArray(tour.lichTrinh) ? tour.lichTrinh : [];
+          const lichTrinhHtml = lichTrinh.map(item => `<li>${item}</li>`).join('');
+          tabPane.innerHTML = `
         <div class="row g-4 align-items-center">
           <div class="col-md-6">
             <img src="${tour.anh || 'images/placeholder.jpg'}" alt="${tour.ten || ''}" class="tour-img">
@@ -483,105 +488,105 @@
             </a>
           </div>
         </div>`;
-      tourContent.appendChild(tabPane);
-    });
+          tourContent.appendChild(tabPane);
+        });
 
-    // Sau khi tải và vẽ xong tour, gọi hàm xử lý hash để kích hoạt tab (nếu có hash)
-    handleHashScroll();
-  });
-
-  // --- SỰ KIỆN 3: Xử lý Modal (Tự động điền) ---
-  const bookingModal = document.getElementById('bookingModal');
-  bookingModal.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget;
-    
-    // Lấy Tên Tour
-    const tourName = button.getAttribute('data-tour');
-    bookingModal.querySelector('#selectedTour').value = tourName;
-
-    // LẤY ID TOUR
-    const tourId = button.getAttribute('data-tour-id');
-    bookingModal.querySelector('#selectedTourId').value = tourId;
-    
-    // TỰ ĐỘNG ĐIỀN THÔNG TIN
-    const inputHoTen = bookingModal.querySelector('#inputHoTen');
-    const inputSDT = bookingModal.querySelector('#inputSDT');
-    const inputEmail = bookingModal.querySelector('#inputEmail');
-    const inputDiaChi = bookingModal.querySelector('#inputDiaChi');
-    const inputSoLuong = bookingModal.querySelector('#inputSoLuong');
-
-    if (currentUser) {
-      // Yêu cầu: Ưu tiên HoVaTen, nếu trống thì dùng TenTaiKhoan
-      inputHoTen.value = currentUser.HoVaTen || currentUser.TenTaiKhoan || '';
-      
-      // Yêu cầu: Lấy SDT từ KHACHHANG
-      inputSDT.value = currentUser.SDT || '';
-      
-      // Yêu cầu: Lấy Email từ TAIKHOAN
-      inputEmail.value = currentUser.Email || '';
-      
-      // Yêu cầu: Lấy DiaChi từ KHACHHANG
-      inputDiaChi.value = currentUser.DiaChi || '';
-
-    } else {
-      // Nếu chưa đăng nhập, xóa trống
-      inputHoTen.value = '';
-      inputSDT.value = '';
-      inputEmail.value = '';
-      inputDiaChi.value = '';
-    }
-    inputSoLuong.value = 1; // Reset số lượng
-  });
-
-  // --- SỰ KIỆN 4: Xử lý Submit Form Đặt Tour ---
-  document.getElementById('bookingForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Ngăn tải lại trang
-
-    if (!isLoggedIn) {
-        alert("Vui lòng đăng nhập để đặt tour!");
-        window.location.href = "dangNhap.html";
-        return;
-    }
-
-    const formData = {
-      MaTour: document.getElementById('selectedTourId').value,
-      HoVaTen: document.getElementById('inputHoTen').value,
-      SDT: document.getElementById('inputSDT').value,
-      Email: document.getElementById('inputEmail').value,
-      DiaChi: document.getElementById('inputDiaChi').value,
-      SoLuong: document.getElementById('inputSoLuong').value
-    };
-
-    try {
-      // Gửi dữ liệu đến file datTour.php
-      const res = await fetch('datTour.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        // Sau khi tải và vẽ xong tour, gọi hàm xử lý hash để kích hoạt tab (nếu có hash)
+        handleHashScroll();
       });
-      const data = await res.json();
 
-      if (data.success) {
-        alert(data.message || 'Đặt tour thành công! Chúng tôi sẽ liên hệ với bạn sớm.');
-        const modalInstance = bootstrap.Modal.getInstance(bookingModal);
-        modalInstance.hide();
-        window.location.href = 'Lichsu.html'; 
-      } else {
-        if (data.needLogin) {
-            alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
-            window.location.href = "dangNhap.html";
+      // --- SỰ KIỆN 3: Xử lý Modal (Tự động điền) ---
+      const bookingModal = document.getElementById('bookingModal');
+      bookingModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+
+        // Lấy Tên Tour
+        const tourName = button.getAttribute('data-tour');
+        bookingModal.querySelector('#selectedTour').value = tourName;
+
+        // LẤY ID TOUR
+        const tourId = button.getAttribute('data-tour-id');
+        bookingModal.querySelector('#selectedTourId').value = tourId;
+
+        // TỰ ĐỘNG ĐIỀN THÔNG TIN
+        const inputHoTen = bookingModal.querySelector('#inputHoTen');
+        const inputSDT = bookingModal.querySelector('#inputSDT');
+        const inputEmail = bookingModal.querySelector('#inputEmail');
+        const inputDiaChi = bookingModal.querySelector('#inputDiaChi');
+        const inputSoLuong = bookingModal.querySelector('#inputSoLuong');
+
+        if (currentUser) {
+          // Yêu cầu: Ưu tiên HoVaTen, nếu trống thì dùng TenTaiKhoan
+          inputHoTen.value = currentUser.HoVaTen || currentUser.TenTaiKhoan || '';
+
+          // Yêu cầu: Lấy SDT từ KHACHHANG
+          inputSDT.value = currentUser.SDT || '';
+
+          // Yêu cầu: Lấy Email từ TAIKHOAN
+          inputEmail.value = currentUser.Email || '';
+
+          // Yêu cầu: Lấy DiaChi từ KHACHHANG
+          inputDiaChi.value = currentUser.DiaChi || '';
+
         } else {
-            alert('Lỗi: ' + (data.message || 'Không thể đặt tour.'));
+          // Nếu chưa đăng nhập, xóa trống
+          inputHoTen.value = '';
+          inputSDT.value = '';
+          inputEmail.value = '';
+          inputDiaChi.value = '';
         }
-      }
-    } catch (err) {
-      console.error('Lỗi khi submit form:', err);
-      alert('Đã xảy ra lỗi kết nối. Vui lòng thử lại.');
-    }
-  });
+        inputSoLuong.value = 1; // Reset số lượng
+      });
 
-  // ✅ Bỏ hàm handleHashScroll cũ ở cuối vì đã hợp nhất logic
-</script>
+      // --- SỰ KIỆN 4: Xử lý Submit Form Đặt Tour ---
+      document.getElementById('bookingForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Ngăn tải lại trang
+
+        if (!isLoggedIn) {
+          alert("Vui lòng đăng nhập để đặt tour!");
+          window.location.href = "dangNhap.html";
+          return;
+        }
+
+        const formData = {
+          MaTour: document.getElementById('selectedTourId').value,
+          HoVaTen: document.getElementById('inputHoTen').value,
+          SDT: document.getElementById('inputSDT').value,
+          Email: document.getElementById('inputEmail').value,
+          DiaChi: document.getElementById('inputDiaChi').value,
+          SoLuong: document.getElementById('inputSoLuong').value
+        };
+
+        try {
+          // Gửi dữ liệu đến file datTour.php
+          const res = await fetch('datTour.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            alert(data.message || 'Đặt tour thành công! Chúng tôi sẽ liên hệ với bạn sớm.');
+            const modalInstance = bootstrap.Modal.getInstance(bookingModal);
+            modalInstance.hide();
+            window.location.href = 'Lichsu.html';
+          } else {
+            if (data.needLogin) {
+              alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
+              window.location.href = "dangNhap.html";
+            } else {
+              alert('Lỗi: ' + (data.message || 'Không thể đặt tour.'));
+            }
+          }
+        } catch (err) {
+          console.error('Lỗi khi submit form:', err);
+          alert('Đã xảy ra lỗi kết nối. Vui lòng thử lại.');
+        }
+      });
+
+      // ✅ Bỏ hàm handleHashScroll cũ ở cuối vì đã hợp nhất logic
+    </script>
 
 </body>
 
