@@ -1,20 +1,14 @@
 <?php
-// goiyTour.php
+// goiyTour.php - Phiên bản KNN
 header('Content-Type: application/json');
-
-// Yêu cầu file cấu hình kết nối CSDL (sẽ khởi tạo biến $conn)
 require 'config.php'; 
-
-// Khai báo biến $conn là global để sử dụng
 global $conn;
 
-// Lấy tham số action để xác định yêu cầu
 $action = isset($_GET['action']) ? $_GET['action'] : (isset($_POST['action']) ? $data['action'] : '');
 
-// ==========================================
-// CHỨC NĂNG 1: TẠO DANH SÁCH LỰA CHỌN ĐỘNG (action=get_features)
-// ==========================================
+// --- PHẦN 1: GIỮ NGUYÊN LOGIC LẤY DANH SÁCH (GET_FEATURES) ---
 if ($action === 'get_features') {
+    // (Giữ nguyên code cũ của phần này, không thay đổi gì)
     $features = [];
     $tables = [
         'diadanh' => ['table' => 'DIADANH', 'id_col' => 'MaDD', 'name_col' => 'TenDD', 'title' => 'Địa Danh Quan Tâm', 'emoji' => '🌍'],
@@ -25,108 +19,133 @@ if ($action === 'get_features') {
     foreach ($tables as $key => $conf) {
         $items = [];
         try {
-            // Dùng $conn->query() cho truy vấn đơn giản này
             $result = $conn->query("SELECT {$conf['id_col']} as id, {$conf['name_col']} as name FROM {$conf['table']} ORDER BY {$conf['name_col']} ASC");
-            
             if ($result) {
-                while ($row = $result->fetch_assoc()) {
-                    $items[] = $row;
-                }
+                while ($row = $result->fetch_assoc()) $items[] = $row;
                 $result->free();
             }
-            
-            $features[$key] = [
-                'title' => $conf['title'],
-                'emoji' => $conf['emoji'],
-                'items' => $items
-            ];
+            $features[$key] = ['title' => $conf['title'], 'emoji' => $conf['emoji'], 'items' => $items];
         } catch (Exception $e) {
-            $features[$key] = [
-                'error' => 'Lỗi truy vấn ' . $conf['title'] . ': ' . $e->getMessage()
-            ];
+            $features[$key] = ['error' => 'Lỗi: ' . $e->getMessage()];
         }
     }
-    
     echo json_encode(['success' => true, 'features' => $features]);
     exit();
 }
 
-
-// ==========================================
-// CHỨC NĂNG 2: TÍNH TOÁN GỢI Ý (AJAX POST)
-// ==========================================
+// --- PHẦN 2: THUẬT TOÁN KNN (POST) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
-    // 1. Lọc và chuẩn hóa dữ liệu đầu vào
-    $selected_diadanh = isset($data['diadanh']) ? (is_array($data['diadanh']) ? $data['diadanh'] : []) : [];
-    $selected_knd = isset($data['knd']) ? (is_array($data['knd']) ? $data['knd'] : []) : [];
-    $selected_monan = isset($data['monan']) ? (is_array($data['monan']) ? $data['monan'] : []) : [];
+    // 1. Vector Người dùng (User Profile Vector)
+    // Gom tất cả ID người dùng chọn vào một mảng duy nhất
+    $user_vector = [];
+    if(isset($data['diadanh'])) foreach($data['diadanh'] as $id) $user_vector[] = "DD_".$id;
+    if(isset($data['knd']))     foreach($data['knd'] as $id)     $user_vector[] = "KND_".$id;
+    if(isset($data['monan']))   foreach($data['monan'] as $id)   $user_vector[] = "MA_".$id;
 
-    $total_selected_features = count($selected_diadanh) + count($selected_knd) + count($selected_monan);
-
-    if ($total_selected_features === 0) {
+    // Nếu không chọn gì
+    if (empty($user_vector)) {
         http_response_code(400);
-        echo json_encode(['error' => 'Vui lòng chọn ít nhất một tiêu chí để nhận gợi ý.']);
+        echo json_encode(['error' => 'Vui lòng chọn ít nhất một tiêu chí.']);
         exit();
     }
 
-    // 2. Chuẩn bị chuỗi ID cho truy vấn SQL
-    $diadanh_in = !empty($selected_diadanh) ? implode(',', array_map('intval', $selected_diadanh)) : '0';
-    $knd_in = !empty($selected_knd) ? implode(',', array_map('intval', $selected_knd)) : '0';
-    $monan_in = !empty($selected_monan) ? implode(',', array_map('intval', $selected_monan)) : '0';
+    // 2. Lấy dữ liệu toàn bộ Tour (Training Data)
+    // Thay vì SQL lọc, ta lấy hết về để tính toán
+    $tours = [];
+    
+    // Lấy thông tin cơ bản Tour
+    $sqlBase = "SELECT MaTour, TenTour FROM TOUR";
+    $resultBase = $conn->query($sqlBase);
+    while($row = $resultBase->fetch_assoc()) {
+        $tours[$row['MaTour']] = [
+            'info' => $row,
+            'features' => [] // Vector đặc trưng của Tour
+        ];
+    }
 
-    // 3. TRUY VẤN SQL TÍNH ĐỘ CHỒNG LẤP (OVERLAP SCORE)
-    $sql = "
-        SELECT 
-            T.MaTour, 
-            T.TenTour,
-            COUNT(T.MaTour) AS DiemTuongDong
-        FROM 
-            TOUR T
-        JOIN 
-            (
-                SELECT MaTour FROM TOUR_DIADANH WHERE MaDiaDanh IN ($diadanh_in)
-                UNION ALL
-                SELECT MaTour FROM TOUR_KND WHERE MaKND IN ($knd_in)
-                UNION ALL
-                SELECT MaTour FROM TOUR_MONAN WHERE MaMonAn IN ($monan_in)
-            ) AS MatchedFeatures ON T.MaTour = MatchedFeatures.MaTour
-        GROUP BY 
-            T.MaTour, T.TenTour
-        ORDER BY 
-            DiemTuongDong DESC
-        LIMIT 10 
+    // Lấy đặc trưng (Features) cho từng Tour và gán vào Vector
+    // Dùng prefix DD_, KND_, MA_ để phân biệt các loại ID trùng nhau
+    $sqlFeatures = "
+        SELECT MaTour, CONCAT('DD_', MaDiaDanh) as FeatureID FROM TOUR_DIADANH
+        UNION ALL
+        SELECT MaTour, CONCAT('KND_', MaKND) as FeatureID FROM TOUR_KND
+        UNION ALL
+        SELECT MaTour, CONCAT('MA_', MaMonAn) as FeatureID FROM TOUR_MONAN
     ";
-
-    $recommended_tours = [];
-    try {
-        // Sử dụng $conn->query() cho truy vấn phức tạp nhưng đã được sanitize
-        $result = $conn->query($sql);
-
-        if ($result) {
-            while ($row = $result->fetch_assoc()) {
-                $overlap_score = (int)$row['DiemTuongDong'];
-                $ratio = ($overlap_score / $total_selected_features) * 100;
-                
-                $row['TyLeTuongDong'] = number_format($ratio, 2); 
-                $recommended_tours[] = $row;
-            }
-            $result->free();
+    
+    $resultFeat = $conn->query($sqlFeatures);
+    while($row = $resultFeat->fetch_assoc()) {
+        if(isset($tours[$row['MaTour']])) {
+            $tours[$row['MaTour']]['features'][] = $row['FeatureID'];
         }
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode(['error' => 'Lỗi truy vấn gợi ý: ' . $e->getMessage()]);
-        exit();
     }
 
-    echo json_encode($recommended_tours);
+    // 3. Tính khoảng cách/độ tương đồng (KNN Logic)
+    $scored_tours = [];
+
+    foreach ($tours as $maTour => $tourData) {
+        $tour_vector = $tourData['features'];
+        
+        // Bỏ qua tour không có đặc điểm nào (dữ liệu rác)
+        if (empty($tour_vector)) continue;
+
+        // --- TÍNH COSINE SIMILARITY ---
+        // Công thức: (A giao B) / (sqrt(A) * sqrt(B))
+        
+        // A giao B: Số lượng đặc điểm trùng nhau
+        $intersection = count(array_intersect($user_vector, $tour_vector));
+        
+        // Nếu không có điểm chung nào, bỏ qua ngay để tối ưu
+        if ($intersection == 0) continue;
+
+        // Độ dài vector (số lượng phần tử)
+        $len_user = count($user_vector);
+        $len_tour = count($tour_vector);
+
+        // Tính điểm (Score)
+        // Tránh chia cho 0
+        if ($len_user * $len_tour > 0) {
+            $similarity = $intersection / (sqrt($len_user) * sqrt($len_tour));
+        } else {
+            $similarity = 0;
+        }
+
+        // Lưu kết quả
+        $scored_tours[] = [
+            'MaTour' => $tourData['info']['MaTour'],
+            'TenTour' => $tourData['info']['TenTour'],
+            'Similarity' => $similarity,
+            'DiemTuongDong' => $intersection, // Giữ lại field này để hiển thị số lượng trùng
+            'TotalFeatures' => $len_tour
+        ];
+    }
+
+    // 4. Sắp xếp (Ranking) - Tìm K láng giềng gần nhất
+    // Sắp xếp giảm dần theo Similarity
+    usort($scored_tours, function ($a, $b) {
+        return $b['Similarity'] <=> $a['Similarity'];
+    });
+
+    // 5. Lấy Top K (K=3)
+    $k_neighbors = array_slice($scored_tours, 0, 3);
+
+    // 6. Format lại dữ liệu trả về cho đúng ý Frontend cũ
+    $output = [];
+    foreach ($k_neighbors as $tour) {
+        // Tính lại tỷ lệ % để hiển thị cho đẹp (Frontend mong đợi TyLeTuongDong)
+        // Ở đây mình dùng chính điểm Similarity * 100
+        $output[] = [
+            'MaTour' => $tour['MaTour'],
+            'TenTour' => $tour['TenTour'],
+            'DiemTuongDong' => $tour['DiemTuongDong'], // Số lượng mục trùng khớp
+            'TyLeTuongDong' => number_format($tour['Similarity'] * 100, 2) // Chuyển cosine 0-1 thành 0-100%
+        ];
+    }
+
+    echo json_encode($output);
     exit();
 }
-
-// Trường hợp request không hợp lệ
-http_response_code(400);
-echo json_encode(['error' => 'Yêu cầu không hợp lệ hoặc thiếu action.']);
 ?>
