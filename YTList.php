@@ -3,9 +3,6 @@ session_start();
 // Thiết lập header JSON để đảm bảo trình duyệt biết nội dung là JSON
 header('Content-Type: application/json; charset=utf-8');
 
-// Báo cáo tất cả lỗi PHP (chỉ nên dùng khi debug)
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
 
 require 'config.php'; // Đảm bảo file config.php kết nối CSDL đúng
 
@@ -82,5 +79,5 @@ try {
     // Ghi log lỗi để debug
     error_log("YTList.php Error: " . $e->getMessage()); 
 }
-// Chú ý: Không đóng $conn ở đây nếu $conn là global và được dùng ở nơi khác
+
 ?>
