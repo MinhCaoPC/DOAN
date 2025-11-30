@@ -1,4 +1,9 @@
-
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Cắt bỏ thanh cuộn ngang thừa */
+}
 .navbar-custom {
   position: fixed;
   width: 100%;
@@ -834,6 +839,178 @@ html {
   /* Thu nhỏ icon trong nút Login */
   .navbar .login-text i {
     font-size: 16px !important;
+  }
+}
+
+/* --- RESPONSIVE CHO MÀN HÌNH SIÊU NHỎ (< 378px) --- */
+@media(max-width: 377.9px) {
+
+.footer .container .row {
+    display: flex;
+    flex-wrap: nowrap;       /* Không cho rớt dòng */
+    align-items: flex-start; /* Căn tất cả lên trên cùng */
+  }
+
+  .footer .col-md-4 {
+    width: 33.33%;           /* Chia đều 3 cột */
+    padding: 0 2px;          /* Khoảng cách giữa các cột nhỏ lại để đỡ chật */
+    text-align: left;        /* Nội dung canh trái */
+  }
+
+  /* --- SỬA LỖI LỆCH DÒNG TIÊU ĐỀ --- */
+  /* Đặt margin-top = 0 để tất cả tiêu đề h3, h5 bám sát mép trên bằng nhau */
+  .footer-logo, 
+  .footer h5 {
+    margin-top: 0 !important; 
+    padding-top: 0 !important;
+    margin-bottom: 8px !important; /* Khoảng cách xuống nội dung dưới */
+    line-height: 1.2 !important;   /* Chiều cao dòng đồng nhất */
+    display: block;
+  }
+
+  .footer-logo {
+    font-size: 10px; /* Logo nhỏ lại chút */
+  }
+  
+  .footer h5 {
+    font-size: 9px;
+    font-weight: bold;
+    color: #ffcc66; /* Giữ màu vàng cho tiêu đề cột */
+  }
+
+  /* Nội dung bên trong */
+  .footer p, 
+  .footer li, 
+  .footer a {
+    font-size: 8px; 
+    line-height: 1.4;
+    margin-bottom: 2px;
+    text-align: left;
+    word-wrap: break-word; /* Ngắt dòng nếu chữ quá dài */
+  }
+  
+
+  .footer .social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3px;
+    margin-top: 5px;
+  }
+  .footer .social-icons a {
+    font-size: 10px;
+    margin-right: 0;
+  }
+
+
+  .footer .col-md-4:first-child p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .footer-bottom {
+    text-align: center !important;
+    width: 100%;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Kẻ mờ phân cách cho đẹp */
+  }
+
+  .footer-bottom p {
+    font-size: 9px !important;
+    text-align: center !important;
+    margin: 0;
+    width: 100%;
+    display: block;
+  }
+  
+
+  .floating-btn {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 16px !important;
+    right: 10px !important;
+    bottom: 20px !important;
+  }
+  /* 2. Banner */
+  .banner {
+    height: 350px; /* Giảm chiều cao banner */
+  }
+  
+  .banner-content h1 {
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa tuyệt đối */
+    font-size: 32px; /* Chữ DA NANG nhỏ lại */
+    width: 100%;
+  }
+  
+  .gallery {
+    bottom: 60px; /* Đẩy lên một chút */
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .gallery img {
+    width: 60px; /* Ảnh thumb siêu nhỏ */
+    height: 80px;
+  }
+  
+  .explore-btn {
+    bottom: 10px;
+    right: 50%;
+    transform: translateX(50%); /* Căn giữa nút */
+    padding: 8px 16px;
+    font-size: 12px;
+    width: max-content;
+  }
+
+  /* 3. Nội dung Tour */
+  .danang-desc {
+    font-size: 11px;
+    padding: 10px;
+  }
+  
+  h2.text-center {
+    font-size: 18px; /* Tiêu đề section nhỏ lại */
+  }
+  
+  /* Tabs điều hướng tour */
+  .nav-pills .nav-link {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  
+  /* Chi tiết tour */
+  .tour-img {
+    height: 180px; /* Ảnh tour nhỏ lại */
+  }
+  
+  .tab-content h4 {
+    font-size: 16px; /* Tên tour nhỏ lại */
+    margin-top: 10px;
+  }
+  
+  .tab-content p, .tab-content ul li {
+    font-size: 11px;
+  }
+  
+  .fav-btn, .btn-book {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  /* 4. Carousel Tour Nổi bật */
+  .tour-card {
+    width: 90%; /* Card chiếm gần hết màn hình */
+    margin: 0 auto;
+  }
+  
+  .carousel-control-prev, .carousel-control-next {
+    width: 30px;
+    height: 30px;
   }
 }
 

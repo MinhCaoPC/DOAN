@@ -1008,15 +1008,11 @@ body {
     width: 100%;
     /* 100% của chữ (vì thẻ a giờ đã co lại bằng chữ rồi) */
   }
+  .intro-title {
+    font-size: 38px;
+  }
 }
-@media(max-width: 377.9px){
-  .banner-text h1{
-  font-size: 28px;
-}
-  .banner-text h2{
-  font-size: 18px;
-}
-}
+
 
 @media (min-width: 992px) {
   /* 1. Canh chỉnh lại khung chứa menu */
@@ -1067,4 +1063,181 @@ body {
   .navbar .login-text i {
     font-size: 16px !important;
   }
+}
+@media(max-width: 377.9px) {
+
+  /* --- 1. XỬ LÝ BANNER & LOGO (Code cũ giữ lại để ổn định) --- */
+  .banner-text h1 {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+
+  .banner-text h2 {
+    font-size: 16px; /* Giảm thêm cho cân đối */
+  }
+
+  #banner {
+    height: 300px;
+    min-height: 300px;
+  }
+
+  #banner .banner-img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .intro-image img {
+    height: auto;
+    max-height: 200px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  /* --- 2. THU NHỎ FONT TIÊU ĐỀ CÁC SECTION (Giảm 2-10px) --- */
+  .intro-title,
+  .why-title,
+  .experience-title,
+  .festival-heading,
+  .highlight-section h2,
+  .discover-text h3,
+  #map-section h2 {
+    font-size: 20px !important; /* Đưa hết về size 20px cho gọn */
+    margin-left: 0; /* Canh giữa hoặc bỏ margin lệch trái nếu có */
+    text-align: center; /* Nên canh giữa tiêu đề trên mobile */
+    line-height: 1.3;
+  }
+  
+  /* Riêng tiêu đề phần "Tại sao" cần chỉnh lại lề */
+  .why-title {
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  /* --- 3. PHẦN TRẢI NGHIỆM (4 Icon 1 hàng) --- */
+  .experience-section {
+    padding: 20px 5px; /* Giảm padding khung ngoài */
+    width: 96%; /* Mở rộng khung ra sát viền màn hình */
+    margin: 30px auto; /* Giảm margin dọc */
+    border-radius: 30px;
+  }
+
+  .experience-icons {
+    display: flex;
+    flex-wrap: nowrap; /* QUAN TRỌNG: Ép không xuống dòng */
+    gap: 4px; /* Khoảng cách giữa các icon rất nhỏ */
+    justify-content: space-between; /* Dàn đều ra */
+  }
+
+  .experience-item {
+    flex: 1; /* Chia đều không gian cho 4 mục */
+    padding: 0;
+  }
+
+  .icon-circle {
+    width: 40px; /* Giảm từ 80px xuống 40px */
+    height: 40px;
+    margin: 0 auto 5px auto;
+    border-width: 1px; /* Viền mỏng lại */
+  }
+
+  .icon-circle i {
+    font-size: 16px; /* Giảm size icon bên trong */
+  }
+
+  .experience-item p {
+    font-size: 9px; /* Chữ chú thích siêu nhỏ để không bị đè nhau */
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+.footer .container .row {
+    display: flex;
+    flex-wrap: nowrap;       /* Không cho rớt dòng */
+    align-items: flex-start; /* Căn tất cả lên trên cùng */
+  }
+
+  .footer .col-md-4 {
+    width: 33.33%;           /* Chia đều 3 cột */
+    padding: 0 2px;          /* Khoảng cách giữa các cột nhỏ lại để đỡ chật */
+    text-align: left;        /* Nội dung canh trái */
+  }
+
+  /* --- SỬA LỖI LỆCH DÒNG TIÊU ĐỀ --- */
+  /* Đặt margin-top = 0 để tất cả tiêu đề h3, h5 bám sát mép trên bằng nhau */
+  .footer-logo, 
+  .footer h5 {
+    margin-top: 0 !important; 
+    padding-top: 0 !important;
+    margin-bottom: 8px !important; /* Khoảng cách xuống nội dung dưới */
+    line-height: 1.2 !important;   /* Chiều cao dòng đồng nhất */
+    display: block;
+  }
+
+  .footer-logo {
+    font-size: 10px; /* Logo nhỏ lại chút */
+  }
+  
+  .footer h5 {
+    font-size: 9px;
+    font-weight: bold;
+    color: #ffcc66; /* Giữ màu vàng cho tiêu đề cột */
+  }
+
+  /* Nội dung bên trong */
+  .footer p, 
+  .footer li, 
+  .footer a {
+    font-size: 8px; 
+    line-height: 1.4;
+    margin-bottom: 2px;
+    text-align: left;
+    word-wrap: break-word; /* Ngắt dòng nếu chữ quá dài */
+  }
+  
+  /* Chỉnh icon mạng xã hội */
+  .footer .social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3px;
+    margin-top: 5px;
+  }
+  .footer .social-icons a {
+    font-size: 10px;
+    margin-right: 0;
+  }
+
+  /* Cắt bớt mô tả ở cột 1 nếu quá dài */
+  .footer .col-md-4:first-child p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 2. FOOTER BOTTOM (Dòng bản quyền - CANH GIỮA) */
+  /* Dùng !important để ép nó vào giữa bất kể setup ở trên */
+  .footer-bottom {
+    text-align: center !important;
+    width: 100%;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Kẻ mờ phân cách cho đẹp */
+  }
+
+  .footer-bottom p {
+    font-size: 9px !important;
+    text-align: center !important;
+    margin: 0;
+    width: 100%;
+    display: block;
+  }
+  
+  /* 3. XỬ LÝ NÚT GỌI (PHONE) BỊ CHE CHỮ */
+  /* Thu nhỏ nút và đẩy ra sát mép hơn ở màn hình bé */
+  .floating-btn {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 16px !important;
+    right: 10px !important;
+    bottom: 20px !important;
+}
 }

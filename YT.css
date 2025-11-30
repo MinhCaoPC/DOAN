@@ -100,8 +100,8 @@
   position: relative;
   
   /* 1. Thay đổi width và max-width để khớp với phần dưới */
-  width: 95%;              /* Chiếm 95% màn hình trên mobile/tablet cho đẹp (có lề 2 bên) */
-  max-width: 1200px;       /* Không to quá 1200px (bằng kích thước grid bên dưới) */
+  width: 100%;              /* Chiếm 95% màn hình trên mobile/tablet cho đẹp (có lề 2 bên) */
+
   
   /* 2. Căn giữa banner */
   margin: 24px auto;       
@@ -129,7 +129,7 @@
 }
 @media (min-width: 768px) and (max-width: 1168px) {
   .favorite-banner {
-    width: 96%;            /* Mở rộng ra xíu ở màn hình tablet */
+    width: 100%;            /* Mở rộng ra xíu ở màn hình tablet */
     min-height: 220px;     /* Giảm chiều cao chút cho đỡ chiếm chỗ */
     margin: 20px auto;
   }
@@ -734,6 +734,168 @@
   /* Thu nhỏ icon trong nút Login */
   .navbar .login-text i {
     font-size: 16px !important;
+  }
+}
+
+/* --- RESPONSIVE CHO MÀN HÌNH SIÊU NHỎ (< 378px) --- */
+@media(max-width: 377.9px) {
+
+.footer .container .row {
+    display: flex;
+    flex-wrap: nowrap;       /* Không cho rớt dòng */
+    align-items: flex-start; /* Căn tất cả lên trên cùng */
+  }
+
+  .footer .col-md-4 {
+    width: 33.33%;           /* Chia đều 3 cột */
+    padding: 0 2px;          /* Khoảng cách giữa các cột nhỏ lại để đỡ chật */
+    text-align: left;        /* Nội dung canh trái */
+  }
+
+  /* --- SỬA LỖI LỆCH DÒNG TIÊU ĐỀ --- */
+  /* Đặt margin-top = 0 để tất cả tiêu đề h3, h5 bám sát mép trên bằng nhau */
+  .footer-logo, 
+  .footer h5 {
+    margin-top: 0 !important; 
+    padding-top: 0 !important;
+    margin-bottom: 8px !important; /* Khoảng cách xuống nội dung dưới */
+    line-height: 1.2 !important;   /* Chiều cao dòng đồng nhất */
+    display: block;
+  }
+
+  .footer-logo {
+    font-size: 10px; /* Logo nhỏ lại chút */
+  }
+  
+  .footer h5 {
+    font-size: 9px;
+    font-weight: bold;
+    color: #ffcc66; /* Giữ màu vàng cho tiêu đề cột */
+  }
+
+  /* Nội dung bên trong */
+  .footer p, 
+  .footer li, 
+  .footer a {
+    font-size: 8px; 
+    line-height: 1.4;
+    margin-bottom: 2px;
+    text-align: left;
+    word-wrap: break-word; /* Ngắt dòng nếu chữ quá dài */
+  }
+  
+  /* Chỉnh icon mạng xã hội */
+  .footer .social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3px;
+    margin-top: 5px;
+  }
+  .footer .social-icons a {
+    font-size: 10px;
+    margin-right: 0;
+  }
+
+  /* Cắt bớt mô tả ở cột 1 nếu quá dài */
+  .footer .col-md-4:first-child p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 2. FOOTER BOTTOM (Dòng bản quyền - CANH GIỮA) */
+  /* Dùng !important để ép nó vào giữa bất kể setup ở trên */
+  .footer-bottom {
+    text-align: center !important;
+    width: 100%;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Kẻ mờ phân cách cho đẹp */
+  }
+
+  .footer-bottom p {
+    font-size: 9px !important;
+    text-align: center !important;
+    margin: 0;
+    width: 100%;
+    display: block;
+  }
+  
+  /* 3. XỬ LÝ NÚT GỌI (PHONE) BỊ CHE CHỮ */
+  /* Thu nhỏ nút và đẩy ra sát mép hơn ở màn hình bé */
+  .floating-btn {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 16px !important;
+    right: 10px !important;
+    bottom: 20px !important;
+  }
+  /* 2. Banner Yêu thích */
+  .favorite-banner {
+    min-height: 150px;
+    padding: 20px 10px;
+    margin: 15px auto;
+  }
+  
+  .favorite-banner__content h1 {
+    font-size: 20px; /* Giảm size chữ tiêu đề */
+  }
+  
+  /* 3. Sidebar Phân loại */
+  .favorites-sidebar h2 {
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .favorites-sidebar li {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  /* 4. Card Yêu thích (Content Box) */
+  .content-box {
+    width: 100%;
+    padding: 10px;
+    height: auto; /* Để auto chiều cao */
+  }
+  
+  .content-box img {
+    height: 180px; /* Thu nhỏ ảnh */
+  }
+  
+  .text-box {
+    padding: 5px;
+    width: 100%;
+    margin-top: 5px;
+  }
+  
+  .text-box h3 {
+    font-size: 16px;
+  }
+  
+  .text-box p {
+    font-size: 11px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Cắt bớt mô tả nếu quá dài */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .badge {
+    font-size: 10px; /* Nhãn phân loại nhỏ lại */
+  }
+  
+  /* Nút xóa (X) */
+  .content-box-buttons {
+    top: 5px;
+    right: 5px;
+    transform: none; /* Reset vị trí cũ */
+  }
+  
+  .btn-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
   }
 }
 

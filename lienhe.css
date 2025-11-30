@@ -267,3 +267,98 @@ main.container {
   .btn-back-home { margin-top: 15px; display: inline-block; }
   .col-md-4.text-md-end { text-align: left !important; }
 }
+
+@media(max-width: 377.9px) {
+
+.footer .container .row {
+    display: flex;
+    flex-wrap: nowrap;       /* Không cho rớt dòng */
+    align-items: flex-start; /* Căn tất cả lên trên cùng */
+  }
+
+  .footer .col-md-4 {
+    width: 33.33%;           /* Chia đều 3 cột */
+    padding: 0 2px;          /* Khoảng cách giữa các cột nhỏ lại để đỡ chật */
+    text-align: left;        /* Nội dung canh trái */
+  }
+
+  /* --- SỬA LỖI LỆCH DÒNG TIÊU ĐỀ --- */
+  /* Đặt margin-top = 0 để tất cả tiêu đề h3, h5 bám sát mép trên bằng nhau */
+  .footer-logo, 
+  .footer h5 {
+    margin-top: 0 !important; 
+    padding-top: 0 !important;
+    margin-bottom: 8px !important; /* Khoảng cách xuống nội dung dưới */
+    line-height: 1.2 !important;   /* Chiều cao dòng đồng nhất */
+    display: block;
+  }
+
+  .footer-logo {
+    font-size: 10px; /* Logo nhỏ lại chút */
+  }
+  
+  .footer h5 {
+    font-size: 9px;
+    font-weight: bold;
+    color: #ffcc66; /* Giữ màu vàng cho tiêu đề cột */
+  }
+
+  /* Nội dung bên trong */
+  .footer p, 
+  .footer li, 
+  .footer a {
+    font-size: 8px; 
+    line-height: 1.4;
+    margin-bottom: 2px;
+    text-align: left;
+    word-wrap: break-word; /* Ngắt dòng nếu chữ quá dài */
+  }
+  
+  /* Chỉnh icon mạng xã hội */
+  .footer .social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3px;
+    margin-top: 5px;
+  }
+  .footer .social-icons a {
+    font-size: 10px;
+    margin-right: 0;
+  }
+
+  /* Cắt bớt mô tả ở cột 1 nếu quá dài */
+  .footer .col-md-4:first-child p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 2. FOOTER BOTTOM (Dòng bản quyền - CANH GIỮA) */
+  /* Dùng !important để ép nó vào giữa bất kể setup ở trên */
+  .footer-bottom {
+    text-align: center !important;
+    width: 100%;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Kẻ mờ phân cách cho đẹp */
+  }
+
+  .footer-bottom p {
+    font-size: 9px !important;
+    text-align: center !important;
+    margin: 0;
+    width: 100%;
+    display: block;
+  }
+  
+  /* 3. XỬ LÝ NÚT GỌI (PHONE) BỊ CHE CHỮ */
+  /* Thu nhỏ nút và đẩy ra sát mép hơn ở màn hình bé */
+  .floating-btn {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 16px !important;
+    right: 10px !important;
+    bottom: 20px !important;
+  }
+
+}
