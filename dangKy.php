@@ -25,6 +25,10 @@ try {
     $Email       = trim($_POST['Email'] ?? '');
     $MatKhau     = trim($_POST['MatKhau'] ?? '');
     $MatKhau2    = trim($_POST['MatKhau2'] ?? '');
+    if (strlen($MatKhau) < 8) {
+        echo json_encode(['status' => 'error', 'code' => 6]); 
+        exit;
+    }
 
     // 1) Mật khẩu không khớp → code 1
     if ($MatKhau !== $MatKhau2) {

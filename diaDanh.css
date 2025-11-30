@@ -1,7 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Inknut+Antiqua:wght@400&display=swap"); */
 
-/* Font đoạn mô tả */
-/* @import url("https://fonts.googleapis.com/css2?family=Montagu+Slab:wght@100;400;500&display=swap"); */
 
 .navbar-custom {
   position: fixed;
@@ -19,15 +16,21 @@
   );
 
   backdrop-filter: blur(6px);
-  padding: 12px 0;
+  padding: 5px 0;
   transition: background 0.4s ease;
 }
 
 .logo-fixed {
-  width: 45px;     /* chỉnh logo nhỏ vừa phải */
+  width: 70px;
+  /* chỉnh logo nhỏ vừa phải */
   height: auto;
-  border-radius: 50%; /* bo tròn nhẹ nếu muốn */
+  border-radius: 50%;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  /* bo tròn nhẹ nếu muốn */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; 
+  z-index: 1001;
 }
 /* Khi cuộn xuống, làm nền đậm hơn một chút */
 .navbar-custom.scrolled {
@@ -36,20 +39,47 @@
 }
 
 
-/* Giữ màu menu + hover */
+/* --- Cập nhật lại phần Nav Link --- */
+
 .navbar-custom .nav-link {
- color: #fff;
- font-weight: 500;
- padding: 8px 16px;
- transition: color 0.3s ease;
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  position: relative; /* Quan trọng để định vị đường gạch chân */
 }
 
-
-.navbar-custom .nav-link:hover {
- color: #F5F5DC;
- text-shadow: 0 0 8px rgba(255,255,255,0.6);
+/* Tạo đường gạch chân ảo */
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 5px; /* Khoảng cách so với chữ */
+  left: 50%;
+  background-color: #F5F5DC; /* Màu kem (trùng màu hover) */
+  transition: all 0.3s ease;
+  transform: translateX(-50%); /* Căn giữa đường gạch */
 }
 
+.navbar-custom .nav-link.active {
+  color: #F5F5DC;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+.navbar-custom .nav-link.active::after {
+  width: 80%;
+}
+
+@media (hover: hover) {
+  .navbar-custom .nav-link:hover {
+    color: #F5F5DC;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  
+  .navbar-custom .nav-link:hover::after {
+    width: 80%; 
+  }
+}
 
 /* Cố định login sang phải */
 .navbar .login-section {
@@ -858,4 +888,77 @@
   font-size: 13px;
    height: 40px;
   padding: 3px 0;
+}
+
+@media (max-width: 991.98px) {
+  
+  /* 1. Đảm bảo toàn bộ danh sách menu bám sang trái */
+  .navbar-nav {
+    align-items: flex-start; /* Canh trái các mục menu */
+    padding-left: 10px;      /* (Tùy chọn) Thụt vào một xíu cho đẹp, không sát lề quá */
+  }
+
+  /* 2. Co thẻ Link lại vừa khít nội dung chữ */
+  .navbar-custom .nav-link {
+    width: fit-content;      /* QUAN TRỌNG: Chỉ rộng bằng chữ, không chiếm hết dòng */
+    display: block;
+    text-align: left;        /* Canh chữ bên trái */
+  }
+
+  /* 3. Đảm bảo đường gạch chân tính theo độ rộng mới của chữ */
+  .navbar-custom .nav-link:hover::after,
+  .navbar-custom .nav-link.active::after {
+    width: 100%;             /* 100% của chữ (vì thẻ a giờ đã co lại bằng chữ rồi) */
+  }
+}
+
+@media (min-width: 992px) {
+  /* 1. Canh chỉnh lại khung chứa menu */
+  .navbar-collapse {
+    /* Thay vì canh giữa, ta dùng space-between để dàn trải */
+    justify-content: space-between !important; 
+    width: 100%;
+  }
+
+  /* 2. Đẩy Menu về phía bên trái (gần Logo hơn) */
+  .navbar-nav {
+    margin-left: 20px; /* Cách logo 20px */
+    margin-right: auto; /* Đẩy mọi thứ còn lại (Login) sang hết bên phải */
+    
+    /* Cho phép menu co giãn linh hoạt */
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  /* 3. Xử lý phần Login: Bỏ position absolute để không bị đè */
+  .navbar .login-section {
+    position: static !important; /* Trả lại vị trí thực tế, chiếm diện tích đàng hoàng */
+    transform: none !important;  /* Bỏ căn giữa dọc cũ */
+    margin-left: 10px;           /* Cách menu một chút */
+    
+    /* Đảm bảo nút login không bị xuống dòng */
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+}
+
+/* --- Tinh chỉnh riêng cho màn hình Laptop nhỏ (Dưới 1300px) --- */
+@media (min-width: 992px) and (max-width: 1300px) {
+  
+  /* Thu nhỏ chữ menu một chút */
+  .navbar-custom .nav-link {
+    font-size: 13px;       /* Giảm size chữ */
+    padding: 8px 10px;     /* Giảm khoảng cách giữa các chữ */
+  }
+  
+  /* Thu nhỏ chữ nút Login/User */
+  .navbar .login-text {
+    font-size: 13px;
+  }
+  
+  /* Thu nhỏ icon trong nút Login */
+  .navbar .login-text i {
+    font-size: 16px !important;
+  }
 }

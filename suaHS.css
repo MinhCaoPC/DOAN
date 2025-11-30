@@ -1,100 +1,125 @@
-body {
-  background-color: #f6fafd;
-  font-family: 'Segoe UI', sans-serif;
-}
 
-/* Header */
-.profile-header {
-  background: linear-gradient(135deg, #b2ddef, #206689);
-  padding: 20px 0;
-  position: relative;
-}
+    :root {
+      --primary-color: #4a90e2; 
+      --bg-color: #f2f4f8;      
+      --card-bg: #ffffff;
+      --text-main: #2c3e50;
+      --text-muted: #95a5a6;
+      --shadow-soft: 0 10px 25px rgba(0,0,0,0.05);
+    }
 
-.profile-header h5 {
-  margin: 0;
-}
-/* Nút quay lại */
-.btn-back {
-  position: absolute;
-  top: 15px;
-  left: 20px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 50%;
-  transition: background 0.3s ease;
-}
+    body {
+      background-color: var(--bg-color) !important;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-main);
+    }
 
-/* Nút lưu */
-.btn-save {
-  position: absolute;
-  top: 30px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-}
+    /* === HEADER GỌN GÀNG === */
+    .profile-header {
+      background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+      padding: 15px 20px;
+      position: sticky; /* Dính lên đầu trang */
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
 
-.btn-back { left: 15px; }
-.btn-save { right: 15px; font-weight: 500; }
+    .page-title {
+      font-weight: 600;
+      font-size: 18px;
+      margin: 0;
+      color: var(--text-main);
+      text-transform: capitalize;
+    }
 
-/* Avatar */
-.profile-avatar {
-  position: relative;
-  display: inline-block;
-}
+    /* Nút Icon */
+    .btn-icon {
+      background: transparent; /* Nền trong suốt cho thoáng */
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
 
-.profile-avatar img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3px solid white;
-  object-fit: cover;
-}
+    .btn-icon:hover { background: rgba(0,0,0,0.05); }
+    .btn-save { color: var(--primary-color); font-size: 24px; } /* Nút lưu to hơn xíu */
 
-.profile-avatar input {
-  display: none;
-}
+    /* === FORM CONTENT === */
+    .main-content {
+      padding: 20px;
+      max-width: 600px; /* Giới hạn chiều rộng trên máy tính cho đẹp */
+      margin: 0 auto;
+    }
 
-.edit-avatar {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.6);
-  color: white;
-  font-size: 14px;
-  padding: 2px 10px;
-  border-radius: 12px;
-  cursor: pointer;
-}
+    .form-group-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
 
-/* Form item */
-.profile-item {
-  background: white;
-  border-bottom: 1px solid #eee;
-  padding: 15px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .group-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin: 15px 0 10px 5px;
+      letter-spacing: 0.5px;
+    }
 
-.profile-item label {
-  color: #333;
-  font-weight: 500;
-}
+    .profile-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 5px;
+      border-bottom: 1px solid #f0f0f0;
+    }
 
-.profile-item input,
-.profile-item select {
-  border: none;
-  outline: none;
-  text-align: right;
-  width: 60%;
-  color: #555;
-}
+    .profile-item:last-child { border-bottom: none; }
 
+    .profile-item label {
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 15px;
+      flex: 0 0 40%;
+    }
+
+    .profile-item input, .profile-item select {
+      border: none;
+      outline: none;
+      text-align: right;
+      width: 100%;
+      color: #555;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      background: transparent;
+    }
+    
+    .profile-item input:focus { color: var(--primary-color); font-weight: 500; }
+    .profile-item input::placeholder { color: #ccc; font-weight: 300; }
+
+    .select-wrapper { display: flex; align-items: center; width: 60%; justify-content: flex-end; }
+    .select-wrapper select { appearance: none; direction: rtl; padding-right: 10px; border: none; outline: none; background: transparent; color: #555;}
+    .arrow-icon { font-size: 12px; color: #ccc; }
+
+    /* Animation Fade In */
+    .fade-in { animation: fadeInUp 0.5s ease forwards; opacity: 0; transform: translateY(10px); }
+    .delay-1 { animation-delay: 0.1s; }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+ 

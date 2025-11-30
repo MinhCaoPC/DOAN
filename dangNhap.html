@@ -18,31 +18,13 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <!-- Logo -->
-      <a class="navbar-logo-fixed" href="#">
-        <img src="images/logo.png" alt="Logo" class="logo-fixed" />
-      </a>
 
-      <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="logo-group">
+        <a class="navbar-logo-fixed" href="TrangChu.html">
+          <img src="images/logo.png" alt="Logo" class="logo-fixed" />
+        </a>
 
-      <!-- Menu -->
-      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="tour.html">TOUR</a>
-          </li>
-        </ul>
+        <span class="page-title">ĐĂNG NHẬP</span>
       </div>
     </div>
   </nav>
@@ -53,16 +35,16 @@
   <div class="login-container">
     <div class="login-box">
       <div class="left fade-in">
-        <div class="logo">LOGO</div>
         <h2>DA NANG TRAVEL</h2>
 
         <form id="formDangNhap" method="POST">
           <input type="text" name="TenTaiKhoan" placeholder="Tên tài khoản hoặc email" required>
           <div class="password-field">
-            <input type="password" name="MatKhau" placeholder="Mật khẩu" required>
+            <input type="password" name="MatKhau" id="id_password" placeholder="Mật khẩu" required>
+            <i class="bi bi-eye-slash eye" id="togglePassword"></i>
             <div id="error-message" class="text-danger" style="font-size:13px;"></div>
           </div>
-          <button type="submit">Đăng nhập</button>
+          <button type="submit" class="login-btn">Đăng nhập</button>
           <a href="repassword.html" style=" text-align: right; font-size: 14px;">Quên mật khẩu ?</a>
         </form>
 
@@ -77,9 +59,20 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#id_password");
+
+    togglePassword.addEventListener("click", function () {
+      // 1. Kiểm tra loại hiện tại (password hay text)
+      const type = password.getAttribute("type") === "password" ? "text" : "password";
+      password.setAttribute("type", type);
+
+      // 2. Đổi icon (Mắt mở <-> Mắt gạch chéo)
+      this.classList.toggle("bi-eye");
+      this.classList.toggle("bi-eye-slash");
+    });
     const errorMessages = {
       4: "Tài khoản hoặc mật khẩu không đúng!"
     };
@@ -87,9 +80,9 @@
     document.getElementById('formDangNhap').addEventListener('submit', async function (e) {
       e.preventDefault();
       const formData = new FormData(this);
-      
+
       // Đặt URL đúng: Tên file bạn gửi lên là dangNhap.php
-      const res = await fetch('dangNhap.php', { method: 'POST', body: formData }); 
+      const res = await fetch('dangNhap.php', { method: 'POST', body: formData });
       const data = await res.json();
 
       const errorEl = document.getElementById('error-message');

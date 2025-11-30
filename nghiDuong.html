@@ -18,7 +18,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-logo-fixed" href="#">
+      <a class="navbar-logo-fixed" href="TrangChu.html">
         <img src="images/logo.png" alt="Logo" class="logo-fixed" />
       </a>
 
@@ -36,7 +36,7 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
           <li class="nav-item">
-            <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
+            <a class="nav-link active" href="nghiDuong.html">NGHỈ DƯỠNG</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="tour.html">TOUR</a>
@@ -127,7 +127,7 @@
         <div class="col-md-4">
           <h5>Liên kết nhanh</h5>
           <ul class="footer-links">
-            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="TrangChu.html">Trang Chủ</a></li>
             <li><a href="diaDanh.html">Địa Danh</a></li>
             <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
             <li><a href="Food.html">Ẩm thực</a></li>
@@ -425,7 +425,7 @@
               <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
               <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
               <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
-              <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
+              <li class="nav-item"><a class="nav-link active" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
               <li class="nav-item"><a class="nav-link" href="tour.html">TOUR</a></li>
               <li class="nav-item"><a class="nav-link" href="YT.html">MỤC YÊU THÍCH</a></li>
               <li class="nav-item"><a class="nav-link" href="Lichsu.html">LỊCH SỬ ĐẶT TOUR</a></li>
@@ -440,5 +440,18 @@
       });
     });
   </script>
+    <script>
+
+  window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+          document.querySelectorAll('.nav-link').forEach(function(link) {
+              link.blur(); 
+          });
+          document.body.style.display = 'none';
+          document.body.offsetHeight; 
+          document.body.style.display = '';
+      }
+  });
+</script>
 </body>
 </html>

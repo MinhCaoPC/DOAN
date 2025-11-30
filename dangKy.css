@@ -15,17 +15,23 @@ background: linear-gradient(
 
 
   backdrop-filter: blur(6px);
-  padding: 12px 0;
+  padding: 5px 0;
   transition: background 0.4s ease;
  
   
 }
 
 .logo-fixed {
-  width: 45px;     /* chỉnh logo nhỏ vừa phải */
+  width: 70px;
+  /* chỉnh logo nhỏ vừa phải */
   height: auto;
-  border-radius: 50%; /* bo tròn nhẹ nếu muốn */
+  border-radius: 50%;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  /* bo tròn nhẹ nếu muốn */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; 
+  z-index: 1001;
 }
 
 
@@ -164,16 +170,30 @@ input:focus {
 }
 
 .password-field {
-  position: relative;
+  display: flex;           
+  flex-direction: column;  /* Xếp 2 ô mật khẩu dọc */
+  gap: 12px;               /* Khoảng cách giữa 2 ô */
+  width: 100%;
+}
+.password-group {
+  position: relative; /* Quan trọng để icon mắt định vị theo khung này */
+  width: 70%;
 }
 
-.password-field .eye {
+.password-group input {
+  width: 100%;        /* Input chiếm hết chiều rộng */
+  padding-right: 40px; /* Chừa chỗ cho icon mắt khỏi đè lên chữ */
+}
+
+.password-group .eye {
   position: absolute;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 14px;
+  color: #666;
+  font-size: 18px;
+  z-index: 5;
 }
 
 .login-btn {
@@ -300,6 +320,17 @@ input:focus {
     font-size: .8rem;
     margin-right: 3px;
   }
+  
+}
+
+@media (max-width: 421px){ 
+  .password-field {
+  display: flex;           
+  flex-direction: column;  
+  gap: 12px;               
+  
+}
+  
 }
 
 
@@ -320,8 +351,15 @@ input:focus {
     font-size: 1.0rem;
     margin-right: 3px;
   }
+  .password-field {
+  display: flex;           
+  flex-direction: column;  
+  gap: 12px;               
+  
+}
 
    
 }
+
 
 

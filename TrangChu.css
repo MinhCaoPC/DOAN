@@ -1,26 +1,41 @@
-
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Cắt bỏ thanh cuộn ngang thừa */
+}
 
 .navbar-custom {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 10;
-  background: linear-gradient(
-    to bottom,
-    rgba(21, 78, 100, 0.85) 0%,   /* phần trên đậm */
-    rgba(78, 189, 240, 0.6) 40%,   /* loang nhẹ */
-    rgba(125, 199, 231, 0.3) 75%,   /* loang nhiều hơn */
-    rgba(182, 233, 254, 0) 100%   /* mờ dần xuống ảnh */
-  );
+  z-index: 1000;
+  background: linear-gradient(to bottom,
+      rgba(21, 78, 100, 0.85) 0%,
+      /* phần trên đậm */
+      rgba(78, 189, 240, 0.6) 40%,
+      /* loang nhẹ */
+      rgba(125, 199, 231, 0.3) 75%,
+      /* loang nhiều hơn */
+      rgba(182, 233, 254, 0) 100%
+      /* mờ dần xuống ảnh */
+    );
   backdrop-filter: blur(6px);
-  padding: 12px 0;
+  padding: 5px 0;
   transition: background 0.4s ease;
 }
+
 .logo-fixed {
-  width: 45px;     /* chỉnh logo nhỏ vừa phải */
+  width: 70px;
+  /* chỉnh logo nhỏ vừa phải */
   height: auto;
-  border-radius: 50%; /* bo tròn nhẹ nếu muốn */
+  border-radius: 50%;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  /* bo tròn nhẹ nếu muốn */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; 
+  z-index: 1001;
 }
 
 /* Khi cuộn xuống, làm nền đậm hơn một chút */
@@ -29,23 +44,62 @@
   backdrop-filter: blur(10px);
 }
 
-/* Giữ màu menu + hover */
+
+
+/* --- Cập nhật lại phần Nav Link --- */
+
 .navbar-custom .nav-link {
   color: #fff;
   font-weight: 500;
   padding: 8px 16px;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  /* Quan trọng để định vị đường gạch chân */
 }
 
-.navbar-custom .nav-link:hover {
+/* Tạo đường gạch chân ảo */
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 5px;
+  /* Khoảng cách so với chữ */
+  left: 50%;
+  background-color: #F5F5DC;
+  /* Màu kem (trùng màu hover) */
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  /* Căn giữa đường gạch */
+}
+
+
+
+.navbar-custom .nav-link.active {
   color: #F5F5DC;
-  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.navbar-custom .nav-link.active::after {
+  width: 80%;
+}
+
+@media (hover: hover) {
+  .navbar-custom .nav-link:hover {
+    color: #F5F5DC;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+
+  .navbar-custom .nav-link:hover::after {
+    width: 80%;
+  }
 }
 
 /* Cố định login sang phải */
 .navbar .login-section {
   position: absolute;
-  right: 20px;   /* cách mép phải một chút */
+  right: 20px;
+  /* cách mép phải một chút */
   top: 50%;
   transform: translateY(-50%);
 }
@@ -59,7 +113,7 @@
 
 .navbar .login-text:hover {
   color: #F5F5DC;
-  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 
@@ -87,6 +141,7 @@
   background: rgba(255, 255, 255, 0);
   /* Xóa lớp mờ đen phủ trên */
 }
+
 /* --- Chữ welcome & ĐÀ NẴNG --- */
 
 .banner-text h1 {
@@ -107,10 +162,14 @@
 
 /* H1 lớn và nổi bật */
 .banner-text h1 {
-  font-size: 88px;
+  font-size: 78px;
   font-weight: 900;
   letter-spacing: 10px;
   margin-bottom: 30px;
+}
+
+.banner-text h2{
+  font-size: 68px;
 }
 
 /* Hiệu ứng ánh sáng loang xanh chạy qua chữ */
@@ -118,9 +177,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -133,7 +194,8 @@
 
 /* --- Phần giới thiệu --- */
 .intro-section {
-  background-color: #f8fbff 0%; /* nền xanh nhạt dịu */
+  background-color: #f8fbff 0%;
+  /* nền xanh nhạt dịu */
   padding: 20px 0;
 }
 
@@ -177,11 +239,12 @@
 
 /* --- Cột phải (bản đồ) --- */
 .intro-image img {
-  width: 120%; /* cho hình bự hơn khung */
+  width: 100%;
+  /* Sửa từ 120% thành 100% để không bị tràn */
   height: auto;
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
-  margin-top: 20px; /* đẩy hình xuống dưới */
-  transform: translateY(20px); /* có thể dùng thay margin-top, dịch mượt hơn */
+  margin-top: 20px;
+
 }
 
 /* --- Responsive --- */
@@ -190,18 +253,22 @@
     flex-direction: column;
     text-align: center;
   }
+
   .intro-image img {
     width: 250px;
   }
 }
+
 /* --- Tại sao nên đến Đà Nẵng --- */
 .why-section {
   background: linear-gradient(to bottom, #ffffff 0%, #e3f2fd 60%, #d4e7f5 100%);
   padding: 80px 0;
   transition: background 0.5s ease;
 }
+
 .why-title {
-  font-family: 'Playfair Display', serif; /* chữ thanh lịch */
+  font-family: 'Playfair Display', serif;
+  /* chữ thanh lịch */
   color: #4a9ff5;
   font-size: 28px;
   text-align: left;
@@ -254,9 +321,11 @@
 .carousel-control-next:hover .carousel-control-next-icon {
   background-color: #1e88e5;
 }
+
 .carousel-item {
   position: relative;
 }
+
 /* --- Responsive --- */
 @media (max-width: 992px) {
   .why-content {
@@ -264,18 +333,21 @@
     gap: 30px;
     text-align: center;
   }
+
   .why-img {
     width: 90%;
   }
+
   .why-text {
     max-width: 90%;
   }
 }
+
 /* Trải nghiệm không thể bỏ lỡ */
 .experience-section {
-  background: linear-gradient(135deg, #e7f3ff, #ffffff); 
-  border-top-right-radius: 60px;   
-  border-bottom-left-radius: 60px; 
+  background: linear-gradient(135deg, #e7f3ff, #ffffff);
+  border-top-right-radius: 60px;
+  border-bottom-left-radius: 60px;
   padding: 60px 20px;
   margin: 60px auto;
   width: 90%;
@@ -365,10 +437,12 @@
 .see-more:hover {
   background-color: #1e88e5;
 }
+
 .icon-circle img {
   width: 40px;
   height: 40px;
 }
+
 /* 4 phần giới thiệu chi tiết */
 .discover-section {
   background: #e9f6ff;
@@ -383,21 +457,26 @@
   margin: 0 auto 80px auto;
   gap: 40px;
 }
+
 /* Dịch phần chữ sang phải cho bố cục bên phải */
 .discover-content.right .discover-text {
-  padding-left: 100px; /* Đẩy chữ ra xa ảnh, tuỳ chỉnh 30–60px */
+  padding-left: 100px;
+  /* Đẩy chữ ra xa ảnh, tuỳ chỉnh 30–60px */
 }
 
 /* So le layout */
 .discover-content.left .discover-text {
   order: 1;
 }
+
 .discover-content.left .discover-images {
   order: 2;
 }
+
 .discover-content.right .discover-images {
   order: 1;
 }
+
 .discover-content.right .discover-text {
   order: 2;
 }
@@ -406,6 +485,7 @@
 .discover-text {
   flex: 1;
 }
+
 .discover-text h3 {
   font-size: 24px;
   font-weight: 600;
@@ -415,6 +495,7 @@
   align-items: center;
   gap: 10px;
 }
+
 .discover-text h3 span {
   display: inline-block;
   width: 80px;
@@ -422,6 +503,7 @@
   background-color: #4a9ff5;
   border-radius: 3px;
 }
+
 .discover-text p {
   font-size: 16px;
   color: #555;
@@ -440,14 +522,16 @@
   padding: 6px 18px;
   border-radius: 20px;
   font-size: 14px;
-  color: #0b65c2; /* xanh đậm hơn nền */
+  color: #0b65c2;
+  /* xanh đậm hơn nền */
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .btn-more i {
   font-size: 14px;
-  color: #0057b7; /* mũi tên xanh đậm hơn nền */
+  color: #0057b7;
+  /* mũi tên xanh đậm hơn nền */
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
@@ -467,11 +551,13 @@
 .discover-images {
   flex: 1;
 }
+
 .image-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
+
 .image-grid img {
   width: 100%;
   height: 200px;
@@ -479,6 +565,7 @@
   border-radius: 40px;
   transition: transform 0.4s ease;
 }
+
 .image-grid img:hover {
   transform: scale(1.05);
 }
@@ -489,12 +576,15 @@
     flex-direction: column;
     text-align: center;
   }
+
   .discover-text h3 {
     justify-content: center;
   }
+
   .discover-text h3 span {
     display: none;
   }
+
   .discover-text p {
     margin: 0 auto 20px;
   }
@@ -509,12 +599,6 @@
   overflow: hidden;
 }
 
-.festival-heading {
-  font-size: 2rem;
-  color: #2b72d6;
-  font-weight: 400;
-  margin-bottom: 80px;
-}
 
 .danang-carousel {
   position: relative;
@@ -558,30 +642,36 @@
   border-radius: 0 0 20px 20px;
 }
 
-/* Nút điều hướng */
 .danang-controls {
   position: absolute;
-  bottom: -50px;
+  top: 50%;                     /* Đưa mép trên của khung nút về giữa */
+  transform: translateY(-50%);  /* Kéo ngược lên 50% chiều cao của chính nó để căn giữa hoàn hảo */
+  bottom: auto;                 /* Bỏ thuộc tính bottom cũ */
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 10px;              /* Khoảng cách nút so với lề trái phải */
+  z-index: 10;                  /* Đảm bảo nút nằm trên ảnh */
+  pointer-events: none;         /* Cho phép click xuyên qua khoảng trống ở giữa */
 }
 
 .danang-btn {
-  background: #5da8ca;
+  background: rgba(93, 168, 202, 0.7); /* Làm mờ nền một chút cho đẹp */
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 15px 20px;           /* Tăng kích thước nút một chút cho dễ bấm */
+  border-radius: 50%;           /* Bo tròn nút nếu thích (hoặc giữ 10px như cũ) */
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
+  pointer-events: auto;         /* Bật lại khả năng click cho nút */
 }
 
 .danang-btn:hover {
   background: #5da8ca;
+  transform: scale(1.1);        /* Hiệu ứng phóng to nhẹ khi hover */
 }
+
 /* Tiêu đề và bản đồ*/
 .festival-title-wrapper {
   position: relative;
@@ -598,10 +688,27 @@
 }
 
 .festival-heading {
-  font-size: 1.5rem;
-  color: #2b94d6;
-  font-weight: 300;
+  font-family: 'Playfair Display', serif !important;
+  /* Font chữ kiểu sang trọng */
+  color: #4a9ff5 !important;
+  /* Màu xanh dương nhạt */
+  font-size: 24px !important;
+  /* Kích thước 24px */
+  font-weight: normal !important;
+  /* Bỏ in đậm hoặc mỏng cũ */
+  text-transform: none;
+  /* Giữ nguyên chữ hoa/thường */
 }
+
+
+#map {
+
+  height: 600px;
+  border-radius: 15px;
+  margin: 30px auto;
+  width: 90%;
+}
+
 #map-section {
   background-color: #f4faff;
   border-top: 2px solid #cde3ff;
@@ -609,9 +716,14 @@
 }
 
 #map-section h2 {
-  font-weight: 300;
-  color: #48a0d3;
+  font-family: 'Playfair Display', serif !important;
+  color: #4a9ff5 !important;
+  font-size: 24px !important;
+  font-weight: normal !important;
+  margin-bottom: 40px;
+  /* Canh lề dưới cho thoáng giống mẫu */
 }
+
 
 .leaflet-popup-content {
   font-size: 14px;
@@ -671,7 +783,7 @@
   background: transparent;
   border-top: 1px solid rgba(28, 48, 84, 0.3);
   font-size: 13px;
-   height: 40px;
+  height: 40px;
   padding: 3px 0;
 }
 
@@ -692,77 +804,89 @@
 
 .navbar .login-text:hover {
   color: #F5F5DC;
-  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 
 .floating-btn {
-    /* Cố định vị trí */
-    position: fixed;
-    bottom: 20px; /* Cách đáy 20px */
-    right: 20px; /* Cách lề phải 20px */
-    
-    /* Thiết kế hình tròn */
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    
-    /* Màu sắc và bóng */
-    background-color: #007bff; /* Màu xanh Bootstrap Primary */
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    
-    /* Căn giữa biểu tượng */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    /* Chuyển động mượt */
-    transition: all 0.3s ease;
-    text-decoration: none; /* Bỏ gạch chân */
-    z-index: 1050; /* Đảm bảo nó nằm trên các element khác, ví dụ: modal */
-    
-    /* Ẩn text mặc định */
-    overflow: hidden; 
-    font-size: 24px;
+  /* Cố định vị trí */
+  position: fixed;
+  bottom: 20px;
+  /* Cách đáy 20px */
+  right: 20px;
+  /* Cách lề phải 20px */
+
+  /* Thiết kế hình tròn */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  /* Màu sắc và bóng */
+  background-color: #007bff;
+  /* Màu xanh Bootstrap Primary */
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+
+  /* Căn giữa biểu tượng */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Chuyển động mượt */
+  transition: all 0.3s ease;
+  text-decoration: none;
+  /* Bỏ gạch chân */
+  z-index: 1050;
+  /* Đảm bảo nó nằm trên các element khác, ví dụ: modal */
+
+  /* Ẩn text mặc định */
+  overflow: hidden;
+  font-size: 24px;
 }
 
 .floating-btn:hover {
-    background-color: #0056b3;
-    width: 150px; /* Mở rộng khi di chuột (tùy chọn) */
-    border-radius: 30px; /* Làm cong các cạnh khi mở rộng */
+  background-color: #0056b3;
+  width: 150px;
+  /* Mở rộng khi di chuột (tùy chọn) */
+  border-radius: 30px;
+  /* Làm cong các cạnh khi mở rộng */
 }
 
 /* Thêm tooltip hiển thị khi hover */
 .floating-btn .tooltip-text {
-    visibility: hidden;
-    opacity: 0;
-    margin-left: 10px; /* Cách icon một chút */
-    font-size: 14px;
-    font-weight: bold;
-    white-space: nowrap; /* Giữ text trên 1 hàng */
-    transition: opacity 0.3s ease;
+  visibility: hidden;
+  opacity: 0;
+  margin-left: 10px;
+  /* Cách icon một chút */
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  /* Giữ text trên 1 hàng */
+  transition: opacity 0.3s ease;
 }
 
 .floating-btn:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Ẩn tooltip khi ở trạng thái bình thường */
 .floating-btn .tooltip-text {
-    display: none;
+  display: none;
 }
 
 /* Hiển thị tooltip khi hover */
 .floating-btn:hover .tooltip-text {
-    display: inline;
+  display: inline;
 }
 
 /* Điều chỉnh icon cho hợp lý */
 .floating-btn i {
-    margin: 0;
+  margin: 0;
 }
+
+
+
 
 /* ======================== */
 /* Mobile tweaks */
@@ -787,7 +911,8 @@
 
   /* login-section ngoài collapse */
   .navbar .login-section {
-    position: static;                /* bỏ absolute khi mobile */
+    position: static;
+    /* bỏ absolute khi mobile */
     transform: none;
     width: 100%;
     display: flex;
@@ -801,6 +926,30 @@
     font-size: 0.9rem;
     margin-right: 3px;
   }
+
+  .banner-text h1 {
+    font-size: 38px;
+    /* Giảm từ 88px xuống 40px */
+    letter-spacing: 2px;
+    /* Giảm khoảng cách chữ */
+    margin-bottom: 10px;
+  }
+  .banner-text h2{
+  font-size: 28px;
+}
+
+
+
+  /* Đảm bảo Nav không bị lỗi padding */
+  .navbar-custom {
+    padding: 6px 14px;
+    /* Giống bên diaDanh */
+  }
+
+  #map{
+  height: 300px;
+
+}
 }
 
 /* ======================== */
@@ -821,10 +970,101 @@
     font-size: 1rem;
     margin-right: 3px;
   }
+  #map{
+  height: 400px;
+
+}
+  .banner-text h1{
+  font-size: 48px;
+}
+  .banner-text h2{
+  font-size: 38px;
+}
 }
 
 
+@media (max-width: 991.98px) {
 
+  /* 1. Đảm bảo toàn bộ danh sách menu bám sang trái */
+  .navbar-nav {
+    align-items: flex-start;
+    /* Canh trái các mục menu */
+    padding-left: 10px;
+    /* (Tùy chọn) Thụt vào một xíu cho đẹp, không sát lề quá */
+  }
 
+  /* 2. Co thẻ Link lại vừa khít nội dung chữ */
+  .navbar-custom .nav-link {
+    width: fit-content;
+    /* QUAN TRỌNG: Chỉ rộng bằng chữ, không chiếm hết dòng */
+    display: block;
+    text-align: left;
+    /* Canh chữ bên trái */
+  }
 
+  /* 3. Đảm bảo đường gạch chân tính theo độ rộng mới của chữ */
+  .navbar-custom .nav-link:hover::after,
+  .navbar-custom .nav-link.active::after {
+    width: 100%;
+    /* 100% của chữ (vì thẻ a giờ đã co lại bằng chữ rồi) */
+  }
+}
+@media(max-width: 377.9px){
+  .banner-text h1{
+  font-size: 28px;
+}
+  .banner-text h2{
+  font-size: 18px;
+}
+}
 
+@media (min-width: 992px) {
+  /* 1. Canh chỉnh lại khung chứa menu */
+  .navbar-collapse {
+    /* Thay vì canh giữa, ta dùng space-between để dàn trải */
+    justify-content: space-between !important; 
+    width: 100%;
+  }
+
+  /* 2. Đẩy Menu về phía bên trái (gần Logo hơn) */
+  .navbar-nav {
+    margin-left: 20px; /* Cách logo 20px */
+    margin-right: auto; /* Đẩy mọi thứ còn lại (Login) sang hết bên phải */
+    
+    /* Cho phép menu co giãn linh hoạt */
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  /* 3. Xử lý phần Login: Bỏ position absolute để không bị đè */
+  .navbar .login-section {
+    position: static !important; /* Trả lại vị trí thực tế, chiếm diện tích đàng hoàng */
+    transform: none !important;  /* Bỏ căn giữa dọc cũ */
+    margin-left: 10px;           /* Cách menu một chút */
+    
+    /* Đảm bảo nút login không bị xuống dòng */
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+}
+
+/* --- Tinh chỉnh riêng cho màn hình Laptop nhỏ (Dưới 1300px) --- */
+@media (min-width: 992px) and (max-width: 1300px) {
+  
+  /* Thu nhỏ chữ menu một chút */
+  .navbar-custom .nav-link {
+    font-size: 13px;       /* Giảm size chữ */
+    padding: 8px 10px;     /* Giảm khoảng cách giữa các chữ */
+  }
+  
+  /* Thu nhỏ chữ nút Login/User */
+  .navbar .login-text {
+    font-size: 13px;
+  }
+  
+  /* Thu nhỏ icon trong nút Login */
+  .navbar .login-text i {
+    font-size: 16px !important;
+  }
+}

@@ -6,53 +6,48 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Liên hệ — Đà Nẵng Travel</title>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Leaflet CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-  <!-- File CSS Riêng -->
-  <link rel="stylesheet" href="lienHe.css">
+  <link rel="stylesheet" href="lienhe.css">
 </head>
 
 <body>
 
-  <!-- Header -->
   <header class="page-header">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-md-8">
+        <div class="col-lg-7 col-md-8">
           <h1>Liên hệ với chúng tôi</h1>
-          <p class="small-muted mb-0">
-            Cần trợ giúp? Gửi tin nhắn, đặt câu hỏi hoặc yêu cầu hỗ trợ — chúng tôi luôn sẵn sàng giúp bạn.
+          <p>
+            Đội ngũ Đà Nẵng Travel luôn sẵn sàng lắng nghe bạn. <br>
+            Hãy để lại tin nhắn, chúng tôi sẽ phản hồi trong thời gian sớm nhất.
           </p>
         </div>
-        <div class="col-md-4 text-md-end d-none d-md-block">
-          <a href="TrangChu.html" class="btn btn-outline-light btn-sm">
-            <i class="fa fa-home me-2"></i>Về trang chủ
+        <div class="col-lg-5 col-md-4 text-md-end">
+          <a href="TrangChu.html" class="btn-back-home">
+            <i class="fa fa-arrow-left me-2"></i>Về trang chủ
           </a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main -->
   <main class="container mb-5">
     <div class="row g-4">
 
-      <!-- Form liên hệ -->
       <div class="col-lg-7">
         <div class="contact-card">
-          <h4 class="mb-3">Gửi tin nhắn cho chúng tôi</h4>
-          <p class="small-muted">Điền thông tin, chúng tôi sẽ phản hồi sớm nhất trong vòng 24h.</p>
+          <h3 class="card-title">Gửi tin nhắn</h3>
+          <p class="text-muted mb-4">Điền thông tin vào biểu mẫu bên dưới.</p>
 
           <form id="contactForm" novalidate>
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="name" class="form-label">Họ và tên <span class="text-danger">*</span></label>
-                <input id="name" type="text" class="form-control" placeholder="Nguyễn Văn A" required>
+                <input id="name" type="text" class="form-control" placeholder="Nhập họ tên của bạn" required>
                 <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
               </div>
 
@@ -61,7 +56,8 @@
                 <input id="sdt" type="text" class="form-control" placeholder="0xxxxxxxxx" required>
                 <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ.</div>
               </div>
-               <div class="col-md-6">
+
+              <div class="col-12">
                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                 <input id="email" type="email" class="form-control" placeholder="email@domain.com" required>
                 <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
@@ -69,86 +65,83 @@
 
               <div class="col-12">
                 <label for="subject" class="form-label">Chủ đề</label>
-                <input id="subject" type="text" class="form-control" placeholder="Ví dụ: Hỏi về tour Bà Nà">
+                <input id="subject" type="text" class="form-control" placeholder="Ví dụ: Tư vấn tour Bà Nà Hills">
               </div>
 
               <div class="col-12">
-                <label for="message" class="form-label">Nội dung <span class="text-danger">*</span></label>
-                <textarea id="message" rows="6" class="form-control" placeholder="Viết nội dung..." required></textarea>
+                <label for="message" class="form-label">Nội dung tin nhắn <span class="text-danger">*</span></label>
+                <textarea id="message" rows="5" class="form-control" placeholder="Bạn cần hỗ trợ gì..." required></textarea>
                 <div class="invalid-feedback">Vui lòng nhập nội dung.</div>
               </div>
 
-              <div class="col-12 d-flex align-items-center justify-content-between flex-column flex-sm-row gap-2">
-                <div class="small-muted">
-                  Bằng việc gửi bạn đồng ý với <a href="#" class="text-decoration-underline">chính sách bảo mật</a>.
-                </div>
-                <div>
-                  <button type="submit" class="btn btn-primary">Gửi yêu cầu</button>
-                  <button type="reset" class="btn btn-outline-secondary ms-2">Xoá</button>
-                </div>
+              <div class="col-12 mt-4 d-flex align-items-center justify-content-between">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa-regular fa-paper-plane me-2"></i>Gửi yêu cầu
+                </button>
+                <button type="reset" class="btn btn-outline-secondary btn-sm border-0">Làm mới</button>
               </div>
             </div>
           </form>
 
-          <div id="successMessage" class="alert alert-success mt-3 d-none" role="alert">
-            ✅ Cảm ơn! Yêu cầu của bạn đã được gửi. Chúng tôi sẽ liên hệ sớm.
+          <div id="successMessage" class="alert alert-custom mt-4 d-none" role="alert">
+            <i class="fa-solid fa-circle-check me-2"></i>
+            Yêu cầu đã được gửi thành công! Chúng tôi sẽ liên hệ lại sớm.
           </div>
         </div>
       </div>
 
-      <!-- Thông tin liên hệ + Bản đồ -->
       <div class="col-lg-5">
-        <div class="contact-card mb-4">
-          <h5>Thông tin liên hệ</h5>
-          <p class="small-muted">Bạn có thể gọi hoặc ghé trực tiếp văn phòng chúng tôi.</p>
-
-          <div class="d-flex align-items-start gap-3 mb-3">
-            <div class="icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
-            <div><strong>Văn phòng</strong>
-              <div class="small-muted">123 Bạch Đằng, Hải Châu, Đà Nẵng</div>
-            </div>
-          </div>
-
-          <div class="d-flex align-items-start gap-3 mb-3">
-            <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
-            <div><strong>Hotline</strong>
-              <div><a href="tel:0901234567" class="text-decoration-none">0901 234 567</a></div>
-            </div>
-          </div>
-
-          <div class="d-flex align-items-start gap-3 mb-3">
-            <div class="icon-circle"><i class="fa-regular fa-envelope"></i></div>
-            <div><strong>Email</strong>
-              <div><a href="mailto:info@danangtravel.vn" class="text-decoration-none">info@danangtravel.vn</a></div>
-            </div>
-          </div>
-
-          <div class="mt-3">
-            <div class="small-muted mb-2">Theo dõi chúng tôi</div>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bản đồ -->
         <div class="contact-card">
-          <h6>Bản đồ</h6>
-          <div id="map" aria-label="Bản đồ Đà Nẵng"></div>
-          <div class="small-muted mt-2">Click vào marker để xem chi tiết địa điểm.</div>
+          <h3 class="card-title mb-4">Thông tin liên hệ</h3>
+
+          <div class="icon-box">
+            <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div class="info-label">Địa chỉ văn phòng</div>
+              <div class="info-content">123 Đường Bạch Đằng,<br>Quận Hải Châu, Đà Nẵng</div>
+            </div>
+          </div>
+
+          <div class="icon-box">
+            <div class="icon-circle"><i class="fa-solid fa-phone-volume"></i></div>
+            <div>
+              <div class="info-label">Hotline hỗ trợ 24/7</div>
+              <div class="info-content"><a href="tel:0901234567">0901 234 567</a></div>
+            </div>
+          </div>
+
+          <div class="icon-box">
+            <div class="icon-circle"><i class="fa-regular fa-envelope-open"></i></div>
+            <div>
+              <div class="info-label">Email</div>
+              <div class="info-content"><a href="mailto:info@danangtravel.vn">info@danangtravel.vn</a></div>
+            </div>
+          </div>
+
+          <hr class="my-4" style="opacity: 0.1">
+
+          <div class="mb-4">
+            <div class="info-label mb-2">Kết nối mạng xã hội</div>
+            <div class="social-icons">
+              <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <div>
+            <div class="info-label mb-2">Bản đồ vị trí</div>
+            <div id="map" aria-label="Bản đồ Đà Nẵng"></div>
+          </div>
         </div>
       </div>
 
     </div>
   </main>
 
-  <!-- 🌊 Footer -->
   <footer class="footer text-light">
     <div class="container py-5">
       <div class="row gy-4">
-        <!-- Logo & Mô tả -->
         <div class="col-md-4">
           <h3 class="footer-logo">Đà Nẵng Travel</h3>
           <p>
@@ -157,11 +150,10 @@
           </p>
         </div>
 
-        <!-- Liên kết nhanh -->
         <div class="col-md-4">
           <h5>Liên kết nhanh</h5>
           <ul class="footer-links">
-            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="TrangChu.html">Trang Chủ</a></li>
             <li><a href="diaDanh.html">Địa Danh</a></li>
             <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
             <li><a href="Food.html">Ẩm thực</a></li>
@@ -169,7 +161,6 @@
           </ul>
         </div>
 
-        <!-- Liên hệ & Mạng xã hội -->
         <div class="col-md-4">
           <h5>Liên hệ</h5>
           <p>
@@ -191,12 +182,8 @@
       <p>© 2025 Đà Nẵng Travel. Thiết kế bởi <strong>CTV Team</strong>.</p>
     </div>
   </footer>
-  <a href="lienhe.html" class="floating-btn" title="Bạn cần tư vấn?" style="bottom: 90px;">
-    <i class="bi bi-phone"></i>
-    <span class="tooltip-text">Bạn cần tư vấn?</span>
-  </a>
 
-  <!-- JS -->
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -204,44 +191,32 @@
     // Biến toàn cục để lưu thông tin người dùng (nếu có)
     let currentUser = null;
 
-    // --- 1. Xử lý logic chung khi trang tải ---
     document.addEventListener("DOMContentLoaded", () => {
       
-      // Khởi tạo bản đồ Leaflet (giữ nguyên code cũ của bạn)
-      const map = L.map('map').setView([16.0678, 108.2208], 12);
+      // Khởi tạo bản đồ Leaflet
+      const map = L.map('map').setView([16.0678, 108.2208], 14);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
       const places = [
-        { name: 'Cầu Rồng', coords: [16.0615, 108.2271] },
-        { name: 'Biển Mỹ Khê', coords: [16.0635, 108.2510] },
-        { name: 'Bà Nà Hills', coords: [15.9970, 107.9884] }
+        { name: 'Văn phòng Đà Nẵng Travel', coords: [16.0615, 108.2271] }
       ];
       places.forEach(p => {
-        L.marker(p.coords).addTo(map).bindPopup(`<strong>${p.name}</strong>`);
+        L.marker(p.coords).addTo(map).bindPopup(`<strong>${p.name}</strong>`).openPopup();
       });
 
-      // Năm tự động (giữ nguyên code cũ)
-      document.getElementById('year').textContent = new Date().getFullYear();
-
-      // --- 2. TỰ ĐỘNG ĐIỀN FORM (LOGIC MỚI) ---
-      // (Giống như các trang khác, ta gọi getUser.php)
+      // --- TỰ ĐỘNG ĐIỀN FORM ---
       fetch('getUser.php')
         .then(res => res.json())
         .then(data => {
           if (data.loggedIn) {
             currentUser = data;
-            
-            // Tự động điền thông tin vào form
-            // Logic: Ưu tiên HoVaTen, nếu trống thì dùng TenTaiKhoan
             if (document.getElementById('name')) {
               document.getElementById('name').value = currentUser.HoVaTen || currentUser.TenTaiKhoan || '';
             }
-            // Lấy SDT từ KHACHHANG
             if (document.getElementById('sdt')) {
               document.getElementById('sdt').value = currentUser.SDT || '';
             }
-            // Lấy Email từ TAIKHOAN
             if (document.getElementById('email')) {
               document.getElementById('email').value = currentUser.Email || '';
             }
@@ -251,25 +226,22 @@
     });
 
 
-    // --- 3. XỬ LÝ SUBMIT FORM (SỬA LẠI HOÀN TOÀN) ---
+    // --- XỬ LÝ SUBMIT FORM ---
     const form = document.getElementById('contactForm');
     const success = document.getElementById('successMessage');
     
-    // Thêm 'async' để dùng 'await'
     form.addEventListener('submit', async (e) => {
-      e.preventDefault(); // Ngăn form gửi theo cách truyền thống
+      e.preventDefault(); 
       
       if (!form.checkValidity()) {
         form.classList.add('was-validated');
         return;
       }
       
-      // Tắt nút gửi để tránh spam
       const submitButton = form.querySelector('button[type="submit"]');
       submitButton.disabled = true;
-      submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang gửi...';
+      submitButton.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Đang gửi...';
 
-      // Lấy dữ liệu từ form
       const formData = {
           name: document.getElementById('name').value,
           sdt: document.getElementById('sdt').value,
@@ -279,7 +251,6 @@
       };
 
       try {
-        // Gửi dữ liệu đến file PHP
         const res = await fetch('lienhe.php', {
           method: 'POST',
           headers: {
@@ -291,25 +262,20 @@
         const result = await res.json();
 
         if (result.success) {
-          // Gửi thành công
-          success.classList.remove('d-none'); // Hiện thông báo
-          form.reset(); // Xóa form
+          success.classList.remove('d-none');
+          form.reset(); 
           form.classList.remove('was-validated');
         } else {
-          // Gửi thất bại (do server báo lỗi)
           alert('Gửi thất bại: ' + (result.message || 'Lỗi không xác định.'));
         }
 
       } catch (err) {
-        // Lỗi mạng hoặc kết nối
         console.error('Lỗi khi gửi form:', err);
         alert('Đã xảy ra lỗi mạng. Vui lòng thử lại.');
       } finally {
-         // Bật lại nút gửi dù thành công hay thất bại
          submitButton.disabled = false;
-         submitButton.innerHTML = 'Gửi yêu cầu';
+         submitButton.innerHTML = '<i class="fa-regular fa-paper-plane me-2"></i>Gửi yêu cầu';
          
-         // Ẩn thông báo thành công sau 5 giây
          setTimeout(() => {
             success.classList.add('d-none');
          }, 5000);

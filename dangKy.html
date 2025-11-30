@@ -14,35 +14,15 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <!-- Logo -->
-      <a class="navbar-logo-fixed" href="#">
-        <img src="images/logo.png" alt="Logo" class="logo-fixed" />
-      </a>
 
-      <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="logo-group">
+        <a class="navbar-logo-fixed" href="TrangChu.html">
+          <img src="images/logo.png" alt="Logo" class="logo-fixed" />
+        </a>
 
-      <!-- Menu -->
-      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="tour.html">TOUR</a>
-          </li>
-        </ul>
-
+        <span class="page-title">ĐĂNG KÝ</span>
       </div>
     </div>
   </nav>
@@ -58,18 +38,24 @@
         <img src="images/banner-DN.png" alt="Golden Bridge">
       </div>
       <div class="left fade-in">
-        <div class="logo">LOGO</div>
         <h2>DA NANG TRAVEL</h2>
 
         <form id="formDangKy" method="POST">
           <input type="text" name="TenTaiKhoan" placeholder="Tên tài khoản" required>
           <input type="email" name="Email" placeholder="Email" required>
           <div class="password-field">
-            <input type="password" name="MatKhau" placeholder="Mật khẩu" required>
-            <input type="password" name="MatKhau2" placeholder="Nhập lại mật khẩu" required>
+
+            <div class="password-group">
+              <input type="password" name="MatKhau" id="pass1" placeholder="Mật khẩu" required>
+              <i class="bi bi-eye-slash eye" onclick="togglePass('pass1', this)"></i>
+            </div>
+
+            <div class="password-group">
+              <input type="password" name="MatKhau2" id="pass2" placeholder="Nhập lại mật khẩu" required>
+              <i class="bi bi-eye-slash eye" onclick="togglePass('pass2', this)"></i>
+            </div>
+
             <div id="error-message" class="text-danger" style="font-size:13px;"></div>
-
-
           </div>
           <button type="submit" class="login-btn">Đăng ký</button>
         </form>
@@ -82,67 +68,96 @@
   </div>
 
   <script>
-    const errorMessages = {
-      1: "Mật khẩu không khớp!",
-      2: "Tên tài khoản đã tồn tại!",
-      3: "Email đã được đăng ký!",
-      4: "Email không được để trống!",
-      5: "Tên tài khoản không được để trống!",
-      0: "Có lỗi xảy ra, vui lòng thử lại!"
-    };
+  // Hàm ẩn/hiện mật khẩu
+  function togglePass(inputId, icon) {
+    const input = document.getElementById(inputId);
+    const type = input.getAttribute("type") === "password" ? "text" : "password";
+    input.setAttribute("type", type);
+    
+    // Đổi icon
+    icon.classList.toggle("bi-eye");
+    icon.classList.toggle("bi-eye-slash");
+  }
 
-    const form = document.getElementById('formDangKy');
-    const errorEl = document.getElementById('error-message');
-    const btn = form.querySelector('button[type="submit"]');
-    const inUser = form.querySelector('input[name="TenTaiKhoan"]');
-    const inEmail = form.querySelector('input[name="Email"]');
-    const inPw1 = form.querySelector('input[name="MatKhau"]');
-    const inPw2 = form.querySelector('input[name="MatKhau2"]');
+  const errorMessages = {
+    1: "Mật khẩu không khớp!",
+    2: "Tên tài khoản đã tồn tại!",
+    3: "Email đã được đăng ký!",
+    4: "Email không được để trống!",
+    5: "Tên tài khoản không được để trống!",
+    6: "Mật khẩu phải có ít nhất 8 ký tự!",
+    0: "Có lỗi xảy ra, vui lòng thử lại!"
+  };
 
-    function markError(inputEl, on) {
-      if (!inputEl) return;
-      if (on) inputEl.classList.add('is-invalid');
-      else inputEl.classList.remove('is-invalid');
-    }
+  const form = document.getElementById('formDangKy');
+  const errorEl = document.getElementById('error-message');
+  const btn = form.querySelector('button[type="submit"]');
+  
+  const inUser = form.querySelector('input[name="TenTaiKhoan"]');
+  const inEmail = form.querySelector('input[name="Email"]');
+  const inPw1 = form.querySelector('input[name="MatKhau"]');
+  const inPw2 = form.querySelector('input[name="MatKhau2"]');
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      errorEl.textContent = '';
-      [inUser, inEmail, inPw1, inPw2].forEach(i => markError(i, false));
+  // Hàm tô viền đỏ khi lỗi
+  function markError(inputEl, on) {
+    if (!inputEl) return;
+    if (on) inputEl.classList.add('is-invalid');
+    else inputEl.classList.remove('is-invalid');
+  }
 
-      btn.disabled = true;
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    
+    // 1. Reset trạng thái cũ (xóa lỗi, xóa thành công, trả về màu đỏ mặc định cho lỗi)
+    errorEl.textContent = '';
+    errorEl.classList.remove('text-success'); // Xóa màu xanh
+    errorEl.classList.add('text-danger');     // Thêm lại màu đỏ cho trường hợp lỗi
+    
+    [inUser, inEmail, inPw1, inPw2].forEach(i => markError(i, false));
+    btn.disabled = true;
 
-      try {
-        const formData = new FormData(form);
-        const res = await fetch('dangKy.php', { method: 'POST', body: formData });
-        const data = await res.json();
+    try {
+      const formData = new FormData(form);
+      const res = await fetch('dangKy.php', { method: 'POST', body: formData });
+      const data = await res.json();
 
-        if (data.status === 'error') {
-          const code = Number(data.code) || 0;
-          errorEl.textContent = errorMessages[code] || errorMessages[0];
+      // Trường hợp LỖI
+      if (data.status === 'error') {
+        const code = Number(data.code) || 0;
+        errorEl.textContent = errorMessages[code] || errorMessages[0];
 
-          // Tô lỗi vào field tương ứng để user sửa nhanh
-          if (code === 1) { markError(inPw1, true); markError(inPw2, true); }
-          if (code === 2) { markError(inUser, true); }
-          if (code === 3 || code === 4) { markError(inEmail, true); }
-          if (code === 5) { markError(inUser, true); }
-
-          btn.disabled = false;
-          return;
-        }
-
-        // OK → chuyển trang
-        window.location.href = "TrangChu.html";
-      } catch (err) {
-        errorEl.textContent = errorMessages[0];
-        btn.disabled = false;
+        // Tô viền đỏ input bị lỗi
+        if (code === 1) { markError(inPw1, true); markError(inPw2, true); }
+        if (code === 2) { markError(inUser, true); }
+        if (code === 3 || code === 4) { markError(inEmail, true); }
+        if (code === 5) { markError(inUser, true); }
+        if (code === 6) { markError(inPw1, true); }
+        btn.disabled = false; // Mở lại nút đăng ký để bấm lại
+        return;
       }
-    });
-  </script>
 
+      // === TRƯỜNG HỢP THÀNH CÔNG (Sửa ở đây) ===
+      
+      // 1. Đổi màu chữ sang xanh lá (Success)
+      errorEl.classList.remove('text-danger');
+      errorEl.classList.add('text-success');
+      
+      // 2. Hiện thông báo
+      errorEl.style.fontWeight = "bold";
+      errorEl.textContent = "Đăng ký thành công! Đang chuyển hướng...";
 
+      // 3. Đợi 1.5 giây rồi mới chuyển trang
+      setTimeout(function() {
+         window.location.href = "TrangChu.html";
+      }, 1500);
 
-
+    } catch (err) {
+      console.error(err);
+      errorEl.textContent = errorMessages[0];
+      btn.disabled = false;
+    }
+  });
+</script>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

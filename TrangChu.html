@@ -20,7 +20,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" id="navbar">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-logo-fixed" href="#">
+      <a class="navbar-logo-fixed" href="TrangChu.html">
         <img src="images/logo.png" alt="Logo" class="logo-fixed" />
       </a>
 
@@ -32,7 +32,7 @@
       <!-- Menu -->
       <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+          <li class="nav-item"><a class="nav-link active" href="TrangChu.html">TRANG CHỦ</a></li>
           <li class="nav-item">
             <a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a>
           </li>
@@ -62,7 +62,7 @@
     <!-- Thanh tìm kiếm nằm giữa banner -->
     <div class="search-container position-absolute top-50 start-50 translate-middle text-center">
       <div class="banner-text">
-        <h2 style="font-family: Playfair Display, serif !important; font-size: 64px !important;">w e l c o m e&nbsp; t o</h2>
+        <h2 style="font-family: Playfair Display, serif !important; ">w e l c o m e&nbsp; t o</h2>
         <h1>ĐÀ NẴNG</h1>
       </div>
 
@@ -303,7 +303,7 @@
     <!-- <h2 class="festival-heading">🎉 Sự kiện & Lễ hội ở Đà Nẵng</h2> -->
     <div class="festival-title-wrapper">
       <div class="festival-title-bar"></div>
-      <h2 class="festival-heading">🎉 Sự kiện & Lễ hội ở Đà Nẵng</h2>
+      <h2 class="festival-heading"> Sự kiện & Lễ hội ở Đà Nẵng</h2>
     </div>
 
     <div class="danang-carousel">
@@ -330,16 +330,11 @@
   </section>
   <!-- Bản đồ tương tác Đà Nẵng -->
   <section id="map-section" class="py-5 text-center">
-    <h2 class="mb-4">🗺️ Bản đồ du lịch Đà Nẵng</h2>
+    <h2 class="mb-4"> Bản đồ du lịch Đà Nẵng</h2>
     <p class="text-muted">
       Khám phá những địa điểm nổi bật tại thành phố đáng sống nhất Việt Nam
     </p>
-    <div id="map" style="
-          height: 300px;
-          border-radius: 15px;
-          margin: 30px auto;
-          width: 90%;
-        "></div>
+    <div id="map"></div>
   </section>
   <!-- Thư viện Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -427,7 +422,7 @@
         <div class="col-md-4">
           <h5>Liên kết nhanh</h5>
           <ul class="footer-links">
-            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="TrangChu.html">Trang Chủ</a></li>
             <li><a href="diaDanh.html">Địa Danh</a></li>
             <li><a href="nghiDuong.html">Nghỉ Dưỡng</a></li>
             <li><a href="Food.html">Ẩm thực</a></li>
@@ -466,6 +461,7 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
   <!--tại sao nên đến đà nẵng  -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -492,7 +488,9 @@
   <!--lễ hội  -->
   <script>
     const danangSlides = document.querySelectorAll(".danang-slide");
+    const carouselContainer = document.querySelector(".danang-carousel"); // Lấy container để bắt sự kiện hover
     let danangCurrent = 1;
+    let autoPlayInterval; // Biến lưu trạng thái tự động chạy
 
     function updateFestival() {
       danangSlides.forEach((slide, i) => {
@@ -523,13 +521,31 @@
     }
 
     function prevFestival() {
-      danangCurrent =
-        (danangCurrent - 1 + danangSlides.length) % danangSlides.length;
+      danangCurrent = (danangCurrent - 1 + danangSlides.length) % danangSlides.length;
       updateFestival();
     }
 
-    // Gọi lần đầu
+    // --- HÀM TỰ ĐỘNG CHẠY ---
+    function startAutoPlay() {
+      // Xóa interval cũ nếu có để tránh trùng lặp
+      clearInterval(autoPlayInterval);
+      // Cài đặt chạy hàm nextFestival mỗi 3000ms (3 giây)
+      autoPlayInterval = setInterval(nextFestival, 3000);
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    // Sự kiện: Khi chuột vào carousel thì DỪNG chạy
+    carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+
+    // Sự kiện: Khi chuột rời khỏi carousel thì CHẠY tiếp
+    carouselContainer.addEventListener('mouseleave', startAutoPlay);
+
+    // Khởi chạy lần đầu
     updateFestival();
+    startAutoPlay();
 
 
 
@@ -553,7 +569,7 @@
 
             // Thay menu nếu muốn thêm mục Yêu thích
             navbarMenu.querySelector('ul.navbar-nav').innerHTML = `
-          <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
+          <li class="nav-item"><a class="nav-link active" href="TrangChu.html">TRANG CHỦ</a></li>
           <li class="nav-item"><a class="nav-link" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
           <li class="nav-item"><a class="nav-link" href="Food.html">ẨM THỰC</a></li>
           <li class="nav-item"><a class="nav-link" href="nghiDuong.html">NGHỈ DƯỠNG</a></li>
@@ -565,6 +581,19 @@
         });
     });
   </script>
+  <script>
+
+  window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+          document.querySelectorAll('.nav-link').forEach(function(link) {
+              link.blur(); 
+          });
+          document.body.style.display = 'none';
+          document.body.offsetHeight; 
+          document.body.style.display = '';
+      }
+  });
+</script>
 </body>
 
 </html>

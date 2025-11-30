@@ -12,14 +12,20 @@
     rgba(182, 233, 254, 0) 100%   /* mờ dần xuống ảnh */
   );
   backdrop-filter: blur(6px);
-  padding: 12px 0;
+  padding: 5px 0;
   transition: background 0.4s ease;
 }
 .logo-fixed {
-  width: 45px;     /* chỉnh logo nhỏ vừa phải */
+  width: 70px;
+  /* chỉnh logo nhỏ vừa phải */
   height: auto;
-  border-radius: 50%; /* bo tròn nhẹ nếu muốn */
+  border-radius: 50%;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  /* bo tròn nhẹ nếu muốn */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; 
+  z-index: 1001;
 }
 
 /* Khi cuộn xuống, làm nền đậm hơn một chút */
@@ -28,17 +34,46 @@
   backdrop-filter: blur(10px);
 }
 
-/* Giữ màu menu + hover */
+/* --- Cập nhật lại phần Nav Link --- */
+
 .navbar-custom .nav-link {
   color: #fff;
   font-weight: 500;
   padding: 8px 16px;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative; /* Quan trọng để định vị đường gạch chân */
 }
 
-.navbar-custom .nav-link:hover {
+/* Tạo đường gạch chân ảo */
+.navbar-custom .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 5px; /* Khoảng cách so với chữ */
+  left: 50%;
+  background-color: #F5F5DC; /* Màu kem (trùng màu hover) */
+  transition: all 0.3s ease;
+  transform: translateX(-50%); /* Căn giữa đường gạch */
+}
+
+.navbar-custom .nav-link.active {
   color: #F5F5DC;
-  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+.navbar-custom .nav-link.active::after {
+  width: 80%;
+}
+
+@media (hover: hover) {
+  .navbar-custom .nav-link:hover {
+    color: #F5F5DC;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  
+  .navbar-custom .nav-link:hover::after {
+    width: 80%; 
+  }
 }
 
 /* Cố định login sang phải */
@@ -61,28 +96,48 @@
   text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
 
-
-/* 🌈 Banner màu xanh trời phấn sáng hơn */
 .favorite-banner {
   position: relative;
-  width: 100%;
-  height: 300px;
+  
+  /* 1. Thay đổi width và max-width để khớp với phần dưới */
+  width: 95%;              /* Chiếm 95% màn hình trên mobile/tablet cho đẹp (có lề 2 bên) */
+  max-width: 1200px;       /* Không to quá 1200px (bằng kích thước grid bên dưới) */
+  
+  /* 2. Căn giữa banner */
+  margin: 24px auto;       
+  
+  /* 3. Chiều cao linh hoạt hơn */
+  height: auto;            /* Để auto cho responsive */
+  min-height: 250px;       /* Chiều cao tối thiểu */
+  
   padding: 36px 20px;
-  border-radius: 18px;
+  border-radius: 24px;     /* Bo góc to hơn xíu cho hiện đại */
   overflow: hidden;
   box-sizing: border-box;
+  
   background: linear-gradient(135deg,
-    #f0fbff 0%,   /* trắng xanh */
-    #d6f1ff 30%,  /* xanh baby */
-    #b3e6ff 60%,  /* xanh trời pastel */
-    #ecfaff 100%  /* trắng phấn ở cuối */
+    #f0fbff 0%,   
+    #d6f1ff 30%,  
+    #b3e6ff 60%,  
+    #ecfaff 100%  
   );
   box-shadow: 0 10px 30px rgba(10, 60, 120, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 12px 0;
+}
+@media (min-width: 768px) and (max-width: 1168px) {
+  .favorite-banner {
+    width: 96%;            /* Mở rộng ra xíu ở màn hình tablet */
+    min-height: 220px;     /* Giảm chiều cao chút cho đỡ chiếm chỗ */
+    margin: 20px auto;
+  }
+  
+  /* Điều chỉnh cỡ chữ banner trong khoảng này */
+  .favorite-banner__content h1 {
+    font-size: 28px; 
+  }
 }
 
 /* hai mảng loang nhẹ tạo cảm giác "phấn" */
@@ -215,21 +270,20 @@
 .content-box {
   position: relative;
   display: flex;
-  flex-direction: row; /* desktop: ảnh trái, text phải */
+  flex-direction: row;
   align-items: stretch;
-  background: linear-gradient(135deg,
-      #b3e6ff 0%,   /* xanh trời pastel */
-      #d6f1ff 50%,  /* xanh baby nhạt */
-      #ecfaff 100%  /* trắng phấn mịn */
-  );
+  background: linear-gradient(135deg, #b3e6ff 0%, #d6f1ff 50%, #ecfaff 100%);
   border-radius: 24px;
   padding: 20px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   box-sizing: border-box;
   transition: all 0.3s ease;
-  width: 850px;       /* cố định chiều ngang */
-  height: 350px;      /* cố định chiều cao */
-  margin: 12px;
+  
+
+  width: 100%;       
+  
+  height: 350px;      /* Chiều cao giữ nguyên hoặc để auto nếu muốn */
+  margin: 0 0 20px 0; /* Chỉnh lại margin cho gọn */
   overflow: hidden;
 }
 
@@ -483,6 +537,65 @@
     padding: 0.25rem 0.5rem; 
   }
 }
+
+/* --- Footer --- */
+.footer {
+  background: linear-gradient(180deg, #9ecbea, #1e4d6d);
+  color: #f5f5f5;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.footer-logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.footer h5 {
+  color: #ffcc66;
+  margin-bottom: 15px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #f5f5f5;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ffcc66;
+}
+
+.footer .social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+  color: #ffcc66;
+}
+
+.footer-bottom {
+  background: transparent;
+  border-top: 1px solid rgba(28, 48, 84, 0.3);
+  font-size: 13px;
+  height: 40px;
+  padding: 3px 0;
+}
+
 .floating-btn {
     /* Cố định vị trí */
     position: fixed;
@@ -549,6 +662,79 @@
 /* Điều chỉnh icon cho hợp lý */
 .floating-btn i {
     margin: 0;
+}
+
+@media (max-width: 991.98px) {
+  
+  /* 1. Đảm bảo toàn bộ danh sách menu bám sang trái */
+  .navbar-nav {
+    align-items: flex-start; /* Canh trái các mục menu */
+    padding-left: 10px;      /* (Tùy chọn) Thụt vào một xíu cho đẹp, không sát lề quá */
+  }
+
+  /* 2. Co thẻ Link lại vừa khít nội dung chữ */
+  .navbar-custom .nav-link {
+    width: fit-content;      /* QUAN TRỌNG: Chỉ rộng bằng chữ, không chiếm hết dòng */
+    display: block;
+    text-align: left;        /* Canh chữ bên trái */
+  }
+
+  /* 3. Đảm bảo đường gạch chân tính theo độ rộng mới của chữ */
+  .navbar-custom .nav-link:hover::after,
+  .navbar-custom .nav-link.active::after {
+    width: 100%;             /* 100% của chữ (vì thẻ a giờ đã co lại bằng chữ rồi) */
+  }
+}
+
+@media (min-width: 992px) {
+  /* 1. Canh chỉnh lại khung chứa menu */
+  .navbar-collapse {
+    /* Thay vì canh giữa, ta dùng space-between để dàn trải */
+    justify-content: space-between !important; 
+    width: 100%;
+  }
+
+  /* 2. Đẩy Menu về phía bên trái (gần Logo hơn) */
+  .navbar-nav {
+    margin-left: 20px; /* Cách logo 20px */
+    margin-right: auto; /* Đẩy mọi thứ còn lại (Login) sang hết bên phải */
+    
+    /* Cho phép menu co giãn linh hoạt */
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  /* 3. Xử lý phần Login: Bỏ position absolute để không bị đè */
+  .navbar .login-section {
+    position: static !important; /* Trả lại vị trí thực tế, chiếm diện tích đàng hoàng */
+    transform: none !important;  /* Bỏ căn giữa dọc cũ */
+    margin-left: 10px;           /* Cách menu một chút */
+    
+    /* Đảm bảo nút login không bị xuống dòng */
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+}
+
+/* --- Tinh chỉnh riêng cho màn hình Laptop nhỏ (Dưới 1300px) --- */
+@media (min-width: 992px) and (max-width: 1300px) {
+  
+  /* Thu nhỏ chữ menu một chút */
+  .navbar-custom .nav-link {
+    font-size: 13px;       /* Giảm size chữ */
+    padding: 8px 10px;     /* Giảm khoảng cách giữa các chữ */
+  }
+  
+  /* Thu nhỏ chữ nút Login/User */
+  .navbar .login-text {
+    font-size: 13px;
+  }
+  
+  /* Thu nhỏ icon trong nút Login */
+  .navbar .login-text i {
+    font-size: 16px !important;
+  }
 }
 
 
