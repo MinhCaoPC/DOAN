@@ -239,51 +239,55 @@ body {
 }
 
 @media (min-width: 992px) {
-  /* 1. Canh chỉnh lại khung chứa menu */
+  
+  /* 1. Canh chỉnh khung chứa menu */
   .navbar-collapse {
-    /* Thay vì canh giữa, ta dùng space-between để dàn trải */
-    justify-content: space-between !important; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; /* Quan trọng: Căn giữa dọc cho tất cả phần tử con */
     width: 100%;
   }
 
-  /* 2. Đẩy Menu về phía bên trái (gần Logo hơn) */
+  /* 2. Đưa Menu ra chính giữa màn hình */
   .navbar-nav {
-    margin-left: 20px; /* Cách logo 20px */
-    margin-right: auto; /* Đẩy mọi thứ còn lại (Login) sang hết bên phải */
-    
-    /* Cho phép menu co giãn linh hoạt */
+    margin: 0 auto;
     display: flex;
-    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
+    flex-wrap: nowrap;
   }
 
-  /* 3. Xử lý phần Login: Bỏ position absolute để không bị đè */
+  /* 3. Xử lý phần Login/User (Sửa lỗi bị dính lên trên) */
   .navbar .login-section {
-    position: static !important; /* Trả lại vị trí thực tế, chiếm diện tích đàng hoàng */
-    transform: none !important;  /* Bỏ căn giữa dọc cũ */
-    margin-left: 10px;           /* Cách menu một chút */
+    position: static !important; /* Hủy bỏ absolute để chạy theo Flexbox */
+    margin-left: 0; 
     
-    /* Đảm bảo nút login không bị xuống dòng */
-    white-space: nowrap;
-    min-width: fit-content;
+    display: flex;           /* Bắt buộc dùng flex */
+    align-items: center;     /* Căn giữa chiều dọc: Sửa lỗi bị dính lên trên */
+    justify-content: flex-end;
+    
+    height: 100%;            /* Chiếm full chiều cao của dòng để căn giữa chuẩn */
+    min-width: fit-content;  /* Không bị co lại */
+    padding-right: 0;        /* Đẩy sát lề phải */
+  }
+  
+  /* Chỉnh lại chữ Login/User cho thẳng hàng với icon */
+  .navbar .login-text {
+    display: flex;
+    align-items: center;
+    line-height: 1;          /* Reset chiều cao dòng để không bị lệch */
   }
 }
 
-/* --- Tinh chỉnh riêng cho màn hình Laptop nhỏ (Dưới 1300px) --- */
-@media (min-width: 992px) and (max-width: 1300px) {
-  
-  /* Thu nhỏ chữ menu một chút */
+/* --- Responsive cho Laptop nhỏ (khi menu dài ra) --- */
+@media (min-width: 992px) and (max-width: 1350px) {
   .navbar-custom .nav-link {
-    font-size: 13px;       /* Giảm size chữ */
-    padding: 8px 10px;     /* Giảm khoảng cách giữa các chữ */
+    font-size: 13px;
+    padding: 8px 10px;
   }
-  
-  /* Thu nhỏ chữ nút Login/User */
   .navbar .login-text {
     font-size: 13px;
   }
-  
-  /* Thu nhỏ icon trong nút Login */
   .navbar .login-text i {
     font-size: 16px !important;
   }

@@ -494,7 +494,7 @@ VALUES
 (
     'Furama Resort Danang',
     '105 Võ Nguyên Giáp, phường Khuê Mỹ, quận Ngũ Hành Sơn, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.…Resort%20Danang!5e0!3m2!1svi!2s!4v1761808163074!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.491872859339!2d108.24619718592375!3d16.0399455450186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2!2sFurama%20Resort%20Danang!5e0!3m2!1svi!2s!4v1764512970397!5m2!1svi!2s',
     'nghiduong',
 'Furama Resort Danang là khu nghỉ dưỡng cao cấp bên bờ biển Mỹ Khê với kiến trúc sang trọng, hồ bơi rộng, dịch vụ tiện nghi 5 sao và nhiều hoạt động giải trí.',
     'anh/resort2.jpg'
@@ -504,7 +504,7 @@ VALUES
 (
     'Hyatt Regency Danang Resort & Spa',
     '05 Trường Sa, phường Hòa Hải, quận Ngũ Hành Sơn, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.…ort%20and%20Spa!5e0!3m2!1svi!2s!4v1761808201027!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.0096282167615!2d108.26162297602069!3d16.013014284658382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314210cf6a42c159%3A0xaeb535cc2b736240!2sHyatt%20Regency%20Danang%20Resort%20and%20Spa!5e0!3m2!1svi!2s!4v1764513000658!5m2!1svi!2s',
     'nghiduong',
     'Hyatt Regency Danang Resort & Spa là khu nghỉ dưỡng sang trọng bên bờ biển Non Nước với kiến trúc hiện đại, hồ bơi ngoài trời, spa cao cấp và nhiều tiện nghi đẳng cấp.',
     'anh/resort3.webp'
@@ -514,7 +514,7 @@ VALUES
 (
     'Naman Retreat',
     'Trường Sa, phường Hòa Hải, quận Ngũ Hành Sơn, TP Đà Nẵng',
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.…Naman%20Retreat!5e0!3m2!1svi!2s!4v1761808756039!5m2!1svi!2s',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1917.9201371958197!2d108.28181294851522!3d15.969715486308532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314210ffff49be83%3A0x4dc264a06ef8baa5!2sNaman%20Retreat!5e0!3m2!1svi!2s!4v1764512888725!5m2!1svi!2s',
     'nghiduong',
     'Naman Retreat là khu nghỉ dưỡng nổi tiếng với kiến trúc tre đặc trưng, hòa quyện thiên nhiên và không gian hiện đại. Mang đến trải nghiệm nghỉ dưỡng yên bình và sang trọng.',
     'anh/resort4.jpg'
@@ -524,7 +524,7 @@ VALUES
 (
   'Pullman Danang Beach Resort',
   '101 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.…0Beach%20Resort!5e0!3m2!1svi!2s!4v1761808244473!5m2!1svi!2s',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.47995989457!2d108.24751227602103!3d16.040564684634788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217686dfcf229%3A0xa17b1ae3b14af658!2sPullman%20Danang%20Beach%20Resort!5e0!3m2!1svi!2s!4v1764512804285!5m2!1svi!2s',
   'nghiduong',
   'Pullman Danang Beach Resort là khu nghỉ dưỡng cao cấp ven biển Mỹ Khê, Đà Nẵng, với các phòng nghỉ sang trọng, hồ bơi rộng, spa thư giãn và các dịch vụ ẩm thực phong phú. Đây là điểm dừng chân lý tưởng cho kỳ nghỉ gia đình hoặc du lịch kết hợp công tác.',
   'anh/resort5.jpg'
@@ -534,7 +534,7 @@ VALUES
 (
   'Premier Village Danang Resort (Managed by Accor)',
   '99 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.…6tW5nIFJlc29ydA!5e0!3m2!1svi!2s!4v1761808272373!5m2!1svi!2s',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.4506113664197!2d108.24817547602113!3d16.0420898846335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217687f97d183%3A0xee49ef38ee262430!2zUHJlbWllciBWaWxsYWdlIMSQw6AgTuG6tW5nIFJlc29ydA!5e0!3m2!1svi!2s!4v1764512758194!5m2!1svi!2s',
   'nghiduong',
 'Khu nghỉ dưỡng sang trọng ven biển Đà Nẵng, với các biệt thự hướng biển, hồ bơi riêng, và dịch vụ cao cấp mang đến trải nghiệm nghỉ dưỡng đẳng cấp quốc tế.',
   'anh/resort6.jpg'
@@ -554,7 +554,7 @@ VALUES
 (
   'Khu du lịch sinh thái Hòa Phú Thành',
   'QL14G, Hòa Phú, Hòa Vang, Đà Nẵng',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3849.…xJDDoCBO4bq1bmc!5e0!3m2!1svi!2s!4v1761808357278!5m2!1svi!2s',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.0567990196837!2d107.9924463760197!3d15.95840998470519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f77af7e9b92b%3A0xfaf4e097094874f3!2zSMOyYSBQaMO6IFRow6BuaCBUb3VyaXN0IC0gVHLGsOG7o3QgdGjDoWMgxJDDoCBO4bq1bmc!5e0!3m2!1svi!2s!4v1764512940808!5m2!1svi!2s',
   'sinhthai',
   'Khu du lịch sinh thái nằm ở ngoại ô Đà Nẵng, nổi bật với cảnh quan núi rừng tươi mát, suối thác, hồ nước trong xanh, thích hợp cho các hoạt động dã ngoại, cắm trại và team building.',
   'anh/HPT.jpg'
@@ -564,7 +564,7 @@ VALUES
 (
   'Khu du lịch Suối Hoa',
   'Thôn Phú Túc, Hòa Phú, Hòa Vang, Đà Nẵng',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.…IFN14buRaSBIb2E!5e0!3m2!1svi!2s!4v1761808395156!5m2!1svi!2s',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.0567990196837!2d107.9924463760197!3d15.95840998470519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141f7e396263a2d%3A0xc5471820f69b2f53!2zS2h1IGR1IGzhu4tjaCBzaW5oIHRow6FpIFN14buRaSBIb2E!5e0!3m2!1svi!2s!4v1764512914313!5m2!1svi!2s',
   'sinhthai',
   'Khu du lịch nổi tiếng với suối trong xanh, vườn hoa rực rỡ và không gian yên tĩnh, thích hợp cho các chuyến dã ngoại, thư giãn và tham quan cùng gia đình.',
   'anh/SH.jpg'
@@ -574,7 +574,7 @@ VALUES
 (
   'Rừng dừa Cẩm Thanh',
   'Thôn Cồn Nhàn, Cẩm Thanh, Hội An, Quảng Nam',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4774.…ELhuqN5IE3huqt1!5e0!3m2!1svi!2s!4v1761808435977!5m2!1svi!2s',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7675.179382427862!2d108.36163934537926!3d15.878148139095869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dadaf61a853%3A0xf6d4fb8016f50b0e!2zS2h1IGRpIHTDrWNoIGzhu4tjaCBz4butIHbEg24gaMOzYSBS4burbmcgROG7q2EgQuG6o3kgTeG6q3U!5e0!3m2!1svi!2s!4v1764512851919!5m2!1svi!2s',
   'sinhthai',
   'Rừng dừa nổi tiếng gần Hội An với những kênh rạch xanh mát, trải nghiệm thuyền tham quan, ngắm cảnh thiên nhiên hoang sơ và thưởng thức đặc sản địa phương.',
   'anh/Rừng.jpg'
@@ -584,7 +584,7 @@ VALUES
 (
 'Công viên APEC Đà Nẵng',
   'Đường 2 Tháng 9, Bình Hiên, Hải Châu, Đà Nẵng',
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30673…gVmnDqm4gQVBFQw!5e0!3m2!1svi!2s!4v1761809359663!5m2!1svi!2s',
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.1422685156917!2d108.22066857602121!3d16.05810548461973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421930165d7dcd%3A0xf9d555ad7f300ab3!2zQ8O0bmcgVmnDqm4gQVBFQw!5e0!3m2!1svi!2s!4v1764513030430!5m2!1svi!2s',
   'vuichoi',
   'Công viên APEC nằm bên bờ sông Hàn, được xây dựng để phục vụ Tuần lễ Cấp cao APEC 2017. Không gian rộng, nhiều bãi cỏ, kiến trúc đẹp, là điểm check in nổi bật tại Đà Nẵng.',
   'anh/APEC.png'

@@ -16,7 +16,7 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-    <div class="container">
+    <div class="container-fluid px-3">
       <!-- Logo -->
       <a class="navbar-logo-fixed" href="TrangChu.html">
         <img src="images/logo.png" alt="Logo" class="logo-fixed" />
@@ -382,10 +382,15 @@
           if (data.loggedIn) {
             isLoggedIn = true;
             loginSection.innerHTML = `
-              <a class="login-text" href ="suaHS.html"><i class="bi bi-person-circle me-2 fs-5" ></i>${data.TenTaiKhoan}</a>
-              <a href="dangXuat.php" class="login-text ms-3">
-                <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
-              </a>`;
+  <div class="d-flex align-items-center">
+      <a class="login-text text-truncate" href="suaHS.html" style="max-width: 150px;">
+        <i class="bi bi-person-circle me-2 fs-5"></i>${data.TenTaiKhoan}
+      </a>
+      <a href="dangXuat.php" class="login-text ms-3">
+        <i class="bi bi-box-arrow-in-right me-2 fs-5"></i>ĐĂNG XUẤT
+      </a>
+  </div>
+`;
             navbarMenu.querySelector("ul.navbar-nav").innerHTML = `
               <li class="nav-item"><a class="nav-link" href="TrangChu.html">TRANG CHỦ</a></li>
               <li class="nav-item"><a class="nav-link active" href="diaDanh.html">ĐỊA DANH NỔI BẬT</a></li>
