@@ -295,7 +295,10 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS UpdateUserProfile$$
 
 CREATE PROCEDURE UpdateUserProfile(
-iKhoan VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    IN p_MaSoTK VARCHAR(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    -- THÊM DÒNG NÀY (Bị thiếu trong code của bạn):
+    IN p_TenTaiKhoan VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    
     IN p_Email VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     IN p_HoTen VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     IN p_GioiTinh VARCHAR(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -306,20 +309,21 @@ iKhoan VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
 BEGIN
     DECLARE v_Count INT;
 
-    -- 1. Kiểm tra trùng Tên Tài Khoản (Ép kiểu so sánh)
+    -- 1. Kiểm tra trùng Tên Tài Khoản
+    -- Không cần COLLATE ở đây nữa vì đầu vào đã ép kiểu rồi
     SELECT COUNT(*) INTO v_Count
     FROM TAIKHOAN
-    WHERE TenTaiKhoan COLLATE utf8mb4_unicode_ci = p_TenTaiKhoan 
-      AND MaSoTK COLLATE utf8mb4_unicode_ci != p_MaSoTK;
+    WHERE TenTaiKhoan = p_TenTaiKhoan 
+      AND MaSoTK != p_MaSoTK;
 
     IF v_Count > 0 THEN
         SELECT 'DUPLICATE_USERNAME' AS result;
     ELSE
-        -- 2. Kiểm tra trùng Email (Ép kiểu so sánh)
+        -- 2. Kiểm tra trùng Email
         SELECT COUNT(*) INTO v_Count
         FROM TAIKHOAN
-        WHERE Email COLLATE utf8mb4_unicode_ci = p_Email 
-          AND MaSoTK COLLATE utf8mb4_unicode_ci != p_MaSoTK;
+        WHERE Email = p_Email 
+          AND MaSoTK != p_MaSoTK;
 
         IF v_Count > 0 THEN
             SELECT 'DUPLICATE_EMAIL' AS result;
@@ -327,21 +331,20 @@ BEGIN
             -- 3. Bắt đầu cập nhật
             START TRANSACTION;
 
-            -- Cập nhật bảng TAIKHOAN
-            -- Lưu ý: WHERE cũng cần ép kiểu để tìm đúng dòng
+            -- Cập nhật bảng TAIKHOAN (Tài khoản & Email)
             UPDATE TAIKHOAN
             SET TenTaiKhoan = p_TenTaiKhoan, 
                 Email = p_Email
-            WHERE MaSoTK COLLATE utf8mb4_unicode_ci = p_MaSoTK;
+            WHERE MaSoTK = p_MaSoTK;
 
-            -- Cập nhật bảng KHACHHANG
+            -- Cập nhật bảng KHACHHANG (Thông tin cá nhân)
             UPDATE KHACHHANG
             SET HoVaTen = p_HoTen, 
                 GioiTinh = p_GioiTinh, 
                 NgaySinh = p_NgaySinh, 
                 DiaChi = p_DiaChi, 
                 SDT = p_SDT
-            WHERE MaSoTK COLLATE utf8mb4_unicode_ci = p_MaSoTK;
+            WHERE MaSoTK = p_MaSoTK;
 
             COMMIT;
             
